@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Anvil body -->
+  <path d="M12 36 L52 36 L48 28 L44 28 L44 20 L36 20 L36 28 L28 28 L28 20 L20 20 L20 28 L16 28 Z" fill="#D8660B"/>
+  <!-- Anvil base -->
+  <rect x="8" y="36" width="48" height="8" rx="2" fill="#D8660B"/>
+  <!-- Anvil feet -->
+  <rect x="14" y="44" width="10" height="6" rx="1" fill="#C4A062"/>
+  <rect x="40" y="44" width="10" height="6" rx="1" fill="#C4A062"/>
+  <!-- Anvil horn -->
+  <path d="M52 32 L60 30 L60 34 L52 36 Z" fill="#C4A062"/>
+  <!-- Anvil top surface highlight -->
+  <rect x="16" y="28" width="28" height="2" rx="1" fill="#C4A062" opacity="0.5"/>
+</svg>
