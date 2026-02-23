@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0F1419;
+  color: #ffffff;
+  font-family: var(--font-inter);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, #0F1419 0%, #1a2f4f 50%, #0F1419 100%);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-gradient-to-r from-forge-ember to-forge-gold text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-forge-ember/50;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 border-2 border-forge-gold text-forge-gold font-semibold rounded-lg transition-all duration-300 hover:bg-forge-gold hover:text-forge-dark;
+}
+
+.btn-small {
+  @apply px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-2xl hover:shadow-forge-ember/30 hover:-translate-y-1;
+}
+
+/* Section spacing */
+.section-py {
+  @apply py-16 md:py-24;
+}
+
+/* Container */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 md:px-8;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #C4A062, #D8660B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+@keyframes ember-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(216, 102, 11, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(216, 102, 11, 0.8);
+  }
+}
+
+.ember-glow {
+  animation: ember-glow 3s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+/* Price styling */
+.price-regular {
+  @apply text-gray-400 line-through;
+}
+
+.price-current {
+  @apply text-2xl font-bold text-forge-gold;
+}
+
+.price-discount {
+  @apply text-xs font-semibold text-forge-ember bg-forge-ember/10 px-2 py-1 rounded;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #16213E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8660B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4A062;
+}
