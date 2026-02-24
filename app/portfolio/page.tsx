@@ -3,7 +3,16 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Our Work -- App Development Portfolio | ForgingApps',
-  description: 'Security-certified mobile apps, AI agent systems, and cross-platform applications. See what we\'ve forged.',
+  description: "Security-certified mobile apps, AI agent systems, and cross-platform applications. See what we've forged.",
+  alternates: {
+    canonical: 'https://forgingapps.com/portfolio',
+  },
+  openGraph: {
+    title: 'Our Work -- App Development Portfolio | ForgingApps',
+    description: "Security-certified mobile apps, AI agent systems, and cross-platform applications.",
+    url: 'https://forgingapps.com/portfolio',
+    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'ForgingApps Portfolio' }],
+  },
 }
 
 export default function Portfolio() {

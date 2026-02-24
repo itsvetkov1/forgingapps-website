@@ -41,12 +41,12 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="md:hidden pb-4 border-t border-forge-stone">
             <div className="flex flex-col gap-3">
-              <Link href="/services" className="hover:text-forge-gold transition py-2">Services</Link>
-              <Link href="/ai-consulting" className="hover:text-forge-gold transition py-2">AI Consulting</Link>
-              <Link href="/portfolio" className="hover:text-forge-gold transition py-2">Portfolio</Link>
-              <Link href="/about" className="hover:text-forge-gold transition py-2">About</Link>
-              <Link href="/blog" className="hover:text-forge-gold transition py-2">Blog</Link>
-              <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center">Contact</Link>
+              <Link href="/services" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+              <Link href="/ai-consulting" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>AI Consulting</Link>
+              <Link href="/portfolio" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link>
+              <Link href="/about" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
+              <Link href="/blog" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
+              <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
             </div>
           </div>
         )}

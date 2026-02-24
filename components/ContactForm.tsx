@@ -19,6 +19,7 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
 
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -28,9 +29,9 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setError(false)
 
     try {
-      // Using Formspree for form submission
       const response = await fetch('https://formspree.io/f/xlgwoabo', {
         method: 'POST',
         body: JSON.stringify(formData),
@@ -51,9 +52,11 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           source: '',
         })
         setTimeout(() => setSubmitted(false), 5000)
+      } else {
+        setError(true)
       }
-    } catch (error) {
-      console.error('Form submission error:', error)
+    } catch (_error) {
+      setError(true)
     }
 
     setLoading(false)
@@ -91,7 +94,7 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="your@email.com"
+            placeholder="your.name@company.com"
             required
             className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition"
           />
@@ -174,6 +177,12 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           </select>
         </div>
       </div>
+
+      {error && (
+        <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-4 text-red-300 text-sm">
+          Something went wrong. Please try again or email us directly at <a href="mailto:hello@forgingapps.com" className="text-forge-gold hover:text-forge-ember transition underline">hello@forgingapps.com</a>.
+        </div>
+      )}
 
       <button
         type="submit"
