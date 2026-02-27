@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       {/* CTA Banner */}
-      <section className="section-py bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">Ready to forge your next app?</h2>
           <p className="text-lg mb-8 text-forge-dark/80">Free consultation. Transparent pricing. No middlemen.</p>

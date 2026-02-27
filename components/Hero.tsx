@@ -28,7 +28,7 @@ export default function Hero({
   const heightClass = size === 'full' ? 'min-h-screen' : 'min-h-80'
 
   return (
-    <section className={`hero-gradient ${heightClass} flex items-center justify-center relative overflow-hidden`}>
+    <section className={`hero-gradient section-fluent-merge ${heightClass} flex items-center justify-center relative overflow-hidden`}>
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-80 h-80 bg-forge-ember rounded-full mix-blend-multiply filter blur-3xl"></div>

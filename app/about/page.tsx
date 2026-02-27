@@ -160,7 +160,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="section-py bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">Ready to build something great?</h2>
           <p className="text-lg mb-8 text-forge-dark/80">Let's talk about your project. Free consultation, no commitment.</p>

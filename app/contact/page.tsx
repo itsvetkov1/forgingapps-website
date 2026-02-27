@@ -90,7 +90,7 @@ export default function Contact() {
       </section>
 
       {/* CTA */}
-      <section className="section-py bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">Questions?</h2>
           <p className="text-lg text-forge-dark/80">Email us at <a href="mailto:hello@forgingapps.com" className="font-semibold hover:underline">hello@forgingapps.com</a> or fill the form above.</p>

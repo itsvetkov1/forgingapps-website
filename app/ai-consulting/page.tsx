@@ -201,7 +201,7 @@ export default function AiConsulting() {
       </section>
 
       {/* CTA Banner */}
-      <section className="section-py bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">Ready to explore AI for your business?</h2>
           <p className="text-lg mb-8 text-forge-dark/80">Start with a free 30-minute discovery call. No commitment. No jargon.</p>
