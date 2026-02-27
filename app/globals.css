@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Button styles */
 .btn-primary {
-  @apply px-6 py-3 bg-gradient-to-r from-forge-ember to-forge-gold text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-forge-ember/50;
+  @apply px-6 py-3 bg-forge-ember/85 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-forge-ember hover:shadow-lg hover:shadow-forge-ember/30;
 }
 
 .btn-secondary {
