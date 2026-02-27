@@ -30,11 +30,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Button styles */
 .btn-primary {
-  @apply px-6 py-3 bg-forge-ember/85 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-forge-ember hover:shadow-lg hover:shadow-forge-ember/30;
+  @apply inline-flex items-center justify-center px-6 py-3 bg-forge-ember/85 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-forge-ember hover:shadow-lg hover:shadow-forge-ember/30;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 border-2 border-forge-gold text-forge-gold font-semibold rounded-lg transition-all duration-300 hover:bg-forge-gold hover:text-forge-dark;
+  @apply inline-flex items-center justify-center px-6 py-[10px] border-2 border-forge-gold text-forge-gold font-semibold rounded-lg transition-all duration-300 hover:bg-forge-gold hover:text-forge-dark;
 }
 
 .btn-small {
