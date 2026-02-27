@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BookOpen, Bot, TrendingUp } from 'lucide-react'
+import { BookOpen, Bot, TrendingUp, Shield } from 'lucide-react'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
 
@@ -20,9 +20,18 @@ export const metadata: Metadata = {
 export default function Blog() {
   const posts = [
     {
+      slug: 'umlaut-secure-app-award',
+      title: 'How We Won the umlaut Secure App Award — Twice',
+      excerpt: "What it takes to pass umlaut's security certification, why most apps fail, and what it means when your developer has done it twice.",
+      date: 'Feb 27, 2026',
+      readTime: '5 min',
+      category: 'Security',
+      image: 'shield',
+    },
+    {
       slug: 'why-we-started-forgingapps',
       title: 'Why We Started ForgingApps',
-      excerpt: 'Two senior developers walk out of the enterprise forge. This is why -- and what we\'re building instead.',
+      excerpt: "Two senior developers walk out of the enterprise forge. This is why -- and what we're building instead.",
       date: 'Feb 22, 2026',
       readTime: '4 min',
       category: 'Business',
@@ -31,7 +40,7 @@ export default function Blog() {
     {
       slug: 'ai-for-small-business',
       title: 'AI for Small Business: Where to Start in 2026',
-      excerpt: 'You\'ve heard the hype. Here\'s what AI actually does for businesses your size -- and what to try first.',
+      excerpt: "You've heard the hype. Here's what AI actually does for businesses your size -- and what to try first.",
       date: 'Feb 15, 2026',
       readTime: '6 min',
       category: 'AI',
@@ -64,7 +73,7 @@ export default function Blog() {
                 <article className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden card-hover transition-all h-full flex flex-col">
                   {/* Featured Image */}
                   <div className="bg-gradient-to-b from-forge-ember/20 to-transparent h-40 flex items-center justify-center group-hover:from-forge-ember/40 transition text-forge-gold">
-                    {post.image === 'bookopen' ? <BookOpen size={60} /> : post.image === 'bot' ? <Bot size={60} /> : <TrendingUp size={60} />}
+                    {post.image === 'bookopen' ? <BookOpen size={60} /> : post.image === 'bot' ? <Bot size={60} /> : post.image === 'shield' ? <Shield size={60} /> : <TrendingUp size={60} />}
                   </div>
 
                   <div className="flex-1 p-6 flex flex-col">
