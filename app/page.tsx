@@ -29,7 +29,7 @@ export default function Home() {
       />
 
       {/* What We Forge */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Forge</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -76,7 +76,7 @@ export default function Home() {
       </section>
 
       {/* Why Us */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">The ForgingApps Difference</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -105,7 +105,7 @@ export default function Home() {
       </section>
 
       {/* How We Work */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">From Spark to Ship</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -147,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* Credentials */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Tempered & Tested</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">

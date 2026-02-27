@@ -27,7 +27,7 @@ export default function AiConsulting() {
       />
 
       {/* What We Offer */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">AI Expertise, Accessible</h2>
 
@@ -95,7 +95,7 @@ export default function AiConsulting() {
       </section>
 
       {/* Who It's For */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Is This for You?</h2>
           <div className="space-y-8">
@@ -139,7 +139,7 @@ export default function AiConsulting() {
       </section>
 
       {/* Our AI Expertise */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Work With</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -167,7 +167,7 @@ export default function AiConsulting() {
       </section>
 
       {/* How It Works */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Three Steps from Curious to Capable</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

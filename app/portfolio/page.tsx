@@ -61,7 +61,7 @@ export default function Portfolio() {
         size="small"
       />
 
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <div className="space-y-8 mb-12">
             {projects.map((project, i) => (
@@ -107,7 +107,7 @@ export default function Portfolio() {
       </section>
 
       {/* Credentials */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Credentials & Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -144,7 +144,7 @@ export default function Portfolio() {
       </section>
 
       {/* CTA */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">Impressed?</h2>
           <p className="text-gray-400 mb-8 text-lg">Let's talk about your next project. Free consultation, no commitment.</p>

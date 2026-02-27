@@ -25,7 +25,7 @@ export default function About() {
       />
 
       {/* Team */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Meet the Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -101,7 +101,7 @@ export default function About() {
       </section>
 
       {/* Our Story */}
-      <section className="section-py bg-forge-stone">
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Why ForgingApps</h2>
           <div className="max-w-3xl mx-auto">
@@ -128,7 +128,7 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Stand For</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

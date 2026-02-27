@@ -55,7 +55,7 @@ export default function Blog() {
         size="small"
       />
 
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {posts.map((post) => (

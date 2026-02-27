@@ -162,7 +162,7 @@ export default function Services() {
         badge="Launch Discount: 25% off all packages"
       />
 
-      <section className="section-py bg-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <div className="space-y-8">
             {packages.map((pkg) => (
