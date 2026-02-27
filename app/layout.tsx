@@ -3,6 +3,7 @@ import { Cinzel, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import StructuredData from '@/components/StructuredData'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang="en" className={`${cinzel.variable} ${inter.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <StructuredData />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="font-inter bg-forge-dark text-white">
