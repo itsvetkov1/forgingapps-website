@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero'
+import { User, Flame, Zap, Coins, Wrench } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -30,8 +31,8 @@ export default function About() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Meet the Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden">
-              <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-48 flex items-center justify-center text-6xl">
-                👤
+              <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-48 flex items-center justify-center">
+                <User size={80} className="text-forge-ember/40" />
               </div>
               <div className="p-8">
                 <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">Ivaylo Tsvetkov</h2>
@@ -64,8 +65,8 @@ export default function About() {
             </div>
 
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden">
-              <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-48 flex items-center justify-center text-6xl">
-                👤
+              <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-48 flex items-center justify-center">
+                <User size={80} className="text-forge-ember/40" />
               </div>
               <div className="p-8">
                 <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">Radoslav Lambrev</h2>
@@ -133,25 +134,25 @@ export default function About() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Stand For</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-4xl mb-4">🔥</div>
+              <div className="text-forge-gold mb-4"><Flame size={36} /></div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">Tempered Quality</h3>
               <p className="text-gray-400">We test everything. Twice. Our security certification isn't a marketing badge -- it's proof that we build things that hold up under pressure.</p>
             </div>
 
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-4xl mb-4">⚡</div>
+              <div className="text-forge-gold mb-4"><Zap size={36} /></div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">Direct Fire</h3>
               <p className="text-gray-400">No account managers. No layers. No game of telephone. You talk to the people writing your code. Questions get answered in hours, not days.</p>
             </div>
 
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-4xl mb-4">💰</div>
+              <div className="text-forge-gold mb-4"><Coins size={36} /></div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">Fair Trade</h3>
               <p className="text-gray-400">Transparent pricing. No hidden costs. No scope creep surprises. You know what you're paying for before we write a single line of code.</p>
             </div>
 
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-4xl mb-4">🔧</div>
+              <div className="text-forge-gold mb-4"><Wrench size={36} /></div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">Continuous Heat</h3>
               <p className="text-gray-400">We don't disappear after launch. Every project includes a bug fix warranty, and our retainer packages keep your product maintained, secure, and evolving.</p>
             </div>

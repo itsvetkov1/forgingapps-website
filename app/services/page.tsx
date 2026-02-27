@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { Zap, Hammer, Flame, Brain, Gem, LayoutList } from 'lucide-react'
+import React from 'react'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
 
@@ -20,7 +22,7 @@ export default function Services() {
   const packages = [
     {
       id: 'spark',
-      icon: '⚡',
+      icon: 'zap',
       name: 'The Spark',
       tagline: 'Landing Pages & Simple Sites',
       regularPrice: '€400 - €1,100',
@@ -44,7 +46,7 @@ export default function Services() {
     },
     {
       id: 'anvil',
-      icon: '🔨',
+      icon: 'hammer',
       name: 'The Anvil',
       tagline: 'Standard Web & Mobile Application',
       badge: 'Most Popular',
@@ -73,7 +75,7 @@ export default function Services() {
     },
     {
       id: 'forge',
-      icon: '🔥',
+      icon: 'flame',
       name: 'The Forge',
       tagline: 'Complex Application / Full MVP',
       regularPrice: '€11,000 - €27,000',
@@ -104,7 +106,7 @@ export default function Services() {
     },
     {
       id: 'oracle',
-      icon: '🔮',
+      icon: 'brain',
       name: 'The Oracle',
       tagline: 'AI Consulting & Integration',
       regularPrice: '€80/hr | €670 - €6,700 (project)',
@@ -130,7 +132,7 @@ export default function Services() {
     },
     {
       id: 'hearthstone',
-      icon: '💎',
+      icon: 'gem',
       name: 'The Hearthstone',
       tagline: 'Ongoing Support & Retainer',
       regularPrice: '€400 - €2,000/month',
@@ -170,7 +172,7 @@ export default function Services() {
                 <div className="flex flex-col md:flex-row items-start justify-between mb-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-4xl">{pkg.icon}</span>
+                      <span className="text-forge-gold">{pkg.icon === 'zap' ? <Zap size={40} /> : pkg.icon === 'hammer' ? <Hammer size={40} /> : pkg.icon === 'flame' ? <Flame size={40} /> : pkg.icon === 'brain' ? <Brain size={40} /> : <Gem size={40} />}</span>
                       <div>
                         <h2 className="font-cinzel text-3xl font-bold text-forge-gold">{pkg.name}</h2>
                         <p className="text-gray-400">{pkg.tagline}</p>

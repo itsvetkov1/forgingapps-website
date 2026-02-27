@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BookOpen, Bot, TrendingUp } from 'lucide-react'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
 
@@ -25,7 +26,7 @@ export default function Blog() {
       date: 'Feb 22, 2026',
       readTime: '4 min',
       category: 'Business',
-      image: '📖',
+      image: 'bookopen',
     },
     {
       slug: 'ai-for-small-business',
@@ -34,7 +35,7 @@ export default function Blog() {
       date: 'Feb 15, 2026',
       readTime: '6 min',
       category: 'AI',
-      image: '🤖',
+      image: 'bot',
     },
     {
       slug: 'what-does-app-cost',
@@ -43,7 +44,7 @@ export default function Blog() {
       date: 'Feb 8, 2026',
       readTime: '7 min',
       category: 'Business',
-      image: '💰',
+      image: 'trending',
     },
   ]
 
@@ -62,8 +63,8 @@ export default function Blog() {
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
                 <article className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden card-hover transition-all h-full flex flex-col">
                   {/* Featured Image */}
-                  <div className="bg-gradient-to-b from-forge-ember/20 to-transparent h-40 flex items-center justify-center text-5xl group-hover:from-forge-ember/40 transition">
-                    {post.image}
+                  <div className="bg-gradient-to-b from-forge-ember/20 to-transparent h-40 flex items-center justify-center group-hover:from-forge-ember/40 transition text-forge-gold">
+                    {post.image === 'bookopen' ? <BookOpen size={60} /> : post.image === 'bot' ? <Bot size={60} /> : <TrendingUp size={60} />}
                   </div>
 
                   <div className="flex-1 p-6 flex flex-col">

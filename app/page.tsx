@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Hero from '@/components/Hero'
 import ServiceCard from '@/components/ServiceCard'
 import { Metadata } from 'next'
+import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, Coins } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'ForgingApps -- Custom App Development & AI Consulting | Sofia, Bulgaria',
@@ -34,7 +35,7 @@ export default function Home() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Forge</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <ServiceCard
-              icon="⚡"
+              icon={<Zap size={40} />}
               name="The Spark"
               description="Landing Pages & Simple Sites"
               regularPrice="€400 - €1,100"
@@ -42,7 +43,7 @@ export default function Home() {
               href="/services#spark"
             />
             <ServiceCard
-              icon="🔨"
+              icon={<Hammer size={40} />}
               name="The Anvil"
               description="Standard Web & Mobile Apps"
               regularPrice="€4,000 - €11,000"
@@ -51,7 +52,7 @@ export default function Home() {
               href="/services#anvil"
             />
             <ServiceCard
-              icon="🔥"
+              icon={<Flame size={40} />}
               name="The Forge"
               description="Complex Applications & Full MVPs"
               regularPrice="€11,000 - €27,000"
@@ -59,7 +60,7 @@ export default function Home() {
               href="/services#forge"
             />
             <ServiceCard
-              icon="🔮"
+              icon={<Brain size={40} />}
               name="The Oracle"
               description="AI Consulting & Integration"
               regularPrice="€80/hr"
@@ -81,22 +82,22 @@ export default function Home() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">The ForgingApps Difference</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-3xl mb-4">👥</div>
+              <div className="text-forge-gold mb-4"><Users size={32} /></div>
               <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Senior Craftsmanship</h3>
               <p className="text-gray-400">Two senior developers. No juniors. No middlemen. Every line of code is written by engineers with 10+ years in the trade.</p>
             </div>
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-3xl mb-4">🤖</div>
+              <div className="text-forge-gold mb-4"><Bot size={32} /></div>
               <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">AI-Native Delivery</h3>
               <p className="text-gray-400">We use AI tools to cut delivery time in half -- not quality. You get enterprise-grade work at startup-friendly timelines.</p>
             </div>
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-3xl mb-4">🛡️</div>
+              <div className="text-forge-gold mb-4"><Shield size={32} /></div>
               <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Proven Security</h3>
               <p className="text-gray-400">umlaut Secure App Award, two years running. Your data and your users' data are safe in our forge.</p>
             </div>
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-3xl mb-4">💰</div>
+              <div className="text-forge-gold mb-4"><Coins size={32} /></div>
               <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Startup-Friendly Pricing</h3>
               <p className="text-gray-400">Quality you'd expect at €50K. Prices that start at €300. We're building our portfolio -- you get the best deal you'll ever find.</p>
             </div>

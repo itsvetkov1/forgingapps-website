@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import React from 'react'
 
 interface ServiceCardProps {
-  icon: string
+  icon: React.ReactNode
   name: string
   description: string
   regularPrice: string
@@ -31,7 +32,7 @@ export default function ServiceCard({
         </div>
       )}
 
-      <div className="text-4xl mb-4">{icon}</div>
+      <div className="mb-4 text-forge-gold">{icon}</div>
 
       <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-2">
         {name}
