@@ -1,0 +1,26 @@
+# PR Agent - AI-powered code review
+# https://github.com/qodo-ai/pr-agent
+
+name: PR Agent
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issues:
+    types: [opened]
+
+jobs:
+  pr_agent_job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: PR Agent action step
+        uses: Codium-ai/pr-agent@main
+        with:
+          ai_model: gpt-4o-mini
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
