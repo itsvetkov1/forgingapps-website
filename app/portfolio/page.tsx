@@ -42,15 +42,6 @@ export default function Portfolio() {
       result: 'In Development',
       status: 'In Development',
     },
-    {
-      name: 'Singles of Sofia',
-      category: 'Mobile App / Community Platform',
-      tagline: 'Community app with payments, matching, and real-time chat',
-      description: 'A community-driven social platform for Sofia featuring user matching, integrated payments, real-time messaging, and admin moderation tools.',
-      tech: ['Flutter', 'Kotlin', 'Stripe', 'Firebase'],
-      result: 'In Progress',
-      status: 'In Progress',
-    },
   ]
 
   return (
