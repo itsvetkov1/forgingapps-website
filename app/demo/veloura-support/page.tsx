@@ -2,7 +2,7 @@ import Hero from '@/components/Hero'
 import { ExternalLink, MessageSquare, Shield, Shirt, Truck, RotateCcw } from 'lucide-react'
 import { Metadata } from 'next'
 
-const LIVE_DEMO_URL = 'https://88de515d087d6c.lhr.life'
+const LIVE_DEMO_URL = 'https://sean-commerce-rehab-arise.trycloudflare.com'
 
 export const metadata: Metadata = {
   title: 'Veloura Support Demo -- AI Customer Support Showcase | ForgingApps',
