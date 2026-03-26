@@ -2,9 +2,11 @@ import Hero from '@/components/Hero'
 import { ExternalLink, MessageSquare, Shield, Shirt, Truck, RotateCcw } from 'lucide-react'
 import { Metadata } from 'next'
 
+const LIVE_DEMO_URL = 'https://88de515d087d6c.lhr.life'
+
 export const metadata: Metadata = {
   title: 'Veloura Support Demo -- AI Customer Support Showcase | ForgingApps',
-  description: 'Live stage demo of an AI customer support assistant for apparel brands. Test shipping, returns, sizing, and product guidance flows.',
+  description: 'Live production-stage demo of an AI customer support assistant for apparel brands. Test shipping, returns, sizing, and product guidance flows.',
   alternates: {
     canonical: 'https://forgingapps.com/demo/veloura-support',
   },
@@ -28,9 +30,9 @@ export default function VelouraSupportDemo() {
     <>
       <Hero
         headline="Veloura Support Demo"
-        subheadline="A live AI customer support demo for fashion and e-commerce brands. Ask about shipping, returns, exchanges, and sizing like a real customer would."
+        subheadline="A live AI customer support demo for fashion and e-commerce brands. Launch the secure stage environment and test shipping, returns, exchanges, and sizing like a real customer would."
         size="small"
-        badge="Stage Demo"
+        badge="Live Demo"
       />
 
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
@@ -42,13 +44,14 @@ export default function VelouraSupportDemo() {
                   <div>
                     <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-3">Try the Bot</h2>
                     <p className="text-gray-400 max-w-2xl">
-                      This demo is hosted separately from the marketing site so the website can stay static and fast while the assistant runs on a live stage environment.
+                      This demo runs in a dedicated secure stage environment so the marketing site can stay fast and static while the assistant remains fully interactive.
                     </p>
                   </div>
                   <a
-                    href="#"
+                    href={LIVE_DEMO_URL}
                     className="btn-primary whitespace-nowrap"
-                    aria-disabled="true"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Launch Live Demo <ExternalLink size={18} className="ml-2" />
                   </a>
@@ -57,23 +60,23 @@ export default function VelouraSupportDemo() {
                 <div className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6 mb-6">
                   <div className="flex items-center gap-3 mb-3">
                     <MessageSquare className="text-forge-gold" size={22} />
-                    <h3 className="font-cinzel text-xl font-bold text-forge-gold">Stage hookup pending</h3>
+                    <h3 className="font-cinzel text-xl font-bold text-forge-gold">Live stage access</h3>
                   </div>
                   <p className="text-gray-400 mb-4">
-                    The page shell is ready. Next step is wiring the public stage chat endpoint for the OpenClaw bot.
+                    The assistant is now reachable through a public secure stage link. It opens in a separate tab with the live Veloura support runtime.
                   </p>
                   <ul className="space-y-2 text-sm text-gray-300">
                     <li className="flex items-start gap-3">
                       <span className="text-forge-gold mt-1">•</span>
-                      <span>Website side is prepared for a dedicated demo surface</span>
+                      <span>Live customer-support agent, not a scripted fake chat</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-forge-gold mt-1">•</span>
-                      <span>Bot still needs authenticated remote WebChat/Gateway exposure</span>
+                      <span>Runs in a separate secure stage to keep the main site static and fast</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-forge-gold mt-1">•</span>
-                      <span>Once stage URL exists, replace this placeholder CTA with the live link</span>
+                      <span>Best tested on desktop first for the full Control UI experience</span>
                     </li>
                   </ul>
                 </div>
@@ -135,7 +138,7 @@ export default function VelouraSupportDemo() {
                   </div>
                   <div>
                     <p className="text-gray-400 mb-1">Runtime</p>
-                    <p className="text-white font-semibold">OpenClaw bot on stage environment</p>
+                    <p className="text-white font-semibold">OpenClaw bot on live secure stage</p>
                   </div>
                 </div>
               </div>
