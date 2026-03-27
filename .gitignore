@@ -18,6 +18,28 @@ dist/
 # debug
 npm-debug.log*
 
+# temp/cache/logs
+.tmp/
+tmp/
+.cache/
+*.log
+*.tmp
+*.pid
+
+# local databases/state
+*.sqlite
+*.sqlite3
+*.db
+*.db-*
+*.journal
+*.wal
+*.shm
+
+# patch/backups
+*.bak
+*.orig
+*.rej
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
