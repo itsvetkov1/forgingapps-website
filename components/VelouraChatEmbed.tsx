@@ -177,6 +177,12 @@ export default function VelouraChatEmbed() {
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault()
+                void sendMessage(input)
+              }
+            }}
             placeholder="Ask about shipping, returns, exchanges, or sizing..."
             rows={3}
             disabled={loading}
