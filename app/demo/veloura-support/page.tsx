@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero'
 import VelouraChatEmbed from '@/components/VelouraChatEmbed'
-import { Shield, Shirt, Truck, RotateCcw } from 'lucide-react'
+import { PROOF_CARDS } from '@/lib/veloura-demo-config.mjs'
+import { RotateCcw, Search, Shield, Shirt, Truck } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -17,12 +18,20 @@ export const metadata: Metadata = {
   },
 }
 
+const iconMap = {
+  truck: Truck,
+  rotate: RotateCcw,
+  search: Search,
+  shirt: Shirt,
+  shield: Shield,
+} as const
+
 export default function VelouraSupportDemo() {
   return (
     <>
       <Hero
         headline="Veloura Support Demo"
-        subheadline="A branded embedded AI support experience for fashion and e-commerce brands. Ask about shipping, returns, exchanges, and sizing without leaving the page."
+        subheadline="A branded embedded AI support experience for fashion and e-commerce brands. Ask about shipping, returns, exchanges, sizing, and product browsing without leaving the page."
         size="small"
         badge="Embedded Live Demo"
       />
@@ -36,26 +45,16 @@ export default function VelouraSupportDemo() {
               <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
                 <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">What this demo proves</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6">
-                    <Truck className="text-forge-gold mb-4" size={28} />
-                    <h3 className="font-semibold text-white mb-2">Shipping questions</h3>
-                    <p className="text-gray-400 text-sm">Handles standard delivery questions with policy-grounded answers instead of hallucinated promises.</p>
-                  </div>
-                  <div className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6">
-                    <RotateCcw className="text-forge-gold mb-4" size={28} />
-                    <h3 className="font-semibold text-white mb-2">Returns and exchanges</h3>
-                    <p className="text-gray-400 text-sm">Explains return windows, condition requirements, and exchange limits clearly and consistently.</p>
-                  </div>
-                  <div className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6">
-                    <Shirt className="text-forge-gold mb-4" size={28} />
-                    <h3 className="font-semibold text-white mb-2">Sizing support</h3>
-                    <p className="text-gray-400 text-sm">Guides users toward the right choice with concise follow-up questions and product-aware support behavior.</p>
-                  </div>
-                  <div className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6">
-                    <Shield className="text-forge-gold mb-4" size={28} />
-                    <h3 className="font-semibold text-white mb-2">Safe support boundaries</h3>
-                    <p className="text-gray-400 text-sm">Avoids inventing order status, refund approvals, or exceptions that would violate store policy.</p>
-                  </div>
+                  {PROOF_CARDS.map((card) => {
+                    const Icon = iconMap[card.icon as keyof typeof iconMap]
+                    return (
+                      <div key={card.title} className="bg-forge-dark border border-forge-ember/20 rounded-lg p-6">
+                        <Icon className="text-forge-gold mb-4" size={28} />
+                        <h3 className="font-semibold text-white mb-2">{card.title}</h3>
+                        <p className="text-gray-400 text-sm">{card.description}</p>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>

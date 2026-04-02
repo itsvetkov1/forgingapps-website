@@ -1,19 +1,19 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  CHAT_SUBTITLE,
+  INPUT_PLACEHOLDER,
+  RESET_MESSAGE,
+  STARTER_PROMPTS,
+  WELCOME_MESSAGE,
+} from '@/lib/veloura-demo-config.mjs'
 
 interface ChatMessage {
   id: string
   role: 'user' | 'assistant'
   text: string
 }
-
-const STARTER_PROMPTS = [
-  'How long does EU shipping take?',
-  'Can I return an item if it does not fit?',
-  'Do you allow size exchanges?',
-  'I am between two sizes. What do you recommend?',
-]
 
 function getOrCreateVisitorId() {
   const key = 'veloura-demo-visitor-id'
@@ -30,7 +30,7 @@ export default function VelouraChatEmbed() {
     {
       id: 'welcome',
       role: 'assistant',
-      text: 'Hi. I am Veloura Support. Ask me about shipping, returns, exchanges, or sizing.',
+      text: WELCOME_MESSAGE,
     },
   ])
   const [input, setInput] = useState('')
@@ -107,7 +107,7 @@ export default function VelouraChatEmbed() {
       {
         id: 'welcome-reset',
         role: 'assistant',
-        text: 'Chat reset. Ask me about shipping, returns, exchanges, or sizing.',
+        text: RESET_MESSAGE,
       },
     ])
     setInput('')
@@ -119,7 +119,7 @@ export default function VelouraChatEmbed() {
       <div className="border-b border-forge-ember/20 px-6 py-4 flex items-center justify-between gap-4">
         <div>
           <h2 className="font-cinzel text-2xl font-bold text-forge-gold">Live Veloura Support Demo</h2>
-          <p className="text-sm text-gray-400">Embedded customer support chat powered by the wardrobe-support bot.</p>
+          <p className="text-sm text-gray-400">{CHAT_SUBTITLE}</p>
         </div>
         <button type="button" onClick={resetChat} className="btn-secondary text-sm px-4 py-2">
           Reset chat
@@ -146,7 +146,7 @@ export default function VelouraChatEmbed() {
         {messages.map((message) => (
           <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 ${
+              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 whitespace-pre-line ${
                 message.role === 'user'
                   ? 'bg-forge-ember text-white'
                   : 'bg-forge-dark border border-forge-ember/20 text-gray-200'
@@ -183,7 +183,7 @@ export default function VelouraChatEmbed() {
                 void sendMessage(input)
               }
             }}
-            placeholder="Ask about shipping, returns, exchanges, or sizing..."
+            placeholder={INPUT_PLACEHOLDER}
             rows={3}
             disabled={loading}
             className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-3 text-white focus:outline-none focus:border-forge-gold transition resize-none"
