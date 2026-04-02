@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { parseChatText, parseProductLine, splitChatBlocks } from '@/lib/chat-format.mjs'
+import { getProductActionPrompts } from '@/lib/product-actions.mjs'
 import {
   CHAT_SUBTITLE,
   INPUT_PLACEHOLDER,
@@ -161,6 +162,8 @@ export default function VelouraChatEmbed() {
                     const product = parseProductLine(block.text)
 
                     if (product && message.role === 'assistant') {
+                      const actionPrompts = getProductActionPrompts(product.name)
+
                       return (
                         <div
                           key={`${message.id}-block-${blockIndex}`}
@@ -182,9 +185,19 @@ export default function VelouraChatEmbed() {
                             <span className="inline-flex rounded-full border border-forge-ember/20 px-3 py-1 text-xs text-gray-300">
                               {product.onSale ? 'Sale item' : 'Current catalog item'}
                             </span>
-                            <span className="inline-flex rounded-full bg-forge-ember px-3 py-1 text-xs font-medium text-white">
-                              Ask for details
-                            </span>
+                          </div>
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {actionPrompts.map((action) => (
+                              <button
+                                key={`${product.name}-${action.label}`}
+                                type="button"
+                                onClick={() => void sendMessage(action.prompt)}
+                                disabled={loading}
+                                className="rounded-full border border-forge-ember/30 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-forge-ember/20 disabled:opacity-50"
+                              >
+                                {action.label}
+                              </button>
+                            ))}
                           </div>
                         </div>
                       )
