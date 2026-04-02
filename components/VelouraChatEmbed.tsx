@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { parseChatText, parseProductLine, splitChatBlocks } from '@/lib/chat-format.mjs'
 import {
   CHAT_SUBTITLE,
   INPUT_PLACEHOLDER,
@@ -143,19 +144,79 @@ export default function VelouraChatEmbed() {
       </div>
 
       <div ref={listRef} className="h-[480px] overflow-y-auto px-6 pb-4 space-y-4">
-        {messages.map((message) => (
-          <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 whitespace-pre-line ${
-                message.role === 'user'
-                  ? 'bg-forge-ember text-white'
-                  : 'bg-forge-dark border border-forge-ember/20 text-gray-200'
-              }`}
-            >
-              {message.text}
+        {messages.map((message) => {
+          const blocks = splitChatBlocks(message.text)
+
+          return (
+            <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div
+                className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 ${
+                  message.role === 'user'
+                    ? 'bg-forge-ember text-white'
+                    : 'bg-forge-dark border border-forge-ember/20 text-gray-200'
+                }`}
+              >
+                <div className="space-y-3">
+                  {blocks.map((block, blockIndex) => {
+                    const product = parseProductLine(block.text)
+
+                    if (product && message.role === 'assistant') {
+                      return (
+                        <div
+                          key={`${message.id}-block-${blockIndex}`}
+                          className="rounded-2xl border border-forge-gold/30 bg-black/15 px-4 py-3 shadow-[0_0_0_1px_rgba(255,184,77,0.04)]"
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div>
+                              <p className="text-xs uppercase tracking-[0.22em] text-forge-gold/80">Product {product.index}</p>
+                              <h4 className="text-base font-semibold text-white">{product.name}</h4>
+                            </div>
+                            <div className="text-right">
+                              {product.previousPrice && (
+                                <p className="text-xs text-gray-500 line-through">{product.previousPrice}</p>
+                              )}
+                              <p className="text-lg font-semibold text-forge-gold">{product.currentPrice}</p>
+                            </div>
+                          </div>
+                          <div className="mt-3 flex items-center justify-between gap-3">
+                            <span className="inline-flex rounded-full border border-forge-ember/20 px-3 py-1 text-xs text-gray-300">
+                              {product.onSale ? 'Sale item' : 'Current catalog item'}
+                            </span>
+                            <span className="inline-flex rounded-full bg-forge-ember px-3 py-1 text-xs font-medium text-white">
+                              Ask for details
+                            </span>
+                          </div>
+                        </div>
+                      )
+                    }
+
+                    return (
+                      <div
+                        key={`${message.id}-block-${blockIndex}`}
+                        className={block.type === 'list-item' ? 'rounded-xl border border-forge-ember/15 bg-black/10 px-3 py-2' : ''}
+                      >
+                        {parseChatText(block.text).map((line, lineIndex) => (
+                          <Fragment key={`${message.id}-line-${blockIndex}-${lineIndex}`}>
+                            {line.map((segment, segmentIndex) =>
+                              segment.bold ? (
+                                <strong key={`${message.id}-segment-${blockIndex}-${lineIndex}-${segmentIndex}`} className="font-semibold text-white">
+                                  {segment.text}
+                                </strong>
+                              ) : (
+                                <span key={`${message.id}-segment-${blockIndex}-${lineIndex}-${segmentIndex}`}>{segment.text}</span>
+                              )
+                            )}
+                            {lineIndex < parseChatText(block.text).length - 1 && <br />}
+                          </Fragment>
+                        ))}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
 
         {loading && (
           <div className="flex justify-start">
