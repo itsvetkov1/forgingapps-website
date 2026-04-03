@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Hero from '@/components/Hero'
 import ServiceCard from '@/components/ServiceCard'
 import { Metadata } from 'next'
-import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, Coins } from 'lucide-react'
+import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, Coins, GraduationCap, DollarSign } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'ForgingApps -- Custom App Development & AI Consulting | Sofia, Bulgaria',
@@ -124,26 +124,26 @@ export default function Home() {
       <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">The ForgingApps Difference</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-forge-gold mb-4"><Users size={32} /></div>
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Senior Craftsmanship</h3>
-              <p className="text-gray-400">Two senior developers. No juniors. No middlemen. Every line of code is written by engineers with 10+ years in the trade.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Users size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Direct Access to Founders</h3>
+              <p className="text-gray-400 text-sm">Two senior developers. You work directly with the people building your app -- no project managers, no hand-offs.</p>
             </div>
-            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-forge-gold mb-4"><Bot size={32} /></div>
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">AI-Native Delivery</h3>
-              <p className="text-gray-400">We use AI tools to cut delivery time in half -- not quality. You get enterprise-grade work at startup-friendly timelines.</p>
+            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Zap size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Average 2-3 Week Delivery</h3>
+              <p className="text-gray-400 text-sm">AI-assisted development cuts timelines in half. Most projects ship within 2-8 weeks -- not months.</p>
             </div>
-            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-forge-gold mb-4"><Shield size={32} /></div>
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Proven Security</h3>
-              <p className="text-gray-400">umlaut Secure App Award, two years running. Your data and your users' data are safe in our forge.</p>
+            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><DollarSign size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">40% Less Than Agencies</h3>
+              <p className="text-gray-400 text-sm">No bloated teams or overhead. Senior work at €60/hr AI consulting and fixed-price projects starting at €300.</p>
             </div>
-            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
-              <div className="text-forge-gold mb-4"><Coins size={32} /></div>
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3">Startup-Friendly Pricing</h3>
-              <p className="text-gray-400">Quality you'd expect at €50K. Prices that start at €300. We're building our portfolio -- you get the best deal you'll ever find.</p>
+            <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Shield size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">umlaut Secure App Award</h3>
+              <p className="text-gray-400 text-sm">Two years running. Your data and your users' data are safe -- privacy and security built in by design.</p>
             </div>
           </div>
         </div>
