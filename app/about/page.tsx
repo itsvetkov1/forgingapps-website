@@ -90,10 +90,10 @@ export default function About() {
                 </div>
                 <p className="text-forge-gold font-semibold mb-4">AI & Product</p>
                 <p className="text-gray-400 mb-6">
-                  The bridge between what AI can do and what your business needs. 10+ years in tech, with deep expertise in AI integration, product strategy, and quality engineering. Leads the technical vision, designs AI solutions, and ensures every product ships with the security and polish clients deserve.
+                  The bridge between what AI can do and what your business needs. Deep expertise in AI integration, product strategy, and quality engineering. Leads the technical vision, designs AI solutions, and ensures every product ships with the security and polish clients deserve.
                 </p>
                 <p className="text-gray-400 mb-6 text-sm">
-                  Before ForgingApps, Ivaylo led a 22-person technical team building enterprise software. He's an AI systems architect who has built autonomous agents running in production, and a two-time recipient of the umlaut Secure App Award. He spends his time figuring out how to make AI actually useful for real businesses, not just impressive in demos.
+                  An AI systems architect who has built autonomous agents running in production, and a two-time recipient of the umlaut Secure App Award. He spends his time figuring out how to make AI actually useful for real businesses, not just impressive in demos.
                 </p>
                 <div>
                   <h3 className="font-semibold text-forge-gold mb-3">Credentials</h3>
@@ -101,10 +101,6 @@ export default function About() {
                     <li className="flex items-start gap-2">
                       <span className="text-forge-gold mt-1 flex-shrink-0">✓</span>
                       <span>umlaut Secure App Award (2x)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-forge-gold mt-1 flex-shrink-0">✓</span>
-                      <span>Technical Team Lead (22-person team)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-forge-gold mt-1 flex-shrink-0">✓</span>
