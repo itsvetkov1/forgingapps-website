@@ -154,6 +154,15 @@ export default function BlogPost() {
             ← All Posts
           </Link>
         </div>
+
+        {/* Contextual CTA */}
+        <div className="mt-8 bg-gradient-to-r from-forge-ember/20 to-transparent border border-forge-ember/40 rounded-lg p-6 text-center">
+          <p className="text-forge-gold font-semibold mb-1">Security matters for your app?</p>
+          <p className="text-gray-400 text-sm mb-4">We build apps to production-grade security standards. Learn what that means for your project.</p>
+          <Link href="/services" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
+            View Development Services →
+          </Link>
+        </div>
       </div>
     </article>
   )

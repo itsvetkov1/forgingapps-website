@@ -189,11 +189,20 @@ export default function BlogPost() {
         </div>
 
         {/* CTA */}
-        <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 text-center">
+        <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 text-center mb-8">
           <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">Want a transparent quote for your project?</h3>
           <p className="text-gray-400 mb-6">Free consultation. Real numbers. No surprises.</p>
           <Link href="/contact" className="btn-primary">
             Get a Free Quote →
+          </Link>
+        </div>
+
+        {/* Contextual CTA */}
+        <div className="bg-gradient-to-r from-forge-ember/20 to-transparent border border-forge-ember/40 rounded-lg p-6 text-center">
+          <p className="text-forge-gold font-semibold mb-1">Considering an AI integration for your app?</p>
+          <p className="text-gray-400 text-sm mb-4">We also build AI-powered features and workflows. Learn what's possible in a free consultation.</p>
+          <Link href="/ai-consulting" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
+            Explore AI Consulting →
           </Link>
         </div>
       </div>

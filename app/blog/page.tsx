@@ -21,12 +21,14 @@ export default function Blog() {
   const posts = [
     {
       slug: 'umlaut-secure-app-award',
-      title: 'How We Won the umlaut Secure App Award — Twice',
+      title: 'How We Won the umlaut Secure App Award -- Twice',
       excerpt: "What it takes to pass umlaut's security certification, why most apps fail, and what it means when your developer has done it twice.",
       date: 'Feb 27, 2026',
       readTime: '5 min',
       category: 'Security',
       image: 'shield',
+      author: 'Radoslav Stanev',
+      authorRole: 'Founder & Lead Developer',
     },
     {
       slug: 'why-we-started-forgingapps',
@@ -36,6 +38,8 @@ export default function Blog() {
       readTime: '4 min',
       category: 'Business',
       image: 'bookopen',
+      author: 'Radoslav Stanev',
+      authorRole: 'Founder & Lead Developer',
     },
     {
       slug: 'ai-for-small-business',
@@ -45,6 +49,8 @@ export default function Blog() {
       readTime: '6 min',
       category: 'AI',
       image: 'bot',
+      author: 'Radoslav Stanev',
+      authorRole: 'Founder & Lead Developer',
     },
     {
       slug: 'what-does-app-cost',
@@ -54,6 +60,8 @@ export default function Blog() {
       readTime: '7 min',
       category: 'Business',
       image: 'trending',
+      author: 'Radoslav Stanev',
+      authorRole: 'Founder & Lead Developer',
     },
   ]
 
@@ -67,6 +75,38 @@ export default function Blog() {
 
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
+
+          {/* Email Capture */}
+          <div className="bg-gradient-to-r from-forge-ember/20 to-forge-gold/10 border border-forge-ember/40 rounded-lg p-8 mb-12">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">Stay in the loop</h2>
+              <p className="text-gray-400 mb-6">Get new articles on AI, app development, and building products that last. No spam. Unsubscribe anytime.</p>
+              <form
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                action="#"
+                method="POST"
+              >
+                <input
+                  type="email"
+                  placeholder="your.name@company.com"
+                  required
+                  className="flex-1 sm:max-w-sm bg-forge-dark border border-forge-ember/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-forge-gold transition placeholder-gray-500"
+                />
+                <button
+                  type="submit"
+                  className="btn-primary whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </form>
+              <p className="text-gray-500 text-xs mt-3">
+                {/* TODO: Hook up to email provider when ready */}
+                We respect your privacy. No spam, ever.
+              </p>
+            </div>
+          </div>
+
+          {/* Article Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {posts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
@@ -95,8 +135,13 @@ export default function Blog() {
                       {post.excerpt}
                     </p>
 
+                    {/* Author */}
+                    <div className="pt-4 border-t border-forge-ember/20">
+                      <p className="text-xs text-gray-500 mb-1">By {post.author}, {post.authorRole}</p>
+                    </div>
+
                     {/* Read Time & Link */}
-                    <div className="flex items-center justify-between pt-4 border-t border-forge-ember/20">
+                    <div className="flex items-center justify-between mt-2">
                       <span className="text-xs text-gray-500">{post.readTime} read</span>
                       <span className="text-forge-gold group-hover:text-forge-ember transition">Read →</span>
                     </div>
@@ -106,10 +151,6 @@ export default function Blog() {
             ))}
           </div>
 
-          {/* Coming Soon */}
-          <div className="text-center">
-            <p className="text-gray-400 text-lg">More articles coming soon. Check back for insights on app development, AI, and building products that last.</p>
-          </div>
         </div>
       </section>
     </>
