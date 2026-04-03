@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Zap, Hammer, Flame, Brain, Gem, LayoutList } from 'lucide-react'
+import { Zap, Hammer, Flame, Brain, Gem, Clock, AlertCircle, LayoutList } from 'lucide-react'
 import React from 'react'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
@@ -109,23 +109,14 @@ export default function Services() {
       icon: 'brain',
       name: 'The Oracle',
       tagline: 'AI Consulting & Integration',
-      regularPrice: '€80/hr | €670 - €6,700 (project)',
-      launchPrice: '€60/hr | €500 - €5,000 (project)',
-      description: 'Not sure what AI can do for your business? We\'ll show you. From strategy sessions to full integration -- accessible AI expertise without enterprise pricing.',
+      regularPrice: '€80/hr | €500 - €5,000 (project)',
+      launchPrice: '€60/hr',
+      description: "Not sure what AI can do for your business? We'll show you. From a free discovery call to full AI integration — accessible expertise without enterprise pricing.",
       consulting: [
-        'AI strategy sessions',
-        'Tool selection and evaluation',
-        'Workflow automation audits',
-        'AI integration architecture',
-        'Chatbot and agent design',
-        'Proof-of-concept development',
-      ],
-      projects: [
-        { name: 'AI Feasibility Assessment', regular: '€670 - €1,070', launch: '€500 - €800' },
-        { name: 'Chatbot / AI Agent Setup', regular: '€1,340 - €4,000', launch: '€1,000 - €3,000' },
-        { name: 'Workflow Automation (1 process)', regular: '€1,070 - €2,670', launch: '€800 - €2,000' },
-        { name: 'Custom AI Integration', regular: '€2,670 - €6,700', launch: '€2,000 - €5,000' },
-        { name: 'AI Strategy & Roadmap', regular: '€1,340 - €2,670', launch: '€1,000 - €2,000' },
+        'AI strategy sessions & feasibility assessments',
+        'Chatbot and AI agent design and deployment',
+        'Workflow automation and process optimization',
+        'Integration with your existing systems and tools',
       ],
       cta: 'Explore AI Consulting',
       ctaLink: '/ai-consulting',
@@ -163,6 +154,97 @@ export default function Services() {
         size="small"
         badge="Launch Discount: 25% off all packages"
       />
+
+      {/* Scarcity Banner */}
+      <section className="bg-forge-dark border-t border-amber-700/50">
+        <div className="container-custom py-4">
+          <div className="flex items-center justify-center gap-3 text-amber-400 text-sm font-semibold">
+            <Clock size={16} />
+            <span>Launch Pricing Available Through Q3 2026 — <span className="text-amber-300">First 20 clients</span></span>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+        <div className="container-custom">
+          <h2 className="font-cinzel text-3xl font-bold text-center mb-8">Quick Comparison</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[600px]">
+              <thead>
+                <tr className="border-b border-forge-ember/30">
+                  <th className="text-left py-3 px-4 text-gray-400 font-normal text-sm"></th>
+                  <th className="text-center py-3 px-4">
+                    <div className="flex flex-col items-center gap-1">
+                      <Zap size={20} className="text-forge-gold" />
+                      <span className="font-cinzel text-forge-gold font-bold">Spark</span>
+                      <span className="text-xs text-gray-500">Landing Pages</span>
+                    </div>
+                  </th>
+                  <th className="text-center py-3 px-4">
+                    <div className="flex flex-col items-center gap-1">
+                      <Hammer size={20} className="text-forge-gold" />
+                      <span className="font-cinzel text-forge-gold font-bold">Anvil</span>
+                      <span className="text-xs text-gray-500">Standard Apps</span>
+                    </div>
+                  </th>
+                  <th className="text-center py-3 px-4">
+                    <div className="flex flex-col items-center gap-1">
+                      <Flame size={20} className="text-forge-gold" />
+                      <span className="font-cinzel text-forge-gold font-bold">Forge</span>
+                      <span className="text-xs text-gray-500">Full MVPs</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-forge-ember/20">
+                {[
+                  { label: 'Price Range', spark: '€300 - €800', anvil: '€3,000 - €8,000', forge: '€8,000 - €20,000' },
+                  { label: 'Delivery', spark: '1-2 weeks', anvil: '4-8 weeks', forge: '8-16 weeks' },
+                  { label: 'Platform', spark: 'Web only', anvil: 'Mobile OR Web', forge: 'Mobile + Web', forgeFull: true },
+                  { label: 'Pages / Screens', spark: '1-5 pages', anvil: 'Up to 10', forge: '10+' },
+                  { label: 'User Authentication', spark: false, anvil: true, forge: true },
+                  { label: 'Backend / Database', spark: false, anvil: true, forge: true },
+                  { label: 'Payment Integration', spark: false, anvil: false, forge: true },
+                  { label: 'Real-time Features', spark: false, anvil: false, forge: true },
+                  { label: 'Bilingual (EN/BG)', spark: false, anvil: false, forge: true, forgeFull: true },
+                  { label: 'Admin Dashboard', spark: false, anvil: false, forge: true },
+                  { label: 'Revisions Included', spark: '1 round', anvil: '1 round', forge: '2 rounds' },
+                  { label: 'Bug Fix Warranty', spark: '30 days', anvil: '30 days', forge: '60 days' },
+                ].map((row, i) => (
+                  <tr key={i} className="hover:bg-forge-stone/50 transition-colors">
+                    <td className="py-3 px-4 text-gray-400 text-sm">{row.label}</td>
+                    <td className="py-3 px-4 text-center text-sm">
+                      {typeof row.spark === 'boolean' ? (
+                        row.spark ? <span className="text-forge-gold">✓</span> : <span className="text-gray-600">—</span>
+                      ) : (
+                        <span className="text-gray-300">{row.spark}</span>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-center text-sm">
+                      {typeof row.anvil === 'boolean' ? (
+                        row.anvil ? <span className="text-forge-gold">✓</span> : <span className="text-gray-600">—</span>
+                      ) : (
+                        <span className="text-gray-300">{row.anvil}</span>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 text-center text-sm">
+                      {typeof row.forge === 'boolean' ? (
+                        row.forge ? <span className="text-forge-gold">✓</span> : <span className="text-gray-600">—</span>
+                      ) : (
+                        <span className="text-gray-300">{row.forge}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-gray-500 text-sm">Need AI capabilities? <Link href="/ai-consulting" className="text-forge-gold hover:text-forge-ember transition">Explore AI Consulting →</Link></p>
+          </div>
+        </div>
+      </section>
 
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
@@ -234,25 +316,6 @@ export default function Services() {
                         </li>
                       ))}
                     </ul>
-                  </div>
-                )}
-
-                {pkg.projects && (
-                  <div className="mb-6">
-                    <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-3">Fixed-Price AI Projects:</h3>
-                    <div className="space-y-3">
-                      {pkg.projects.map((project, i) => (
-                        <div key={i} className="bg-forge-dark rounded p-4 border border-forge-ember/20">
-                          <div className="flex items-center justify-between">
-                            <span className="font-semibold text-white">{project.name}</span>
-                            <div className="text-right">
-                              <div className="text-gray-400 line-through text-xs">{project.regular}</div>
-                              <div className="text-forge-gold font-semibold">{project.launch}</div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 )}
 
@@ -377,6 +440,63 @@ export default function Services() {
                 <span>Marketing and SEO campaigns (unless specifically scoped as an add-on)</span>
               </li>
             </ul>
+          </div>
+
+          {/* FAQ */}
+          <div className="mt-8 bg-forge-dark border border-forge-ember/30 rounded-lg p-8">
+            <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">Frequently Asked Questions</h2>
+            <div className="space-y-3">
+              {[
+                {
+                  q: "How much does a custom app actually cost?",
+                  a: "It depends on complexity. Landing pages start at €300. Standard apps typically run €3,000-€8,000. Full MVPs range €8,000-€20,000. Every project is scoped individually — we give you a fixed price before any code is written.",
+                },
+                {
+                  q: "What's the typical timeline from idea to launch?",
+                  a: "Spark (landing pages) ship in 1-2 weeks. Anvil (standard apps) take 4-8 weeks. Forge (full MVPs) run 8-16 weeks. Most projects are live within two months of signing.",
+                },
+                {
+                  q: "What exactly is included in the price?",
+                  a: "Design, development, one round of revisions, and a 30-60 day bug fix warranty depending on package. Hosting setup is included — you pay the hosting provider directly. See the full What's Not Included list above.",
+                },
+                {
+                  q: "I have a non-technical background. Can I still work with you?",
+                  a: "Absolutely. Most of our clients are non-technical founders and business owners. We handle the technical complexity — you stay in control through weekly demos and feedback rounds. No jargon in our conversations.",
+                },
+                {
+                  q: "What if I need changes mid-project?",
+                  a: "Small adjustments are part of every package. For larger scope changes, we scope them out, give you a clear cost, and get your approval before proceeding. No surprises — every change is quoted separately.",
+                },
+                {
+                  q: "What happens after my app goes live?",
+                  a: "Every project includes a 30-60 day bug fix warranty. After that, you can add a Hearthstone support retainer for ongoing maintenance, updates, and priority response. Or handle maintenance yourself — the code is yours.",
+                },
+                {
+                  q: "We need something live urgently. Can you fast-track?",
+                  a: "Yes. Rush timelines are possible for an additional fee depending on availability. Tell us your deadline and we'll tell you what's achievable and at what cost — no judgment.",
+                },
+              ].map((item, i) => (
+                <details key={i} className="group border border-forge-ember/20 rounded-lg">
+                  <summary className="flex items-center justify-between cursor-pointer p-4 text-gray-300 font-semibold hover:text-forge-gold hover:bg-forge-stone/50 transition-colors list-none">
+                    {item.q}
+                    <span className="text-forge-gold group-open:rotate-180 transition-transform ml-4 flex-shrink-0">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                  </summary>
+                  <div className="px-4 pb-4 text-gray-400 text-sm leading-relaxed border-t border-forge-ember/10 pt-3">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+            <div className="mt-6 pt-6 border-t border-forge-ember/20">
+              <p className="text-gray-400 text-sm text-center">
+                Still have questions?{" "}
+                <Link href="/contact" className="text-forge-gold hover:text-forge-ember transition">
+                  Talk to us directly →
+                </Link>
+              </p>
+            </div>
           </div>
 
           {/* CTA */}
