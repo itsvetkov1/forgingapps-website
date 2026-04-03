@@ -23,29 +23,34 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <Hero
-        headline="Apps Forged to Last"
-        subheadline="Custom mobile and web applications, hand-crafted by senior developers. AI-powered delivery at startup-friendly prices."
-        primaryCTA={{ text: 'See Our Services', href: '/services' }}
-        secondaryCTA={{ text: 'Get a Free Quote', href: '/contact' }}
+        headline="Custom AI & Software Built Fast, Without the Price Tag"
+        subheadline="Senior developers building production-ready mobile apps, web platforms, and AI integrations for growing businesses in Sofia and across Europe."
+        primaryCTA={{ text: 'See It In Action', href: '/demo/veloura-support' }}
+        secondaryCTA={{ text: 'Get Started', href: '/contact' }}
+        trustBadge="Umlaut Verified Partner"
       />
 
       {/* What We Forge */}
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Forge</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <ServiceCard
               icon={<Zap size={40} />}
-              name="The Spark"
-              description="Landing Pages & Simple Sites"
+              title="Landing Pages & Simple Sites"
+              tier="The Spark"
+              outcome="Launch in 2 weeks"
+              description="Landing pages and simple sites for businesses that need to get online fast. Mobile-responsive, SEO-optimized, ready to ship."
               regularPrice="€400 - €1,100"
               launchPrice="From €300"
               href="/services#spark"
             />
             <ServiceCard
               icon={<Hammer size={40} />}
-              name="The Anvil"
-              description="Standard Web & Mobile Apps"
+              title="Standard Web & Mobile Apps"
+              tier="The Anvil"
+              outcome="Ship in 4-8 weeks"
+              description="Custom web and mobile applications built to your spec. Cross-platform, scalable, with a 30-day bug-fix warranty."
               regularPrice="€4,000 - €11,000"
               launchPrice="From €3,000"
               badge="Most Popular"
@@ -53,25 +58,64 @@ export default function Home() {
             />
             <ServiceCard
               icon={<Flame size={40} />}
-              name="The Forge"
-              description="Complex Applications & Full MVPs"
+              title="Complex Apps & Full MVPs"
+              tier="The Forge"
+              outcome="Production-ready in 8-16 weeks"
+              description="Full MVPs, complex web platforms, and multi-service systems. Enterprise-grade architecture without the enterprise price."
               regularPrice="€11,000 - €27,000"
               launchPrice="From €8,000"
               href="/services#forge"
             />
-            <ServiceCard
-              icon={<Brain size={40} />}
-              name="The Oracle"
-              description="AI Consulting & Integration"
-              regularPrice="€80/hr"
-              launchPrice="€60/hr"
-              href="/ai-consulting"
-            />
           </div>
-          <div className="text-center">
+
+          {/* AI Consulting Link */}
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
+            <p className="text-gray-300 mb-3">Ready for custom AI?</p>
+            <Link href="/ai-consulting" className="text-forge-gold hover:text-forge-ember transition font-semibold">
+              Explore AI Consulting Services →
+            </Link>
+          </div>
+
+          <div className="text-center mt-8">
             <Link href="/services" className="btn-primary">
               View All Packages →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Teaser */}
+      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
+        <div className="container-custom">
+          <div className="bg-forge-dark border border-forge-ember/30 rounded-xl p-8 md:p-12 text-center">
+            <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-forge-gold mb-4">
+              See Custom AI in Action
+            </h2>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">
+              The Veloura demo shows how custom AI handles real customer conversations with context and intelligence. This is live, working software running right now — not a mockup or a video. Try it yourself and see what's possible for your business.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+              <Link href="/demo/veloura-support" className="btn-primary">
+                Try the Demo
+              </Link>
+              <Link href="/ai-consulting" className="btn-secondary">
+                Learn about AI Consulting
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+              <div className="flex flex-col items-center gap-2">
+                <Brain size={24} className="text-forge-gold" />
+                <span className="text-sm text-gray-400">Real-time problem solving</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Bot size={24} className="text-forge-gold" />
+                <span className="text-sm text-gray-400">Context-aware conversations</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Zap size={24} className="text-forge-gold" />
+                <span className="text-sm text-gray-400">Immediately deployable</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

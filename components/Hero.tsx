@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Shield, CheckCircle2 } from 'lucide-react'
 
 interface HeroProps {
   headline: string
@@ -15,6 +16,7 @@ interface HeroProps {
   }
   size?: 'full' | 'small'
   badge?: string
+  trustBadge?: string
 }
 
 export default function Hero({
@@ -24,6 +26,7 @@ export default function Hero({
   secondaryCTA,
   size = 'full',
   badge,
+  trustBadge,
 }: HeroProps) {
   const heightClass = size === 'full' ? 'min-h-screen' : 'min-h-80'
 
@@ -48,9 +51,18 @@ export default function Hero({
           {headline}
         </h1>
 
-        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-6">
           {subheadline}
         </p>
+
+        {trustBadge && (
+          <div className="flex items-center justify-center gap-2 mb-10">
+            <CheckCircle2 size={18} className="text-forge-gold" />
+            <span className="text-xs text-gray-400 border border-forge-ember/30 bg-forge-ember/10 px-3 py-1 rounded-full">
+              {trustBadge}
+            </span>
+          </div>
+        )}
 
         {(primaryCTA || secondaryCTA) && (
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

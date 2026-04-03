@@ -5,8 +5,10 @@ import React from 'react'
 
 interface ServiceCardProps {
   icon: React.ReactNode
-  name: string
+  title: string
+  tier?: string
   description: string
+  outcome?: string
   regularPrice: string
   launchPrice: string
   badge?: string
@@ -15,8 +17,10 @@ interface ServiceCardProps {
 
 export default function ServiceCard({
   icon,
-  name,
+  title,
+  tier,
   description,
+  outcome,
   regularPrice,
   launchPrice,
   badge,
@@ -34,9 +38,17 @@ export default function ServiceCard({
 
       <div className="mb-4 text-forge-gold">{icon}</div>
 
-      <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-2">
-        {name}
+      <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-1">
+        {title}
       </h3>
+
+      {tier && (
+        <p className="text-xs text-gray-400 mb-3">{tier}</p>
+      )}
+
+      {outcome && (
+        <p className="text-sm text-forge-ember font-semibold mb-3">{outcome}</p>
+      )}
 
       <p className="text-gray-400 text-sm mb-4">
         {description}
