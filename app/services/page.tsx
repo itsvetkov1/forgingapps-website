@@ -150,7 +150,7 @@ export default function Services() {
     <>
       <Hero
         headline="Service Packages"
-        subheadline="From a quick landing page to a full MVP. Choose the forge that fits your scale."
+        subheadline="From a quick landing page to a full MVP. Choose the package that fits your scale."
         size="small"
         badge="Launch Discount: 25% off all packages"
       />

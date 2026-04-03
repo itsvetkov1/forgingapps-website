@@ -13,7 +13,7 @@ export default function Footer() {
               <span>⚒</span>
               <span>ForgingApps</span>
             </div>
-            <p className="text-gray-400 text-sm">Apps forged with precision. Built to last.</p>
+            <p className="text-gray-400 text-sm">Apps built with precision. Built to last.</p>
           </div>
 
           {/* Links */}

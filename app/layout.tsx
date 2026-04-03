@@ -17,12 +17,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'ForgingApps -- Custom App Development & AI Consulting | Sofia, Bulgaria',
-  description: 'Custom mobile and web applications forged by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing. Based in Sofia, serving Europe.',
+  description: 'Custom mobile and web applications built by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing. Based in Sofia, serving Europe.',
   keywords: 'app development, flutter, react, AI consulting, custom apps, Bulgaria, Europe',
   metadataBase: new URL('https://forgingapps.com'),
   openGraph: {
     title: 'ForgingApps -- Custom App Development & AI Consulting',
-    description: 'Apps forged to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
+    description: 'Apps built to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
     type: 'website',
     url: 'https://forgingapps.com',
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ForgingApps -- Custom App Development & AI Consulting',
-    description: 'Apps forged to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
+    description: 'Apps built to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
     images: ['/og-image.svg'],
   },
   robots: 'index, follow',

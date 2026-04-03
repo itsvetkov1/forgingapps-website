@@ -5,7 +5,7 @@ export default function StructuredData() {
     name: 'ForgingApps',
     url: 'https://forgingapps.com',
     logo: 'https://forgingapps.com/favicon.svg',
-    description: 'Custom mobile and web applications forged by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing.',
+    description: 'Custom mobile and web applications built by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Sofia',

@@ -6,13 +6,13 @@ import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, Coins, GraduationCap, Do
 
 export const metadata: Metadata = {
   title: 'ForgingApps -- Custom App Development & AI Consulting | Sofia, Bulgaria',
-  description: 'Custom mobile and web applications forged by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing. Based in Sofia, serving Europe.',
+  description: 'Custom mobile and web applications built by senior developers. AI consulting, cross-platform apps, and startup-friendly pricing. Based in Sofia, serving Europe.',
   alternates: {
     canonical: 'https://forgingapps.com',
   },
   openGraph: {
     title: 'ForgingApps -- Custom App Development & AI Consulting',
-    description: 'Apps forged to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
+    description: 'Apps built to last. Senior developers, AI-powered delivery, startup-friendly pricing.',
     url: 'https://forgingapps.com',
     images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'ForgingApps' }],
   },
@@ -172,7 +172,7 @@ export default function Home() {
               },
               {
                 num: 4,
-                name: 'The Quench',
+                name: 'Launch & Warranty',
                 desc: 'Launch, test, deliver. Every project ships with a 30-60 day bug fix warranty. We don\'t disappear after launch.',
               },
             ].map((step, i) => (
@@ -194,7 +194,7 @@ export default function Home() {
       {/* Credentials */}
       <section className="section-py bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Tempered & Tested</h2>
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">Proven & Verified</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Credentials</h3>
@@ -234,7 +234,7 @@ export default function Home() {
       {/* CTA Banner */}
       <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
-          <h2 className="font-cinzel text-4xl font-bold mb-4">Ready to forge your next app?</h2>
+          <h2 className="font-cinzel text-4xl font-bold mb-4">Ready to build your next app?</h2>
           <p className="text-lg mb-8 text-forge-dark/80">Free consultation. Transparent pricing. No middlemen.</p>
           <Link href="/contact" className="btn-primary bg-forge-dark text-forge-gold hover:bg-forge-stone">
             Get a Free Quote →
