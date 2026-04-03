@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero'
 import ContactForm from '@/components/ContactForm'
+import CopyEmailButton from '@/components/CopyEmailButton'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -15,6 +16,21 @@ export const metadata: Metadata = {
   description: 'Get a free 30-minute consultation. Tell us about your project and we\'ll recommend the right package. Response within 24 hours.',
 }
 
+const FAQ_ITEMS = [
+  {
+    question: 'Do you sign NDAs?',
+    answer: 'Yes. We are happy to sign non-disclosure agreements before any detailed discussion. Your project ideas are treated with strict confidentiality.',
+  },
+  {
+    question: 'What if I\'m not technical?',
+    answer: 'That is exactly who we work best with. We guide you through every step -- scoping, requirements, design decisions, launch -- without assuming you know what a REST API is.',
+  },
+  {
+    question: 'What does the contract look like?',
+    answer: 'A simple, transparent agreement covering scope, timeline, milestones, and payment schedule. No legal fine print designed to trap you. You get exactly what we agree on in writing.',
+  },
+]
+
 export default function Contact() {
   return (
     <>
@@ -28,14 +44,39 @@ export default function Contact() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Form */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 space-y-6">
+              {/* Scarcity signal */}
+              <div className="bg-gradient-to-r from-forge-ember/10 to-forge-gold/5 border border-forge-ember/40 rounded-lg px-6 py-4">
+                <p className="text-forge-ember text-sm font-semibold text-center">
+                  Currently accepting 2-3 new projects per month
+                </p>
+              </div>
+
               <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
                 <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">Send Your Brief</h2>
                 <ContactForm />
               </div>
+
+              {/* FAQ below form */}
+              <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
+                <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-6">Common Questions</h3>
+                <div className="space-y-4">
+                  {FAQ_ITEMS.map((item) => (
+                    <details key={item.question} className="group bg-forge-dark border border-forge-ember/20 rounded-lg">
+                      <summary className="flex items-center justify-between cursor-pointer p-4 font-semibold text-forge-gold hover:text-forge-ember transition list-none">
+                        {item.question}
+                        <span className="text-forge-ember group-open:rotate-45 transition-transform font-bold">+</span>
+                      </summary>
+                      <div className="px-4 pb-4 pt-1 text-gray-400 text-sm leading-relaxed border-t border-forge-ember/10">
+                        {item.answer}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Contact Info & FAQ */}
+            {/* Contact Info Sidebar */}
             <div className="space-y-8">
               {/* Direct Contact */}
               <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
@@ -43,9 +84,12 @@ export default function Contact() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-gray-400 text-sm mb-1">Email</p>
-                    <a href="mailto:hello@forgingapps.com" className="text-forge-gold font-semibold hover:text-forge-ember transition">
-                      hello@forgingapps.com
-                    </a>
+                    <div className="flex items-center gap-2">
+                      <a href="mailto:hello@forgingapps.com" className="text-forge-gold font-semibold hover:text-forge-ember transition flex-1">
+                        hello@forgingapps.com
+                      </a>
+                      <CopyEmailButton />
+                    </div>
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm mb-1">Location</p>
@@ -58,7 +102,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* FAQ */}
+              {/* Existing FAQ */}
               <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
                 <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-6">Quick FAQ</h3>
                 <div className="space-y-4 text-sm">

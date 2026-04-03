@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 interface ContactFormProps {
   packagePreselect?: string
@@ -65,9 +66,36 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
   if (submitted) {
     return (
       <div className="bg-forge-stone border border-forge-gold rounded-lg p-8 text-center">
-        <div className="text-4xl mb-4">✓</div>
-        <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">Brief Received</h3>
-        <p className="text-gray-400">We'll respond within 24 hours on business days.</p>
+        <div className="text-5xl mb-4">✓</div>
+        <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">We Got Your Message!</h3>
+        <p className="text-gray-300 mb-6">Here's what happens next:</p>
+        <div className="text-left space-y-3 mb-6 bg-forge-dark rounded-lg p-4 border border-forge-ember/20">
+          <div className="flex items-start gap-3">
+            <span className="text-forge-ember font-bold">1.</span>
+            <p className="text-gray-300 text-sm">We read your brief carefully — usually same day.</p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="text-forge-ember font-bold">2.</span>
+            <p className="text-gray-300 text-sm">We prepare a quick assessment: fit, approach, ballpark.</p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="text-forge-ember font-bold">3.</span>
+            <p className="text-gray-300 text-sm">You hear from us within 24 hours on business days.</p>
+          </div>
+        </div>
+        <p className="text-gray-400 text-sm mb-4">Want to see our work first?</p>
+        <a href="/demo/veloura-support" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
+          Try the live demo →
+        </a>
+        <div className="mt-4 pt-4 border-t border-forge-ember/20">
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="text-gray-500 text-xs hover:text-gray-300 transition"
+          >
+            ← Send another message
+          </button>
+        </div>
       </div>
     )
   }
@@ -142,6 +170,9 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           rows={5}
           className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition"
         ></textarea>
+        <p className="text-gray-500 text-xs mt-2">
+          Include: problem you're solving, who the users are, your timeline/budget, specific features, and what success looks like.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
