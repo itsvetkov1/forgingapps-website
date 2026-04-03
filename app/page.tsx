@@ -23,7 +23,7 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <Hero
-        headline="Custom AI & Software Built Fast, Without the Price Tag"
+        headline="Apps Forged to Last"
         subheadline="Senior developers building production-ready mobile apps, web platforms, and AI integrations for growing businesses in Sofia and across Europe."
         primaryCTA={{ text: 'See It In Action', href: '/demo/veloura-support' }}
         secondaryCTA={{ text: 'Get Started', href: '/contact' }}
