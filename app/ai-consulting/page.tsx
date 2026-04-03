@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
+import { Brain, Zap, TrendingUp, Shield } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'AI Consulting for Business -- The Oracle | ForgingApps',
@@ -138,31 +139,58 @@ export default function AiConsulting() {
         </div>
       </section>
 
+      {/* Demo Callout */}
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+        <div className="container-custom">
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 md:p-10 text-center">
+            <h2 className="font-cinzel text-2xl md:text-3xl font-bold text-forge-gold mb-4">
+              See Custom AI Working Right Now
+            </h2>
+            <p className="text-gray-300 max-w-xl mx-auto mb-6">
+              Before you decide, see what custom AI actually looks like in practice. Our Veloura demo is live, working software -- not a slide deck.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/demo/veloura-support" className="btn-primary">
+                Try the Demo
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Or Book a Discovery Call
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Our AI Expertise */}
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What We Work With</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-4">Large Language Models (LLMs)</h3>
-              <p className="text-gray-400">GPT-4, Claude, Gemini, Llama -- we work with all major models and know which one fits your use case and budget.</p>
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">What AI Can Do for You</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Brain size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Understand Your Customers</h3>
+              <p className="text-gray-400 text-sm">AI handles complex inquiries, follows up on leads, and answers questions -- with full context, around the clock.</p>
             </div>
 
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-4">Chatbots & AI Agents</h3>
-              <p className="text-gray-400">Conversational agents for customer support, internal Q&A, lead qualification, and business operations. We built an AI agent system that manages business operations autonomously -- it's the system powering parts of this very company.</p>
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Zap size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Automate Repetitive Work</h3>
+              <p className="text-gray-400 text-sm">Data entry, report generation, email triage, scheduling. AI takes over the tasks that eat up your team's time.</p>
             </div>
 
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-4">Workflow Automation</h3>
-              <p className="text-gray-400">Connect AI to your existing tools. Automate repetitive processes, reduce errors, and free your team to do work that matters.</p>
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><TrendingUp size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Scale with Intelligence</h3>
+              <p className="text-gray-400 text-sm">AI learns and improves as your business grows. Handle 10x the volume without 10x the headcount.</p>
             </div>
 
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-4">Integration Architecture</h3>
-              <p className="text-gray-400">We don't just bolt AI onto your system. We design integrations that are maintainable, scalable, and secure.</p>
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
+              <div className="text-forge-gold mb-4 flex justify-center"><Shield size={36} /></div>
+              <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">Keep Your Data Secure</h3>
+              <p className="text-gray-400 text-sm">Privacy and security built in by design. Your data stays yours -- compliant with GDPR and best practices.</p>
             </div>
           </div>
+          <p className="text-center text-gray-500 text-sm">We work with the latest proven AI models, selecting the right tool for your specific needs and budget.</p>
         </div>
       </section>
 
