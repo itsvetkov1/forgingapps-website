@@ -84,7 +84,7 @@ export default function About() {
                 <div className="flex items-start justify-between mb-2">
                   <h2 className="font-cinzel text-2xl font-bold text-forge-gold">Ivaylo Tsvetkov</h2>
                   <LinkedInButton
-                    href="https://www.linkedin.com/in/ivaylo-tsvetkov"
+                    href="https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106"
                     label="Profile"
                   />
                 </div>
