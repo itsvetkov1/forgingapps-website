@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { User, Linkedin } from 'lucide-react'
 import { Metadata } from 'next'
 
@@ -16,12 +17,12 @@ export const metadata: Metadata = {
   },
 }
 
-function AvatarPlaceholder({ initials, name }: { initials: string; name: string }) {
+function TeamPhoto({ src, name }: { src: string; name: string }) {
   return (
-    <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-48 flex items-center justify-center">
+    <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-56 flex items-center justify-center py-6">
       <div className="relative">
-        <div className="w-24 h-24 rounded-full bg-forge-stone border-2 border-forge-ember/40 flex items-center justify-center">
-          <span className="font-cinzel text-3xl font-bold text-forge-gold">{initials}</span>
+        <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-forge-ember/40">
+          <Image src={src} alt={name} width={400} height={400} className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
@@ -79,7 +80,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {/* Ivaylo */}
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg overflow-hidden">
-              <AvatarPlaceholder initials="IT" name="Ivaylo Tsvetkov" />
+              <TeamPhoto src="/team/ivaylo-tsvetkov.jpg" name="Ivaylo Tsvetkov" />
               <div className="p-8">
                 <div className="flex items-start justify-between mb-2">
                   <h2 className="font-cinzel text-2xl font-bold text-forge-gold">Ivaylo Tsvetkov</h2>
@@ -117,7 +118,7 @@ export default function About() {
 
             {/* Radoslav */}
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg overflow-hidden">
-              <AvatarPlaceholder initials="RL" name="Radoslav Lambrev" />
+              <TeamPhoto src="/team/radoslav-lambrev.jpg" name="Radoslav Lambrev" />
               <div className="p-8">
                 <div className="flex items-start justify-between mb-2">
                   <h2 className="font-cinzel text-2xl font-bold text-forge-gold">Radoslav Lambrev</h2>
