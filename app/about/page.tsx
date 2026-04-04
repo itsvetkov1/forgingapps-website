@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { User, Linkedin } from 'lucide-react'
 import { Metadata } from 'next'
 
@@ -22,7 +21,7 @@ function TeamPhoto({ src, name }: { src: string; name: string }) {
     <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-56 flex items-center justify-center py-6">
       <div className="relative">
         <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-forge-ember/40">
-          <Image src={src} alt={name} width={400} height={400} className="w-full h-full object-cover" />
+          <img src={src} alt={name} width={400} height={400} className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
