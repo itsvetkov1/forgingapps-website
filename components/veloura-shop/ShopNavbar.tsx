@@ -25,7 +25,7 @@ export default function ShopNavbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/demo/veloura-shop" className="flex items-center gap-2">
-            <span className="font-serif text-2xl font-bold tracking-widest text-gray-900">VELOURA</span>
+            <span className="text-2xl font-bold tracking-widest text-gray-900">VELOURA</span>
           </Link>
 
           {/* Desktop Nav */}

@@ -41,7 +41,7 @@ export default function CartItemComponent({ item }: CartItemProps) {
             className="text-gray-400 hover:text-red-500 transition-colors ml-2"
             aria-label="Remove item"
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="w-4 h-4 text-gray-500" />
           </button>
         </div>
         <div className="flex items-end justify-between mt-3">
@@ -51,15 +51,15 @@ export default function CartItemComponent({ item }: CartItemProps) {
               className="w-7 h-7 flex items-center justify-center rounded border border-gray-300 hover:bg-gray-50 transition-colors"
               aria-label="Decrease quantity"
             >
-              <Minus className="w-3 h-3" />
+              <Minus className="w-3 h-3 text-gray-500" />
             </button>
-            <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
+            <span className="text-sm font-medium w-6 text-center text-gray-900">{item.quantity}</span>
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}
               className="w-7 h-7 flex items-center justify-center rounded border border-gray-300 hover:bg-gray-50 transition-colors"
               aria-label="Increase quantity"
             >
-              <Plus className="w-3 h-3" />
+              <Plus className="w-3 h-3 text-gray-500" />
             </button>
           </div>
           <span className="text-sm font-semibold text-gray-900">

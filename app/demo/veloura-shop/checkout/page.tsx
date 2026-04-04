@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useVelouraCart } from '@/contexts/VelouraCartContext'
-import { ArrowLeft, Lock } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useVelouraCart()
@@ -20,57 +20,81 @@ export default function CheckoutPage() {
     postalCode: '',
     country: 'Germany',
     shippingMethod: 'standard',
-    cardNumber: '4242 4242 4242 4242',
-    expiry: '12/28',
-    cvv: '123',
   })
 
-  const shipping = form.shippingMethod === 'express' ? 12.90 : form.shippingMethod === 'free' ? 0 : 5.90
+  const shipping =
+    form.shippingMethod === 'express'
+      ? 12.9
+      : form.shippingMethod === 'free'
+      ? 0
+      : 5.9
   const total = cartTotal + shipping
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Basic validation
-    if (!form.firstName || !form.lastName || !form.email || !form.address || !form.city || !form.postalCode) {
-      alert('Please fill in all required fields')
+    if (
+      !form.firstName ||
+      !form.lastName ||
+      !form.email ||
+      !form.address ||
+      !form.city ||
+      !form.postalCode
+    ) {
       return
     }
     clearCart()
     router.push('/demo/veloura-shop/success')
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   if (items.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-        <Link href="/demo/veloura-shop" className="text-blue-600 hover:underline">Back to Shop</Link>
+      <div className="max-w-lg mx-auto px-4 py-20 text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
+        <Link
+          href="/demo/veloura-shop"
+          className="text-gray-600 hover:text-gray-900 underline text-sm"
+        >
+          Back to Shop
+        </Link>
       </div>
     )
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link href="/demo/veloura-shop/cart" className="hover:text-gray-900 flex items-center gap-1">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      {/* Back link */}
+      <div className="mb-6">
+        <Link
+          href="/demo/veloura-shop/cart"
+          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+        >
           <ArrowLeft size={14} /> Back to Cart
         </Link>
       </div>
 
-      <h1 className="font-serif text-3xl font-bold mb-8">Checkout</h1>
+      {/* Page heading */}
+      <h1 className="text-2xl font-bold text-gray-900 mb-8">Checkout</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form
+          onSubmit={handleSubmit}
+          className="lg:col-span-3 space-y-8"
+        >
           {/* Contact */}
-          <div>
-            <h2 className="font-bold text-lg mb-4">Contact Information</h2>
+          <section>
+            <h2 className="text-base font-bold text-gray-900 mb-4">Contact Information</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  First Name *
+                </label>
                 <input
                   type="text"
                   name="firstName"
@@ -81,7 +105,9 @@ export default function CheckoutPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Last Name *
+                </label>
                 <input
                   type="text"
                   name="lastName"
@@ -92,7 +118,9 @@ export default function CheckoutPage() {
                 />
               </div>
               <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Email *
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -103,14 +131,16 @@ export default function CheckoutPage() {
                 />
               </div>
             </div>
-          </div>
+          </section>
 
           {/* Shipping */}
-          <div>
-            <h2 className="font-bold text-lg mb-4">Shipping Address</h2>
+          <section>
+            <h2 className="text-base font-bold text-gray-900 mb-4">Shipping Address</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Street Address *</label>
+                <label className="block text-xs font-medium text-gray-600 mb-1">
+                  Street Address *
+                </label>
                 <input
                   type="text"
                   name="address"
@@ -122,7 +152,9 @@ export default function CheckoutPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">
+                    City *
+                  </label>
                   <input
                     type="text"
                     name="city"
@@ -133,7 +165,9 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">
+                    Postal Code *
+                  </label>
                   <input
                     type="text"
                     name="postalCode"
@@ -145,7 +179,7 @@ export default function CheckoutPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                <label className="block text-xs font-medium text-gray-600 mb-1">Country</label>
                 <select
                   name="country"
                   value={form.country}
@@ -165,48 +199,59 @@ export default function CheckoutPage() {
                 </select>
               </div>
             </div>
-          </div>
+          </section>
 
           {/* Shipping Method */}
-          <div>
-            <h2 className="font-bold text-lg mb-4">Shipping Method</h2>
+          <section>
+            <h2 className="text-base font-bold text-gray-900 mb-4">Shipping Method</h2>
             <div className="space-y-2">
-              <label className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${form.shippingMethod === 'standard' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="radio"
-                    name="shippingMethod"
-                    value="standard"
-                    checked={form.shippingMethod === 'standard'}
-                    onChange={handleChange}
-                    className="accent-gray-900"
-                  />
-                  <div>
-                    <p className="font-medium text-sm">Standard Delivery</p>
-                    <p className="text-xs text-gray-500">3-5 business days</p>
+              {[
+                {
+                  value: 'standard',
+                  label: 'Standard Delivery',
+                  sub: '3-5 business days',
+                  price: '€5.90',
+                },
+                {
+                  value: 'express',
+                  label: 'Express Delivery',
+                  sub: '1-2 business days',
+                  price: '€12.90',
+                },
+              ].map((opt) => (
+                <label
+                  key={opt.value}
+                  className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${
+                    form.shippingMethod === opt.value
+                      ? 'border-gray-900 bg-gray-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value={opt.value}
+                      checked={form.shippingMethod === opt.value}
+                      onChange={handleChange}
+                      className="accent-gray-900"
+                    />
+                    <div>
+                      <p className="font-medium text-sm">{opt.label}</p>
+                      <p className="text-xs text-gray-500">{opt.sub}</p>
+                    </div>
                   </div>
-                </div>
-                <span className="font-semibold text-sm">€5.90</span>
-              </label>
-              <label className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${form.shippingMethod === 'express' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="radio"
-                    name="shippingMethod"
-                    value="express"
-                    checked={form.shippingMethod === 'express'}
-                    onChange={handleChange}
-                    className="accent-gray-900"
-                  />
-                  <div>
-                    <p className="font-medium text-sm">Express Delivery</p>
-                    <p className="text-xs text-gray-500">1-2 business days</p>
-                  </div>
-                </div>
-                <span className="font-semibold text-sm">€12.90</span>
-              </label>
+                  <span className="font-semibold text-sm">{opt.price}</span>
+                </label>
+              ))}
               {cartTotal >= 60 && (
-                <label className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${form.shippingMethod === 'free' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                <label
+                  className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${
+                    form.shippingMethod === 'free'
+                      ? 'border-gray-900 bg-gray-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
                   <div className="flex items-center gap-3">
                     <input
                       type="radio"
@@ -225,58 +270,12 @@ export default function CheckoutPage() {
                 </label>
               )}
             </div>
-          </div>
+          </section>
 
-          {/* Payment */}
-          <div>
-            <h2 className="font-bold text-lg mb-4 flex items-center gap-2">
-              <Lock size={16} /> Payment
-            </h2>
-            <div className="border border-gray-200 rounded p-4 bg-gray-50 mb-4">
-              <div className="flex items-center gap-2 mb-3">
-                <input type="radio" checked readOnly className="accent-gray-900" />
-                <span className="font-medium text-sm">Credit Card</span>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Card Number</label>
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    value={form.cardNumber}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
-                    placeholder="1234 5678 9012 3456"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">Expiry</label>
-                    <input
-                      type="text"
-                      name="expiry"
-                      value={form.expiry}
-                      onChange={handleChange}
-                      className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
-                      placeholder="MM/YY"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">CVV</label>
-                    <input
-                      type="text"
-                      name="cvv"
-                      value={form.cvv}
-                      onChange={handleChange}
-                      className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
-                      placeholder="123"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-gray-400">This is a demo. No real payment will be processed.</p>
-          </div>
+          {/* Demo note */}
+          <p className="text-xs text-gray-400 bg-gray-50 border border-gray-200 rounded p-3">
+            This is a demo checkout. No real payment will be processed.
+          </p>
 
           <button
             type="submit"
@@ -287,11 +286,13 @@ export default function CheckoutPage() {
         </form>
 
         {/* Order Summary */}
-        <div>
+        <div className="lg:col-span-2">
           <div className="bg-gray-50 rounded-lg p-6 sticky top-24">
-            <h2 className="font-bold text-lg mb-4">Order Summary</h2>
+            <h2 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
+              Order Summary
+            </h2>
             <div className="space-y-4 mb-4">
-              {items.map(item => (
+              {items.map((item) => (
                 <div key={item.id} className="flex gap-3">
                   <div className="relative w-14 h-16 bg-white rounded overflow-hidden flex-shrink-0">
                     <Image
@@ -305,25 +306,31 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{item.product.name}</p>
-                    <p className="text-xs text-gray-500">{item.color.name} / {item.size}</p>
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      {item.product.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {item.color.name} / {item.size}
+                    </p>
                   </div>
-                  <span className="text-sm font-medium">€{(((item.product.salePrice ?? item.product.price)) * item.quantity).toFixed(2)}</span>
+                  <span className="text-sm font-medium text-gray-900">
+                    €{((item.product.salePrice ?? item.product.price) * item.quantity).toFixed(2)}
+                  </span>
                 </div>
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span>€{cartTotal.toFixed(2)}</span>
+                <span className="text-gray-900">€{cartTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
-                <span className={shipping === 0 ? 'text-green-600' : ''}>
+                <span className={shipping === 0 ? 'text-green-600 font-medium' : 'text-gray-900'}>
                   {shipping === 0 ? 'Free' : `€${shipping.toFixed(2)}`}
                 </span>
               </div>
-              <div className="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
+              <div className="flex justify-between font-bold text-base pt-2 border-t border-gray-200">
                 <span>Total</span>
                 <span>€{total.toFixed(2)}</span>
               </div>

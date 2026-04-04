@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ShoppingBag, ChevronRight, Check } from "lucide-react"
@@ -28,16 +28,21 @@ export default function ProductDetail({
     useState<ProductColor>(product.colors[0]!)
   const [selectedSize, setSelectedSize] = useState("")
   const [added, setAdded] = useState(false)
+  const isAdding = useRef(false)
 
   const discountPct = product.salePrice
     ? Math.round(((product.price - product.salePrice) / product.price) * 100)
     : 0
 
   function handleAddToCart() {
-    if (!selectedSize) return
-    addToCart(product, selectedColor, selectedSize)
+    if (!selectedSize || isAdding.current) return
+    isAdding.current = true
     setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
+    addToCart(product, selectedColor, selectedSize)
+    setTimeout(() => {
+      setAdded(false)
+      isAdding.current = false
+    }, 2000)
   }
 
   return (

@@ -27,7 +27,7 @@ export default function VelouraShopHome() {
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <div className="text-center text-white">
-            <p className="font-serif text-5xl md:text-7xl font-bold tracking-widest mb-4">VELOURA</p>
+            <p className="text-5xl md:text-7xl font-bold tracking-widest mb-4">VELOURA</p>
             <p className="text-xl md:text-2xl mb-8 font-light">Everyday essentials, built to last.</p>
             <Link
               href="/demo/veloura-shop/category/hoodies-sweatshirts"
@@ -42,7 +42,7 @@ export default function VelouraShopHome() {
       {/* New Arrivals */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="font-serif text-3xl font-bold tracking-wide">New Arrivals</h2>
+          <h2 className="text-3xl font-bold tracking-wide">New Arrivals</h2>
           <Link href="/demo/veloura-shop" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors underline">
             View All
           </Link>
@@ -58,7 +58,7 @@ export default function VelouraShopHome() {
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-serif text-3xl font-bold tracking-wide">On Sale</h2>
+            <h2 className="text-3xl font-bold tracking-wide">On Sale</h2>
             <Link href="/demo/veloura-shop/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors underline">
               View All Sale Items
             </Link>
@@ -73,7 +73,7 @@ export default function VelouraShopHome() {
 
       {/* Category Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <h2 className="font-serif text-3xl font-bold tracking-wide mb-8">Shop by Category</h2>
+        <h2 className="text-3xl font-bold tracking-wide mb-8">Shop by Category</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {shopCategories.map(cat => (
             <Link
@@ -89,7 +89,7 @@ export default function VelouraShopHome() {
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-white font-serif text-lg font-bold">{cat.name.split(' ')[0]}</p>
+                <p className="text-white text-lg font-bold">{cat.name.split(' ')[0]}</p>
                 <p className="text-white/80 text-xs mt-1">{cat.productCount} products</p>
               </div>
             </Link>
@@ -103,17 +103,17 @@ export default function VelouraShopHome() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <p className="text-3xl mb-2">⚡</p>
-              <h3 className="font-serif text-lg font-bold mb-2">Free Shipping Over €60</h3>
+              <h3 className="text-lg font-bold mb-2">Free Shipping Over €60</h3>
               <p className="text-gray-400 text-sm">Standard delivery 3-5 business days</p>
             </div>
             <div>
               <p className="text-3xl mb-2">↩️</p>
-              <h3 className="font-serif text-lg font-bold mb-2">30-Day Returns</h3>
+              <h3 className="text-lg font-bold mb-2">30-Day Returns</h3>
               <p className="text-gray-400 text-sm">No questions asked, free return shipping</p>
             </div>
             <div>
               <p className="text-3xl mb-2">🛡️</p>
-              <h3 className="font-serif text-lg font-bold mb-2">Quality Guarantee</h3>
+              <h3 className="text-lg font-bold mb-2">Quality Guarantee</h3>
               <p className="text-gray-400 text-sm">Every piece backed by our quality promise</p>
             </div>
           </div>

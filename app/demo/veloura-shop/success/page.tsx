@@ -22,7 +22,7 @@ export default function SuccessPage() {
         </svg>
       </div>
 
-      <h1 className="font-serif text-4xl font-bold mb-2">Order Confirmed!</h1>
+      <h1 className="text-4xl font-bold mb-2">Order Confirmed!</h1>
       <p className="text-gray-500 mb-1">Thank you for your order. We have received it and will begin processing shortly.</p>
 
       <div className="bg-gray-50 rounded-lg p-6 my-8 text-left">
@@ -42,7 +42,7 @@ export default function SuccessPage() {
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 my-10 text-left">
         <div className="flex items-start gap-3 mb-4">
           <span className="text-2xl">👋</span>
-          <h2 className="font-serif text-xl font-bold text-amber-900">A quick word from the Veloura team</h2>
+          <h2 className="text-xl font-bold text-amber-900">A quick word from the Veloura team</h2>
         </div>
         <div className="space-y-3 text-amber-900 text-sm leading-relaxed">
           <p>
