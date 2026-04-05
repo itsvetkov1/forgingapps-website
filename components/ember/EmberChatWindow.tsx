@@ -10,6 +10,7 @@ import { useEmberChat } from '@/components/ember/EmberChatContext'
 
 export default function EmberChatWindow() {
   const {
+    awaitingEmail,
     close,
     error,
     hasConversation,
@@ -17,8 +18,10 @@ export default function EmberChatWindow() {
     messages,
     resetConversation,
     sendMessage,
+    submitEmail,
   } = useEmberChat()
   const [input, setInput] = useState('')
+  const [emailInput, setEmailInput] = useState('')
   const listRef = useRef<HTMLDivElement | null>(null)
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -29,7 +32,7 @@ export default function EmberChatWindow() {
   useEffect(() => {
     if (!listRef.current) return
     listRef.current.scrollTop = listRef.current.scrollHeight
-  }, [messages, loading])
+  }, [messages, loading, awaitingEmail])
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
@@ -45,6 +48,13 @@ export default function EmberChatWindow() {
     if (!trimmed) return
     setInput('')
     await sendMessage(trimmed)
+  }
+
+  async function handleEmailSubmit() {
+    const trimmed = emailInput.trim()
+    if (!trimmed) return
+    await submitEmail(trimmed)
+    setEmailInput('')
   }
 
   return (
@@ -89,6 +99,29 @@ export default function EmberChatWindow() {
         ))}
 
         {!hasConversation && <EmberStarterPrompts disabled={loading} onSelect={(prompt) => void handleSend(prompt)} />}
+
+        {awaitingEmail ? (
+          <div className="rounded-2xl border border-amber-500/30 bg-zinc-800 p-4">
+            <p className="mb-3 text-sm text-zinc-200">Drop your email here and Ember will keep the conversation moving there.</p>
+            <div className="flex gap-2">
+              <input
+                type="email"
+                value={emailInput}
+                onChange={(event) => setEmailInput(event.target.value)}
+                placeholder="you@company.com"
+                className="flex-1 rounded-xl border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white outline-none transition focus:border-amber-500"
+              />
+              <button
+                type="button"
+                onClick={() => void handleEmailSubmit()}
+                disabled={loading || !emailInput.trim()}
+                className="rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Share
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         {loading && <EmberTypingIndicator />}
       </div>

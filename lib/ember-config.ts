@@ -1,9 +1,17 @@
 export type EmberRole = 'user' | 'assistant'
+export type EmberActionType = 'collect_email' | 'internal_notify' | 'send_summary' | 'meeting_confirmation'
 
 export interface EmberMessage {
   id: string
   role: EmberRole
   content: string
+}
+
+export interface EmberAction {
+  type: EmberActionType
+  status?: 'sent' | 'skipped' | 'failed'
+  reason?: string
+  email?: string
 }
 
 export const EMBER_STORAGE_KEYS = {
@@ -31,13 +39,21 @@ export function createWelcomeMessage(): EmberMessage {
   }
 }
 
-export function getEmberProxyUrl() {
-  if (typeof window === 'undefined') return 'https://chat.forgingapps.com/api/ember/message'
+function getBaseEmberProxyOrigin() {
+  if (typeof window === 'undefined') return 'https://chat.forgingapps.com'
 
   const host = window.location.hostname
   if (host === 'localhost' || host === '127.0.0.1') {
-    return 'http://127.0.0.1:18893/api/ember/message'
+    return 'http://127.0.0.1:18893'
   }
 
-  return 'https://chat.forgingapps.com/api/ember/message'
+  return 'https://chat.forgingapps.com'
+}
+
+export function getEmberProxyUrl() {
+  return `${getBaseEmberProxyOrigin()}/api/ember/message`
+}
+
+export function getEmberCollectEmailUrl() {
+  return `${getBaseEmberProxyOrigin()}/api/ember/collect-email`
 }

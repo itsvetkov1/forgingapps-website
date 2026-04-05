@@ -1,11 +1,12 @@
 'use client'
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { sendEmberMessage } from '@/lib/ember-api'
+import { collectEmberEmail, sendEmberMessage } from '@/lib/ember-api'
 import {
   createWelcomeMessage,
   EMBER_ERROR_MESSAGE,
   EMBER_STORAGE_KEYS,
+  type EmberAction,
   type EmberMessage,
 } from '@/lib/ember-config'
 
@@ -15,11 +16,13 @@ interface EmberChatContextValue {
   messages: EmberMessage[]
   error: string
   hasConversation: boolean
+  awaitingEmail: boolean
   open: () => void
   close: () => void
   toggle: () => void
   resetConversation: () => void
   sendMessage: (message: string) => Promise<void>
+  submitEmail: (email: string, name?: string) => Promise<void>
 }
 
 const EmberChatContext = createContext<EmberChatContextValue | null>(null)
@@ -33,6 +36,10 @@ function getOrCreateVisitorId() {
   return created
 }
 
+function hasCollectEmailAction(actions: EmberAction[]) {
+  return actions.some((action) => action.type === 'collect_email')
+}
+
 export function EmberChatProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -40,6 +47,7 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState('')
   const [visitorId, setVisitorId] = useState('ember_ssr')
   const [hydrated, setHydrated] = useState(false)
+  const [awaitingEmail, setAwaitingEmail] = useState(false)
 
   useEffect(() => {
     const storedMessages = window.localStorage.getItem(EMBER_STORAGE_KEYS.messages)
@@ -74,11 +82,12 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
 
     setError('')
     setLoading(true)
+    setAwaitingEmail(false)
     setMessages((prev) => [...prev, userMessage])
     setIsOpen(true)
 
     try {
-      const { reply } = await sendEmberMessage({ message: trimmed, visitorId })
+      const { reply, actions } = await sendEmberMessage({ message: trimmed, visitorId })
       setMessages((prev) => [
         ...prev,
         {
@@ -87,6 +96,7 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
           content: reply || EMBER_ERROR_MESSAGE,
         },
       ])
+      setAwaitingEmail(hasCollectEmailAction(actions))
     } catch {
       setError(EMBER_ERROR_MESSAGE)
       setMessages((prev) => [
@@ -102,9 +112,36 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  async function submitEmail(email: string, name?: string) {
+    const trimmed = email.trim()
+    if (!trimmed || loading) return
+
+    setError('')
+    setLoading(true)
+
+    try {
+      const result = await collectEmberEmail({ visitorId, email: trimmed, name })
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `assistant_email_${Date.now()}`,
+          role: 'assistant',
+          content: result.message || 'Thanks — got it. We can follow up by email from here.',
+        },
+      ])
+      setAwaitingEmail(false)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : EMBER_ERROR_MESSAGE
+      setError(message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   function resetConversation() {
     setError('')
     setLoading(false)
+    setAwaitingEmail(false)
     setMessages([createWelcomeMessage()])
     const created = `ember_${crypto.randomUUID()}`
     window.localStorage.setItem(EMBER_STORAGE_KEYS.visitorId, created)
@@ -117,12 +154,14 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
     messages,
     error,
     hasConversation: messages.some((message) => message.role === 'user'),
+    awaitingEmail,
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
     toggle: () => setIsOpen((prev) => !prev),
     resetConversation,
     sendMessage,
-  }), [isOpen, loading, messages, error])
+    submitEmail,
+  }), [isOpen, loading, messages, error, awaitingEmail])
 
   return <EmberChatContext.Provider value={value}>{children}</EmberChatContext.Provider>
 }
