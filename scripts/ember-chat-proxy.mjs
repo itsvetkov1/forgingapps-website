@@ -1,8 +1,14 @@
 import http from 'node:http'
+import { execFile } from 'node:child_process'
+import { promisify } from 'node:util'
+
+const execFileAsync = promisify(execFile)
 
 const PORT = Number(process.env.PORT || 18893)
-const GATEWAY_URL = process.env.EMBER_GATEWAY_URL || 'http://127.0.0.1:18892/v1/messages'
-const AUTH_TOKEN = process.env.EMBER_GATEWAY_TOKEN || 'ember-local-token'
+const BOT_CONTAINER = process.env.EMBER_CONTAINER || 'ember-openclaw-gateway-1'
+const BOT_AGENT = process.env.EMBER_AGENT || 'main'
+const BOT_TIMEOUT_MS = Number(process.env.EMBER_TIMEOUT_MS || 120000)
+const SESSION_PREFIX = 'ember-web:'
 const ORIGIN_ALLOWLIST = new Set([
   'https://forgingapps.com',
   'https://www.forgingapps.com',
@@ -25,7 +31,6 @@ function sendJson(res, statusCode, payload, origin = '*') {
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = ''
-
     req.on('data', (chunk) => {
       body += chunk
       if (body.length > 100_000) {
@@ -33,49 +38,57 @@ function parseBody(req) {
         req.destroy()
       }
     })
-
     req.on('end', () => {
-      try {
-        resolve(body ? JSON.parse(body) : {})
-      } catch (error) {
-        reject(error)
-      }
+      try { resolve(body ? JSON.parse(body) : {}) }
+      catch (error) { reject(error) }
     })
-
     req.on('error', reject)
   })
 }
 
 function sanitizeVisitorId(value) {
-  return String(value || '')
-    .trim()
-    .replace(/[^a-zA-Z0-9:_-]/g, '-')
-    .slice(0, 120)
+  return String(value || '').trim().replace(/[^a-zA-Z0-9:_-]/g, '-').slice(0, 120)
 }
 
-async function forwardMessage({ message, visitorId, stream = false }) {
-  const response = await fetch(GATEWAY_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${AUTH_TOKEN}`,
-      'Content-Type': 'application/json',
-      Accept: stream ? 'text/event-stream' : 'application/json',
-    },
-    body: JSON.stringify({
-      visitorId,
-      message: {
-        role: 'user',
-        content: message,
-      },
-      stream,
-    }),
-  })
-
-  if (!response.ok) {
-    throw new Error(`Gateway request failed: ${response.status}`)
+function extractReply(rawOutput) {
+  const trimmed = String(rawOutput || '').trim()
+  let lastError = null
+  let result = null
+  let searchFrom = 0
+  while (true) {
+    const jsonStart = trimmed.indexOf('{', searchFrom)
+    if (jsonStart === -1) break
+    try {
+      const candidate = JSON.parse(trimmed.slice(jsonStart))
+      if (Array.isArray(candidate?.payloads) && candidate.payloads.length > 0) {
+        const firstText = candidate.payloads
+          .find((entry) => typeof entry?.text === 'string' && entry.text.trim())
+          ?.text?.trim()
+        if (firstText) { result = firstText; break }
+      }
+    } catch (error) { lastError = error }
+    searchFrom = jsonStart + 1
   }
+  if (result !== null) return result
+  throw new Error(lastError?.message || 'Bot returned no reply payload')
+}
 
-  return response
+async function askBot(visitorId, message) {
+  const sessionId = SESSION_PREFIX + visitorId
+  const args = [
+    'exec', BOT_CONTAINER,
+    'openclaw', 'agent',
+    '--local',
+    '--agent', BOT_AGENT,
+    '--session-id', sessionId,
+    '--message', message,
+    '--json',
+  ]
+  const { stdout, stderr } = await execFileAsync('docker', args, {
+    timeout: BOT_TIMEOUT_MS,
+    maxBuffer: 1024 * 1024,
+  })
+  return extractReply(stdout + '\n' + stderr)
 }
 
 const server = http.createServer(async (req, res) => {
@@ -98,11 +111,11 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  const url = new URL(req.url, `http://${req.headers.host || '127.0.0.1'}`)
+  const url = new URL(req.url, 'http://' + (req.headers.host || '127.0.0.1'))
 
   try {
     if (req.method === 'GET' && url.pathname === '/health') {
-      sendJson(res, 200, { ok: true, service: 'ember-chat-proxy', gateway: GATEWAY_URL }, allowedOrigin)
+      sendJson(res, 200, { ok: true, service: 'ember-chat-proxy', container: BOT_CONTAINER }, allowedOrigin)
       return
     }
 
@@ -110,58 +123,27 @@ const server = http.createServer(async (req, res) => {
       const body = await parseBody(req)
       const message = String(body?.message || '').trim()
       const visitorId = sanitizeVisitorId(body?.visitorId)
-      const stream = Boolean(body?.stream)
 
       if (!message || !visitorId) {
         sendJson(res, 400, { error: 'message and visitorId are required' }, allowedOrigin)
         return
       }
 
-      const gatewayResponse = await forwardMessage({ message, visitorId, stream })
-
-      if (stream) {
-        res.writeHead(200, {
-          'Content-Type': 'text/event-stream; charset=utf-8',
-          'Access-Control-Allow-Origin': allowedOrigin,
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
-          'Cache-Control': 'no-store',
-          Connection: 'keep-alive',
-        })
-
-        if (!gatewayResponse.body) {
-          res.end()
-          return
-        }
-
-        for await (const chunk of gatewayResponse.body) {
-          res.write(chunk)
-        }
-        res.end()
-        return
-      }
-
-      const data = await gatewayResponse.json()
-      const reply = typeof data?.reply === 'string'
-        ? data.reply
-        : typeof data?.content === 'string'
-          ? data.content
-          : typeof data?.message?.content === 'string'
-            ? data.message.content
-            : ''
-
+      const reply = await askBot(visitorId, message)
       sendJson(res, 200, { reply }, allowedOrigin)
       return
     }
 
     sendJson(res, 404, { error: 'Not found' }, allowedOrigin)
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error'
-    sendJson(res, 500, { error: message }, allowedOrigin)
+    const msg = error instanceof Error ? error.message : 'Unknown error'
+    console.error('[ember-chat-proxy] error:', msg)
+    sendJson(res, 500, { error: msg }, allowedOrigin)
   }
 })
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`[ember-chat-proxy] listening on http://127.0.0.1:${PORT}`)
-  console.log(`[ember-chat-proxy] forwarding to ${GATEWAY_URL}`)
+  console.log('[ember-chat-proxy] listening on http://127.0.0.1:' + PORT)
+  console.log('[ember-chat-proxy] container: ' + BOT_CONTAINER)
+  console.log('[ember-chat-proxy] agent: ' + BOT_AGENT)
 })
