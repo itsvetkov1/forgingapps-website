@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BookOpen, Bot, TrendingUp, Shield } from 'lucide-react'
+import { BookOpen, Bot, TrendingUp, Shield, Brain, Zap } from 'lucide-react'
 import Hero from '@/components/Hero'
 import { Metadata } from 'next'
 
@@ -19,6 +19,50 @@ export const metadata: Metadata = {
 
 export default function Blog() {
   const posts = [
+    {
+      slug: 'why-forgingapps-ai',
+      title: 'Why ForgingApps for AI Consulting',
+      excerpt: 'Who we are, how we work, what we actually build, and why clients choose a small senior team over bloated process and vague AI promises.',
+      date: 'Apr 5, 2026',
+      readTime: '5 min',
+      category: 'AI',
+      image: 'zap',
+      author: 'Ivaylo Tsvetkov',
+      authorRole: 'Co-Founder',
+    },
+    {
+      slug: 'how-to-choose-ai-consultant',
+      title: 'How to Choose an AI Consulting Partner (Without Getting Burned)',
+      excerpt: 'The AI consulting market is full of noise. Here is how to separate people who build useful systems from people who just sell the idea of AI.',
+      date: 'Mar 29, 2026',
+      readTime: '7 min',
+      category: 'AI',
+      image: 'shield',
+      author: 'Ivaylo Tsvetkov',
+      authorRole: 'Co-Founder',
+    },
+    {
+      slug: 'does-my-business-need-ai',
+      title: 'Does My Business Need AI? An Honest Checklist',
+      excerpt: 'Not every business needs AI. Some need a better process. Some need a spreadsheet. Some are leaving serious leverage on the table.',
+      date: 'Mar 22, 2026',
+      readTime: '6 min',
+      category: 'AI',
+      image: 'trending',
+      author: 'Ivaylo Tsvetkov',
+      authorRole: 'Co-Founder',
+    },
+    {
+      slug: 'what-is-ai-consulting',
+      title: 'What Is AI Consulting? (And What It Isn\'t)',
+      excerpt: 'Most people hear AI consulting and picture overpriced slide decks or a chatbot with a logo on it. The reality is more useful than either.',
+      date: 'Mar 15, 2026',
+      readTime: '5 min',
+      category: 'AI',
+      image: 'brain',
+      author: 'Ivaylo Tsvetkov',
+      authorRole: 'Co-Founder',
+    },
     {
       slug: 'umlaut-secure-app-award',
       title: 'How We Won the umlaut Secure App Award -- Twice',
@@ -113,7 +157,7 @@ export default function Blog() {
                 <article className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden card-hover transition-all h-full flex flex-col">
                   {/* Featured Image */}
                   <div className="bg-gradient-to-b from-forge-ember/20 to-transparent h-40 flex items-center justify-center group-hover:from-forge-ember/40 transition text-forge-gold">
-                    {post.image === 'bookopen' ? <BookOpen size={60} /> : post.image === 'bot' ? <Bot size={60} /> : post.image === 'shield' ? <Shield size={60} /> : <TrendingUp size={60} />}
+                    {post.image === 'brain' ? <Brain size={60} /> : post.image === 'zap' ? <Zap size={60} /> : post.image === 'bookopen' ? <BookOpen size={60} /> : post.image === 'bot' ? <Bot size={60} /> : post.image === 'shield' ? <Shield size={60} /> : <TrendingUp size={60} />}
                   </div>
 
                   <div className="flex-1 p-6 flex flex-col">
