@@ -3,6 +3,7 @@ import { Cinzel, Inter } from 'next/font/google'
 import './globals.css'
 import ConditionalShell from '@/components/ConditionalShell'
 import StructuredData from '@/components/StructuredData'
+import EmberChatWidget from '@/components/ember/EmberChatWidget'
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({
       </head>
       <body className="font-inter bg-forge-dark text-white">
         <ConditionalShell>{children}</ConditionalShell>
+        <EmberChatWidget />
       </body>
     </html>
   )
