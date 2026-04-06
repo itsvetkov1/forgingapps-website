@@ -16,7 +16,7 @@ export default function VelouraShopLayout({
 }) {
   return (
     <VelouraCartProvider>
-      <div className="min-h-screen flex flex-col bg-white">
+      <div className="veloura-shop min-h-screen flex flex-col bg-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
