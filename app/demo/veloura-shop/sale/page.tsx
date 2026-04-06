@@ -21,7 +21,7 @@ export default function SalePage() {
       </nav>
 
       <div className="flex items-center justify-between mb-2">
-        <h1 className="text-4xl font-bold tracking-wide">Sale</h1>
+        <h1 className="text-4xl font-bold text-gray-900">Sale</h1>
         <span className="text-sm text-red-600 font-medium">{saleProducts.length} items on sale</span>
       </div>
       <p className="text-gray-500 mb-8">Limited time only. When they're gone, they're gone.</p>

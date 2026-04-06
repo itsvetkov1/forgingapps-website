@@ -32,7 +32,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/demo/veloura-shop"
-          className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-semibold uppercase tracking-wide hover:bg-gray-800 transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-6 py-3 text-sm font-semibold text-white hover:bg-gray-800 transition-colors"
         >
           Continue Shopping
         </Link>
@@ -79,7 +79,7 @@ export default function CartPage() {
         {/* Order summary */}
         <div>
           <div className="bg-gray-50 rounded-xl p-6 sticky top-24">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-900 mb-4">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">
               Order Summary
             </h2>
 
@@ -109,7 +109,7 @@ export default function CartPage() {
 
             <div className="border-t border-gray-200 pt-3 mb-6">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm font-semibold uppercase tracking-wide text-gray-900">
+                <span className="text-sm font-semibold text-gray-900">
                   Total
                 </span>
                 <span className="text-xl font-bold text-gray-900">{formatPrice(total)}</span>
@@ -119,7 +119,7 @@ export default function CartPage() {
 
             <button
               onClick={() => router.push("/demo/veloura-shop/checkout")}
-              className="w-full py-3.5 bg-gray-900 text-white text-sm font-semibold uppercase tracking-wide rounded-lg hover:bg-gray-800 active:bg-gray-950 transition-colors"
+              className="w-full rounded-lg bg-gray-900 py-3.5 text-sm font-semibold text-white hover:bg-gray-800 active:bg-gray-950 transition-colors"
             >
               Proceed to Checkout
             </button>

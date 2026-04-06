@@ -27,7 +27,7 @@ export default function VelouraShopHome() {
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <div className="text-center text-white">
-            <p className="text-5xl md:text-7xl font-bold tracking-widest mb-4">VELOURA</p>
+            <p className="text-5xl md:text-7xl font-bold mb-4">Veloura</p>
             <p className="text-xl md:text-2xl mb-8 font-light">Everyday essentials, built to last.</p>
             <Link
               href="/demo/veloura-shop/category/hoodies-sweatshirts"
@@ -42,7 +42,7 @@ export default function VelouraShopHome() {
       {/* New Arrivals */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold tracking-wide">New Arrivals</h2>
+          <h2 className="text-3xl font-bold text-gray-900">New Arrivals</h2>
           <Link href="/demo/veloura-shop" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors underline">
             View All
           </Link>
@@ -58,7 +58,7 @@ export default function VelouraShopHome() {
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold tracking-wide">On Sale</h2>
+            <h2 className="text-3xl font-bold text-gray-900">On Sale</h2>
             <Link href="/demo/veloura-shop/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors underline">
               View All Sale Items
             </Link>
@@ -73,7 +73,7 @@ export default function VelouraShopHome() {
 
       {/* Category Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <h2 className="text-3xl font-bold tracking-wide mb-8">Shop by Category</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Shop by Category</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {shopCategories.map(cat => (
             <Link

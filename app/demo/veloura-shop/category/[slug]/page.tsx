@@ -39,7 +39,7 @@ export default async function CategoryPage({ params }: Props) {
       </nav>
 
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold tracking-wide">{category.name}</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{category.name}</h1>
         <span className="text-sm text-gray-500">{products.length} products</span>
       </div>
 

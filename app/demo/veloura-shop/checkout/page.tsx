@@ -288,7 +288,7 @@ export default function CheckoutPage() {
         {/* Order Summary */}
         <div className="lg:col-span-2">
           <div className="bg-gray-50 rounded-lg p-6 sticky top-24">
-            <h2 className="text-sm font-bold uppercase tracking-wide text-gray-900 mb-4">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">
               Order Summary
             </h2>
             <div className="space-y-4 mb-4">
