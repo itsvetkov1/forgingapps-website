@@ -25,7 +25,7 @@ export default function Home() {
       <Hero
         headline="Apps Forged to Last"
         subheadline="Senior developers building production-ready mobile apps, web platforms, and AI integrations for growing businesses in Sofia and across Europe."
-        primaryCTA={{ text: 'See It In Action', href: '/demo/veloura-support' }}
+        primaryCTA={{ text: 'See It In Action', href: '/demo' }}
         secondaryCTA={{ text: 'Get Started', href: '/contact' }}
         trustBadge="Umlaut Verified Partner"
       />
@@ -95,7 +95,7 @@ export default function Home() {
               The Veloura demo shows how custom AI handles real customer conversations with context and intelligence. This is live, working software running right now — not a mockup or a video. Try it yourself and see what's possible for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Link href="/demo/veloura-support" className="btn-primary">
+              <Link href="/demo" className="btn-primary">
                 Try the Demo
               </Link>
               <Link href="/ai-consulting" className="btn-secondary">

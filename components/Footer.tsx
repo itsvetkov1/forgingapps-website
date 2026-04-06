@@ -31,7 +31,7 @@ export default function Footer() {
             <h3 className="font-cinzel text-forge-gold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
 
-              <li><Link href="/demo/veloura-support" className="text-gray-400 hover:text-forge-gold transition">Demo</Link></li>
+              <li><Link href="/demo" className="text-gray-400 hover:text-forge-gold transition">Demo</Link></li>
               <li><Link href="/about" className="text-gray-400 hover:text-forge-gold transition">About Us</Link></li>
               <li><Link href="/blog" className="text-gray-400 hover:text-forge-gold transition">Blog</Link></li>
             </ul>

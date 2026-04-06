@@ -84,7 +84,7 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           </div>
         </div>
         <p className="text-gray-400 text-sm mb-4">Want to see our work first?</p>
-        <a href="/demo/veloura-support" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
+        <a href="/demo" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
           Try the live demo →
         </a>
         <div className="mt-4 pt-4 border-t border-forge-ember/20">
