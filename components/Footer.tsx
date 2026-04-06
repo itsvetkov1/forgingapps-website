@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Logo & Tagline */}
           <div>
             <div className="flex items-center gap-2 font-cinzel text-lg font-bold text-forge-gold mb-2">
-              <span>⚒</span>
+              <img src="/logo.svg" alt="ForgingApps" width={28} height={28} className="inline-block" />
               <span>ForgingApps</span>
             </div>
             <p className="text-gray-400 text-sm">Apps built with precision. Built to last.</p>

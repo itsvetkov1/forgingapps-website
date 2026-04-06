@@ -1,46 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <!-- Background -->
   <rect width="1200" height="630" fill="#1a1a1a"/>
-  <!-- Gradient overlay -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2a2018;stop-opacity:1" />
+    <linearGradient id="bg" x1="0%%" y1="0%%" x2="100%%" y2="100%%">
+      <stop offset="0%%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%%" style="stop-color:#2a2018;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#D8660B;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#C4A062;stop-opacity:1" />
+    <linearGradient id="accent" x1="0%%" y1="0%%" x2="100%%" y2="0%%">
+      <stop offset="0%%" style="stop-color:#D8660B;stop-opacity:1" />
+      <stop offset="100%%" style="stop-color:#C4A062;stop-opacity:1" />
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- Top border accent -->
   <rect x="0" y="0" width="1200" height="6" fill="url(#accent)"/>
-
-  <!-- Anvil icon (simplified) -->
-  <g transform="translate(80, 200) scale(2.5)">
-    <path d="M12 36 L52 36 L48 28 L44 28 L44 20 L36 20 L36 28 L28 28 L28 20 L20 20 L20 28 L16 28 Z" fill="#D8660B"/>
-    <rect x="8" y="36" width="48" height="8" rx="2" fill="#D8660B"/>
-    <rect x="14" y="44" width="10" height="6" rx="1" fill="#C4A062"/>
-    <rect x="40" y="44" width="10" height="6" rx="1" fill="#C4A062"/>
-    <path d="M52 32 L60 30 L60 34 L52 36 Z" fill="#C4A062"/>
+  <g transform="translate(60, 120) scale(0.3)">
+    <g>
+      <path fill="#e86807" d="M303.78.78c118.73,7.8,220.79,88.84,254.47,203.59,11,37.48,12.17,66.71,10.34,105.98-.96,20.65-4.86,40.01-10.85,59.68-10.11,33.18-26.07,63.71-47.42,90.94l-14.55,16.97-15.32,15.39c-14.24,13.26-29.48,24.39-46.15,34.45l-31.23,16.51-22.86,9.12-13.12,4.29-28.97,7.54c-1.36.35-4.02-.36-5.29-.45-11.77,1.2-23.07,3.37-34.92,3.34l-26.56-.07c-28.09-1.5-55.64-7.01-81.93-16.85l-16.45-6.71c-10.39-4.24-20.63-9.3-30.09-14.73C67.52,486.52,16.76,409.6,4.62,325.74c-13.38-92.4,18.49-183.93,85.48-247.49C138.69,32.14,201.24,5.57,267.37.78h36.41Z"/>
+      <path fill="#e86807" d="M364.52,77.22c-5.88-2.37-11.62-1.54-14.15,1.74-.23.29-2.09,2.4-1.41,4.94.99,3.72,3.97,6.47,7.8,7.44,8.5,2.23,17.76,1.3,23.38-5.32.77-.91,3.51-4.83,3-9.69-1.16-11.22-18.98-17.69-30.53-21.89-5.38-1.95-23.1-8.02-52.18-8.97-17.45-.57-30.74.97-34.67,1.45-35.58,4.42-62.17,16.86-75.66,24.12-9.51,5.12-22.11,12.83-35.68,24.09,19.69-17.81,79.57-68.13,156.12-74.96,0,0,47.69-5.38,91.07,16.94,19.78,10.18,22.14,19.04,22.95,21.22,6.18,16.69-5.4,33.36-6.6,35.02-17.54,24.46-54.75,18.69-56.33,18.42-1.55-.27-3.71-.65-6.55-1.51-6.91-2.08-16.33-6.52-37.87-29.09-5.89-6.17-5.15-5.8-7.12-7.67-8.87-8.39-24.95-16.92-56.59-15.71,9.8-2.24,21.93-4.03,35.8-3.7,35.08.84,61.55,14.55,75.22,23.09Z"/>
+    </g>
+    <circle fill="none" stroke="#e86807" stroke-miterlimit="10" stroke-width="6" cx="285.46" cy="285.46" r="282.46"/>
   </g>
-
-  <!-- Main headline -->
   <text x="80" y="160" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#C4A062">ForgingApps</text>
-
-  <!-- Tagline -->
   <text x="80" y="230" font-family="Georgia, serif" font-size="36" fill="#ffffff">Custom App Development &amp; AI Consulting</text>
-
-  <!-- Sub text -->
   <text x="80" y="295" font-family="Arial, sans-serif" font-size="24" fill="#888888">Senior developers. Startup-friendly pricing. Sofia, Bulgaria.</text>
-
-  <!-- Divider -->
   <rect x="80" y="340" width="200" height="3" fill="url(#accent)"/>
-
-  <!-- Features row -->
-  <text x="80" y="395" font-family="Arial, sans-serif" font-size="22" fill="#D8660B">Flutter  ·  React  ·  Kotlin  ·  AI Integration  ·  From €300</text>
-
-  <!-- Bottom right URL -->
+  <text x="80" y="395" font-family="Arial, sans-serif" font-size="22" fill="#D8660B">Flutter    React    Kotlin    AI Integration</text>
   <text x="1120" y="600" font-family="Arial, sans-serif" font-size="20" fill="#555555" text-anchor="end">forgingapps.com</text>
 </svg>

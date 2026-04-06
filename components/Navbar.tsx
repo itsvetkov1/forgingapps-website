@@ -12,7 +12,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-cinzel text-xl font-bold text-forge-gold hover:text-forge-ember transition">
-            <span>⚒</span>
+            <img src="/logo.svg" alt="ForgingApps" width={32} height={32} className="inline-block" />
             <span>ForgingApps</span>
           </Link>
 
