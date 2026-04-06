@@ -21,7 +21,8 @@ export default function CopyEmailButton() {
       type="button"
       onClick={handleCopy}
       className="text-forge-gold hover:text-forge-ember transition p-1"
-      title="Copy email address"
+      aria-label="Copy email address"
+      title={copied ? 'Copied' : 'Copy email address'}
     >
       {copied ? <CheckCheck size={16} /> : <Copy size={16} />}
     </button>

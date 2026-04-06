@@ -2,31 +2,32 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import LanguageToggle from '@/components/LanguageToggle'
+import { useTranslation } from '@/lib/i18n/useTranslation'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { t } = useTranslation('common')
 
   return (
     <nav className="sticky top-0 z-50 bg-forge-dark/95 backdrop-blur-sm border-b border-forge-stone">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 font-cinzel text-xl font-bold text-forge-gold hover:text-forge-ember transition">
             <img src="/logo.svg" alt="ForgingApps" width={32} height={32} className="inline-block" />
             <span>ForgingApps</span>
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/services" className="hover:text-forge-gold transition">Services</Link>
-            <Link href="/ai-consulting" className="hover:text-forge-gold transition">AI Consulting</Link>
-            <Link href="/demo" className="hover:text-forge-gold transition">Demo</Link>
-            <Link href="/about" className="hover:text-forge-gold transition">About</Link>
-            <Link href="/blog" className="hover:text-forge-gold transition">Blog</Link>
-            <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark">Contact</Link>
+            <Link href="/services" className="hover:text-forge-gold transition">{t('nav.services')}</Link>
+            <Link href="/ai-consulting" className="hover:text-forge-gold transition">{t('nav.aiConsulting')}</Link>
+            <Link href="/demo" className="hover:text-forge-gold transition">{t('nav.demo')}</Link>
+            <Link href="/about" className="hover:text-forge-gold transition">{t('nav.about')}</Link>
+            <Link href="/blog" className="hover:text-forge-gold transition">{t('nav.blog')}</Link>
+            <LanguageToggle />
+            <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark">{t('nav.contact')}</Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-forge-gold hover:text-forge-ember transition"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -37,16 +38,18 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pb-4 border-t border-forge-stone">
-            <div className="flex flex-col gap-3">
-              <Link href="/services" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-              <Link href="/ai-consulting" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>AI Consulting</Link>
-              <Link href="/demo" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Demo</Link>
-              <Link href="/about" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
-              <Link href="/blog" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
-              <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+            <div className="flex flex-col gap-3 pt-3">
+              <div className="py-2">
+                <LanguageToggle />
+              </div>
+              <Link href="/services" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</Link>
+              <Link href="/ai-consulting" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.aiConsulting')}</Link>
+              <Link href="/demo" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.demo')}</Link>
+              <Link href="/about" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</Link>
+              <Link href="/blog" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.blog')}</Link>
+              <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</Link>
             </div>
           </div>
         )}
