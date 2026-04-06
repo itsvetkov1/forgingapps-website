@@ -31,7 +31,7 @@ function getOrCreateVisitorId() {
   const existing = window.localStorage.getItem(EMBER_STORAGE_KEYS.visitorId)
   if (existing) return existing
 
-  const created = `ember_${crypto.randomUUID()}`
+  const created = `ember_${(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36))}`
   window.localStorage.setItem(EMBER_STORAGE_KEYS.visitorId, created)
   return created
 }
@@ -143,7 +143,7 @@ export function EmberChatProvider({ children }: { children: React.ReactNode }) {
     setLoading(false)
     setAwaitingEmail(false)
     setMessages([createWelcomeMessage()])
-    const created = `ember_${crypto.randomUUID()}`
+    const created = `ember_${(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36))}`
     window.localStorage.setItem(EMBER_STORAGE_KEYS.visitorId, created)
     setVisitorId(created)
   }

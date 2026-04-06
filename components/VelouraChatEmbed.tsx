@@ -22,7 +22,7 @@ function getOrCreateVisitorId() {
   const existing = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null
   if (existing) return existing
 
-  const created = `visitor_${crypto.randomUUID()}`
+  const created = `visitor_${(typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36))}`
   window.localStorage.setItem(key, created)
   return created
 }
