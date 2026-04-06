@@ -59,7 +59,7 @@ export default function EmberChatWindow() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-[9999] mx-auto flex max-h-[70vh] flex-col overflow-hidden rounded-t-2xl border border-zinc-700 bg-zinc-900 shadow-2xl md:bottom-6 md:left-auto md:right-6 md:w-[400px] md:max-h-none md:h-[550px] md:rounded-2xl ember-chat-enter"
+      className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[9999] mx-auto flex max-h-[70vh] flex-col overflow-hidden rounded-t-2xl border border-zinc-700 bg-zinc-900 shadow-2xl md:bottom-6 md:left-auto md:right-6 md:w-[400px] md:max-h-none md:h-[550px] md:rounded-2xl ember-chat-enter"
       role="dialog"
       aria-label="Chat with Ember"
       aria-modal="false"
