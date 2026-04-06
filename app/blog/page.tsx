@@ -20,6 +20,17 @@ export const metadata: Metadata = {
 export default function Blog() {
   const posts = [
     {
+      slug: 'voice-agents-just-got-useful',
+      title: 'Voice Agents Just Got a Lot More Useful. Here’s What That Means for Businesses.',
+      excerpt: 'The latest audio model push is not just a demo upgrade. It changes what voice agents can realistically do for support, sales, and operations.',
+      date: 'Apr 6, 2026',
+      readTime: '6 min',
+      category: 'AI',
+      image: 'bot',
+      author: 'Ivaylo Tsvetkov',
+      authorRole: 'Co-Founder',
+    },
+    {
       slug: 'why-forgingapps-ai',
       title: 'Why ForgingApps for AI Consulting',
       excerpt: 'Who we are, how we work, what we actually build, and why clients choose a small senior team over bloated process and vague AI promises.',
