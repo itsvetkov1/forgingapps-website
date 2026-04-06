@@ -132,6 +132,16 @@ export default function VelouraSupportDemoClient() {
               </ul>
             </div>
 
+            <Link href="/demo/veloura-shop" className="block bg-forge-stone border border-forge-ember/30 rounded-lg p-8 hover:border-forge-gold/60 transition-all duration-300 group">
+              <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Browse the Veloura Shop</h2>
+              <p className="text-gray-400 mb-4 text-sm">
+                See the full e-commerce storefront we built for this fictional brand — 17 products, 6 categories, cart, and checkout.
+              </p>
+              <span className="text-forge-gold text-sm font-semibold group-hover:underline">
+                Open the shop demo →
+              </span>
+            </Link>
+
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Want this for your brand?</h2>
               <p className="text-gray-400 mb-6 text-sm">

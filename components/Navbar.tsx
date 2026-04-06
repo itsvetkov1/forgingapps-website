@@ -20,7 +20,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <Link href="/services" className="hover:text-forge-gold transition">Services</Link>
             <Link href="/ai-consulting" className="hover:text-forge-gold transition">AI Consulting</Link>
-            <Link href="/demo/veloura-support" className="hover:text-forge-gold transition">Demo</Link>
+            <Link href="/demo" className="hover:text-forge-gold transition">Demo</Link>
             <Link href="/about" className="hover:text-forge-gold transition">About</Link>
             <Link href="/blog" className="hover:text-forge-gold transition">Blog</Link>
             <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark">Contact</Link>
@@ -43,7 +43,7 @@ export default function Navbar() {
             <div className="flex flex-col gap-3">
               <Link href="/services" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Services</Link>
               <Link href="/ai-consulting" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>AI Consulting</Link>
-              <Link href="/demo/veloura-support" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Demo</Link>
+              <Link href="/demo" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Demo</Link>
               <Link href="/about" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
               <Link href="/blog" className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
               <Link href="/contact" className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>Contact</Link>

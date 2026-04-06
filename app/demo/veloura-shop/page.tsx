@@ -119,6 +119,16 @@ export default function VelouraShopHome() {
           </div>
         </div>
       </section>
+      {/* Cross-link to Support Demo */}
+      <section className="bg-gray-950 text-white py-12 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-gray-400 mb-2 text-sm">This is a demo storefront built by ForgingApps</p>
+          <p className="text-white text-lg font-semibold mb-4">See our AI support assistant handle Veloura customer questions</p>
+          <Link href="/demo/veloura-support" className="inline-block bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+            Try Veloura Support Demo
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }
