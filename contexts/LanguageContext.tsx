@@ -1,34 +1,27 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react'
-
-type Language = 'en' | 'bg'
+import { createContext, useContext, useEffect, ReactNode } from 'react'
+import { localePath, type Locale } from '@/lib/i18n/routing'
 
 interface LanguageContextType {
-  language: Language
-  setLanguage: (lang: Language) => void
-  toggleLanguage: () => void
+  language: Locale
+  localePath: (path: string) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en')
-
-  const setLanguage = useCallback((lang: Language) => {
-    setLanguageState(lang)
-  }, [])
-
-  const toggleLanguage = useCallback(() => {
-    setLanguageState(prev => prev === 'en' ? 'bg' : 'en')
-  }, [])
-
+export function LanguageProvider({ locale, children }: { locale: Locale; children: ReactNode }) {
   useEffect(() => {
-    document.documentElement.lang = language
-  }, [language])
+    document.documentElement.lang = locale
+  }, [locale])
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage }}>
+    <LanguageContext.Provider
+      value={{
+        language: locale,
+        localePath: (path: string) => localePath(locale, path),
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   )

@@ -65,7 +65,7 @@ const demoCopy = {
 }
 
 export default function DemoContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const data = demoCopy[language]
 
   return (
@@ -114,7 +114,7 @@ export default function DemoContent() {
 
           <div className="mt-12 text-center">
             <p className="text-gray-400 mb-4">{data.ctaPrompt}</p>
-            <Link href="/contact" className="btn-primary">{data.contact}</Link>
+            <Link href={localePath('/contact')} className="btn-primary">{data.contact}</Link>
           </div>
         </div>
       </section>

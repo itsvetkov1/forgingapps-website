@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { useTranslation } from '@/lib/i18n/useTranslation'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Footer() {
   const { t } = useTranslation('common.footer')
+  const { localePath } = useLanguage()
 
   return (
     <footer className="bg-forge-stone border-t border-forge-ember/30">
@@ -21,18 +23,18 @@ export default function Footer() {
           <div>
             <h3 className="font-cinzel text-forge-gold mb-4">{t('services')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/services" className="text-gray-400 hover:text-forge-gold transition">{t('allPackages')}</Link></li>
-              <li><Link href="/ai-consulting" className="text-gray-400 hover:text-forge-gold transition">{t('aiConsulting')}</Link></li>
-              <li><Link href="/contact" className="text-gray-400 hover:text-forge-gold transition">{t('getAQuote')}</Link></li>
+              <li><Link href={localePath('/services')} className="text-gray-400 hover:text-forge-gold transition">{t('allPackages')}</Link></li>
+              <li><Link href={localePath('/ai-consulting')} className="text-gray-400 hover:text-forge-gold transition">{t('aiConsulting')}</Link></li>
+              <li><Link href={localePath('/contact')} className="text-gray-400 hover:text-forge-gold transition">{t('getAQuote')}</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-cinzel text-forge-gold mb-4">{t('company')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/demo" className="text-gray-400 hover:text-forge-gold transition">{t('demo')}</Link></li>
-              <li><Link href="/about" className="text-gray-400 hover:text-forge-gold transition">{t('aboutUs')}</Link></li>
-              <li><Link href="/blog" className="text-gray-400 hover:text-forge-gold transition">{t('blog')}</Link></li>
+              <li><Link href={localePath('/demo')} className="text-gray-400 hover:text-forge-gold transition">{t('demo')}</Link></li>
+              <li><Link href={localePath('/about')} className="text-gray-400 hover:text-forge-gold transition">{t('aboutUs')}</Link></li>
+              <li><Link href={localePath('/blog')} className="text-gray-400 hover:text-forge-gold transition">{t('blog')}</Link></li>
             </ul>
           </div>
 
@@ -41,7 +43,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="mailto:hello@forgingapps.com" className="text-gray-400 hover:text-forge-gold transition">hello@forgingapps.com</a></li>
               <li className="text-gray-400">{t('location')}</li>
-              <li><a href="/contact" className="text-forge-gold hover:text-forge-ember transition font-semibold">{t('freeConsultation')}</a></li>
+              <li><Link href={localePath('/contact')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{t('freeConsultation')}</Link></li>
             </ul>
           </div>
         </div>
@@ -49,8 +51,8 @@ export default function Footer() {
         <div className="border-t border-forge-ember/20 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
           <p>{t('copyright')}</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="hover:text-forge-gold transition">{t('privacyPolicy')}</Link>
-            <Link href="/terms" className="hover:text-forge-gold transition">{t('termsOfService')}</Link>
+            <Link href={localePath('/privacy')} className="hover:text-forge-gold transition">{t('privacyPolicy')}</Link>
+            <Link href={localePath('/terms')} className="hover:text-forge-gold transition">{t('termsOfService')}</Link>
           </div>
         </div>
       </div>

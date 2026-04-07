@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
 export default function AIConsultingContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const data = translations[language].aiConsulting
 
   const scenarios = [data.isThisForYou.s1, data.isThisForYou.s2, data.isThisForYou.s3, data.isThisForYou.s4]
@@ -25,7 +25,7 @@ export default function AIConsultingContent() {
         <div className="container-custom max-w-4xl">
           <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{data.heroHeadline}</h1>
           <p className="text-xl text-gray-300 mb-8">{data.heroSubheadline}</p>
-          <Link href="/contact" className="btn-primary">{data.heroCTA}</Link>
+          <Link href={localePath('/contact')} className="btn-primary">{data.heroCTA}</Link>
         </div>
       </section>
 
@@ -75,8 +75,8 @@ export default function AIConsultingContent() {
           <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.demoSection.heading}</h2>
           <p className="text-gray-300 text-lg mb-8">{data.demoSection.description}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/demo" className="btn-primary">{data.demoSection.tryDemo}</Link>
-            <Link href="/contact" className="btn-secondary">{data.demoSection.orBook}</Link>
+            <Link href={localePath('/demo')} className="btn-primary">{data.demoSection.tryDemo}</Link>
+            <Link href={localePath('/contact')} className="btn-secondary">{data.demoSection.orBook}</Link>
           </div>
         </div>
       </section>
@@ -115,7 +115,7 @@ export default function AIConsultingContent() {
         <div className="container-custom text-center max-w-3xl">
           <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.finalCta.heading}</h2>
           <p className="text-gray-300 text-lg mb-8">{data.finalCta.subheading}</p>
-          <Link href="/contact" className="btn-primary">{data.finalCta.button}</Link>
+          <Link href={localePath('/contact')} className="btn-primary">{data.finalCta.button}</Link>
         </div>
       </section>
     </div>

@@ -8,7 +8,7 @@ import { translations } from '@/lib/i18n/translations'
 import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, DollarSign } from 'lucide-react'
 
 export default function HomeContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const data = translations[language].home
 
   const steps = [data.process.step1, data.process.step2, data.process.step3, data.process.step4]
@@ -20,8 +20,8 @@ export default function HomeContent() {
       <Hero
         headline={data.headline}
         subheadline={data.subheadline}
-        primaryCTA={{ text: data.primaryCTA, href: '/demo' }}
-        secondaryCTA={{ text: data.secondaryCTA, href: '/contact' }}
+        primaryCTA={{ text: data.primaryCTA, href: localePath('/demo') }}
+        secondaryCTA={{ text: data.secondaryCTA, href: localePath('/contact') }}
         trustBadge={data.trustBadge}
       />
 
@@ -29,18 +29,18 @@ export default function HomeContent() {
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.whatWeForge}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} regularPrice={data.spark.regularPrice} launchPrice={data.spark.launchPrice} href="/services#spark" />
-            <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} regularPrice={data.anvil.regularPrice} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} href="/services#anvil" />
-            <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} regularPrice={data.forge.regularPrice} launchPrice={data.forge.launchPrice} href="/services#forge" />
+            <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} regularPrice={data.spark.regularPrice} launchPrice={data.spark.launchPrice} href={localePath('/services#spark')} />
+            <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} regularPrice={data.anvil.regularPrice} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} href={localePath('/services#anvil')} />
+            <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} regularPrice={data.forge.regularPrice} launchPrice={data.forge.launchPrice} href={localePath('/services#forge')} />
           </div>
 
           <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">
             <p className="text-gray-300 mb-3">{data.readyForCustomAi}</p>
-            <Link href="/ai-consulting" className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.exploreAiConsulting} →</Link>
+            <Link href={localePath('/ai-consulting')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.exploreAiConsulting} →</Link>
           </div>
 
           <div className="text-center mt-8">
-            <Link href="/services" className="btn-primary">{data.viewAllPackages} →</Link>
+            <Link href={localePath('/services')} className="btn-primary">{data.viewAllPackages} →</Link>
           </div>
         </div>
       </section>
@@ -51,8 +51,8 @@ export default function HomeContent() {
             <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-forge-gold mb-4">{data.demoTeaser.heading}</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">{data.demoTeaser.description}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-              <Link href="/demo" className="btn-primary">{data.demoTeaser.tryDemo}</Link>
-              <Link href="/ai-consulting" className="btn-secondary">{data.demoTeaser.learnAboutAi}</Link>
+              <Link href={localePath('/demo')} className="btn-primary">{data.demoTeaser.tryDemo}</Link>
+              <Link href={localePath('/ai-consulting')} className="btn-secondary">{data.demoTeaser.learnAboutAi}</Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
               <div className="flex flex-col items-center gap-2"><Brain size={24} className="text-forge-gold" /><span className="text-sm text-gray-400">{data.demoTeaser.realTime}</span></div>
@@ -121,7 +121,7 @@ export default function HomeContent() {
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">{data.cta.heading}</h2>
           <p className="text-lg mb-8 text-forge-dark/80">{data.cta.subheading}</p>
-          <Link href="/contact" className="btn-primary bg-forge-dark text-forge-gold hover:bg-forge-stone">{data.cta.button} →</Link>
+          <Link href={localePath('/contact')} className="btn-primary bg-forge-dark text-forge-gold hover:bg-forge-stone">{data.cta.button} →</Link>
         </div>
       </section>
     </>

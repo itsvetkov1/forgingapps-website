@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 import { useTranslation } from '@/lib/i18n/useTranslation'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ContactFormProps {
   packagePreselect?: string
@@ -44,6 +46,7 @@ const formCopy = {
 
 export default function ContactForm({ packagePreselect }: ContactFormProps) {
   const { t, language } = useTranslation('contact')
+  const { localePath } = useLanguage()
   const copy = formCopy[language]
   const defaultPackage = packagePreselect || t('packageOptions.notSure')
 
@@ -121,9 +124,9 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           </div>
         </div>
         <p className="text-gray-400 text-sm mb-4">{copy.submittedDemoPrompt}</p>
-        <a href="/demo" className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
+        <Link href={localePath('/demo')} className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
           {copy.submittedDemoLink}
-        </a>
+        </Link>
         <div className="mt-4 pt-4 border-t border-forge-ember/20">
           <button
             type="button"

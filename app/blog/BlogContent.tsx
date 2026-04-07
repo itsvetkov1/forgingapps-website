@@ -39,7 +39,7 @@ function renderIcon(image: string) {
 }
 
 export default function BlogContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const blog = translations[language].blog
   const blogPosts = translations[language].blogPosts
   const blogPostMeta = (blog.posts as Record<string, any>)
@@ -60,7 +60,7 @@ export default function BlogContent() {
               const postData = blogPosts[post.slug]
               const postMeta = blogPostMeta[(postKeyMap as Record<string,string>)[post.slug] ?? '']
               return (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group bg-forge-stone border border-forge-ember/20 rounded-xl overflow-hidden hover:border-forge-gold/40 transition block">
+                <Link key={post.slug} href={localePath(`/blog/${post.slug}`)} className="group bg-forge-stone border border-forge-ember/20 rounded-xl overflow-hidden hover:border-forge-gold/40 transition block">
                   <div className="h-40 bg-forge-dark text-forge-gold flex items-center justify-center">{renderIcon(post.image)}</div>
                   <div className="p-6">
                     <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">

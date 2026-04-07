@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
 export default function ServicesContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const data = translations[language].services
 
   const comparisonRows = [
@@ -25,11 +25,11 @@ export default function ServicesContent() {
 
   const faqItems = [data.faq.q1, data.faq.q2, data.faq.q3, data.faq.q4, data.faq.q5, data.faq.q6, data.faq.q7]
   const packages = [
-    { id: 'spark', data: data.spark, href: '/contact' },
-    { id: 'anvil', data: data.anvil, href: '/contact' },
-    { id: 'forge', data: data.forge, href: '/contact' },
-    { id: 'oracle', data: data.oracle, href: '/ai-consulting' },
-    { id: 'hearthstone', data: data.hearthstone, href: '/contact' },
+    { id: 'spark', data: data.spark, href: localePath('/contact') },
+    { id: 'anvil', data: data.anvil, href: localePath('/contact') },
+    { id: 'forge', data: data.forge, href: localePath('/contact') },
+    { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting') },
+    { id: 'hearthstone', data: data.hearthstone, href: localePath('/contact') },
   ]
 
   return (
@@ -68,7 +68,7 @@ export default function ServicesContent() {
           </table>
           <div className="text-center mt-8">
             <p className="text-gray-300 mb-3">{data.comparison.needAi}</p>
-            <Link href="/ai-consulting" className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.comparison.exploreAi} →</Link>
+            <Link href={localePath('/ai-consulting')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.comparison.exploreAi} →</Link>
           </div>
         </div>
       </section>
@@ -150,7 +150,7 @@ export default function ServicesContent() {
         <div className="container-custom max-w-5xl">
           <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.faq.heading}</h2>
           <div className="space-y-6">{faqItems.map((faq: any) => <div key={faq.q} className="bg-forge-stone border border-forge-ember/20 rounded-lg p-6"><h3 className="font-semibold text-white mb-2">{faq.q}</h3><p className="text-gray-400">{faq.a}</p></div>)}</div>
-          <div className="text-center mt-8"><p className="text-gray-300 mb-3">{data.faq.stillHaveQuestions}</p><Link href="/contact" className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.faq.talkToUs} →</Link></div>
+          <div className="text-center mt-8"><p className="text-gray-300 mb-3">{data.faq.stillHaveQuestions}</p><Link href={localePath('/contact')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.faq.talkToUs} →</Link></div>
         </div>
       </section>
 
@@ -158,7 +158,7 @@ export default function ServicesContent() {
         <div className="container-custom text-center max-w-3xl">
           <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.footerCta.heading}</h2>
           <p className="text-gray-300 text-lg mb-8">{data.footerCta.subheading}</p>
-          <Link href="/contact" className="btn-primary">{data.footerCta.button}</Link>
+          <Link href={localePath('/contact')} className="btn-primary">{data.footerCta.button}</Link>
         </div>
       </section>
     </div>

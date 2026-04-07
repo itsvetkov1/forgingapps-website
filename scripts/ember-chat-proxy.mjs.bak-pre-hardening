@@ -24,173 +24,6 @@ const ORIGIN_ALLOWLIST = new Set([
 const ACTION_TAG_REGEX = /\[ACTION:([A-Z_]+)(?::([^\]]+))?\]/g
 const emailStore = new Map()
 
-// ============================================================================
-// [SECURITY] Rate Limiting & Message Length Validation
-// ============================================================================
-
-// [SECURITY] Rate limiting: per-visitor sliding window counters
-// Structure: visitorId -> { minuteWindow: { timestamp, count }, hourWindow: { timestamp, count } }
-const rateLimitStore = new Map()
-const RATE_LIMIT_PER_MINUTE = 10
-const RATE_LIMIT_PER_HOUR = 50
-const RATE_LIMIT_ACTION_TAG_PER_HOUR = 3
-const MESSAGE_MAX_LENGTH = 2000
-const MINUTE_MS = 60 * 1000
-const HOUR_MS = 60 * 60 * 1000
-
-// [SECURITY] Check if visitor has exceeded rate limit (messages)
-function checkRateLimit(visitorId) {
-  const now = Date.now()
-  if (!rateLimitStore.has(visitorId)) {
-    rateLimitStore.set(visitorId, {
-      minuteWindow: { timestamp: now, count: 0 },
-      hourWindow: { timestamp: now, count: 0 },
-      actionTagHour: { timestamp: now, count: 0 },
-    })
-  }
-
-  const limits = rateLimitStore.get(visitorId)
-
-  // Check minute window
-  if (now - limits.minuteWindow.timestamp > MINUTE_MS) {
-    limits.minuteWindow = { timestamp: now, count: 1 }
-  } else {
-    limits.minuteWindow.count++
-    if (limits.minuteWindow.count > RATE_LIMIT_PER_MINUTE) {
-      return {
-        exceeded: true,
-        window: 'minute',
-        limit: RATE_LIMIT_PER_MINUTE,
-      }
-    }
-  }
-
-  // Check hour window
-  if (now - limits.hourWindow.timestamp > HOUR_MS) {
-    limits.hourWindow = { timestamp: now, count: 1 }
-  } else {
-    limits.hourWindow.count++
-    if (limits.hourWindow.count > RATE_LIMIT_PER_HOUR) {
-      return {
-        exceeded: true,
-        window: 'hour',
-        limit: RATE_LIMIT_PER_HOUR,
-      }
-    }
-  }
-
-  return { exceeded: false }
-}
-
-// [SECURITY] Check if visitor has exceeded action tag rate limit
-function checkActionTagRateLimit(visitorId) {
-  const now = Date.now()
-  if (!rateLimitStore.has(visitorId)) {
-    rateLimitStore.set(visitorId, {
-      minuteWindow: { timestamp: now, count: 0 },
-      hourWindow: { timestamp: now, count: 0 },
-      actionTagHour: { timestamp: now, count: 0 },
-    })
-  }
-
-  const limits = rateLimitStore.get(visitorId)
-
-  // Check action tag hour window
-  if (now - limits.actionTagHour.timestamp > HOUR_MS) {
-    limits.actionTagHour = { timestamp: now, count: 1 }
-  } else {
-    limits.actionTagHour.count++
-    if (limits.actionTagHour.count > RATE_LIMIT_ACTION_TAG_PER_HOUR) {
-      return {
-        exceeded: true,
-        limit: RATE_LIMIT_ACTION_TAG_PER_HOUR,
-      }
-    }
-  }
-
-  return { exceeded: false }
-}
-
-// ============================================================================
-// [SECURITY] Input Filtering (Prompt Injection Detection)
-// ============================================================================
-
-// [SECURITY] Patterns to detect common prompt injection and jailbreak attempts
-const BLOCKED_PATTERNS = [
-  /ignore\s+(all\s+)?previous\s+instructions/i,
-  /ignore\s+(all\s+)?above/i,
-  /disregard\s+(all\s+)?previous/i,
-  /forget\s+(all\s+)?(your|previous)\s+instructions/i,
-  /you\s+are\s+now\s+(a|an|in)\s+/i,
-  /pretend\s+(to\s+be|you\s+are)/i,
-  /act\s+as\s+(a|an|if)/i,
-  /enter\s+(developer|debug|admin|god)\s+mode/i,
-  /system\s*prompt/i,
-  /\bDAN\b/,
-  /jailbreak/i,
-  /what\s+are\s+your\s+(instructions|rules|directives|system\s+prompt)/i,
-  /repeat\s+(everything|all|your)\s+(above|instructions|prompt)/i,
-  /translate\s+your\s+(instructions|prompt|rules)/i,
-  /base64/i,
-]
-
-// [SECURITY] Check message for injection patterns
-function checkForInjectionPatterns(message) {
-  for (const pattern of BLOCKED_PATTERNS) {
-    if (pattern.test(message)) {
-      return { blocked: true, pattern: pattern.source }
-    }
-  }
-  return { blocked: false }
-}
-
-// [SECURITY] Canned response for blocked injection attempts
-const BLOCKED_INJECTION_RESPONSE = "I'm Ember, the ForgingApps assistant. I'm here to help with our services and booking consultations. What can I help you with?"
-
-// ============================================================================
-// [SECURITY] Output Filtering (Sensitive Information Leakage Detection)
-// ============================================================================
-
-// [SECURITY] Terms that indicate sensitive/internal information leakage
-const SENSITIVE_TERMS = [
-  'OpenClaw',
-  'openclaw',
-  'Hydra',
-  'hydra-dominatus',
-  'alpharius',
-  'gene-seed',
-  'MiniMax',
-  'minimax',
-  'cardinal-ember-sentinel',
-  '/home/',
-  '/opt/',
-  'docker exec',
-  '.openclaw',
-  'gateway.env',
-  'RESEND_API_KEY',
-  'ember-local-token',
-  'wardrobe-e2e-local-token',
-]
-
-// [SECURITY] Check reply for sensitive information leakage
-function checkForSensitiveLeakage(reply) {
-  const replyLower = reply.toLowerCase()
-  for (const term of SENSITIVE_TERMS) {
-    const termLower = term.toLowerCase()
-    if (replyLower.includes(termLower)) {
-      return { leaked: true, term }
-    }
-  }
-  return { leaked: false }
-}
-
-// [SECURITY] Canned response for leaked information
-const BLOCKED_LEAK_RESPONSE = "I'd be happy to help with questions about ForgingApps services. What would you like to know?"
-
-// ============================================================================
-// Original Functions (Unchanged)
-// ============================================================================
-
 function sendJson(res, statusCode, payload, origin = '*') {
   res.writeHead(statusCode, {
     'Content-Type': 'application/json; charset=utf-8',
@@ -366,29 +199,14 @@ async function executeActionTags(visitorId, tags) {
   const session = getSession(visitorId)
   const actions = []
 
-  // [SECURITY] Check action tag rate limit
-  const actionTagLimitCheck = checkActionTagRateLimit(visitorId)
-  if (actionTagLimitCheck.exceeded) {
-    console.log(`[ember-chat-proxy] [SECURITY] Action tag rate limit exceeded for ${visitorId}; max ${actionTagLimitCheck.limit} per hour`)
-    // Skip all action tags this time
-    return []
-  }
-
   for (const tag of tags) {
     if (tag.type === 'COLLECT_EMAIL') {
-      // [SECURITY] COLLECT_EMAIL only when session has no email yet
-      if (session.email) {
-        console.log(`[ember-chat-proxy] [SECURITY] Skipped COLLECT_EMAIL tag: visitor ${visitorId} already has email`)
-        actions.push({ type: 'collect_email', status: 'skipped', reason: 'email_already_set' })
-        continue
-      }
       actions.push({ type: 'collect_email' })
       continue
     }
 
     if (tag.type === 'INTERNAL_NOTIFY') {
       if (!session.email) {
-        console.log(`[ember-chat-proxy] [SECURITY] Skipped INTERNAL_NOTIFY tag: visitor ${visitorId} has no email`)
         actions.push({ type: 'internal_notify', status: 'skipped', reason: 'missing_email' })
         continue
       }
@@ -403,9 +221,7 @@ async function executeActionTags(visitorId, tags) {
 
     if (tag.type === 'SEND_SUMMARY') {
       const targetEmail = sanitizeEmail(tag.value || session.email)
-      // [SECURITY] SEND_SUMMARY only when session HAS an email
       if (!targetEmail || !isValidEmail(targetEmail)) {
-        console.log(`[ember-chat-proxy] [SECURITY] Skipped SEND_SUMMARY tag: visitor ${visitorId} has no valid email`)
         actions.push({ type: 'send_summary', status: 'skipped', reason: 'missing_email' })
         continue
       }
@@ -417,9 +233,7 @@ async function executeActionTags(visitorId, tags) {
 
     if (tag.type === 'MEETING_CONFIRMATION') {
       const targetEmail = sanitizeEmail(tag.value || session.email)
-      // [SECURITY] MEETING_CONFIRMATION only when session HAS an email
       if (!targetEmail || !isValidEmail(targetEmail)) {
-        console.log(`[ember-chat-proxy] [SECURITY] Skipped MEETING_CONFIRMATION tag: visitor ${visitorId} has no valid email`)
         actions.push({ type: 'meeting_confirmation', status: 'skipped', reason: 'missing_email' })
         continue
       }
@@ -429,9 +243,6 @@ async function executeActionTags(visitorId, tags) {
       actions.push({ type: 'meeting_confirmation', status: result.ok ? 'sent' : result.skipped ? 'skipped' : 'failed', email: targetEmail })
       continue
     }
-
-    // [SECURITY] Log and skip any unrecognized tags
-    console.log(`[ember-chat-proxy] [SECURITY] Skipped unrecognized action tag: ${tag.type}`)
   }
 
   return actions
@@ -468,7 +279,7 @@ async function handleCollectEmail(body) {
         type: 'internal_notify',
         status: notifyResult.ok ? 'sent' : notifyResult.skipped ? 'skipped' : 'failed',
       }],
-      message: 'Thanks! Got it. We can follow up by email from here.',
+      message: 'Thanks — got it. We can follow up by email from here.',
     },
   }
 }
@@ -511,52 +322,9 @@ const server = http.createServer(async (req, res) => {
         return
       }
 
-      // [SECURITY] Check message length cap
-      if (message.length > MESSAGE_MAX_LENGTH) {
-        sendJson(res, 400, {
-          error: `Message exceeds maximum length of ${MESSAGE_MAX_LENGTH} characters`,
-          length: message.length,
-        }, allowedOrigin)
-        return
-      }
-
-      // [SECURITY] Check rate limit (messages per minute/hour)
-      const rateLimitCheck = checkRateLimit(visitorId)
-      if (rateLimitCheck.exceeded) {
-        console.log(`[ember-chat-proxy] [SECURITY] Rate limit exceeded for ${visitorId}: ${rateLimitCheck.window} limit (${rateLimitCheck.limit})`)
-        sendJson(res, 429, {
-          error: `Rate limit exceeded. Max ${rateLimitCheck.limit} messages per ${rateLimitCheck.window}. Please try again later.`,
-          retryAfter: rateLimitCheck.window === 'minute' ? 60 : 3600,
-        }, allowedOrigin)
-        return
-      }
-
-      // [SECURITY] Check for prompt injection patterns in message
-      const injectionCheck = checkForInjectionPatterns(message)
-      if (injectionCheck.blocked) {
-        console.log(`[ember-chat-proxy] [SECURITY] Blocked injection attempt for ${visitorId}; matched pattern: ${injectionCheck.pattern}`)
-        addHistory(visitorId, 'user', message)
-        addHistory(visitorId, 'assistant', BLOCKED_INJECTION_RESPONSE)
-        sendJson(res, 200, {
-          reply: BLOCKED_INJECTION_RESPONSE,
-          actions: [],
-          _securityNote: 'blocked_injection_attempt',
-        }, allowedOrigin)
-        return
-      }
-
       addHistory(visitorId, 'user', message)
       const rawReply = await askBot(visitorId, message)
-
-      // [SECURITY] Check for sensitive information leakage in bot reply
-      const leakageCheck = checkForSensitiveLeakage(rawReply)
-      let finalReply = rawReply
-      if (leakageCheck.leaked) {
-        console.log(`[ember-chat-proxy] [SECURITY] Detected sensitive information leakage for ${visitorId}; blocked term: ${leakageCheck.term}`)
-        finalReply = BLOCKED_LEAK_RESPONSE
-      }
-
-      const { cleanReply, tags } = parseActionTags(finalReply)
+      const { cleanReply, tags } = parseActionTags(rawReply)
       const effectiveTags = inferFallbackTags(visitorId, cleanReply, tags)
       const actions = await executeActionTags(visitorId, effectiveTags)
       const reply = cleanReply || 'I can help with that. Tell me a bit more.'

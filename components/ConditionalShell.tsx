@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export default function ConditionalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -30,10 +29,10 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
   }, [isVeloura])
 
   return (
-    <LanguageProvider>
+    <>
       {!isVeloura && <Navbar />}
       <main>{children}</main>
       {!isVeloura && <Footer />}
-    </LanguageProvider>
+    </>
   )
 }

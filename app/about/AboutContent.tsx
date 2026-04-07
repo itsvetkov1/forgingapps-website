@@ -13,7 +13,7 @@ const teamPhotos: Record<string, string> = {
 }
 
 export default function AboutContent() {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const data = translations[language].about
 
   return (
@@ -84,7 +84,7 @@ export default function AboutContent() {
         <div className="container-custom text-center max-w-3xl">
           <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.cta.heading}</h2>
           <p className="text-gray-300 text-lg mb-8">{data.cta.subheading}</p>
-          <Link href="/contact" className="btn-primary">{data.cta.button}</Link>
+          <Link href={localePath('/contact')} className="btn-primary">{data.cta.button}</Link>
         </div>
       </section>
     </div>

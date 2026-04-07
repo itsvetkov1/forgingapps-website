@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
 export default function BlogPostContent({ slug }: { slug: string }) {
-  const { language } = useLanguage()
+  const { language, localePath } = useLanguage()
   const post = translations[language].blogPosts[slug]
 
   if (!post) {
@@ -22,7 +22,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
     <article className="bg-forge-dark min-h-screen py-16">
       <div className="container-custom max-w-3xl">
         <div className="mb-12">
-          <Link href="/blog" className="text-forge-gold hover:text-forge-ember transition mb-4 inline-block">← Back to Blog</Link>
+          <Link href={localePath('/blog')} className="text-forge-gold hover:text-forge-ember transition mb-4 inline-block">← Back to Blog</Link>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-xs font-semibold text-forge-ember bg-forge-ember/10 px-2 py-1 rounded">{post.category}</span>
             <span className="text-sm text-gray-400">{post.date}</span>
