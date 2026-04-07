@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Cinzel, Inter } from 'next/font/google'
-import './globals.css'
+import '../globals.css'
 import StructuredData from '@/components/StructuredData'
 
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' })
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   robots: 'index, follow',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootRedirectLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cinzel.variable} ${inter.variable}`}>
       <head>
