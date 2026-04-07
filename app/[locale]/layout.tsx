@@ -9,7 +9,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { isLocale, locales } from '@/lib/i18n/routing'
 
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' })
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://forgingapps.com'),
