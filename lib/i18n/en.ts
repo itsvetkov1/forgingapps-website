@@ -93,7 +93,7 @@ export const en: Record<string, any> = {
       },
       affordable: {
         title: "40% Less Than Agencies",
-        description: "No bloated teams or overhead. Senior work at \u20ac60/hr AI consulting and fixed-price projects starting at \u20ac300.",
+        description: "No bloated teams or overhead. Senior expertise, boutique attention — without the overhead of a 50-person agency.",
       },
       secure: {
         title: "umlaut Secure App Award",
