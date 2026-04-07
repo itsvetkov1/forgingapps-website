@@ -59,7 +59,7 @@ export const en: Record<string, any> = {
       tier: "The Anvil",
       outcome: "Ship in 4-8 weeks",
       description: "Custom web and mobile applications built to your spec. Cross-platform, scalable, with 30-day post-launch support.",
-      launchPrice: "From \u20ac3,000",
+      launchPrice: "From \u20ac5,000",
       badge: "Most Popular",
     },
     forge: {
@@ -67,7 +67,7 @@ export const en: Record<string, any> = {
       tier: "The Forge",
       outcome: "Production-ready in 8-16 weeks",
       description: "Full MVPs, complex web platforms, and multi-service systems. Enterprise-grade architecture without the enterprise price.",
-      launchPrice: "From \u20ac8,000",
+      launchPrice: "From \u20ac10,000",
     },
     readyForCustomAi: "Ready for custom AI?",
     exploreAiConsulting: "Explore AI Consulting Services",
