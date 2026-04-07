@@ -5,6 +5,13 @@ import { Shield, Users, Coins } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
+const teamPhotos: Record<string, string> = {
+  'Ivaylo Tsvetkov': '/team/ivaylo-tsvetkov.jpg',
+  'Radoslav Lambrev': '/team/radoslav-lambrev.jpg',
+  'Ивайло Цветков': '/team/ivaylo-tsvetkov.jpg',
+  'Радослав Ламбрев': '/team/radoslav-lambrev.jpg',
+}
+
 export default function AboutContent() {
   const { language } = useLanguage()
   const data = translations[language].about
@@ -30,17 +37,32 @@ export default function AboutContent() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.teamHeading}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[data.ivaylo, data.radoslav].map((person: any) => (
-              <div key={person.name} className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
-                <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{person.name}</h3>
-                <p className="text-forge-ember font-semibold mb-4">{person.role}</p>
-                <p className="text-gray-300 mb-4">{person.bio}</p>
-                <p className="text-gray-400 mb-6">{person.background}</p>
-                <h4 className="font-cinzel text-xl font-bold text-forge-gold mb-3">{person.credentialsTitle}</h4>
-                <ul className="space-y-2 text-gray-400">
-                  {Object.keys(person).filter((key) => key.startsWith('cred')).map((key) => (
-                    <li key={key} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{person[key]}</span></li>
-                  ))}
-                </ul>
+              <div key={person.name} className="bg-forge-stone border border-forge-ember/30 rounded-xl overflow-hidden">
+                <div className="bg-gradient-to-b from-forge-ember/30 to-transparent h-56 flex items-center justify-center py-6">
+                  <div className="relative">
+                    <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-forge-ember/40">
+                      <img
+                        src={teamPhotos[person.name] || '/team/placeholder.jpg'}
+                        alt={person.name}
+                        width={400}
+                        height={400}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{person.name}</h3>
+                  <p className="text-forge-ember font-semibold mb-4">{person.role}</p>
+                  <p className="text-gray-300 mb-4">{person.bio}</p>
+                  <p className="text-gray-400 mb-6">{person.background}</p>
+                  <h4 className="font-cinzel text-xl font-bold text-forge-gold mb-3">{person.credentialsTitle}</h4>
+                  <ul className="space-y-2 text-gray-400">
+                    {Object.keys(person).filter((key) => key.startsWith('cred')).map((key) => (
+                      <li key={key} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{person[key]}</span></li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
