@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Brain, Bot, Workflow, Sparkles, Shield } from 'lucide-react'
+import { Brain, Workflow, Sparkles, Shield } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
@@ -34,8 +34,39 @@ export default function AIConsultingContent() {
           <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.servicesHeading}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiReadinessSprint.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiReadinessSprint.badge}</span>
+              </div>
+              <p className="text-2xl font-bold text-white mb-2">{data.aiReadinessSprint.price}</p>
+              <p className="text-sm text-gray-400 mb-4">{data.aiReadinessSprint.delivery}</p>
+              <p className="text-gray-300 mb-5">{data.aiReadinessSprint.description}</p>
+              <ul className="space-y-2 text-gray-400 mb-5">
+                {[data.aiReadinessSprint.deliverable1, data.aiReadinessSprint.deliverable2, data.aiReadinessSprint.deliverable3].map((item) => <li key={item}>• {item}</li>)}
+              </ul>
+              <p className="text-sm text-forge-gold mb-5">{data.aiReadinessSprint.ctaNote}</p>
+              <Link href={localePath('/contact')} className="btn-primary">{data.aiReadinessSprint.cta}</Link>
+            </div>
+
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiChatAssistant.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiChatAssistant.badge}</span>
+              </div>
+              <p className="text-2xl font-bold text-white mb-2">{data.aiChatAssistant.price}</p>
+              <p className="text-sm text-gray-400 mb-4">{data.aiChatAssistant.delivery}</p>
+              <p className="text-gray-300 mb-5">{data.aiChatAssistant.description}</p>
+              <ul className="space-y-2 text-gray-400 mb-5">
+                {[data.aiChatAssistant.deliverable1, data.aiChatAssistant.deliverable2, data.aiChatAssistant.deliverable3].map((item) => <li key={item}>• {item}</li>)}
+              </ul>
+              <p className="text-sm text-forge-gold mb-5">{data.aiChatAssistant.ctaNote}</p>
+              <Link href={localePath('/contact')} className="btn-primary">{data.aiChatAssistant.cta}</Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{data.hourlyConsulting.title}</h3>
-              <p className="text-gray-500 line-through">{data.hourlyConsulting.regularPrice}</p>
               <p className="text-2xl font-bold text-white mb-4">{data.hourlyConsulting.launchPrice}</p>
               <p className="text-gray-300">{data.hourlyConsulting.description}</p>
             </div>
@@ -45,7 +76,6 @@ export default function AIConsultingContent() {
                 {fixed.map((item: any) => (
                   <div key={item.title} className="border border-forge-ember/20 rounded-lg p-4 bg-forge-dark">
                     <p className="font-semibold text-white">{item.title}</p>
-                    <p className="text-gray-500 line-through text-sm">{item.regularPrice}</p>
                     <p className="text-forge-gold font-semibold mb-2">{item.launchPrice}</p>
                     <p className="text-gray-400 text-sm">{item.description}</p>
                   </div>
@@ -93,6 +123,16 @@ export default function AIConsultingContent() {
             ))}
           </div>
           <p className="text-center text-gray-400">{data.whatAiCanDo.supporting}</p>
+        </div>
+      </section>
+
+      <section className="section-py border-b border-forge-ember/20">
+        <div className="container-custom max-w-5xl">
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 md:p-10 text-center">
+            <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.discoveryWorkshop.heading}</h2>
+            <p className="text-gray-300 text-lg mb-8">{data.discoveryWorkshop.description}</p>
+            <Link href={localePath('/contact')} className="btn-primary">{data.discoveryWorkshop.cta}</Link>
+          </div>
         </div>
       </section>
 
