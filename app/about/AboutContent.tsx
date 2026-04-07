@@ -58,7 +58,7 @@ export default function AboutContent() {
                   <p className="text-gray-400 mb-6">{person.background}</p>
                   <h4 className="font-cinzel text-xl font-bold text-forge-gold mb-3">{person.credentialsTitle}</h4>
                   <ul className="space-y-2 text-gray-400">
-                    {Object.keys(person).filter((key) => key.startsWith('cred')).map((key) => (
+                    {Object.keys(person).filter((key) => key !== 'credentialsTitle' && key.startsWith('cred')).map((key) => (
                       <li key={key} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{person[key]}</span></li>
                     ))}
                   </ul>

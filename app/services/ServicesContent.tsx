@@ -111,7 +111,7 @@ export default function ServicesContent() {
                 <>
                   <h3 className="font-semibold text-forge-gold mb-3">{pkg.covers}</h3>
                   <ul className="space-y-2 text-gray-400 mb-5">
-                    {Object.keys(pkg).filter((key) => key.startsWith('cover')).map((key) => <li key={key}>• {pkg[key]}</li>)}
+                    {Object.keys(pkg).filter((key) => key !== 'covers' && key.startsWith('cover')).map((key) => <li key={key}>• {pkg[key]}</li>)}
                   </ul>
                 </>
               ) : null}

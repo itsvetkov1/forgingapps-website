@@ -46,9 +46,9 @@ const demoCopy = {
         title: 'Veloura Shop',
         slug: '/demo/veloura-shop',
         image: '/veloura/hero.jpg',
-        tagline: 'Пълно e-commerce изживяване',
+        tagline: 'Пълно изживяване за електронна търговия',
         description: 'Завършен онлайн магазин за измислена модна марка. Разгледайте 17 продукта в 6 категории, филтрирайте по размер и цвят, управлявайте количка и преминете през checkout flow.',
-        highlights: ['Продуктов каталог с категории', 'Количка и checkout flow', 'Responsive дизайн', 'Статичен export без backend'],
+        highlights: ['Продуктов каталог с категории', 'Количка и процес на поръчка', 'Адаптивен дизайн', 'Статичен експорт без бекенд'],
         icon: ShoppingBag,
       },
       {

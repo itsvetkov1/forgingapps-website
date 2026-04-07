@@ -29,9 +29,9 @@ export default function HomeContent() {
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.whatWeForge}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} launchPrice={data.spark.launchPrice} href={localePath('/services#spark')} />
-            <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} href={localePath('/services#anvil')} />
-            <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} launchPrice={data.forge.launchPrice} href={localePath('/services#forge')} />
+            <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} launchPrice={data.spark.launchPrice} ctaLabel={data.learnMore + ' →'} href={localePath('/services#spark')} />
+            <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} ctaLabel={data.learnMore + ' →'} href={localePath('/services#anvil')} />
+            <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} launchPrice={data.forge.launchPrice} ctaLabel={data.learnMore + ' →'} href={localePath('/services#forge')} />
           </div>
 
           <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 text-center">

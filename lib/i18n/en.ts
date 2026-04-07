@@ -45,7 +45,7 @@ export const en: Record<string, any> = {
     subheadline: "Senior developers building production-ready mobile apps, web platforms, and AI integrations for growing businesses in Sofia and across Europe.",
     primaryCTA: "See It In Action",
     secondaryCTA: "Get Started",
-    trustBadge: "Umlaut Verified Partner",
+    trustBadge: "umlaut Verified Partner",
     whatWeForge: "What We Forge",
     spark: {
       title: "Landing Pages & Simple Sites",
