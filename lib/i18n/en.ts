@@ -52,7 +52,7 @@ export const en: Record<string, any> = {
       tier: "The Spark",
       outcome: "Launch in 2 weeks",
       description: "Landing pages and simple sites for businesses that need to get online fast. Mobile-responsive, SEO-optimized, ready to ship.",
-      launchPrice: "From \u20ac300",
+      launchPrice: "From \u20ac1,500",
     },
     anvil: {
       title: "Standard Web & Mobile Apps",
