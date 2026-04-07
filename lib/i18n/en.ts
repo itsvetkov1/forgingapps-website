@@ -58,7 +58,7 @@ export const en: Record<string, any> = {
       title: "Standard Web & Mobile Apps",
       tier: "The Anvil",
       outcome: "Ship in 4-8 weeks",
-      description: "Custom web and mobile applications built to your spec. Cross-platform, scalable, with a 30-day bug-fix warranty.",
+      description: "Custom web and mobile applications built to your spec. Cross-platform, scalable, with 30-day post-launch support.",
       launchPrice: "From \u20ac3,000",
       badge: "Most Popular",
     },
@@ -105,7 +105,7 @@ export const en: Record<string, any> = {
       step1: { name: "The Spark", desc: "Tell us your idea. Free consultation, no commitment. We listen, we ask the right questions, we scope." },
       step2: { name: "The Blueprint", desc: "We define the scope, timeline, and price. You approve before a single line of code is written. No surprises." },
       step3: { name: "The Forge", desc: "We build. Weekly demos keep you in the loop. You see progress, give feedback, steer the ship." },
-      step4: { name: "Launch & Warranty", desc: "Launch, test, deliver. Every project ships with a 30-60 day bug fix warranty. We don't disappear after launch." },
+      step4: { name: "Launch & Warranty", desc: "Launch, test, deliver. Every project ships with 30-60 day post-launch support. We don't disappear after launch." },
     },
     credentials: {
       heading: "Proven & Verified",
