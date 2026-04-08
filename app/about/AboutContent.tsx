@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Shield, Users, Coins } from 'lucide-react'
+import { Shield, Users, Coins, Linkedin } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
@@ -62,6 +62,19 @@ export default function AboutContent() {
                       <li key={key} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{person[key]}</span></li>
                     ))}
                   </ul>
+                  {person.linkedInUrl && (
+                    <div className="mt-6 pt-5 border-t border-forge-ember/20">
+                      <a
+                        href={person.linkedInUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-forge-ember hover:text-forge-gold transition-colors text-sm font-medium"
+                      >
+                        <Linkedin size={16} />
+                        <span>{person.linkedin}</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

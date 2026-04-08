@@ -30,6 +30,11 @@ export default function StructuredData() {
       'React Development',
       'Artificial Intelligence Integration',
     ],
+    sameAs: [
+      'https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/',
+      'https://www.linkedin.com/in/radoslav-lambrev/',
+      'https://www.umlaut.com',
+    ],
     openingHoursSpecification: [{
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
