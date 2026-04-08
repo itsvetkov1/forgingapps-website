@@ -25,6 +25,7 @@ export default function Navbar() {
             <Link href={localePath('/ai-consulting')} className="hover:text-forge-gold transition">{t('nav.aiConsulting')}</Link>
             <Link href={localePath('/demo')} className="hover:text-forge-gold transition">{t('nav.demo')}</Link>
             <Link href={localePath('/about')} className="hover:text-forge-gold transition">{t('nav.about')}</Link>
+            <Link href={localePath('/blog')} className="hover:text-forge-gold transition">{t('nav.blog')}</Link>
             <LanguageToggle />
             <Link href={localePath('/contact')} className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark">{t('nav.contact')}</Link>
           </div>
@@ -42,6 +43,7 @@ export default function Navbar() {
               <Link href={localePath('/ai-consulting')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.aiConsulting')}</Link>
               <Link href={localePath('/demo')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.demo')}</Link>
               <Link href={localePath('/about')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</Link>
+              <Link href={localePath('/blog')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.blog')}</Link>
               <Link href={localePath('/contact')} className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</Link>
             </div>
           </div>

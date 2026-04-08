@@ -18,9 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!post) return {}
   return {
     title: `${post.title} | ForgingApps Blog`,
-    description: post.intro,
+    description: post.metaDescription ?? post.intro,
     alternates: buildLocaleAlternates(locale, `/blog/${slug}`),
-    openGraph: buildOg(`/${locale}/blog/${slug}`, `${post.title} | ForgingApps Blog`, post.intro),
+    openGraph: buildOg(`/${locale}/blog/${slug}`, `${post.title} | ForgingApps Blog`, post.metaDescription ?? post.intro),
   }
 }
 

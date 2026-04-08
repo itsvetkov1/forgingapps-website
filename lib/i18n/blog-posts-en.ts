@@ -1,6 +1,7 @@
 export const blogPostsEn: Record<string, any> = {
   "voice-agents-just-got-useful": {
     title: "Voice Agents Just Got a Lot More Useful",
+    metaDescription: "New audio APIs make voice AI practical for real businesses. Better transcription, steerable TTS, and cleaner tooling for support, sales, and booking automation.",
     author: "Ivaylo Tsvetkov, Co-Founder",
     date: "Apr 6, 2026",
     readTime: "6 min read",
@@ -17,6 +18,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "why-forgingapps-ai": {
     title: "Why ForgingApps for AI Consulting",
+    metaDescription: "Senior-led AI consulting from Sofia, Bulgaria. Transparent pricing, working prototypes in days, and no outsourcing chains. See what we build and how we work.",
     author: "Ivaylo Tsvetkov, Co-Founder",
     date: "Apr 5, 2026",
     readTime: "5 min read",
@@ -32,6 +34,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "how-to-choose-ai-consultant": {
     title: "How to Choose an AI Consulting Partner (Without Getting Burned)",
+    metaDescription: "5 green flags and 5 red flags when hiring an AI consultant. Avoid expensive mistakes and find a partner who builds real systems, not just polished slide decks.",
     author: "Ivaylo Tsvetkov, Co-Founder",
     date: "Mar 29, 2026",
     readTime: "7 min read",
@@ -47,6 +50,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "does-my-business-need-ai": {
     title: "Does My Business Need AI? An Honest Checklist",
+    metaDescription: "Not sure if your business needs AI? Use this honest 7-question checklist to find out where AI will save you time, cut costs, and give your team leverage.",
     author: "Ivaylo Tsvetkov, Co-Founder",
     date: "Mar 22, 2026",
     readTime: "6 min read",
@@ -62,6 +66,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "what-is-ai-consulting": {
     title: "What Is AI Consulting? (And What It Isn't)",
+    metaDescription: "AI consulting means finding where AI genuinely helps your business — not selling hype. Learn what good AI consultants actually do and what to expect from the process.",
     author: "Ivaylo Tsvetkov, Co-Founder",
     date: "Mar 15, 2026",
     readTime: "5 min read",
@@ -77,6 +82,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "umlaut-secure-app-award": {
     title: "How We Won the umlaut Secure App Award — Twice",
+    metaDescription: "ForgingApps earned the umlaut Secure App Award in 2024 and 2025. Learn what auditors test, where most apps fail, and how we approach mobile security from day one.",
     author: "Radoslav Lambrev, Founder & Lead Developer",
     date: "Feb 27, 2026",
     readTime: "5 min read",
@@ -92,6 +98,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "why-we-started-forgingapps": {
     title: "Why We Started ForgingApps",
+    metaDescription: "Two senior developers left enterprise to build the studio they wished existed — direct access, no middlemen, no juniors on your project, and honest pricing.",
     author: "Radoslav Lambrev, Founder & Lead Developer",
     date: "Feb 22, 2026",
     readTime: "4 min read",
@@ -107,6 +114,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "ai-for-small-business": {
     title: "AI for Small Business: Where to Start in 2026",
+    metaDescription: "Where should small businesses start with AI in 2026? Three proven use cases, realistic costs, and a 5-question framework to find out what to automate first.",
     author: "Radoslav Lambrev, Founder & Lead Developer",
     date: "Feb 15, 2026",
     readTime: "6 min read",
@@ -122,6 +130,7 @@ export const blogPostsEn: Record<string, any> = {
   },
   "what-does-app-cost": {
     title: "What Does an App Really Cost in 2026?",
+    metaDescription: "Real app development pricing in 2026: from €800 landing pages to €25,000 MVPs. Breakdown of cost drivers, hidden expenses, and how to get an accurate quote.",
     author: "Radoslav Lambrev, Founder & Lead Developer",
     date: "Feb 8, 2026",
     readTime: "7 min read",
