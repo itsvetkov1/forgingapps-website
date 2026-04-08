@@ -369,6 +369,17 @@ export const en: Record<string, any> = {
     heroHeadline: "Practical AI Consulting for Businesses That Want Real Results",
     heroSubheadline: "From readiness and roadmaps to assistants and automation, we help you figure out what AI is actually worth building — and then help you build it.",
     heroCTA: "Talk to Us About AI",
+    bodyCopy: {
+      sectionHeading: "AI Consulting That Starts With Your Business, Not the Technology",
+      p1: "Most businesses know that AI is relevant right now. The harder part is knowing what to actually do with it. Vendor pitches are everywhere, model announcements come weekly, and the gap between a compelling demo and something that actually helps your business is real. Most companies end up either paralyzed by too many options or burned by tools that created more work instead of removing it. If that sounds familiar, you\'re not behind \u2014 you\'ve just been unlucky with where to start.",
+      approachHeading: "How We Work",
+      p2: "ForgingApps approaches AI integration the same way we approach software: start with the problem, not the technology. Before recommending any tool or model, we assess what your business actually does, where time or quality gets lost, and whether AI creates real leverage \u2014 or just complexity. We have deployed AI agents in production environments, not sandboxes. That distinction matters. Production-ready AI looks different from demo-ready AI, and understanding the difference is most of the value a serious business AI consultant provides. We won\'t recommend something because it\'s trending. We\'ll recommend it if it makes your business work better.",
+      outcomesHeading: "What You Can Expect",
+      p3: "Businesses that work with us on AI automation typically come away with: repetitive manual processes replaced by automated workflows, customer interactions that run faster and more consistently, hours per week returned to team members who were stuck doing triage or data work by hand, and a clear picture of what\'s worth automating next \u2014 and what isn\'t. The outcome is rarely one big transformation. It\'s usually a series of targeted improvements that compound. Clients also come away knowing how to use AI in their business on an ongoing basis, not just for a one-time project.",
+      whyUsHeading: "Why ForgingApps",
+      p4: "We are a two-person senior team \u2014 no account managers, no junior consultants doing the actual work after a senior does the pitch. Founders are directly involved in every engagement. We have won the umlaut Secure App Award twice, run AI agents in live production systems, and bring software architecture thinking to every project. For businesses in Bulgaria and across Europe looking for AI consulting they can actually rely on, that combination is not common. We work directly, move fast, and tell you honestly when AI isn\'t the right answer.",
+      bridgeParagraph: "The Oracle is our AI consulting package for businesses that need architecture thinking, technical clarity, or implementation guidance before making bigger moves. A free 30-minute discovery call ends with a clear recommendation \u2014 not a sales deck.",
+    },
     servicesHeading: "AI Offers",
     aiReadinessSprint: {
       title: "AI Readiness Sprint",

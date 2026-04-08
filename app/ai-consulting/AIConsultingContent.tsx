@@ -30,6 +30,20 @@ export default function AIConsultingContent() {
       </section>
 
       <section className="section-py border-b border-forge-ember/20">
+        <div className="container-custom max-w-4xl">
+          <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.bodyCopy.sectionHeading}</h2>
+          <p className="text-gray-300 text-lg mb-6">{data.bodyCopy.p1}</p>
+          <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">{data.bodyCopy.approachHeading}</h3>
+          <p className="text-gray-300 text-lg mb-6">{data.bodyCopy.p2}</p>
+          <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">{data.bodyCopy.outcomesHeading}</h3>
+          <p className="text-gray-300 text-lg mb-6">{data.bodyCopy.p3}</p>
+          <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">{data.bodyCopy.whyUsHeading}</h3>
+          <p className="text-gray-300 text-lg mb-6">{data.bodyCopy.p4}</p>
+          <p className="text-forge-gold text-lg font-semibold mb-2">{data.bodyCopy.bridgeParagraph}</p>
+        </div>
+      </section>
+
+      <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.servicesHeading}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
