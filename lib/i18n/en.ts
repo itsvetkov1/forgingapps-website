@@ -227,8 +227,6 @@ export const en: Record<string, any> = {
       paymentTerms: "40% upfront / 30% at midpoint / 30% on delivery.",
       discoveryOption: "Not ready to commit? Start with a paid scoping workshop (€400) — we’ll define the full scope, tech stack, and timeline. The fee is credited toward your project.",
       hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
-      paymentTerms: "100% upfront.",
-      hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
     },
     ember: {
       name: "The Ember",
