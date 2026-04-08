@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const data = translations[locale]
   const title = locale === 'bg'
-    ? 'ForgingApps -- Разработка на приложения и AI консултиране | София, България'
-    : 'ForgingApps -- Custom App Development & AI Consulting | Sofia, Bulgaria'
+    ? 'ForgingApps | Разработка на приложения и AI консултиране | София, България'
+    : 'ForgingApps | Custom App Development & AI Consulting | Sofia, Bulgaria'
   const description = data.home.subheadline
 
   return {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description,
     alternates: buildLocaleAlternates(locale, '/'),
     openGraph: buildOg(`/${locale}`, title, description),
-    twitter: { card: 'summary_large_image', title, description, images: ['/og-image.svg'] },
+    twitter: { card: 'summary_large_image', title, description, images: ['/og-image.png'] },
   }
 }
 

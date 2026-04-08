@@ -7,6 +7,7 @@ export function buildLocaleAlternates(locale: Locale, path: string) {
     languages: {
       en: localePath('en', path),
       bg: localePath('bg', path),
+      'x-default': localePath('en', path),
     },
   }
 }
@@ -16,6 +17,6 @@ export function buildOg(urlPath: string, title: string, description: string): Me
     title,
     description,
     url: `https://forgingapps.com${urlPath}`,
-    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: title }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: title }],
   }
 }
