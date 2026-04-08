@@ -53,7 +53,6 @@ export default function ServiceCard({
         {hasRegularPrice ? <div className="price-regular text-sm">{regularPrice}</div> : null}
         <div className="flex items-baseline gap-2 flex-wrap">
           <span className="price-current">{launchPrice}</span>
-          {hasRegularPrice ? <span className="price-discount text-forge-ember">Launch Discount</span> : null}
         </div>
       </div>
 
