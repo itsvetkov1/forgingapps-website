@@ -4,6 +4,50 @@ import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
+function BlogCTA({ category, language, localePath }: { category: string; language: string; localePath: (path: string) => string }) {
+  const ctas: Record<string, { href: string; heading: string; body: string; cta: string }> = {
+    AI: {
+      href: localePath('/ai-consulting'),
+      heading: language === 'bg' ? 'Готови ли сте за AI?' : 'Ready to add AI to your business?',
+      body: language === 'bg'
+        ? 'Помагаме на компании да идентифицират, проектират и внедряват AI решения, които реално работят. Запишете безплатна консултация.'
+        : "We help businesses identify, design, and deploy AI systems that actually work. Book a free discovery call and see what's possible.",
+      cta: language === 'bg' ? 'Запишете безплатна консултация →' : 'Book a free discovery call →',
+    },
+    Security: {
+      href: localePath('/about'),
+      heading: language === 'bg' ? 'Сигурността не е опция' : 'Security is non-negotiable',
+      body: language === 'bg'
+        ? 'ForgingApps е два пъти носител на umlaut Secure App Award. Вижте нашите удостоверения и подхода ни към сигурността.'
+        : 'ForgingApps is a two-time umlaut Secure App Award winner. See our credentials and our approach to building secure software.',
+      cta: language === 'bg' ? 'Вижте нашите удостоверения →' : 'See our credentials →',
+    },
+    Business: {
+      href: localePath('/services'),
+      heading: language === 'bg' ? 'Готови да изградим нещо заедно?' : 'Ready to build something?',
+      body: language === 'bg'
+        ? 'От малък уебсайт до сложна платформа — имаме пакет за всяко ниво. Вземете оферта без ангажимент.'
+        : 'From a simple website to a complex platform — we have a package for every stage. Get a quote with no commitment required.',
+      cta: language === 'bg' ? 'Получете оферта →' : 'Get a quote →',
+    },
+  }
+
+  const config = ctas[category] ?? ctas['Business']
+
+  return (
+    <div className="mt-16 border border-forge-gold/30 bg-forge-gold/5 rounded-lg p-8">
+      <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-3">{config.heading}</h3>
+      <p className="text-gray-300 mb-6">{config.body}</p>
+      <Link
+        href={config.href}
+        className="inline-block bg-forge-gold text-forge-dark font-semibold px-6 py-3 rounded hover:bg-forge-ember transition"
+      >
+        {config.cta}
+      </Link>
+    </div>
+  )
+}
+
 export default function BlogPostContent({ slug }: { slug: string }) {
   const { language, localePath } = useLanguage()
   const post = translations[language].blogPosts[slug]
@@ -44,6 +88,8 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             ))}
           </div>
         </div>
+
+        <BlogCTA category={post.category} language={language} localePath={localePath} />
       </div>
     </article>
   )
