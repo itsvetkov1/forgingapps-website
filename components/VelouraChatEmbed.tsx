@@ -10,6 +10,7 @@ import {
   STARTER_PROMPTS,
   WELCOME_MESSAGE,
 } from '@/lib/veloura-demo-config.mjs'
+import { getVelouraProxyUrl } from '@/lib/veloura-config'
 
 interface ChatMessage {
   id: string
@@ -63,7 +64,7 @@ export default function VelouraChatEmbed() {
     setInput('')
 
     try {
-      const response = await fetch('https://chat.forgingapps.com/api/ember/message', {
+      const response = await fetch(getVelouraProxyUrl(), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
