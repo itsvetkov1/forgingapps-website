@@ -32,7 +32,7 @@ function BlogCTA({ category, language, localePath }: { category: string; languag
     },
   }
 
-  const config = ctas[category] ?? ctas['Business']
+  const config = (ctas[category] ?? ctas['Business']) as { href: string; heading: string; body: string; cta: string }
 
   return (
     <div className="mt-16 border border-forge-gold/30 bg-forge-gold/5 rounded-lg p-8">
