@@ -63,7 +63,7 @@ export default function VelouraChatEmbed() {
     setInput('')
 
     try {
-      const response = await fetch('https://chat.forgingapps.com/api/chat/message', {
+      const response = await fetch('https://chat.forgingapps.com/api/ember/message', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
