@@ -211,7 +211,7 @@ export default function VelouraChatEmbed() {
                       >
                         {parseChatText(block.text).map((line, lineIndex) => (
                           <Fragment key={`${message.id}-line-${blockIndex}-${lineIndex}`}>
-                            {line.map((segment, segmentIndex) =>
+                            {line?.map((segment, segmentIndex) =>
                               segment.bold ? (
                                 <strong key={`${message.id}-segment-${blockIndex}-${lineIndex}-${segmentIndex}`} className="font-semibold text-white">
                                   {segment.text}
