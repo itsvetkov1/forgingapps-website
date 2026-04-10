@@ -22,6 +22,8 @@ export const bg: Record<string, any> = {
       email: "hello@forgingapps.com",
       location: "София, България",
       freeConsultation: "Безплатна консултация",
+      linkedIn: "LinkedIn",
+      linkedInUrl: "https://www.linkedin.com/company/forgingapps",
       copyright: "© 2026 ForgingApps. Всички права запазени.",
       privacyPolicy: "Политика за поверителност",
       termsOfService: "Общи условия",
