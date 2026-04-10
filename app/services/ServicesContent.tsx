@@ -95,6 +95,7 @@ export default function ServicesContent() {
               <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{pkg.name}</h2>
               <p className="text-forge-ember font-semibold mb-2">{pkg.subtitle}</p>
               <p className="text-2xl font-bold text-white mb-2">{pkg.launchPrice}</p>
+              {'paymentTerms' in pkg && pkg.paymentTerms ? <p className="text-xs text-gray-500 mb-2">{pkg.paymentTerms}</p> : null}
               {'delivery' in pkg ? <p className="text-sm text-gray-400 mb-4">{data.comparison.delivery}: {pkg.delivery}</p> : null}
               <p className="text-gray-300 mb-6">{pkg.description}</p>
 
@@ -152,6 +153,7 @@ export default function ServicesContent() {
               <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-3">{data.hearthstone.name}</h2>
               <p className="text-forge-ember font-semibold mb-2">{data.hearthstone.subtitle}</p>
               <p className="text-2xl font-bold text-white mb-4">{data.hearthstone.launchPrice}</p>
+              {data.hearthstone.paymentTerms && <p className="text-xs text-gray-500 mb-3">{data.hearthstone.paymentTerms}</p>}
               <p className="text-gray-300">{data.hearthstone.description}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
