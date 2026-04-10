@@ -127,10 +127,10 @@ export const en: Record<string, any> = {
       heading: "Ready to build your next app?",
       subheading: "Free consultation. Transparent pricing. No middlemen.",
       button: "Get a Free Quote",
+    },
     latestFromBlog: {
       heading: "Latest from the Blog",
       viewAll: "View all posts",
-    },
     },
   },
   about: {
