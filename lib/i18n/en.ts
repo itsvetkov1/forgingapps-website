@@ -133,9 +133,9 @@ export const en: Record<string, any> = {
   },
   about: {
     whyHeading: "Why ForgingApps",
-    whyP1: "We spent years working inside large companies with large budgets and layers of process between a good idea and a shipped product.",
-    whyP2: "We watched great projects get buried under agency markups, junior developer churn, and endless revision cycles. We watched small businesses get priced out of quality software because the market told them \u20ac30K was the starting point.",
-    whyP3: "ForgingApps exists because we believe better is possible.",
+    whyP1: "Between us, we’ve spent years building software at enterprise scale — the kind of environments where security, architecture, and quality are non-negotiable baseline requirements. That experience is the standard we bring to every project.",
+    whyP2: "Most small and mid-sized businesses never get access to that calibre of work. The agency model layers on overhead until the budget runs out before anything ships. Junior-heavy teams learn on your dime. The market frames enterprise-grade software as a luxury only enterprise budgets can afford.",
+    whyP3: "ForgingApps exists to close that gap — bringing the rigour and craft of enterprise development, directly, to the businesses that deserve it most.",
     whyP4: "Two senior developers. Direct access. No middlemen. No account managers. No juniors learning on your project. When you work with us, you work with the people building your product.",
     whyP5: "We use AI not as a buzzword, but as a tool that makes us faster without making us careless. It lets us deliver enterprise-quality work at prices that don't require enterprise budgets.",
     whyP6: "We believe software should work for you, not drain you. That's why every project starts with listening, ships with post-launch support, and keeps you in control the whole way through.",
