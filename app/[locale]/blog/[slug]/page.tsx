@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import BlogPostContent from '@/app/blog/BlogPostContent'
 import { translations } from '@/lib/i18n/translations'
-import { buildLocaleAlternates, buildOg } from '@/lib/i18n/metadata'
+import { buildLocaleAlternates, buildOg, buildTwitterCard } from '@/lib/i18n/metadata'
 import { isLocale, locales } from '@/lib/i18n/routing'
 
 const slugs = Object.keys(translations.en.blogPosts)
@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: post.metaDescription ?? post.intro,
     alternates: buildLocaleAlternates(locale, `/blog/${slug}`),
     openGraph: buildOg(`/${locale}/blog/${slug}`, `${post.title} | ForgingApps Blog`, post.metaDescription ?? post.intro),
+    twitter: buildTwitterCard(`${post.title} | ForgingApps Blog`, post.metaDescription ?? post.intro),
   }
 }
 

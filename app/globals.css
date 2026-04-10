@@ -19,7 +19,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-cinzel);
+  font-family: var(--font-cinzel), var(--font-inter), sans-serif;
   font-weight: 700;
 }
 /* Veloura shop: override cinzel headings with sans-serif */

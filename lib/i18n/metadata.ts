@@ -20,3 +20,12 @@ export function buildOg(urlPath: string, title: string, description: string): Me
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: title }],
   }
 }
+
+export function buildTwitterCard(title: string, description: string): Metadata['twitter'] {
+  return {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/og-image.png'],
+  }
+}
