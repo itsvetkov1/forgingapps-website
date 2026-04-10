@@ -80,9 +80,17 @@ export default function AIConsultingContent() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
-              <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{data.hourlyConsulting.title}</h3>
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.hourlyConsulting.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.hourlyConsulting.badge}</span>
+              </div>
               <p className="text-2xl font-bold text-white mb-4">{data.hourlyConsulting.launchPrice}</p>
-              <p className="text-gray-300">{data.hourlyConsulting.description}</p>
+              <p className="text-gray-300 mb-5">{data.hourlyConsulting.description}</p>
+              <ul className="space-y-2 text-gray-400 mb-5">
+                {[data.hourlyConsulting.deliverable1, data.hourlyConsulting.deliverable2, data.hourlyConsulting.deliverable3].map((item) => <li key={item}>✓ {item}</li>)}
+              </ul>
+              <p className="text-sm text-forge-gold mb-5">{data.hourlyConsulting.ctaNote}</p>
+              <Link href={localePath('/contact')} className="btn-primary">{data.hourlyConsulting.cta}</Link>
             </div>
             <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-4">{data.fixedPrice.heading}</h3>
