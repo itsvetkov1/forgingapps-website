@@ -141,3 +141,11 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
+
+/* BG font-weight fix: Cinzel has no Cyrillic, its fallback terminates the
+   chain before Inter is reached. Override headings for Bulgarian pages so
+   Cyrillic text renders in Inter at the correct weight. */
+:lang(bg) h1, :lang(bg) h2, :lang(bg) h3,
+:lang(bg) h4, :lang(bg) h5, :lang(bg) h6 {
+  font-family: var(--font-inter), sans-serif;
+}
