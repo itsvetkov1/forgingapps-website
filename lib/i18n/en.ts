@@ -54,6 +54,13 @@ export const en: Record<string, any> = {
       description: "Landing pages and simple sites for businesses that need to get online fast. Mobile-responsive, SEO-optimized, ready to ship.",
       launchPrice: "From \u20ac1,500",
     },
+    ember: {
+      title: "Simple Web Products & CMS Sites",
+      tier: "The Ember",
+      outcome: "Ship in 2–3 weeks",
+      description: "The step between a landing page and a full custom app. Great for multi-page websites with CMS, client portals, booking flows, directories, and calculators.",
+      launchPrice: "From €3,000",
+    },
     anvil: {
       title: "Standard Web & Mobile Apps",
       tier: "The Anvil",

@@ -54,6 +54,13 @@ export const bg: Record<string, any> = {
       description: "Лендинг страници и визитни сайтове за бизнеси, които трябва да излязат онлайн бързо. Мобилно адаптивни, SEO оптимизирани, готови за пускане.",
       launchPrice: "От EUR 1,500",
     },
+    ember: {
+      title: "Прости уебсайтове и CMS сайтове",
+      tier: "The Ember",
+      outcome: "Готово за 2–3 седмици",
+      description: "Крачката между лендинг страница и пълна custom платформа. Подходящ за многостранични сайтове с CMS, клиентски портали, booking flows, директории и калкулатори.",
+      launchPrice: "от €3,000",
+    },
     anvil: {
       title: "Пълноценни уеб и мобилни приложения",
       tier: "The Anvil",
@@ -481,6 +488,7 @@ export const bg: Record<string, any> = {
     packageOptions: {
       notSure: "Все още не съм сигурен/а",
       spark: "The Spark (Лендинг страница)",
+      ember: "The Ember (уебсайт / приложение)",
       anvil: "The Anvil (Стандартно приложение)",
       forge: "The Forge (Пълен MVP)",
       oracle: "The Oracle (AI Консултации)",

@@ -5,7 +5,7 @@ import Hero from '@/components/Hero'
 import ServiceCard from '@/components/ServiceCard'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
-import { Zap, Hammer, Flame, Brain, Users, Bot, Shield, DollarSign } from 'lucide-react'
+import { Zap, Hammer, Flame, Globe, Brain, Users, Bot, Shield, DollarSign } from 'lucide-react'
 
 export default function HomeContent() {
   const { language, localePath } = useLanguage()
@@ -28,8 +28,9 @@ export default function HomeContent() {
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.whatWeForge}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} launchPrice={data.spark.launchPrice} ctaLabel={data.learnMore + ' →'} href={localePath('/services#spark')} />
+            <ServiceCard icon={<Globe size={40} />} title={data.ember.title} tier={data.ember.tier} outcome={data.ember.outcome} description={data.ember.description} launchPrice={data.ember.launchPrice} ctaLabel={data.learnMore + ' →'} href={localePath('/services#ember')} />
             <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} ctaLabel={data.learnMore + ' →'} href={localePath('/services#anvil')} />
             <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} launchPrice={data.forge.launchPrice} ctaLabel={data.learnMore + ' →'} href={localePath('/services#forge')} />
           </div>
