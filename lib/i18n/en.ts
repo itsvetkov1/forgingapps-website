@@ -237,7 +237,7 @@ export const en: Record<string, any> = {
       cta: "Start with Spark",
       paymentTerms: "100% upfront.",
       discoveryOption: "Not ready to commit? Start with a paid scoping workshop (€400) — we’ll define the full scope, tech stack, and timeline. The fee is credited toward your project.",
-      hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
+      hearthstoneUpsell: "Every project we deliver transitions naturally into a Hearthstone retainer. Reserved capacity starts at €300/month.",
     },
     ember: {
       name: "The Ember",
@@ -254,7 +254,7 @@ export const en: Record<string, any> = {
       priceNote: "Best for projects that are too complex for Spark but do not need full custom platform scoping yet.",
       cta: "Start with Ember",
       paymentTerms: "100% upfront.",
-      hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
+      hearthstoneUpsell: "Every project we deliver transitions naturally into a Hearthstone retainer. Reserved capacity starts at €300/month.",
     },
     anvil: {
       name: "The Anvil",
@@ -272,7 +272,7 @@ export const en: Record<string, any> = {
       cta: "Book a Free Scoping Call",
       paymentTerms: "50% upfront / 50% on delivery.",
       discoveryOption: "Not ready to commit? Start with a paid scoping workshop (€400) — we’ll define the full scope, tech stack, and timeline. The fee is credited toward your project.",
-      hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
+      hearthstoneUpsell: "Every project we deliver transitions naturally into a Hearthstone retainer. Reserved capacity starts at €300/month.",
     },
     forge: {
       name: "The Forge",
@@ -338,7 +338,7 @@ export const en: Record<string, any> = {
       },
       paymentTerms: "Monthly prepaid. Annual plan available: pay 10 months, get 12.",
       annualNote: "Pay 10 months, get 12 on annual retainers.",
-      switchNote: "Most clients move to Hearthstone after an Anvil or Forge build.",
+      switchNote: "Every project delivery is a natural onramp. Ask us about The Hearthstone.",
       cta: "Ask About Hearthstone",
     },
     discoveryWorkshop: {
@@ -376,7 +376,7 @@ export const en: Record<string, any> = {
       q2: { q: "What if I’m not sure which package fits?", a: "That is normal. We can usually tell quickly after a short conversation. If the project is still fuzzy, the Discovery Workshop is the best next step." },
       q3: { q: "Do you work only with clients in Bulgaria?", a: "No. We are based in Sofia, but we work with clients across Europe." },
       q4: { q: "Can you take over an existing project?", a: "Yes, depending on code quality and project state. We usually need a short audit first." },
-      q5: { q: "Do you offer support after launch?", a: "Yes. That is exactly what Hearthstone is for — ongoing maintenance, improvements, and continued delivery." },
+      q5: { q: "Do you offer support after launch?", a: "Yes — that's what The Hearthstone is for. We reserve capacity after every delivery so you have a dedicated technical partner ready, not just a support ticket queue." },
       q6: { q: "Can you help with AI, not just apps?", a: "Yes. The Oracle and our AI consulting offers cover readiness, strategy, automation, assistants, and implementation planning." },
       q7: { q: "What if I just need a roadmap before building?", a: "That is a perfect fit for the Oracle or the AI Readiness Sprint, depending on whether your need is broader consulting or specifically AI-focused." },
       stillHaveQuestions: "Still not sure where you fit?",
@@ -384,7 +384,7 @@ export const en: Record<string, any> = {
     },
     footerCta: {
       heading: "Build It Once. Grow It Forever.",
-      subheading: "Most of our best client relationships start with a single project and grow into an ongoing partnership through The Hearthstone — that's how we keep building together long after launch.",
+      subheading: "Every project we deliver can become a long-term partnership. We reserve capacity so you're never starting from scratch — that's The Hearthstone.",
       button: "Start the Conversation",
     },
   },
@@ -413,7 +413,7 @@ export const en: Record<string, any> = {
       deliverable1: "AI readiness score for your specific business",
       deliverable2: "Automation roadmap with prioritised quick wins",
       deliverable3: "Top 3 recommended implementations with cost estimates",
-      cta: "Get Started -- No Call Needed",
+      cta: "Get Started — No Call Needed",
       ctaNote: "Fill in a short intake form. We confirm within 24 hours.",
     },
     aiChatAssistant: {
@@ -421,11 +421,11 @@ export const en: Record<string, any> = {
       badge: "Fixed price",
       price: "EUR 2,500 flat",
       delivery: "Deployed in 2 weeks",
-      description: "A custom AI chat assistant trained on your content, deployed on your website or internal tools. Fixed scope, fixed price -- no discovery call needed.",
+      description: "A custom AI chat assistant trained on your content, deployed on your website or internal tools. Fixed scope, fixed price — no discovery call needed.",
       deliverable1: "Custom AI assistant trained on your documents, FAQs, or product data",
       deliverable2: "Integrated into your website or internal tool",
       deliverable3: "Admin access for monitoring and updating responses",
-      cta: "Get Started -- Fill in the Form",
+      cta: "Get Started — Fill in the Form",
       ctaNote: "If your needs are more complex, we will redirect you to The Oracle consultation.",
     },
     hourlyConsulting: {
