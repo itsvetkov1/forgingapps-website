@@ -11,6 +11,13 @@ export default function HomeContent() {
   const { language, localePath } = useLanguage()
   const data = translations[language].home
   const common = translations[language].common
+  const blog = translations[language].blog
+
+  const latestPosts = [
+    { slug: 'local-studio-vs-freelancer', date: 'Apr 10, 2026', category: 'business', postKey: 'localStudioVsFreelancer' },
+    { slug: 'custom-software-vs-off-the-shelf', date: 'Apr 8, 2026', category: 'business', postKey: 'customVsOffTheShelf' },
+    { slug: 'voice-agents-just-got-useful', date: 'Apr 6, 2026', category: 'ai', postKey: 'voiceAgents' },
+  ]
 
   const steps = [data.process.step1, data.process.step2, data.process.step3, data.process.step4]
   const credentials = [data.credentials.cred1, data.credentials.cred2, data.credentials.cred3, data.credentials.cred4]
@@ -119,7 +126,32 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+        <div className="container-custom">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.latestFromBlog.heading}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            {latestPosts.map((post) => {
+              const postMeta = (blog.posts as Record<string, any>)[post.postKey]
+              return (
+                <Link key={post.slug} href={localePath(`/blog/${post.slug}`)} className="group bg-forge-stone border border-forge-ember/20 rounded-xl p-6 hover:border-forge-gold/40 transition block">
+                  <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                    <span className="px-2 py-1 rounded bg-forge-ember/10 text-forge-ember">{blog.categories[post.category as keyof typeof blog.categories]}</span>
+                    <span>{post.date}</span>
+                  </div>
+                  <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3 group-hover:text-forge-ember transition">{postMeta?.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4">{postMeta?.description}</p>
+                  <span className="text-forge-gold text-sm font-semibold">{common.readMore} →</span>
+                </Link>
+              )
+            })}
+          </div>
+          <div className="text-center">
+            <Link href={localePath('/blog')} className="btn-secondary">{data.latestFromBlog.viewAll}</Link>
+          </div>
+        </div>
+      </section>
+
+            <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">{data.cta.heading}</h2>
           <p className="text-lg mb-8 text-forge-dark/80">{data.cta.subheading}</p>

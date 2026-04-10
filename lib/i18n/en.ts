@@ -22,8 +22,6 @@ export const en: Record<string, any> = {
       email: "hello@forgingapps.com",
       location: "Sofia, Bulgaria",
       freeConsultation: "Free Consultation",
-      linkedIn: "LinkedIn",
-      linkedInUrl: "https://www.linkedin.com/company/forgingapps",
       copyright: "\u00a9 2026 ForgingApps. All rights reserved.",
       privacyPolicy: "Privacy Policy",
       termsOfService: "Terms of Service",
@@ -129,6 +127,10 @@ export const en: Record<string, any> = {
       heading: "Ready to build your next app?",
       subheading: "Free consultation. Transparent pricing. No middlemen.",
       button: "Get a Free Quote",
+    latestFromBlog: {
+      heading: "Latest from the Blog",
+      viewAll: "View all posts",
+    },
     },
   },
   about: {
