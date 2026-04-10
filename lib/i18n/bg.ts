@@ -235,7 +235,7 @@ export const bg: Record<string, any> = {
       included3: "Contact form и basic SEO setup",
       included4: "Готово за стартиране",
       cta: "Започни със Spark",
-      paymentTerms: "40% авансово / 30% в средата / 30% при доставка.",
+      paymentTerms: "100% предплащане.",
       discoveryOption: "Не сте готови да се ангажирате? Започнете с платен workshop за определяне на обхвата (€400) — дефинираме обхвата, технологиите и сроковете. Таксата се приспада от проекта.",
       hearthstoneUpsell: "След стартирането повечето клиенти преминават към план за текуща поддържка от €400/месец. Попитайте ни за The Hearthstone.",
     },
@@ -477,7 +477,7 @@ export const bg: Record<string, any> = {
       heading: "Как работят AI проектите",
       step1: { title: "AI Readiness Sprint", description: "Оценяваме вашия бизнес и ви даваме конкретен AI roadmap. Фиксирана цена, без discovery call. Повечето AI клиенти започват оттук." },
       step2: { title: "AI Implementation", description: "Изграждаме и внедряваме AI решението. Scope, timeline и цена се потвърждават от резултатите на Sprint-а. Етап 2." },
-      step3: { title: "AI Management Retainer", description: "Постоянна оптимизация, monitoring и разширяване на AI системите ви. Месечно от EUR 1,000. Етап 3." },
+      step3: { title: "AI Management Retainer", description: "Постоянно управление на вашите AI системи след внедряване. Включва мониторинг, оптимизация на промпти, обновяване на модели, поддръжка на интеграции и месечни отчети за ефективност. Следва модела на Hearthstone с AI-специфичен обхват. Минимален ангажимент от 3 месеца." },
     },
     finalCta: {
       heading: "Искате да намерите правилната AI отправна точка?",

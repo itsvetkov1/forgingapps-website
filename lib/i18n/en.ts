@@ -57,9 +57,9 @@ export const en: Record<string, any> = {
     ember: {
       title: "Simple Web Products & CMS Sites",
       tier: "The Ember",
-      outcome: "Ship in 2–3 weeks",
+      outcome: "Ship in 2\u20133 weeks",
       description: "The step between a landing page and a full custom app. Great for multi-page websites with CMS, client portals, booking flows, directories, and calculators.",
-      launchPrice: "From €3,000",
+      launchPrice: "From \u20ac3,000",
     },
     anvil: {
       title: "Standard Web & Mobile Apps",
@@ -235,7 +235,7 @@ export const en: Record<string, any> = {
       included3: "Contact form and basic SEO setup",
       included4: "Launch-ready deployment",
       cta: "Start with Spark",
-      paymentTerms: "40% upfront / 30% at midpoint / 30% on delivery.",
+      paymentTerms: "100% upfront.",
       discoveryOption: "Not ready to commit? Start with a paid scoping workshop (€400) — we’ll define the full scope, tech stack, and timeline. The fee is credited toward your project.",
       hearthstoneUpsell: "After launch, most clients move to an ongoing support plan starting at €400/month. Ask us about The Hearthstone.",
     },
