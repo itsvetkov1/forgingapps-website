@@ -15,9 +15,13 @@ const postKeyMap: Record<string, string> = {
   'why-we-started-forgingapps': 'whyWeStarted',
   'ai-for-small-business': 'aiSmallBusiness',
   'what-does-app-cost': 'appCost',
+  'local-studio-vs-freelancer': 'localStudioVsFreelancer',
+  'custom-software-vs-off-the-shelf': 'customVsOffTheShelf',
 }
 
 const posts = [
+  { slug: 'local-studio-vs-freelancer', date: 'Apr 10, 2026', readTime: '6 min', category: 'business', image: 'bookopen', authorKey: 'authorRadoslav' },
+  { slug: 'custom-software-vs-off-the-shelf', date: 'Apr 8, 2026', readTime: '7 min', category: 'business', image: 'trending', authorKey: 'authorIvaylo' },
   { slug: 'voice-agents-just-got-useful', date: 'Apr 6, 2026', readTime: '6 min', category: 'ai', image: 'bot', authorKey: 'authorIvaylo' },
   { slug: 'why-forgingapps-ai', date: 'Apr 5, 2026', readTime: '5 min', category: 'ai', image: 'zap', authorKey: 'authorIvaylo' },
   { slug: 'how-to-choose-ai-consultant', date: 'Mar 29, 2026', readTime: '7 min', category: 'ai', image: 'shield', authorKey: 'authorIvaylo' },

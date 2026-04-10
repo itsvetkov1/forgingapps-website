@@ -544,6 +544,8 @@ export const en: Record<string, any> = {
       whyWeStarted: { title: "Why We Started ForgingApps", description: "Two senior developers walk out of the enterprise forge. This is why \u2014 and what we're building instead." },
       aiSmallBusiness: { title: "AI for Small Business: Where to Start in 2026", description: "You've heard the hype. Here's what AI actually does for businesses your size \u2014 and what to try first." },
       appCost: { title: "What Does an App Really Cost in 2026?", description: "The real numbers. No fluff. A transparent breakdown of app development pricing in Bulgaria and beyond." },
+      localStudioVsFreelancer: { title: "Why a Local Dev Studio Beats a Freelancer for Custom Software", description: "Freelancers are cheap. Agencies are expensive. The right answer for most small businesses is a boutique studio where senior people build your product directly." },
+      customVsOffTheShelf: { title: "Custom Software vs Off-the-Shelf: When to Build, When to Buy", description: "Not every business needs custom software. But some are paying SaaS fees forever for a tool that barely fits. Here is a practical framework for deciding." },
     },
     authorIvaylo: "Ivaylo Tsvetkov, Co-Founder",
     authorRadoslav: "Radoslav Lambrev, Founder & Lead Developer",

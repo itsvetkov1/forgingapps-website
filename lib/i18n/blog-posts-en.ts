@@ -144,4 +144,38 @@ export const blogPostsEn: Record<string, any> = {
       { heading: "Conclusion", content: "AI-assisted development offers the optimal balance between quality and affordability for startups and small-to-medium businesses." }
     ]
   },
+  "local-studio-vs-freelancer": {
+    title: "Why a Local Dev Studio Beats a Freelancer for Custom Software",
+    metaDescription: "Freelancers are cheap. Agencies are expensive. Boutique dev studios offer something better: senior expertise, direct accountability, and no outsourcing.",
+    author: "Radoslav Lambrev, Founder & Lead Developer",
+    date: "Apr 10, 2026",
+    readTime: "6 min read",
+    category: "Business",
+    intro: "When a small business needs custom software, the first instinct is to hire a freelancer or call a big agency. There is a third option that usually serves them better.",
+    sections: [
+      { heading: "The Freelancer Trade-Off", content: "Freelancers are accessible, affordable, and direct. For small, bounded projects a freelancer often makes perfect sense. The problems emerge when the project grows, the timeline stretches, or the developer goes quiet. Freelancers take vacations, get sick, and move between clients. If yours disappears mid-project, you inherit a half-built codebase with no handover documentation and no backup. Continuity is not guaranteed because there is nobody else to pick it up." },
+      { heading: "The Agency Problem", content: "Agencies solve the continuity problem but introduce new ones. You get account managers, project managers, and a sales layer between you and the people writing your code. Work is often assigned to junior staff who use your project to learn on the job. The overhead of running a large team gets baked into your invoice. You end up paying for their process, not just your product." },
+      { heading: "What a Boutique Studio Is", content: "A boutique studio sits between the two. Small enough to move fast and communicate directly. Senior enough that the founders write the code, not junior hires. No account manager layer. No outsourcing chain. The people you meet on the first call are the people building your product. Overhead is lower, which means pricing can reflect actual work rather than team headcount." },
+      { heading: "Where Studios Have the Edge", content: "Custom software that needs to survive past launch requires an owner. Studios typically offer post-launch maintenance, warrantied code, and ongoing relationships. You are not buying a deliverable and waving goodbye. You are building a working relationship with people who care what happens to the product after deployment. For small businesses, that continuity is often the most valuable thing in the engagement." },
+      { heading: "What to Look For", content: "Founders who are still writing code. Published pricing or clear ranges. A portfolio that shows depth, not just logo lists. Evidence they maintain projects after launch. Direct communication without layers. These signals separate studios that operate like boutiques from agencies that merely call themselves one." },
+      { heading: "The Bottom Line", content: "For most small businesses building custom software, a boutique studio offers the right balance: the accountability of a dedicated team, the expertise of senior developers, and the pricing of people who do not maintain large organizational overhead. It is worth asking whether the developer you are talking to will still be there in 18 months." }
+    ]
+  },
+  "custom-software-vs-off-the-shelf": {
+    title: "Custom Software vs Off-the-Shelf: When to Build, When to Buy",
+    metaDescription: "Not every business needs custom software. But some are paying SaaS fees forever for a tool that barely fits. Here is a practical framework for deciding.",
+    author: "Ivaylo Tsvetkov, Co-Founder",
+    date: "Apr 8, 2026",
+    readTime: "7 min read",
+    category: "Business",
+    intro: "Every growing business eventually faces this question: do we keep paying for SaaS subscriptions, or do we build something designed for exactly how we work?",
+    sections: [
+      { heading: "The Case for Off-the-Shelf", content: "Most businesses should start with existing tools. SaaS products are fast to deploy, proven at scale, supported by dedicated teams, and affordable at low volume. If your process fits the tool, adoption is smooth and the economics make sense. The best argument for off-the-shelf is that someone else maintains it, updates it, and patches its security vulnerabilities." },
+      { heading: "When Off-the-Shelf Breaks Down", content: "The cracks appear when your process stops matching the product. You start building workarounds. You pay for features you never use while missing ones you actually need. You stitch together three or four tools with automations that break every month. Or your process itself is a competitive advantage, and cramming it into a generic tool softens that edge. When software starts shaping your business instead of serving it, the economics shift." },
+      { heading: "The Real Cost of SaaS", content: "Monthly fees compound over years. At 20 users on a mid-tier plan, annual SaaS spend often reaches four to five figures per tool. Add integration costs, workaround hours, and the risk of vendor price increases or shutdowns, and the total cost of ownership is higher than the per-seat sticker suggests. Data lock-in is the silent tax: extracting your data when you decide to switch is rarely free or clean." },
+      { heading: "The Case for Custom", content: "Custom software fits your exact process by definition. It scales with your business without per-seat pricing cliffs. You own the data and the infrastructure. Features you need get built; features you do not need stay out of the way. The upfront cost is real, but the compounding savings on subscription fees, integration overhead, and workaround hours can make the math work within two to three years for mid-sized operations." },
+      { heading: "A Framework for Deciding", content: "Four questions that clarify the choice: Is your process genuinely unique, or does it match patterns a SaaS product already solves well? What would three years of SaaS fees cost, fully loaded including integrations? How painful would vendor lock-in become if the tool raised prices or shut down? Do you have internal technical ownership to maintain custom software after it is built? If three or four of these point toward custom, the conversation is worth having." },
+      { heading: "The Bottom Line", content: "The answer is almost never ideological. It is financial and operational. The right tool fits your process, does not hold your data hostage, and makes economic sense over a three-year horizon. Sometimes that is Notion and a few Zapier automations. Sometimes it is a custom platform. A good developer will tell you which — and decline the project if the off-the-shelf answer is obviously right." }
+    ]
+  },
 }
