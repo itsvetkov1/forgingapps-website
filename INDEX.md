@@ -65,7 +65,8 @@ Locale files live in \lib/i18n/\:
 | \g.ts\ | Full Bulgarian translation object -- source of truth for pricing |
 | \log-posts-en.ts\ | English blog post content (title, meta, sections, CTAs) |
 | \log-posts-bg.ts\ | Bulgarian blog post content |
-| \outing.ts\ | Locale routing helpers: localePath, swapLocaleInPath, stripLocaleFromPath |
+| \
+outing.ts\ | Locale routing helpers: localePath, swapLocaleInPath, stripLocaleFromPath |
 | \	ranslations.ts\ | Translation resolution utilities |
 | \useTranslation.ts\ | React hook for consuming translations |
 | \metadata.ts\ | i18n-aware metadata helpers for Next.js |
@@ -138,3 +139,17 @@ ext.config.ts\ — \output: 'export'\ static build
 - **Owner:** ForgingApps
 - **Repo:** Local repo at ~/projects/forgingapps-website/
 - **Related docs:** DEPLOYMENT.md, ~/projects/INDEX.md, ~/SYSTEM-MAP.md
+
+## Website Content Documentation
+
+For a full content and messaging reference for the website, start with:
+- `CONTENT-MANUAL.md`
+
+Use it for:
+- page-by-page content inventory
+- pricing/offer reference
+- CTA structure
+- blog inventory
+- EN/BG content mapping
+- demo/Veloura/Ember website-content context
+

@@ -89,3 +89,11 @@ public/
 - No README.md found at project root
 - Contact form depends on external Formspree endpoint from client-side code
 - No automated tests or validation pipeline beyond build/deploy and PR agent
+
+## Website Content Documentation
+
+When you need the current website copy, pricing language, offer structure, blog inventory, or content ownership map, read:
+- `CONTENT-MANUAL.md`
+
+This is the main human-readable content reference for the ForgingApps website.
+
