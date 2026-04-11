@@ -1,5 +1,20 @@
 export const blogPostsEn: Record<string, any> = {
-  " how-much-does-custom-software-development-cost: { title: Test },
+  "how-much-does-custom-software-development-cost": {
+    title: "How Much Does Custom Software Development Cost?",
+    metaDescription: "A practical breakdown of what custom software development actually costs, what drives the budget, and how to scope a project without wasting money.",
+    author: "Ivaylo Tsvetkov, Co-Founder",
+    date: "Apr 11, 2026",
+    readTime: "8 min read",
+    category: "Business",
+    intro: "Custom software pricing only looks confusing until you separate the real cost drivers from vague agency language. Complexity, integrations, delivery model, and post-launch responsibility matter far more than generic hourly-rate talk.",
+    sections: [
+      { heading: "Why Prices Move So Much", content: "A landing page, an internal tool, and a full MVP can all be called 'custom software,' but they are completely different jobs. Scope, integrations, user roles, admin needs, and design complexity are what actually move the number." },
+      { heading: "What You Are Really Paying For", content: "The price is not just code. It includes scoping, architecture, UI decisions, testing, deployment, revisions, and the cost of avoiding expensive mistakes later." },
+      { heading: "The Biggest Cost Drivers", content: "Authentication, dashboards, payments, third-party APIs, multilingual content, mobile responsiveness, and long-term maintenance all raise complexity. Fast timelines can also increase cost because delivery pressure changes how the work is staffed." },
+      { heading: "How to Scope It Properly", content: "Separate must-haves from nice-to-haves. Define what success looks like, what users need to do, and what can wait for phase two. Good scoping protects both budget and timeline." },
+      { heading: "The Bottom Line", content: "The right question is not 'what is the cheapest way to build this?' It is 'what scope creates the business result we need without paying for the wrong complexity?' That is where good software pricing starts." }
+    ]
+  },
   "voice-agents-just-got-useful": {
     title: "Voice Agents Just Got a Lot More Useful",
     metaDescription: "New audio APIs make voice AI practical for real businesses. Better transcription, steerable TTS, and cleaner tooling for support, sales, and booking automation.",

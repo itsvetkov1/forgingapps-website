@@ -24,6 +24,42 @@ const CAPABILITY_CARDS = [
   },
 ]
 
+const EXAMPLE_EXCHANGES = [
+  {
+    label: 'Shipping policy',
+    user: 'How long does EU shipping take?',
+    assistant: 'Standard EU shipping takes 3–5 business days, and express EU shipping takes 1–2 business days. Is there anything else I can help you with?',
+  },
+  {
+    label: 'Returns policy',
+    user: "I want to return something. What's the policy?",
+    assistant: 'Returns are accepted within 30 days of delivery if the item is unworn, unwashed, and has its original tags attached. You can start the process through our returns page. Anything else I can help you with?',
+  },
+  {
+    label: 'Sizing guidance',
+    user: 'I am between two sizes. What do you recommend?',
+    assistant: "If you're between sizes, we generally recommend sizing up for a relaxed fit or sizing down for something more fitted. Our size guide has measurements for each item — want me to help you find the right one?",
+  },
+]
+
+const HOW_IT_WORKS_STEPS = [
+  {
+    number: '1',
+    title: 'Share your policies and brand voice',
+    description: 'You provide your FAQs, support docs, and tone guidelines. We train the assistant on your actual content — nothing generic.',
+  },
+  {
+    number: '2',
+    title: 'We build and configure your assistant',
+    description: 'We define its knowledge boundaries, embed it in your site, and test it against real edge cases before anything goes live.',
+  },
+  {
+    number: '3',
+    title: 'It answers instantly, around the clock',
+    description: 'The assistant handles common questions 24/7. Complex issues are routed to your team cleanly, without dead ends.',
+  },
+]
+
 export default function VelouraSupportDemoClient() {
   return (
     <>
@@ -37,14 +73,48 @@ export default function VelouraSupportDemoClient() {
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
 
-          {/* Chat area -- hero prominence */}
           <div className="mb-8 min-h-[60vh] flex flex-col">
             <VelouraChatEmbed />
           </div>
 
-          {/* Share Demo + CTA row */}
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 mb-8">
+            <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">See It in Action</h2>
+            <p className="text-gray-400 text-sm mb-6">Three common support moments, shown the way a branded assistant would handle them inside an actual store experience.</p>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {EXAMPLE_EXCHANGES.map((exchange) => (
+                <div key={exchange.label} className="rounded-lg border border-forge-ember/20 bg-forge-dark/60 p-5">
+                  <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-gray-500">{exchange.label}</p>
+                  <div className="space-y-3">
+                    <div className="flex justify-start">
+                      <div className="max-w-[92%] rounded-2xl border border-forge-ember/20 bg-forge-dark px-4 py-3 text-sm leading-6 text-gray-200">
+                        {exchange.assistant}
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="max-w-[88%] rounded-2xl bg-forge-ember px-4 py-3 text-sm leading-6 text-white">
+                        {exchange.user}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 mb-8">
+            <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">How It Works</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {HOW_IT_WORKS_STEPS.map((step) => (
+                <div key={step.number} className="rounded-lg border border-forge-ember/20 bg-forge-dark/50 p-6">
+                  <div className="text-4xl font-cinzel font-bold text-forge-ember mb-4">{step.number}</div>
+                  <h3 className="text-white font-semibold mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-400 leading-6">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {/* Share button */}
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6 flex items-center justify-between">
               <div>
                 <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-1">Share this demo</h3>
@@ -53,7 +123,6 @@ export default function VelouraSupportDemoClient() {
               <ShareDemoButton />
             </div>
 
-            {/* CTA */}
             <div className="bg-gradient-to-r from-forge-ember/20 to-forge-gold/20 border border-forge-ember/40 rounded-lg p-6 flex items-center justify-between">
               <div>
                 <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-1">Build something like this</h3>
@@ -65,7 +134,6 @@ export default function VelouraSupportDemoClient() {
             </div>
           </div>
 
-          {/* 3 capability cards */}
           <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 mb-8">
             <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">What this demo proves</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -82,7 +150,6 @@ export default function VelouraSupportDemoClient() {
             </div>
           </div>
 
-          {/* Demo Profile sidebar */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">Demo Profile</h2>

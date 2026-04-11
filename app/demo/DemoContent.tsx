@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, MessageCircle, ShoppingBag } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -15,22 +14,22 @@ const demoCopy = {
     tryLive: 'Try it live',
     demos: [
       {
-        title: 'Veloura Shop',
-        slug: '/demo/veloura-shop',
-        image: '/veloura/hero.jpg',
-        tagline: 'Full e-commerce experience',
-        description: 'A complete online storefront for a fictional apparel brand. Browse 17 products across 6 categories, filter by size and colour, manage a cart, and walk through checkout — all statically rendered with Next.js.',
-        highlights: ['Product catalogue with categories', 'Cart & checkout flow', 'Responsive design', 'Static export — zero backend'],
-        icon: ShoppingBag,
-      },
-      {
         title: 'Veloura Support',
         slug: '/demo/veloura-support',
-        image: '/og-image.svg',
         tagline: 'AI customer support assistant',
         description: "An embedded AI chat widget that answers customer questions about Veloura's shipping, returns, sizing, and products — grounded in real brand policies so it never invents answers.",
         highlights: ['Policy-grounded responses', 'Context-aware conversation', 'Branded embedded widget', 'Instant deployment'],
         icon: MessageCircle,
+        preview: 'support',
+      },
+      {
+        title: 'Veloura Shop',
+        slug: '/demo/veloura-shop',
+        tagline: 'Full e-commerce experience',
+        description: 'A complete online storefront for a fictional apparel brand. Browse 17 products across 6 categories, filter by size and colour, manage a cart, and walk through checkout — all statically rendered with Next.js.',
+        highlights: ['Product catalogue with categories', 'Cart & checkout flow', 'Responsive design', 'Static export — zero backend'],
+        icon: ShoppingBag,
+        preview: 'shop',
       },
     ],
   },
@@ -43,22 +42,22 @@ const demoCopy = {
     tryLive: 'Пробвайте демото',
     demos: [
       {
-        title: 'Veloura Shop',
-        slug: '/demo/veloura-shop',
-        image: '/veloura/hero.jpg',
-        tagline: 'Пълно изживяване за електронна търговия',
-        description: 'Завършен онлайн магазин за измислена модна марка. Разгледайте 17 продукта в 6 категории, филтрирайте по размер и цвят, управлявайте количка и преминете през checkout flow.',
-        highlights: ['Продуктов каталог с категории', 'Количка и процес на поръчка', 'Адаптивен дизайн', 'Статичен експорт без бекенд'],
-        icon: ShoppingBag,
-      },
-      {
         title: 'Veloura Support',
         slug: '/demo/veloura-support',
-        image: '/og-image.svg',
         tagline: 'AI асистент за клиентска поддръжка',
         description: 'Вграден AI chat widget, който отговаря на въпроси за доставки, връщания, размери и продукти на Veloura, стъпвайки върху реални правила на бранда.',
         highlights: ['Отговори върху реални правила', 'Контекст в разговора', 'Брандиран embedded widget', 'Бърза интеграция'],
         icon: MessageCircle,
+        preview: 'support',
+      },
+      {
+        title: 'Veloura Shop',
+        slug: '/demo/veloura-shop',
+        tagline: 'Пълно изживяване за електронна търговия',
+        description: 'Завършен онлайн магазин за измислена модна марка. Разгледайте 17 продукта в 6 категории, филтрирайте по размер и цвят, управлявайте количка и преминете през checkout flow.',
+        highlights: ['Продуктов каталог с категории', 'Количка и процес на поръчка', 'Адаптивен дизайн', 'Статичен експорт без бекенд'],
+        icon: ShoppingBag,
+        preview: 'shop',
       },
     ],
   },
@@ -85,8 +84,8 @@ export default function DemoContent() {
               const Icon = demo.icon
               return (
                 <Link key={demo.slug} href={demo.slug} className="group bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden hover:border-forge-gold/60 transition-all duration-300">
-                  <div className="relative h-56 bg-gray-800 overflow-hidden">
-                    <Image src={demo.image} alt={demo.title} fill className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500" />
+                  <div className="relative h-56 overflow-hidden bg-gradient-to-br from-forge-dark via-[#1a1716] to-forge-stone">
+                    {demo.preview === 'support' ? <VelouraSupportPreview /> : <VelouraShopPreview />}
                     <div className="absolute inset-0 bg-gradient-to-t from-forge-stone to-transparent" />
                     <div className="absolute bottom-4 left-6 flex items-center gap-2">
                       <Icon className="text-forge-gold" size={22} />
@@ -119,5 +118,75 @@ export default function DemoContent() {
         </div>
       </section>
     </>
+  )
+}
+
+function VelouraSupportPreview() {
+  return (
+    <div className="absolute inset-0 p-5">
+      <div className="h-full rounded-2xl border border-forge-ember/20 bg-forge-dark/95 p-4 shadow-[0_0_0_1px_rgba(255,184,77,0.04)]">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-forge-gold/70">Veloura Support</p>
+            <p className="text-xs text-gray-500">AI customer support snapshot</p>
+          </div>
+          <span className="rounded-full border border-forge-ember/20 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-gray-400">
+            Live demo
+          </span>
+        </div>
+
+        <div className="space-y-3">
+          <div className="max-w-[88%] rounded-2xl border border-forge-ember/20 bg-[#23201e] px-4 py-3 text-sm leading-5 text-gray-200">
+            Hi. I am Veloura Support. Ask me about products, shipping, returns, or sizing.
+          </div>
+          <div className="flex justify-end">
+            <div className="max-w-[82%] rounded-2xl bg-forge-ember px-4 py-3 text-sm leading-5 text-white shadow-lg shadow-forge-ember/10">
+              How long does EU shipping take?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function VelouraShopPreview() {
+  const products = [
+    { name: 'Heavyweight Hoodie', price: 'EUR 89', swatch: 'from-[#2c2b31] to-[#4a4852]' },
+    { name: 'Relaxed Tee', price: 'EUR 34', swatch: 'from-[#cab08b] to-[#8c6b45]' },
+    { name: 'Canvas Tote', price: 'EUR 29', swatch: 'from-[#b85b34] to-[#6a2f1b]' },
+  ]
+
+  return (
+    <div className="absolute inset-0 p-5">
+      <div className="h-full rounded-2xl border border-forge-ember/20 bg-[#141211]/95 p-4 shadow-[0_0_0_1px_rgba(255,184,77,0.04)]">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-forge-gold/70">Veloura Shop</p>
+            <p className="text-xs text-gray-500">Static storefront preview</p>
+          </div>
+          <span className="rounded-full border border-forge-ember/20 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-gray-400">
+            17 products
+          </span>
+        </div>
+
+        <div className="grid h-[calc(100%-3.25rem)] grid-cols-3 gap-3">
+          {products.map((product) => (
+            <div key={product.name} className="overflow-hidden rounded-xl border border-forge-ember/15 bg-black/20">
+              <div className={`h-20 bg-gradient-to-br ${product.swatch}`} />
+              <div className="p-3">
+                <p className="mb-1 line-clamp-2 text-xs font-medium text-white">{product.name}</p>
+                <div className="mb-2 flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-forge-ember/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-forge-gold/70" />
+                </div>
+                <p className="text-xs font-semibold text-forge-gold">{product.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
