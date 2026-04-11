@@ -1,4 +1,5 @@
 export const blogPostsEn: Record<string, any> = {
+  " how-much-does-custom-software-development-cost: { title: Test },
   "voice-agents-just-got-useful": {
     title: "Voice Agents Just Got a Lot More Useful",
     metaDescription: "New audio APIs make voice AI practical for real businesses. Better transcription, steerable TTS, and cleaner tooling for support, sales, and booking automation.",

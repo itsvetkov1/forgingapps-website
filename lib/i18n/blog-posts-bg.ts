@@ -1,4 +1,7 @@
 export const blogPostsBg: Record<string, any> = {
+ how-much-does-custom-software-development-cost: { title: Колко Струва Персонализирана Разработка, metaDescription: Разбивка на цените., author: Ивайло Цветков, date: 9 април 2026, readTime: 8 мин четене, category: Бизнес, intro: Ценообразуването варира., sections: [{ heading: Защо цените варират, content: Сложност интеграции екип график. }] },
+ -signs-your-business-is-ready-for-ai-integration: { title:  Признака за AI, metaDescription: Пет сигнала., author: Ивайло Цветков, date:  април 2026, readTime:  мин четене, category: AI, intro: Готов ли си за AI?, sections: [{ heading: Какво е AI интеграция, content: Вграждане на AI в работни процеси. }] },
+
   "voice-agents-just-got-useful": {
     title: "Гласовите агенти вече наистина работят",
     metaDescription: "Нови API за аудио правят гласовите AI агенти практични за бизнеса. По-добра транскрипция и TTS за поддръжка, продажби и автоматизация на резервации.",
