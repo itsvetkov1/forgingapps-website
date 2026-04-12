@@ -237,6 +237,19 @@ export default function VelouraSupportDemoClient() {
             </div>
           </div>
 
+          <div className="mt-10 rounded-2xl border border-forge-ember/30 bg-gradient-to-r from-forge-ember/15 to-forge-gold/10 p-8">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-forge-gold/70">Demo-specific next step</p>
+                <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-3">Want an AI assistant like this for your business?</h2>
+                <p className="text-sm leading-7 text-gray-300">We build branded support experiences like this and ship working client-ready implementations in 2-4 weeks.</p>
+              </div>
+              <Link href="/en/contact" className="btn-primary whitespace-nowrap">
+                Start your AI assistant project
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
     </>

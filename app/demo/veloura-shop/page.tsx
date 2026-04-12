@@ -174,6 +174,21 @@ export default function VelouraShopHome() {
         <DemoTechStrip theme="light" />
       </section>
 
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-12">
+        <div className="rounded-2xl border border-gray-200 bg-gradient-to-r from-gray-900 to-black px-8 py-10 text-white">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Demo-specific next step</p>
+              <h2 className="mb-3 text-3xl font-bold">Ready to build your own storefront?</h2>
+              <p className="text-sm leading-7 text-white/70">We design and ship branded storefronts like this, including catalog, cart, checkout, and support-ready flows, in 2-4 weeks.</p>
+            </div>
+            <Link href="/en/contact" className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 transition-colors whitespace-nowrap">
+              Plan your storefront build
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Cross-link to Support Demo */}
       <section className="bg-gray-950 text-white py-12 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
