@@ -42,6 +42,13 @@ export default function VelouraShopHome() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">What you are seeing</p>
+          <p className="max-w-3xl text-sm leading-7 text-gray-600">
+            This is a full working storefront demo with real product data, category filtering, product pages, and persistent cart state inside the browser. It is designed to feel like a launch-ready commerce experience, not a static mockup.
+          </p>
+        </div>
+
         <DemoPackageCallout
           title="The Anvil or The Forge"
           rationale="This demo fits The Anvil for a polished storefront with real cart and catalog flows, or The Forge when the goal is a larger commerce platform with integrated support and expansion room."
@@ -102,6 +109,31 @@ export default function VelouraShopHome() {
           {featured.slice(0, 4).map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-4">
+        <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">How to explore this demo</h2>
+          <p className="text-sm text-gray-500 mb-6">Start with the same journey a real shopper would take, then test how the storefront behaves from discovery through cart.</p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+              <p className="text-3xl font-bold text-gray-900 mb-3">1</p>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Browse categories</h3>
+              <p className="text-sm leading-6 text-gray-600">Open hoodies, tops, sale items, or accessories to see how the catalog structure and merchandising blocks are wired.</p>
+            </div>
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+              <p className="text-3xl font-bold text-gray-900 mb-3">2</p>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Open a product</h3>
+              <p className="text-sm leading-6 text-gray-600">Visit a product detail page to inspect imagery, selectable variants, pricing states, and the supporting content around each item.</p>
+            </div>
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+              <p className="text-3xl font-bold text-gray-900 mb-3">3</p>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Try adding to cart</h3>
+              <p className="text-sm leading-6 text-gray-600">Add an item, review the cart, and walk into checkout to see the complete front-end flow in demo mode.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
