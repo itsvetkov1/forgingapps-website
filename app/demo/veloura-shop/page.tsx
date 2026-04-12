@@ -63,6 +63,7 @@ export default function VelouraShopHome() {
           title="The Anvil or The Forge"
           rationale="This demo fits The Anvil for a polished storefront with real cart and catalog flows, or The Forge when the goal is a larger commerce platform with integrated support and expansion room."
           theme="light"
+          href="/en/services#anvil"
         />
       </section>
 
