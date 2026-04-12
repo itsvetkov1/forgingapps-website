@@ -20,6 +20,31 @@ interface ChatMessage {
   text: string
 }
 
+const DEMO_WALKTHROUGH = [
+  {
+    user: 'Do you have hoodies?',
+    assistant: 'Yes! We carry the Heavyweight Hoodie and the Classic Pullover Hoodie. Both are available in multiple colours. Would you like details on sizing or pricing?',
+    typingDelayMs: 800,
+    pauseAfterMs: 600,
+  },
+  {
+    user: 'What sizes does the Heavyweight Hoodie come in?',
+    assistant: 'The Heavyweight Hoodie comes in XS, S, M, L, XL, and XXL. Currently XS to L are in stock. Would you like to see similar styles?',
+    typingDelayMs: 800,
+    pauseAfterMs: 600,
+  },
+  {
+    user: 'Show me similar items',
+    assistant: 'Sure! You might also like the Classic Pullover Hoodie or the Fleece Zip-Up. Both are available now and ship in 3-5 days.',
+    typingDelayMs: 800,
+    pauseAfterMs: 0,
+  },
+]
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 function getOrCreateVisitorId() {
   const key = 'veloura-demo-visitor-id'
   const existing = typeof window !== 'undefined' ? window.localStorage.getItem(key) : null
@@ -42,6 +67,8 @@ export default function VelouraChatEmbed() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [hasUserSentMessage, setHasUserSentMessage] = useState(false)
+  const [walkthroughStarted, setWalkthroughStarted] = useState(false)
+  const [walkthroughTyping, setWalkthroughTyping] = useState(false)
   const listRef = useRef<HTMLDivElement | null>(null)
   const visitorId = useMemo(() => (typeof window !== 'undefined' ? getOrCreateVisitorId() : 'visitor_ssr'), [])
 
@@ -123,6 +150,42 @@ export default function VelouraChatEmbed() {
     }
   }
 
+  async function startWalkthrough() {
+    if (loading || walkthroughStarted) return
+
+    setError('')
+    setHasUserSentMessage(true)
+    setWalkthroughStarted(true)
+
+    for (const step of DEMO_WALKTHROUGH) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `walkthrough_user_${Date.now()}_${step.user}`,
+          role: 'user',
+          text: step.user,
+        },
+      ])
+
+      setWalkthroughTyping(true)
+      await wait(step.typingDelayMs)
+      setWalkthroughTyping(false)
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `walkthrough_assistant_${Date.now()}_${step.user}`,
+          role: 'assistant',
+          text: step.assistant,
+        },
+      ])
+
+      if (step.pauseAfterMs > 0) {
+        await wait(step.pauseAfterMs)
+      }
+    }
+  }
+
   function resetChat() {
     setMessages([
       {
@@ -134,6 +197,8 @@ export default function VelouraChatEmbed() {
     setInput('')
     setError('')
     setHasUserSentMessage(false)
+    setWalkthroughStarted(false)
+    setWalkthroughTyping(false)
   }
 
   return (
@@ -267,16 +332,27 @@ export default function VelouraChatEmbed() {
           )
         })}
 
-        {loading && (
+        {(loading || walkthroughTyping) && (
           <div className="flex justify-start">
             <div className="max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 bg-forge-dark border border-forge-ember/20 text-gray-400">
-              Thinking...
+              Typing...
             </div>
           </div>
         )}
       </div>
 
       <div className="border-t border-forge-ember/20 p-6">
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <p className="text-xs text-gray-500">Want a guided sample flow? Run the built-in support walkthrough.</p>
+          <button
+            type="button"
+            onClick={() => void startWalkthrough()}
+            disabled={loading || walkthroughStarted}
+            className="rounded-full border border-forge-ember/30 px-4 py-2 text-sm font-medium text-forge-gold transition hover:bg-forge-dark disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {walkthroughStarted ? 'Demo walkthrough running' : 'Show me a demo'}
+          </button>
+        </div>
         <form
           onSubmit={(e) => {
             e.preventDefault()
