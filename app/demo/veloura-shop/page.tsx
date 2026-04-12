@@ -39,6 +39,47 @@ export default function VelouraShopHome() {
         </div>
       </section>
 
+      {/* What this demonstrates */}
+      <section className="bg-gray-950 text-white border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.6fr] gap-8 items-start">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-gray-500 mb-3">ForgingApps demo</p>
+              <h2 className="text-3xl font-bold text-white mb-4">What this demonstrates</h2>
+              <p className="text-gray-400 leading-7 max-w-xl">
+                This Veloura storefront is not just a product grid. It is a capability demo showing how ForgingApps can combine polished commerce UX, guided product discovery, and AI-assisted support inside one branded experience.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
+                <p className="text-sm font-semibold text-white mb-2">AI support assistant</p>
+                <p className="text-sm text-gray-400 leading-6">
+                  Cross-linked with the Veloura Support demo, including product-aware sizing help, similar-item discovery, and policy answers.
+                </p>
+                <Link href="/en/demo/veloura-support" className="inline-block mt-4 text-sm font-semibold text-white underline underline-offset-4 hover:text-gray-200">
+                  Explore the support demo
+                </Link>
+              </div>
+
+              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
+                <p className="text-sm font-semibold text-white mb-2">Complete storefront flow</p>
+                <p className="text-sm text-gray-400 leading-6">
+                  Product catalog, categories, product detail pages, sale browsing, cart state, and checkout flow are all wired into a consistent demo journey.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
+                <p className="text-sm font-semibold text-white mb-2">Reusable UI patterns</p>
+                <p className="text-sm text-gray-400 leading-6">
+                  Hero merchandising, featured products, promotional sections, and demo-safe checkout patterns show how the experience can scale into a real commerce build.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* New Arrivals */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
