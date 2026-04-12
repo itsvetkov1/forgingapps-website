@@ -30,7 +30,7 @@ export default function EmberMessageBubble({ message }: EmberMessageBubbleProps)
               key={blockIndex}
               className={
                 block.type === 'list-item'
-                  ? 'rounded-xl border border-zinc-700/50 bg-black/10 px-3 py-2'
+                  ? 'rounded-lg border border-amber-500/30 bg-gradient-to-r from-amber-950/40 to-amber-900/20 px-3 py-2 shadow-sm'
                   : ''
               }
             >
@@ -46,8 +46,8 @@ export default function EmberMessageBubble({ message }: EmberMessageBubbleProps)
                           rel="noopener noreferrer"
                           className={
                             segment.bold
-                              ? 'font-semibold text-amber-400 hover:text-amber-300 underline underline-offset-2'
-                              : 'text-amber-400 hover:text-amber-300 underline underline-offset-2'
+                              ? 'font-semibold text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors'
+                              : 'text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors'
                           }
                         >
                           {segment.text}
