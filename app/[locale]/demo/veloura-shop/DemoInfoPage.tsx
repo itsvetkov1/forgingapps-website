@@ -8,10 +8,6 @@ interface DemoInfoPageProps {
 export default function DemoInfoPage({ eyebrow, title, intro, paragraphs }: DemoInfoPageProps) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-      <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
-        <span className="font-semibold">Veloura storefront page.</span> The content below shows how supporting trust and service pages fit into the same premium storefront experience.
-      </div>
-
       <div className="mb-10">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">{eyebrow}</p>
         <h1 className="mb-4 text-4xl font-bold text-gray-900">{title}</h1>
