@@ -11,6 +11,7 @@ import {
   WELCOME_MESSAGE,
 } from '@/lib/veloura-demo-config.mjs'
 import { getVelouraProxyUrl } from '@/lib/veloura-config'
+import { getLocalVelouraReply } from '@/lib/veloura-local-support'
 
 interface ChatMessage {
   id: string
@@ -66,6 +67,20 @@ export default function VelouraChatEmbed() {
     setInput('')
 
     try {
+      const localReply = getLocalVelouraReply(trimmed)
+
+      if (localReply) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `assistant_${Date.now()}`,
+            role: 'assistant',
+            text: localReply,
+          },
+        ])
+        return
+      }
+
       const response = await fetch(getVelouraProxyUrl(), {
         method: 'POST',
         headers: {
