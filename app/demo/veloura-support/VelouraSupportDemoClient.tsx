@@ -87,6 +87,19 @@ export default function VelouraSupportDemoClient() {
             <VelouraChatEmbed />
           </div>
 
+          <div className="mb-8 border border-forge-ember/40 rounded-lg bg-forge-dark/40 px-5 py-4">
+            <div className="grid grid-cols-1 gap-2 text-sm text-gray-300">
+              <div>
+                <span className="font-semibold text-forge-gold">What is live:</span>{' '}
+                Real product catalog — Policy-grounded AI responses — Context-aware conversation — Branded chat UI
+              </div>
+              <div>
+                <span className="font-semibold text-forge-ember">What is simulated:</span>{' '}
+                Order tracking — Refund processing — Account actions — Payment flows
+              </div>
+            </div>
+          </div>
+
           <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8 mb-8">
             <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">See It in Action</h2>
             <p className="text-gray-400 text-sm mb-6">Three common support moments, shown the way a branded assistant would handle them inside an actual store experience.</p>
