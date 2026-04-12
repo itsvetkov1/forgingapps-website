@@ -177,7 +177,7 @@ export default function VelouraSupportDemoClient() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-6">Demo Profile</h2>
               <div className="space-y-4 text-sm">
@@ -235,19 +235,6 @@ export default function VelouraSupportDemoClient() {
                 Open the shop demo →
               </span>
             </Link>
-
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
-              <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Want this for your brand?</h2>
-              <p className="text-gray-400 mb-6 text-sm">
-                We build customer-facing AI assistants with clear business boundaries, branded UX, and production-minded integration paths.
-              </p>
-              <Link href="/en/ai-consulting" className="btn-primary w-full text-center block mb-3">
-                AI Consulting →
-              </Link>
-              <Link href="/en/services" className="text-forge-gold text-sm hover:text-forge-ember transition block text-center">
-                View all services →
-              </Link>
-            </div>
           </div>
 
           <div className="mt-10 rounded-2xl border border-forge-ember/30 bg-gradient-to-r from-forge-ember/15 to-forge-gold/10 p-8">
@@ -257,9 +244,17 @@ export default function VelouraSupportDemoClient() {
                 <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-3">Want an AI assistant like this for your business?</h2>
                 <p className="text-sm leading-7 text-gray-300">We build branded support experiences like this and ship working client-ready implementations in 2-4 weeks.</p>
               </div>
-              <Link href="/en/contact" className="btn-primary whitespace-nowrap">
-                Start your AI assistant project
-              </Link>
+              <div className="flex flex-col items-start lg:items-end gap-3">
+                <Link href="/en/contact" className="btn-primary whitespace-nowrap">
+                  Start your AI assistant project
+                </Link>
+                <Link href="/en/ai-consulting" className="text-forge-gold text-sm hover:text-forge-ember transition">
+                  AI Consulting
+                </Link>
+                <Link href="/en/services" className="text-gray-400 text-sm hover:text-gray-300 transition">
+                  View all services →
+                </Link>
+              </div>
             </div>
           </div>
 
