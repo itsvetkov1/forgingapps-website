@@ -62,7 +62,7 @@ export default function AIConsultingContent() {
               <Link href={localePath('/contact')} className="btn-primary">{data.aiReadinessSprint.cta}</Link>
             </div>
 
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+            <div id="ai-chat-assistant" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <div className="flex items-center justify-between gap-4 mb-3">
                 <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiChatAssistant.title}</h3>
                 <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiChatAssistant.badge}</span>

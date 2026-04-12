@@ -31,8 +31,9 @@ const demoCopy = {
         highlights: ['Policy-grounded responses', 'Context-aware conversation', 'Branded embedded widget', 'Instant deployment'],
         icon: MessageCircle,
         preview: 'support',
-        packageTitle: 'The Ember (EUR3,000+) or The Anvil (EUR5,000-15,000)',
-        packageRationale: 'Best fit for an AI-integrated web product where branded support flows, policy grounding, and guided user experience matter.',
+        packageTitle: 'AI Chat Assistant — EUR 2,500 flat',
+        packageRationale: 'A custom AI assistant trained on your content, embedded in your website. Fixed scope, fixed price, deployed in 2 weeks.',
+        packageHref: '/en/ai-consulting#ai-chat-assistant',
       },
       {
         title: 'Veloura Shop',
@@ -70,8 +71,9 @@ const demoCopy = {
         highlights: ['Отговори върху реални правила', 'Контекст в разговора', 'Брандиран embedded widget', 'Бърза интеграция'],
         icon: MessageCircle,
         preview: 'support',
-        packageTitle: 'The Ember or The Anvil',
-        packageRationale: 'Подходящо за AI-интегриран уеб продукт с брандирана поддръжка и насочено потребителско изживяване.',
+        packageTitle: 'AI Chat Assistant — EUR 2,500 flat',
+        packageRationale: 'Персонализиран AI асистент, обучен на вашата информация, вграден във вашия уебсайт. Фиксирана обхват, фиксирана цена, внедрен за 2 седмици.',
+        packageHref: '/bg/ai-consulting#ai-chat-assistant',
       },
       {
         title: 'Veloura Shop',
@@ -128,7 +130,7 @@ export default function DemoContent() {
                       ))}
                     </ul>
                     <div className="mb-6">
-                      <DemoPackageCallout title={demo.packageTitle} rationale={demo.packageRationale} theme="dark" />
+                      <DemoPackageCallout title={demo.packageTitle} rationale={demo.packageRationale} theme="dark" href={demo.packageHref} />
                     </div>
                     <span className="inline-flex items-center gap-1 text-forge-gold text-sm font-semibold group-hover:gap-2 transition-all">
                       {data.tryLive} <ArrowRight size={14} />

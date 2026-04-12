@@ -4,9 +4,10 @@ interface DemoPackageCalloutProps {
   title: string
   rationale: string
   theme?: 'dark' | 'light'
+  href?: string
 }
 
-export default function DemoPackageCallout({ title, rationale, theme = 'dark' }: DemoPackageCalloutProps) {
+export default function DemoPackageCallout({ title, rationale, theme = 'dark', href = '/en/services' }: DemoPackageCalloutProps) {
   const isDark = theme === 'dark'
 
   return (
@@ -15,7 +16,7 @@ export default function DemoPackageCallout({ title, rationale, theme = 'dark' }:
         Best package fit
       </p>
       <p className={`mt-2 text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-        <Link href="/en/services" className={`underline underline-offset-4 ${isDark ? 'text-forge-gold hover:text-forge-ember' : 'text-gray-900 hover:text-gray-700'}`}>
+        <Link href={href} className={`underline underline-offset-4 ${isDark ? 'text-forge-gold hover:text-forge-ember' : 'text-gray-900 hover:text-gray-700'}`}>
           {title}
         </Link>
       </p>

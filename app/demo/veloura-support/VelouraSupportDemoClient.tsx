@@ -77,9 +77,9 @@ export default function VelouraSupportDemoClient() {
 
           <div className="mb-8">
             <DemoPackageCallout
-              title="The Ember (EUR3,000+) or The Anvil (EUR5,000-15,000)"
-              rationale="This demo maps best to an AI-integrated web product: Ember for a focused assistant rollout, or Anvil when the support experience needs deeper product integration."
-              theme="dark"
+              title="AI Chat Assistant — EUR 2,500 flat"
+              rationale="A custom AI assistant trained on your content, embedded in your website. Fixed scope, fixed price, deployed in 2 weeks."
+              href="/en/ai-consulting#ai-chat-assistant"
             />
           </div>
 
@@ -266,7 +266,7 @@ export default function VelouraSupportDemoClient() {
                 <Link href="/en/contact" className="btn-primary whitespace-nowrap">
                   Start your AI assistant project
                 </Link>
-                <Link href="/en/ai-consulting" className="text-forge-gold text-sm hover:text-forge-ember transition">
+                <Link href="/en/ai-consulting#ai-chat-assistant" className="text-forge-gold text-sm hover:text-forge-ember transition">
                   AI Consulting
                 </Link>
                 <Link href="/en/services" className="text-gray-400 text-sm hover:text-gray-300 transition">
