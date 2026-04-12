@@ -29,6 +29,13 @@ export default function AboutContent() {
             <p>{data.whyP5}</p>
             <p>{data.whyP6}</p>
           </div>
+          <p className="mt-6 text-sm leading-7 text-gray-400">
+            Want to see what we actually build?{' '}
+            <Link href={localePath('/demo')} className="text-forge-gold hover:text-forge-ember transition-colors underline underline-offset-4">
+              See the demos
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

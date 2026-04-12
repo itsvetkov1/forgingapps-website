@@ -158,6 +158,13 @@ export default function DemoContent() {
           </div>
 
           <div className="mt-12 rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
+            <div className="mb-6 text-sm leading-7 text-gray-400">
+              Built by the ForgingApps team.{' '}
+              <Link href={localePath('/about')} className="text-forge-gold hover:text-forge-ember transition-colors underline underline-offset-4">
+                Meet us
+              </Link>
+              .
+            </div>
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr]">
               <div>
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-forge-gold/70">ForgingApps</p>
