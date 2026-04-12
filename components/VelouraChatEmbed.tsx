@@ -39,6 +39,7 @@ export default function VelouraChatEmbed() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [hasUserSentMessage, setHasUserSentMessage] = useState(false)
   const listRef = useRef<HTMLDivElement | null>(null)
   const visitorId = useMemo(() => (typeof window !== 'undefined' ? getOrCreateVisitorId() : 'visitor_ssr'), [])
 
@@ -52,6 +53,7 @@ export default function VelouraChatEmbed() {
     if (!trimmed || loading) return
 
     setError('')
+    setHasUserSentMessage(true)
     setLoading(true)
 
     const userMessage: ChatMessage = {
@@ -115,6 +117,7 @@ export default function VelouraChatEmbed() {
     ])
     setInput('')
     setError('')
+    setHasUserSentMessage(false)
   }
 
   return (
@@ -129,21 +132,23 @@ export default function VelouraChatEmbed() {
         </button>
       </div>
 
-      <div className="px-6 pt-4">
-        <div className="flex flex-wrap gap-2 mb-4">
-          {STARTER_PROMPTS.map((prompt) => (
-            <button
-              key={prompt}
-              type="button"
-              onClick={() => sendMessage(prompt)}
-              disabled={loading}
-              className="text-sm border border-forge-ember/30 text-forge-gold hover:bg-forge-dark rounded-full px-4 py-2 transition disabled:opacity-50"
-            >
-              {prompt}
-            </button>
-          ))}
+      {!hasUserSentMessage && (
+        <div className="px-6 pt-4">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {STARTER_PROMPTS.map((prompt) => (
+              <button
+                key={prompt}
+                type="button"
+                onClick={() => sendMessage(prompt)}
+                disabled={loading}
+                className="text-sm border border-forge-ember/30 text-forge-gold hover:bg-forge-dark rounded-full px-4 py-2 transition disabled:opacity-50"
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div ref={listRef} className="h-[480px] overflow-y-auto px-6 pb-4 space-y-4">
         {messages.map((message) => {
