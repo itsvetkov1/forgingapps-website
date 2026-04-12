@@ -226,6 +226,24 @@ export default function VelouraSupportDemoClient() {
               </ul>
             </div>
 
+          <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-8">
+            <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Safety and escalation</h2>
+            <div className="space-y-4 text-sm text-gray-400">
+              <div>
+                <p className="font-semibold text-gray-200 mb-1">Unknown questions</p>
+                <p>The assistant acknowledges uncertainty rather than guessing. If a question falls outside its knowledge base, it says so and suggests contacting support.</p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-200 mb-1">Escalation</p>
+                <p>Complex issues — order disputes, account problems, edge-case returns — surface for human review with full conversation context preserved. No dead ends.</p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-200 mb-1">Policy updates</p>
+                <p>When store policies change, the assistant knowledge base is updated accordingly. No stale answers left running in production.</p>
+              </div>
+            </div>
+          </div>
+
             <Link href="/en/demo/veloura-shop" className="block bg-forge-stone border border-forge-ember/30 rounded-lg p-8 hover:border-forge-gold/60 transition-all duration-300 group">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Browse the Veloura Shop</h2>
               <p className="text-gray-400 mb-4 text-sm">
