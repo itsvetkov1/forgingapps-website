@@ -1,9 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, MessageCircle, ShoppingBag } from 'lucide-react'
+import { ArrowRight, MessageCircle, ShoppingBag, Headset, Search, TrendingUp, Layers3, type LucideIcon } from 'lucide-react'
 import DemoPackageCallout from '@/components/DemoPackageCallout'
 import { useLanguage } from '@/contexts/LanguageContext'
+
+const outcomeIcons: LucideIcon[] = [Headset, Search, TrendingUp, Layers3]
 
 const demoCopy = {
   en: {
@@ -13,6 +15,13 @@ const demoCopy = {
     ctaPrompt: 'Want something like this for your business?',
     contact: 'Get in Touch',
     tryLive: 'Try it live',
+    outcomesHeading: 'What results do our clients see?',
+    outcomes: [
+      'Reduced support load, AI assistants handle repeat queries so human agents can focus on complex cases.',
+      'Faster product discovery, shoppers find what they need in seconds instead of hunting through pages.',
+      'Higher conversion, contextual recommendations help turn browsers into buyers.',
+      'Scalable without headcount, one AI integration can serve thousands of users at the same time.',
+    ],
     demos: [
       {
         title: 'Veloura Support',
@@ -45,6 +54,13 @@ const demoCopy = {
     ctaPrompt: 'Искате нещо подобно за Вашия бизнес?',
     contact: 'Свържете се с нас',
     tryLive: 'Пробвайте демото',
+    outcomesHeading: 'Какви резултати виждат клиентите ни?',
+    outcomes: [
+      'По-малко натоварване за support екипа, AI поема повтарящите се въпроси и оставя сложните случаи на хората.',
+      'По-бързо откриване на продукти, клиентите намират нужното за секунди, не за минути.',
+      'По-висока конверсия, контекстни препоръки превръщат разглеждащите в купувачи.',
+      'Мащабиране без нов headcount, една AI интеграция обслужва хиляди потребители едновременно.',
+    ],
     demos: [
       {
         title: 'Veloura Support',
@@ -121,6 +137,24 @@ export default function DemoContent() {
                 </Link>
               )
             })}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
+            <div className="mb-8">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-forge-gold/70">Business outcomes</p>
+              <h2 className="font-cinzel text-3xl font-bold text-forge-gold">{data.outcomesHeading}</h2>
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {data.outcomes.map((outcome, index) => {
+                const OutcomeIcon: LucideIcon = outcomeIcons[index] ?? Headset
+                return (
+                  <div key={outcome} className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-5">
+                    <OutcomeIcon className="mb-4 text-forge-gold" size={24} />
+                    <p className="text-sm leading-6 text-gray-300">{outcome}</p>
+                  </div>
+                )
+              })}
+            </div>
           </div>
 
           <div className="mt-12 rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
