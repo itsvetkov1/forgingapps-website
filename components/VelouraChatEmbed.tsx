@@ -105,7 +105,7 @@ export default function VelouraChatEmbed() {
         {
           id: `assistant_${Date.now()}`,
           role: 'assistant',
-          text: reply || 'Sorry. I could not produce a reply right now.',
+          text: reply || 'I do not have the right answer for that yet, but I can help with products, sizing, shipping, returns, and similar item recommendations.',
         },
       ])
     } catch (_error) {
@@ -300,7 +300,7 @@ export default function VelouraChatEmbed() {
           />
           <div className="flex items-center justify-between gap-4">
             <p className="text-xs text-gray-500">
-              Demo only. No real orders, tracking, refunds, or personal account actions.
+              Product guidance and policy help are live here. Order status, refunds, and account actions stay outside the demo scope.
             </p>
             <button type="submit" disabled={loading || !input.trim()} className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
               Send

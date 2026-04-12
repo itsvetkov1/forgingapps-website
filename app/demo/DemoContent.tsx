@@ -10,7 +10,7 @@ const outcomeIcons: LucideIcon[] = [Headset, Search, TrendingUp, Layers3]
 const demoCopy = {
   en: {
     headline: 'See What We Build',
-    subheadline: 'Live demos you can touch. Each one is a real, working product — not a mockup.',
+    subheadline: 'Live demos you can touch. Each one is a working product experience you can explore right now.',
     badge: 'Live Demos',
     ctaPrompt: 'Want something like this for your business?',
     contact: 'Get in Touch',
@@ -38,7 +38,7 @@ const demoCopy = {
         title: 'Veloura Shop',
         slug: '/en/demo/veloura-shop',
         tagline: 'Full e-commerce experience',
-        description: 'A complete online storefront for a fictional apparel brand. Browse 17 products across 6 categories, filter by size and colour, manage a cart, and walk through checkout — all statically rendered with Next.js.',
+        description: 'A complete online storefront experience. Browse 17 products across 6 categories, filter by size and colour, manage a cart, and move through checkout in one polished flow.',
         highlights: ['Product catalogue with categories', 'Cart & checkout flow', 'Responsive design', 'Static export — zero backend'],
         icon: ShoppingBag,
         preview: 'shop',
@@ -176,7 +176,7 @@ export default function DemoContent() {
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
                 <div className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-4">
-                  <p className="text-sm font-semibold text-white">Live AI agent, not a mockup</p>
+                  <p className="text-sm font-semibold text-white">Live AI agent in a working storefront</p>
                   <p className="mt-1 text-xs leading-6 text-gray-400">The support experience is interactive and responds to real product and policy questions in the demo.
                   </p>
                 </div>

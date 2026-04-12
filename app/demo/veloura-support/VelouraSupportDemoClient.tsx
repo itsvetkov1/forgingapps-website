@@ -30,12 +30,12 @@ const EXAMPLE_EXCHANGES = [
   {
     label: 'Shipping policy',
     user: 'How long does EU shipping take?',
-    assistant: 'Standard EU shipping takes 3–5 business days, and express EU shipping takes 1–2 business days. Is there anything else I can help you with?',
+    assistant: 'Standard EU shipping takes 3–5 business days, and express EU shipping takes 1–2 business days. If you are ordering on a deadline, I can help you choose the best option.',
   },
   {
     label: 'Returns policy',
     user: "I want to return something. What's the policy?",
-    assistant: 'Returns are accepted within 30 days of delivery if the item is unworn, unwashed, and has its original tags attached. You can start the process through our returns page. Anything else I can help you with?',
+    assistant: 'Returns are accepted within 30 days of delivery if the item is unworn, unwashed, and has its original tags attached. If you want, I can also explain exchanges or help you find the returns page.',
   },
   {
     label: 'Sizing guidance',
@@ -216,7 +216,7 @@ export default function VelouraSupportDemoClient() {
             <Link href="/en/demo/veloura-shop" className="block bg-forge-stone border border-forge-ember/30 rounded-lg p-8 hover:border-forge-gold/60 transition-all duration-300 group">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Browse the Veloura Shop</h2>
               <p className="text-gray-400 mb-4 text-sm">
-                See the full e-commerce storefront we built for this fictional brand — 17 products, 6 categories, cart, and checkout.
+                See the full e-commerce storefront we built for Veloura, with 17 products, 6 categories, cart, and checkout.
               </p>
               <span className="text-forge-gold text-sm font-semibold group-hover:underline">
                 Open the shop demo →

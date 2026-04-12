@@ -61,7 +61,7 @@ function buildSimilarReply(product: Product) {
     .slice(0, 3)
 
   if (similar.length === 0) {
-    return `I could not find close matches to the **${product.name}** right now, but I can show you more from ${product.category}.`
+    return `I do not have close matches to the **${product.name}** in this category right now, but I can show you more from **${product.category}**.`
   }
 
   return [

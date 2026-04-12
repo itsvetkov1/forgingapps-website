@@ -16,10 +16,10 @@ export default async function LocalizedContactUsPage({ params }: { params: Promi
     <DemoInfoPage
       eyebrow="Veloura help"
       title="Contact Us"
-      intro="This placeholder contact page demonstrates the final layer of trust-building content in the Veloura shop demo: a clear place to reach support, sales, or post-purchase help if self-service is not enough."
+      intro="This contact page shows the final layer of trust-building content in the Veloura storefront: a clear place to reach support, sales, or post-purchase help when self-service is not enough."
       paragraphs={[
         'For a live client storefront, we would place the brand’s preferred support channels here, such as email, response-hour expectations, and order-help guidance. The page can stay intentionally lean while still giving customers a reliable next step.',
-        'Because the Veloura experience is a demo, this version focuses on structure and tone rather than real inboxes or ticketing flows. It shows how help content can fit naturally into the same premium storefront style as product and category pages.',
+        'This version focuses on structure and tone while showing how help content can fit naturally into the same premium storefront style as product and category pages.',
         'In a production build, this page would often connect directly to CRM forms, support routing, or a branded assistant handoff so the customer never feels dropped between browsing and service.',
       ]}
     />

@@ -9,7 +9,7 @@ export default function DemoInfoPage({ eyebrow, title, intro, paragraphs }: Demo
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
       <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
-        <span className="font-semibold">This is a demo.</span> The content below is illustrative placeholder copy for the Veloura storefront experience.
+        <span className="font-semibold">Veloura storefront page.</span> The content below shows how supporting trust and service pages fit into the same premium storefront experience.
       </div>
 
       <div className="mb-10">

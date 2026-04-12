@@ -45,7 +45,7 @@ export default function VelouraShopHome() {
         <div className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">What you are seeing</p>
           <p className="max-w-3xl text-sm leading-7 text-gray-600">
-            This is a full working storefront demo with real product data, category filtering, product pages, and persistent cart state inside the browser. It is designed to feel like a launch-ready commerce experience, not a static mockup.
+            This is a full working storefront with product data, category filtering, product pages, and persistent cart state inside the browser. It is structured to feel like a launch-ready commerce experience from the first click.
           </p>
         </div>
 
