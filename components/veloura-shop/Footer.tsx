@@ -40,10 +40,10 @@ export default function Footer() {
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">Help</p>
             <ul className="space-y-2">
               {[
-                { href: "#", label: "Size Guide" },
-                { href: "#", label: "Shipping & Returns" },
-                { href: "#", label: "Care Instructions" },
-                { href: "#", label: "Contact Us" },
+                { href: "/en/demo/veloura-shop/size-guide", label: "Size Guide" },
+                { href: "/en/demo/veloura-shop/shipping-returns", label: "Shipping & Returns" },
+                { href: "/en/demo/veloura-shop/care-instructions", label: "Care Instructions" },
+                { href: "/en/demo/veloura-shop/contact-us", label: "Contact Us" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
