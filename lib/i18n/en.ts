@@ -139,7 +139,7 @@ export const en: Record<string, any> = {
     whyP2: "Most small and mid-sized businesses never get access to that calibre of work. The agency model layers on overhead until the budget runs out before anything ships. Junior-heavy teams learn on your dime. The market frames enterprise-grade software as a luxury only enterprise budgets can afford.",
     whyP3: "ForgingApps exists to close that gap — bringing the rigour and craft of enterprise development, directly, to the businesses that deserve it most.",
     whyP4: "Two founders. Senior engineering, direct access. No middlemen. No account managers. No juniors learning on your project. When you work with us, you work with the people building your product.",
-    whyP5: "We use AI not as a buzzword, but as a tool that makes us faster without making us careless. It lets us deliver enterprise-quality work at prices that don't require enterprise budgets.",
+    whyP5: "We use AI not as a buzzword, but as a tool that makes us faster without making us careless. It lets us deliver work built to the same standards we held ourselves to inside large companies, at prices that don't require enterprise budgets.",
     whyP6: "We believe software should work for you, not drain you. That's why every project starts with listening, ships with post-launch support, and keeps you in control the whole way through.",
     teamHeading: "Meet the Team",
     ivaylo: {
@@ -152,7 +152,7 @@ export const en: Record<string, any> = {
       credentialsTitle: "Credentials",
       cred1: "umlaut Secure App Award (2x)",
       cred2: "AI systems architect",
-      cred3: "Builder of autonomous AI agents",
+      cred3: "Designs and deploys AI agent systems for production workflows",
     },
     radoslav: {
       name: "Radoslav Lambrev",

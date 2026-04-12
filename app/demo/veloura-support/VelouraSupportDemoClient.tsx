@@ -53,12 +53,12 @@ const HOW_IT_WORKS_STEPS = [
   {
     number: '2',
     title: 'We build and configure your assistant',
-    description: 'We define its knowledge boundaries, embed it in your site, and test it against real edge cases before anything goes live.',
+    description: 'We define knowledge boundaries, embed the widget in your site, and run it against real edge cases and adversarial queries before anything goes live — the same testing methodology we use on our own demos.',
   },
   {
     number: '3',
     title: 'It answers instantly, around the clock',
-    description: 'The assistant handles common questions 24/7. Complex issues are routed to your team cleanly, without dead ends.',
+    description: 'The assistant handles common questions 24/7. Complex questions are routed to your team with full conversation context — no dead ends, no lost threads.',
   },
 ]
 
