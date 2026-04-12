@@ -45,7 +45,7 @@ export default function VelouraShopHome() {
         <div className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">What you are seeing</p>
           <p className="max-w-3xl text-sm leading-7 text-gray-600 mb-4">
-            This is a full working storefront with product data, category filtering, product pages, and persistent cart state inside the browser. It is structured to feel like a launch-ready commerce experience from the first click.
+            A full working storefront with product catalog, category filtering, persistent cart state, and product detail pages. Structured to feel like a launch-ready commerce experience from the first click.
           </p>
           <div className="border-t border-gray-100 pt-4 grid grid-cols-1 gap-2 text-sm text-gray-500">
             <div>
@@ -66,47 +66,6 @@ export default function VelouraShopHome() {
         />
       </section>
 
-      {/* What this demonstrates */}
-      <section className="bg-gray-950 text-white border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.6fr] gap-8 items-start">
-            <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-gray-500 mb-3">ForgingApps demo</p>
-              <h2 className="text-3xl font-bold text-white mb-4">What this demonstrates</h2>
-              <p className="text-gray-400 leading-7 max-w-xl">
-                This Veloura storefront is not just a product grid. It is a capability demo showing how ForgingApps can combine polished commerce UX, guided product discovery, and AI-assisted support inside one branded experience.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
-                <p className="text-sm font-semibold text-white mb-2">AI support assistant</p>
-                <p className="text-sm text-gray-400 leading-6">
-                  Cross-linked with the Veloura Support demo, including product-aware sizing help, similar-item discovery, and policy answers.
-                </p>
-                <Link href="/en/demo/veloura-support" className="inline-block mt-4 text-sm font-semibold text-white underline underline-offset-4 hover:text-gray-200">
-                  Explore the support demo
-                </Link>
-              </div>
-
-              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
-                <p className="text-sm font-semibold text-white mb-2">Complete storefront flow</p>
-                <p className="text-sm text-gray-400 leading-6">
-                  Product catalog, categories, product detail pages, sale browsing, cart state, and checkout flow are all wired into a consistent demo journey.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-gray-800 bg-black/20 p-5">
-                <p className="text-sm font-semibold text-white mb-2">Reusable UI patterns</p>
-                <p className="text-sm text-gray-400 leading-6">
-                  Hero merchandising, featured products, promotional sections, and demo-safe checkout patterns show how the experience can scale into a real commerce build.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* New Arrivals */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
@@ -119,31 +78,6 @@ export default function VelouraShopHome() {
           {featured.slice(0, 4).map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-4">
-        <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">How to explore this demo</h2>
-          <p className="text-sm text-gray-500 mb-6">Start with the same journey a real shopper would take, then test how the storefront behaves from discovery through cart.</p>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-              <p className="text-3xl font-bold text-gray-900 mb-3">1</p>
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Browse categories</h3>
-              <p className="text-sm leading-6 text-gray-600">Open hoodies, tops, sale items, or accessories to see how the catalog structure and merchandising blocks are wired.</p>
-            </div>
-            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-              <p className="text-3xl font-bold text-gray-900 mb-3">2</p>
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Open a product</h3>
-              <p className="text-sm leading-6 text-gray-600">Visit a product detail page to inspect imagery, selectable variants, pricing states, and the supporting content around each item.</p>
-            </div>
-            <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
-              <p className="text-3xl font-bold text-gray-900 mb-3">3</p>
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Try adding to cart</h3>
-              <p className="text-sm leading-6 text-gray-600">Add an item, review the cart, and walk into checkout to see the complete front-end flow in demo mode.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -195,23 +129,24 @@ export default function VelouraShopHome() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <p className="text-3xl mb-2">⚡</p>
-              <h3 className="text-lg font-bold mb-2">Free Shipping Over €60</h3>
+              <p className="text-3xl mb-2">&#9889;</p>
+              <h3 className="text-lg font-bold mb-2">Free Shipping Over &#8364;60</h3>
               <p className="text-gray-400 text-sm">Standard delivery 3-5 business days</p>
             </div>
             <div>
-              <p className="text-3xl mb-2">↩️</p>
+              <p className="text-3xl mb-2">&#8617;</p>
               <h3 className="text-lg font-bold mb-2">30-Day Returns</h3>
               <p className="text-gray-400 text-sm">No questions asked, free return shipping</p>
             </div>
             <div>
-              <p className="text-3xl mb-2">🛡️</p>
+              <p className="text-3xl mb-2">&#128737;</p>
               <h3 className="text-lg font-bold mb-2">Quality Guarantee</h3>
               <p className="text-gray-400 text-sm">Every piece backed by our quality promise</p>
             </div>
           </div>
         </div>
       </section>
+
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
         <DemoTechStrip theme="light" />
       </section>
@@ -228,17 +163,6 @@ export default function VelouraShopHome() {
               Plan your storefront build
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Cross-link to Support Demo */}
-      <section className="bg-gray-950 text-white py-12 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-gray-400 mb-2 text-sm">This is a demo storefront built by ForgingApps</p>
-          <p className="text-white text-lg font-semibold mb-4">See our AI support assistant handle Veloura customer questions</p>
-          <Link href="/en/demo/veloura-support" className="inline-block bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-            Try Veloura Support Demo
-          </Link>
         </div>
       </section>
     </div>
