@@ -13,7 +13,7 @@ export default function ServicesContent() {
     { id: 'ember', data: data.ember, href: localePath('/contact') },
     { id: 'anvil', data: data.anvil, href: localePath('/contact') },
     { id: 'forge', data: data.forge, href: localePath('/contact') },
-    { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting') },
+    { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting#the-oracle') },
   ]
 
   const comparisonRows = [

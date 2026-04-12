@@ -47,7 +47,7 @@ export default function AIConsultingContent() {
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.servicesHeading}</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+            <div id="ai-readiness-sprint" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <div className="flex items-center justify-between gap-4 mb-3">
                 <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiReadinessSprint.title}</h3>
                 <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiReadinessSprint.badge}</span>
@@ -79,7 +79,7 @@ export default function AIConsultingContent() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+            <div id="the-oracle" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <div className="flex items-center justify-between gap-4 mb-3">
                 <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.hourlyConsulting.title}</h3>
                 <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.hourlyConsulting.badge}</span>
@@ -92,7 +92,7 @@ export default function AIConsultingContent() {
               <p className="text-sm text-forge-gold mb-5">{data.hourlyConsulting.ctaNote}</p>
               <Link href={localePath('/contact')} className="btn-primary">{data.hourlyConsulting.cta}</Link>
             </div>
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+            <div id="fixed-price" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
               <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-4">{data.fixedPrice.heading}</h3>
               <div className="space-y-4">
                 {fixed.map((item: any) => (
