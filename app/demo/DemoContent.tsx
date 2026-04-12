@@ -111,9 +111,33 @@ export default function DemoContent() {
             })}
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-gray-400 mb-4">{data.ctaPrompt}</p>
-            <Link href={localePath('/contact')} className="btn-primary">{data.contact}</Link>
+          <div className="mt-12 rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr]">
+              <div>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-forge-gold/70">ForgingApps</p>
+                <h2 className="mb-3 font-cinzel text-3xl font-bold text-forge-gold">Built by a product team that ships real client work</h2>
+                <p className="max-w-2xl text-sm leading-7 text-gray-300">
+                  These demos are built by ForgingApps to show what polished AI-assisted product experiences can look like in practice, from storefront UX to embedded support flows.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                <div className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-4">
+                  <p className="text-sm font-semibold text-white">Live AI agent, not a mockup</p>
+                  <p className="mt-1 text-xs leading-6 text-gray-400">The support experience is interactive and responds to real product and policy questions in the demo.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-4">
+                  <p className="text-sm font-semibold text-white">Two-time Umlaut Secure App Award winner</p>
+                  <p className="mt-1 text-xs leading-6 text-gray-400">Security-minded product delivery is part of the team background behind the work you are seeing here.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-forge-ember/20 pt-6 sm:flex-row sm:items-center">
+              <p className="text-sm text-gray-400">{data.ctaPrompt}</p>
+              <Link href={localePath('/contact')} className="btn-primary">Want something like this?</Link>
+            </div>
           </div>
         </div>
       </section>
