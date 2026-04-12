@@ -5,6 +5,7 @@ import Hero from '@/components/Hero'
 import VelouraChatEmbed from '@/components/VelouraChatEmbed'
 import { Brain, MessageCircle, Zap, Share2 } from 'lucide-react'
 import Link from 'next/link'
+import DemoTechStrip from '@/components/DemoTechStrip'
 
 const CAPABILITY_CARDS = [
   {
@@ -112,6 +113,10 @@ export default function VelouraSupportDemoClient() {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="mb-8">
+            <DemoTechStrip theme="dark" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

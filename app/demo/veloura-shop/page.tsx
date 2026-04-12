@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ProductCard from '@/components/veloura-shop/ProductCard'
 import { getFeaturedProducts, getSaleProducts, categories } from '@/lib/veloura-shop-data'
 import { Metadata } from 'next'
+import DemoTechStrip from '@/components/DemoTechStrip'
 
 export const metadata: Metadata = {
   title: 'Veloura — Everyday essentials, built to last',
@@ -160,6 +161,10 @@ export default function VelouraShopHome() {
           </div>
         </div>
       </section>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+        <DemoTechStrip theme="light" />
+      </section>
+
       {/* Cross-link to Support Demo */}
       <section className="bg-gray-950 text-white py-12 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
