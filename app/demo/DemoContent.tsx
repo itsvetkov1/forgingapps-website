@@ -15,7 +15,7 @@ const demoCopy = {
     ctaPrompt: 'Want something like this for your business?',
     contact: 'Get in Touch',
     tryLive: 'Try it live',
-    outcomesHeading: 'What results do our clients see?',
+    outcomesHeading: 'Business outcomes this approach enables',
     outcomes: [
       'Reduced support load, AI assistants handle repeat queries so human agents can focus on complex cases.',
       'Faster product discovery, shoppers find what they need in seconds instead of hunting through pages.',
@@ -54,7 +54,7 @@ const demoCopy = {
     ctaPrompt: 'Искате нещо подобно за Вашия бизнес?',
     contact: 'Свържете се с нас',
     tryLive: 'Пробвайте демото',
-    outcomesHeading: 'Какви резултати виждат клиентите ни?',
+    outcomesHeading: 'Бизнес резултати, които този подход позволява',
     outcomes: [
       'По-малко натоварване за support екипа, AI поема повтарящите се въпроси и оставя сложните случаи на хората.',
       'По-бързо откриване на продукти, клиентите намират нужното за секунди, не за минути.',
