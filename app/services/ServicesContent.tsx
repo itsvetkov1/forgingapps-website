@@ -91,7 +91,7 @@ export default function ServicesContent() {
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projectPackages.map(({ id, data: pkg, href }) => (
-            <div key={id} id={id} className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
+            <div key={id} id={id} className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
               <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{pkg.name}</h2>
               <p className="text-forge-ember font-semibold mb-2">{pkg.subtitle}</p>
               <p className="text-2xl font-bold text-white mb-2">{pkg.launchPrice}</p>
@@ -146,7 +146,7 @@ export default function ServicesContent() {
         </div>
       </section>
 
-      <section id="hearthstone" className="section-py border-b border-forge-ember/20">
+      <section id="hearthstone" className="section-py border-b border-forge-ember/20 scroll-mt-20">
         <div className="container-custom max-w-6xl">
           <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 md:p-10">
             <div className="max-w-3xl mb-8">
