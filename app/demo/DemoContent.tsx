@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowRight, MessageCircle, ShoppingBag } from 'lucide-react'
+import DemoPackageCallout from '@/components/DemoPackageCallout'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const demoCopy = {
@@ -21,6 +22,8 @@ const demoCopy = {
         highlights: ['Policy-grounded responses', 'Context-aware conversation', 'Branded embedded widget', 'Instant deployment'],
         icon: MessageCircle,
         preview: 'support',
+        packageTitle: 'The Ember (EUR3,000+) or The Anvil (EUR5,000-15,000)',
+        packageRationale: 'Best fit for an AI-integrated web product where branded support flows, policy grounding, and guided user experience matter.',
       },
       {
         title: 'Veloura Shop',
@@ -30,6 +33,8 @@ const demoCopy = {
         highlights: ['Product catalogue with categories', 'Cart & checkout flow', 'Responsive design', 'Static export — zero backend'],
         icon: ShoppingBag,
         preview: 'shop',
+        packageTitle: 'The Anvil or The Forge',
+        packageRationale: 'Best fit for a full storefront with catalog, cart, checkout, and integrated support layered into one production-minded product experience.',
       },
     ],
   },
@@ -49,6 +54,8 @@ const demoCopy = {
         highlights: ['Отговори върху реални правила', 'Контекст в разговора', 'Брандиран embedded widget', 'Бърза интеграция'],
         icon: MessageCircle,
         preview: 'support',
+        packageTitle: 'The Ember or The Anvil',
+        packageRationale: 'Подходящо за AI-интегриран уеб продукт с брандирана поддръжка и насочено потребителско изживяване.',
       },
       {
         title: 'Veloura Shop',
@@ -58,6 +65,8 @@ const demoCopy = {
         highlights: ['Продуктов каталог с категории', 'Количка и процес на поръчка', 'Адаптивен дизайн', 'Статичен експорт без бекенд'],
         icon: ShoppingBag,
         preview: 'shop',
+        packageTitle: 'The Anvil or The Forge',
+        packageRationale: 'Подходящо за пълен storefront с каталог, количка, checkout и интегрирана поддръжка в една завършена продуктова среда.',
       },
     ],
   },
@@ -102,6 +111,9 @@ export default function DemoContent() {
                         </li>
                       ))}
                     </ul>
+                    <div className="mb-6">
+                      <DemoPackageCallout title={demo.packageTitle} rationale={demo.packageRationale} theme="dark" />
+                    </div>
                     <span className="inline-flex items-center gap-1 text-forge-gold text-sm font-semibold group-hover:gap-2 transition-all">
                       {data.tryLive} <ArrowRight size={14} />
                     </span>

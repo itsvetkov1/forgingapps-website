@@ -6,6 +6,7 @@ import VelouraChatEmbed from '@/components/VelouraChatEmbed'
 import { Brain, MessageCircle, Zap, Share2 } from 'lucide-react'
 import Link from 'next/link'
 import DemoTechStrip from '@/components/DemoTechStrip'
+import DemoPackageCallout from '@/components/DemoPackageCallout'
 
 const CAPABILITY_CARDS = [
   {
@@ -73,6 +74,14 @@ export default function VelouraSupportDemoClient() {
 
       <section className="section-py bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
+
+          <div className="mb-8">
+            <DemoPackageCallout
+              title="The Ember (EUR3,000+) or The Anvil (EUR5,000-15,000)"
+              rationale="This demo maps best to an AI-integrated web product: Ember for a focused assistant rollout, or Anvil when the support experience needs deeper product integration."
+              theme="dark"
+            />
+          </div>
 
           <div className="mb-8 min-h-[60vh] flex flex-col">
             <VelouraChatEmbed />

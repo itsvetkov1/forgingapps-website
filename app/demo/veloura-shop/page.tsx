@@ -4,6 +4,7 @@ import ProductCard from '@/components/veloura-shop/ProductCard'
 import { getFeaturedProducts, getSaleProducts, categories } from '@/lib/veloura-shop-data'
 import { Metadata } from 'next'
 import DemoTechStrip from '@/components/DemoTechStrip'
+import DemoPackageCallout from '@/components/DemoPackageCallout'
 
 export const metadata: Metadata = {
   title: 'Veloura — Everyday essentials, built to last',
@@ -38,6 +39,14 @@ export default function VelouraShopHome() {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <DemoPackageCallout
+          title="The Anvil or The Forge"
+          rationale="This demo fits The Anvil for a polished storefront with real cart and catalog flows, or The Forge when the goal is a larger commerce platform with integrated support and expansion room."
+          theme="light"
+        />
       </section>
 
       {/* What this demonstrates */}
