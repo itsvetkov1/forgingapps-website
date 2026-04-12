@@ -44,9 +44,19 @@ export default function VelouraShopHome() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="mb-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">What you are seeing</p>
-          <p className="max-w-3xl text-sm leading-7 text-gray-600">
+          <p className="max-w-3xl text-sm leading-7 text-gray-600 mb-4">
             This is a full working storefront with product data, category filtering, product pages, and persistent cart state inside the browser. It is structured to feel like a launch-ready commerce experience from the first click.
           </p>
+          <div className="border-t border-gray-100 pt-4 grid grid-cols-1 gap-2 text-sm text-gray-500">
+            <div>
+              <span className="font-semibold text-gray-700">What is live:</span>{' '}
+              Product catalog with 17 items — Category filtering — Cart state in browser — Product detail pages — AI support cross-link
+            </div>
+            <div>
+              <span className="font-semibold text-gray-700">What is simulated:</span>{' '}
+              Checkout completion — Payment processing — Inventory tracking — Account creation
+            </div>
+          </div>
         </div>
 
         <DemoPackageCallout
