@@ -11,6 +11,7 @@ import {
   WELCOME_MESSAGE,
 } from '@/lib/veloura-demo-config.mjs'
 import { getVelouraProxyUrl } from '@/lib/veloura-config'
+import { products } from '@/lib/veloura-shop-data'
 import { getLocalVelouraReply } from '@/lib/veloura-local-support'
 
 interface ChatMessage {
@@ -184,6 +185,8 @@ export default function VelouraChatEmbed() {
 
                     if (product && message.role === 'assistant') {
                       const actionPrompts = getProductActionPrompts(product.name)
+                      const linkedProduct = products.find((candidate) => candidate.name === product.name)
+                      const productUrl = linkedProduct ? `/en/demo/veloura-shop/product/${linkedProduct.slug}` : null
 
                       return (
                         <div
@@ -208,17 +211,29 @@ export default function VelouraChatEmbed() {
                             </span>
                           </div>
                           <div className="mt-4 flex flex-wrap gap-2">
-                            {actionPrompts.map((action) => (
-                              <button
-                                key={`${product.name}-${action.label}`}
-                                type="button"
-                                onClick={() => void sendMessage(action.prompt)}
-                                disabled={loading}
-                                className="rounded-full border border-forge-ember/30 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-forge-ember/20 disabled:opacity-50"
-                              >
-                                {action.label}
-                              </button>
-                            ))}
+                            {actionPrompts.map((action) =>
+                              action.label === 'View details' && productUrl ? (
+                                <a
+                                  key={`${product.name}-${action.label}`}
+                                  href={productUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="rounded-full border border-forge-ember/30 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-forge-ember/20"
+                                >
+                                  {action.label}
+                                </a>
+                              ) : (
+                                <button
+                                  key={`${product.name}-${action.label}`}
+                                  type="button"
+                                  onClick={() => void sendMessage(action.prompt)}
+                                  disabled={loading}
+                                  className="rounded-full border border-forge-ember/30 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-forge-ember/20 disabled:opacity-50"
+                                >
+                                  {action.label}
+                                </button>
+                              )
+                            )}
                           </div>
                         </div>
                       )
