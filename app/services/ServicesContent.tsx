@@ -146,7 +146,7 @@ export default function ServicesContent() {
         </div>
       </section>
 
-      <section className="section-py border-b border-forge-ember/20">
+      <section id="hearthstone" className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-6xl">
           <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 md:p-10">
             <div className="max-w-3xl mb-8">
