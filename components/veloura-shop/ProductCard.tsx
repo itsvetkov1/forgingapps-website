@@ -6,9 +6,10 @@ import { Product } from '@/lib/veloura-shop-data'
 
 interface ProductCardProps {
   product: Product
+  tag?: string
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, tag }: ProductCardProps) {
   const displayPrice = product.salePrice ?? product.price
   const isOnSale = product.salePrice !== null
   const discountPct = isOnSale ? Math.round((1 - product.salePrice! / product.price) * 100) : 0
@@ -24,10 +25,15 @@ export default function ProductCard({ product }: ProductCardProps) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
         {isOnSale && (
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-3 left-3 flex flex-col gap-1">
             <span className="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
               -{discountPct}%
             </span>
+            {tag && (
+              <span className="bg-gray-900 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                {tag}
+              </span>
+            )}
           </div>
         )}
       </div>

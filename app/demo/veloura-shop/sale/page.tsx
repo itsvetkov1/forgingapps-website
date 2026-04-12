@@ -8,6 +8,16 @@ export const metadata: Metadata = {
   description: 'Shop the Veloura sale. Premium essentials at reduced prices.',
 }
 
+// Item tags:
+// - Best value: Heavyweight Hoodie — biggest absolute discount (€47 off)
+// - Most popular: Lightweight Crewneck — reliable bestseller in any basics collection
+// - Last chance: Lightweight Baseball Cap — lowest price point, feels like a final-add buy
+const TAGGED_PRODUCTS: Record<string, string> = {
+  'heavyweight-hoodie': 'Best value',
+  'lightweight-crewneck': 'Most popular',
+  'lightweight-baseball-cap': 'Last chance',
+}
+
 export default function SalePage() {
   const saleProducts = getSaleProducts()
 
@@ -24,14 +34,18 @@ export default function SalePage() {
         <h1 className="text-4xl font-bold text-gray-900">Sale</h1>
         <span className="text-sm text-red-600 font-medium">{saleProducts.length} items on sale</span>
       </div>
-      <p className="text-gray-500 mb-8">Limited time only. When they're gone, they're gone.</p>
+      <p className="text-gray-500 mb-8">Limited time only. When they are gone, they are gone.</p>
 
       {saleProducts.length === 0 ? (
         <p className="text-gray-500 py-16 text-center">No sale items at the moment.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {saleProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              tag={TAGGED_PRODUCTS[product.slug]}
+            />
           ))}
         </div>
       )}
