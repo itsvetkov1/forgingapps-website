@@ -137,11 +137,11 @@ function VelouraSupportPreview() {
 
         <div className="space-y-3">
           <div className="max-w-[88%] rounded-2xl border border-forge-ember/20 bg-[#23201e] px-4 py-3 text-sm leading-5 text-gray-200">
-            Hi. I am Veloura Support. Ask me about products, shipping, returns, or sizing.
+            The Heavyweight Hoodie comes in XS, S, M, L, XL, and XXL. Available now: XS to L.
           </div>
           <div className="flex justify-end">
             <div className="max-w-[82%] rounded-2xl bg-forge-ember px-4 py-3 text-sm leading-5 text-white shadow-lg shadow-forge-ember/10">
-              How long does EU shipping take?
+              What sizes does the Heavyweight Hoodie come in?
             </div>
           </div>
         </div>
