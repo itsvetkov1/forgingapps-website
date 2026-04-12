@@ -15,7 +15,7 @@ const demoCopy = {
     demos: [
       {
         title: 'Veloura Support',
-        slug: '/demo/veloura-support',
+        slug: '/en/demo/veloura-support',
         tagline: 'AI customer support assistant',
         description: "An embedded AI chat widget that answers customer questions about Veloura's shipping, returns, sizing, and products — grounded in real brand policies so it never invents answers.",
         highlights: ['Policy-grounded responses', 'Context-aware conversation', 'Branded embedded widget', 'Instant deployment'],
@@ -24,7 +24,7 @@ const demoCopy = {
       },
       {
         title: 'Veloura Shop',
-        slug: '/demo/veloura-shop',
+        slug: '/en/demo/veloura-shop',
         tagline: 'Full e-commerce experience',
         description: 'A complete online storefront for a fictional apparel brand. Browse 17 products across 6 categories, filter by size and colour, manage a cart, and walk through checkout — all statically rendered with Next.js.',
         highlights: ['Product catalogue with categories', 'Cart & checkout flow', 'Responsive design', 'Static export — zero backend'],
@@ -43,7 +43,7 @@ const demoCopy = {
     demos: [
       {
         title: 'Veloura Support',
-        slug: '/demo/veloura-support',
+        slug: '/bg/demo/veloura-support',
         tagline: 'AI асистент за клиентска поддръжка',
         description: 'Вграден AI chat widget, който отговаря на въпроси за доставки, връщания, размери и продукти на Veloura, стъпвайки върху реални правила на бранда.',
         highlights: ['Отговори върху реални правила', 'Контекст в разговора', 'Брандиран embedded widget', 'Бърза интеграция'],
@@ -52,7 +52,7 @@ const demoCopy = {
       },
       {
         title: 'Veloura Shop',
-        slug: '/demo/veloura-shop',
+        slug: '/bg/demo/veloura-shop',
         tagline: 'Пълно изживяване за електронна търговия',
         description: 'Завършен онлайн магазин за измислена модна марка. Разгледайте 17 продукта в 6 категории, филтрирайте по размер и цвят, управлявайте количка и преминете през checkout flow.',
         highlights: ['Продуктов каталог с категории', 'Количка и процес на поръчка', 'Адаптивен дизайн', 'Статичен експорт без бекенд'],

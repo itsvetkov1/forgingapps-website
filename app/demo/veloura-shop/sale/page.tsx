@@ -15,7 +15,7 @@ export default function SalePage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link href="/demo/veloura-shop" className="hover:text-gray-900">Home</Link>
+        <Link href="/en/demo/veloura-shop" className="hover:text-gray-900">Home</Link>
         <span>/</span>
         <span className="text-gray-900">Sale</span>
       </nav>

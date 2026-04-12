@@ -49,9 +49,9 @@ export default function ProductDetail({
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1 text-sm text-gray-500 mb-8">
-        <Link href="/demo/veloura-shop" className="hover:text-gray-900">Home</Link>
+        <Link href="/en/demo/veloura-shop" className="hover:text-gray-900">Home</Link>
         <ChevronRight className="w-3 h-3" />
-        <Link href={`/demo/veloura-shop/category/${product.categorySlug}`} className="hover:text-gray-900">
+        <Link href={`/en/demo/veloura-shop/category/${product.categorySlug}`} className="hover:text-gray-900">
           {product.category}
         </Link>
         <ChevronRight className="w-3 h-3" />

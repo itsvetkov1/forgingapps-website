@@ -17,7 +17,6 @@ export function stripLocaleFromPath(pathname: string): string {
 export function localePath(locale: Locale, path: string): string {
   if (!path) return `/${locale}`
   if (/^(https?:)?\/\//.test(path) || path.startsWith('mailto:') || path.startsWith('tel:')) return path
-  if (path.startsWith('/demo/veloura-')) return path
   if (path.startsWith('#')) return path
 
   const match = path.match(/^([^?#]*)([?#].*)?$/)
@@ -30,6 +29,5 @@ export function localePath(locale: Locale, path: string): string {
 }
 
 export function swapLocaleInPath(pathname: string, locale: Locale): string {
-  if (pathname.startsWith('/demo/veloura-')) return pathname
   return localePath(locale, pathname)
 }

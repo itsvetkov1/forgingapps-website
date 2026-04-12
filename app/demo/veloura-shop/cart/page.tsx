@@ -31,7 +31,7 @@ export default function CartPage() {
           Looks like you have not added anything yet.
         </p>
         <Link
-          href="/demo/veloura-shop"
+          href="/en/demo/veloura-shop"
           className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-6 py-3 text-sm font-semibold text-white hover:bg-gray-800 transition-colors"
         >
           Continue Shopping
@@ -44,7 +44,7 @@ export default function CartPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
       <nav className="text-xs text-gray-500 mb-8 flex items-center gap-2">
-        <Link href="/demo/veloura-shop" className="hover:text-gray-900 transition-colors">
+        <Link href="/en/demo/veloura-shop" className="hover:text-gray-900 transition-colors">
           Home
         </Link>
         <span>/</span>
@@ -68,7 +68,7 @@ export default function CartPage() {
           </div>
           <div className="pt-4">
             <Link
-              href="/demo/veloura-shop"
+              href="/en/demo/veloura-shop"
               className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" /> Continue Shopping
@@ -118,7 +118,7 @@ export default function CartPage() {
             </div>
 
             <button
-              onClick={() => router.push("/demo/veloura-shop/checkout")}
+              onClick={() => router.push("/en/demo/veloura-shop/checkout")}
               className="w-full rounded-lg bg-gray-900 py-3.5 text-sm font-semibold text-white hover:bg-gray-800 active:bg-gray-950 transition-colors"
             >
               Proceed to Checkout

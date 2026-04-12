@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 
 export default function ConditionalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isVeloura = pathname?.startsWith('/demo/veloura-shop')
+  const isVeloura = pathname?.startsWith('/demo/veloura-shop') || pathname?.startsWith('/en/demo/veloura-shop') || pathname?.startsWith('/bg/demo/veloura-shop')
 
   useEffect(() => {
     if (isVeloura) {

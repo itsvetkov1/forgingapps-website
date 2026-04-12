@@ -43,7 +43,7 @@ export default function CheckoutPage() {
       return
     }
     clearCart()
-    router.push('/demo/veloura-shop/success')
+    router.push('/en/demo/veloura-shop/success')
   }
 
   const handleChange = (
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h1>
         <Link
-          href="/demo/veloura-shop"
+          href="/en/demo/veloura-shop"
           className="text-gray-600 hover:text-gray-900 underline text-sm"
         >
           Back to Shop
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
       {/* Back link */}
       <div className="mb-6">
         <Link
-          href="/demo/veloura-shop/cart"
+          href="/en/demo/veloura-shop/cart"
           className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
         >
           <ArrowLeft size={14} /> Back to Cart

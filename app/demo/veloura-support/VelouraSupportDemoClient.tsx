@@ -128,7 +128,7 @@ export default function VelouraSupportDemoClient() {
                 <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-1">Build something like this</h3>
                 <p className="text-gray-400 text-sm">Branded AI chat for your e-commerce or SaaS product</p>
               </div>
-              <Link href="/contact" className="btn-primary whitespace-nowrap">
+              <Link href="/en/contact" className="btn-primary whitespace-nowrap">
                 Get in Touch →
               </Link>
             </div>
@@ -199,7 +199,7 @@ export default function VelouraSupportDemoClient() {
               </ul>
             </div>
 
-            <Link href="/demo/veloura-shop" className="block bg-forge-stone border border-forge-ember/30 rounded-lg p-8 hover:border-forge-gold/60 transition-all duration-300 group">
+            <Link href="/en/demo/veloura-shop" className="block bg-forge-stone border border-forge-ember/30 rounded-lg p-8 hover:border-forge-gold/60 transition-all duration-300 group">
               <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">Browse the Veloura Shop</h2>
               <p className="text-gray-400 mb-4 text-sm">
                 See the full e-commerce storefront we built for this fictional brand — 17 products, 6 categories, cart, and checkout.
@@ -214,10 +214,10 @@ export default function VelouraSupportDemoClient() {
               <p className="text-gray-400 mb-6 text-sm">
                 We build customer-facing AI assistants with clear business boundaries, branded UX, and production-minded integration paths.
               </p>
-              <Link href="/ai-consulting" className="btn-primary w-full text-center block mb-3">
+              <Link href="/en/ai-consulting" className="btn-primary w-full text-center block mb-3">
                 AI Consulting →
               </Link>
-              <Link href="/services" className="text-forge-gold text-sm hover:text-forge-ember transition block text-center">
+              <Link href="/en/services" className="text-forge-gold text-sm hover:text-forge-ember transition block text-center">
                 View all services →
               </Link>
             </div>

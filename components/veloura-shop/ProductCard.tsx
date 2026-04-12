@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const discountPct = isOnSale ? Math.round((1 - product.salePrice! / product.price) * 100) : 0
 
   return (
-    <Link href={`/demo/veloura-shop/product/${product.slug}`} className="group block">
+    <Link href={`/en/demo/veloura-shop/product/${product.slug}`} className="group block">
       <div className="relative overflow-hidden rounded-lg bg-gray-50 aspect-[3/4] mb-3">
         <Image
           src={product.image}

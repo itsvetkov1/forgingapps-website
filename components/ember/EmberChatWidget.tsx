@@ -9,7 +9,7 @@ import { EmberChatProvider, useEmberChat } from '@/components/ember/EmberChatCon
 function EmberChatWidgetInner() {
   const pathname = usePathname()
   const { isOpen, open, toggle } = useEmberChat()
-  const isVelouraShop = pathname?.startsWith('/demo/veloura-shop')
+  const isVelouraShop = pathname?.startsWith('/demo/veloura-shop') || pathname?.startsWith('/en/demo/veloura-shop') || pathname?.startsWith('/bg/demo/veloura-shop')
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {

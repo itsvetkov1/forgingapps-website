@@ -19,12 +19,12 @@ export default function Footer() {
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">Shop</p>
             <ul className="space-y-2">
               {[
-                { href: "/demo/veloura-shop/category/hoodies", label: "Hoodies & Sweatshirts" },
-                { href: "/demo/veloura-shop/category/tees", label: "T-Shirts & Tops" },
-                { href: "/demo/veloura-shop/category/pants", label: "Pants & Joggers" },
-                { href: "/demo/veloura-shop/category/jackets", label: "Jackets & Outerwear" },
-                { href: "/demo/veloura-shop/category/accessories", label: "Accessories" },
-                { href: "/demo/veloura-shop/sale", label: "Sale" },
+                { href: "/en/demo/veloura-shop/category/hoodies-sweatshirts", label: "Hoodies & Sweatshirts" },
+                { href: "/en/demo/veloura-shop/category/tshirts-tops", label: "T-Shirts & Tops" },
+                { href: "/en/demo/veloura-shop/category/pants-joggers", label: "Pants & Joggers" },
+                { href: "/en/demo/veloura-shop/category/jackets-outerwear", label: "Jackets & Outerwear" },
+                { href: "/en/demo/veloura-shop/category/accessories", label: "Accessories" },
+                { href: "/en/demo/veloura-shop/sale", label: "Sale" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
@@ -59,9 +59,9 @@ export default function Footer() {
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">About</p>
             <ul className="space-y-2">
               {[
-                { href: "/about", label: "About Us" },
-                { href: "/services", label: "Our Services" },
-                { href: "/contact", label: "Contact" },
+                { href: "/en/about", label: "About Us" },
+                { href: "/en/services", label: "Our Services" },
+                { href: "/en/contact", label: "Contact" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
@@ -87,7 +87,7 @@ export default function Footer() {
           </p>
           <p className="text-xs text-gray-600">
             Powered by{" "}
-            <Link href="/contact" className="text-gray-500 hover:text-white transition-colors">
+            <Link href="/en/contact" className="text-gray-500 hover:text-white transition-colors">
               ForgingApps
             </Link>
           </p>

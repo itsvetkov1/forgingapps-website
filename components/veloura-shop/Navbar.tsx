@@ -15,12 +15,12 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navLinks = [
-    { href: "/demo/veloura-shop", label: "Home" },
+    { href: "/en/demo/veloura-shop", label: "Home" },
     ...mainCategories.map((c) => ({
-      href: `/demo/veloura-shop/category/${c.slug}`,
+      href: `/en/demo/veloura-shop/category/${c.slug}`,
       label: c.name,
     })),
-    { href: "/demo/veloura-shop/sale", label: "Sale" },
+    { href: "/en/demo/veloura-shop/sale", label: "Sale" },
   ]
 
   return (
@@ -44,7 +44,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link
-            href="/demo/veloura-shop"
+            href="/en/demo/veloura-shop"
             className="text-xl font-bold tracking-widest uppercase text-gray-900 hover:text-gray-700 transition-colors"
           >
             Veloura
@@ -79,7 +79,7 @@ export default function Navbar() {
               <Search className="w-5 h-5" />
             </button>
             <Link
-              href="/demo/veloura-shop/cart"
+              href="/en/demo/veloura-shop/cart"
               className="p-2 text-gray-700 hover:text-gray-900 transition-colors relative"
               aria-label={`Cart, ${cartCount} items`}
             >

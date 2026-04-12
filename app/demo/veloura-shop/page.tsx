@@ -30,7 +30,7 @@ export default function VelouraShopHome() {
             <p className="text-5xl md:text-7xl font-bold mb-4">Veloura</p>
             <p className="text-xl md:text-2xl mb-8 font-light">Everyday essentials, built to last.</p>
             <Link
-              href="/demo/veloura-shop/category/hoodies-sweatshirts"
+              href="/en/demo/veloura-shop/category/hoodies-sweatshirts"
               className="inline-block bg-white text-gray-900 px-8 py-3 font-medium hover:bg-gray-100 transition-colors"
             >
               Shop Now
@@ -43,7 +43,7 @@ export default function VelouraShopHome() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-gray-900">New Arrivals</h2>
-          <Link href="/demo/veloura-shop" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors underline">
+          <Link href="/en/demo/veloura-shop" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors underline">
             View All
           </Link>
         </div>
@@ -59,7 +59,7 @@ export default function VelouraShopHome() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold text-gray-900">On Sale</h2>
-            <Link href="/demo/veloura-shop/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors underline">
+            <Link href="/en/demo/veloura-shop/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors underline">
               View All Sale Items
             </Link>
           </div>
@@ -78,7 +78,7 @@ export default function VelouraShopHome() {
           {shopCategories.map(cat => (
             <Link
               key={cat.slug}
-              href={`/demo/veloura-shop/category/${cat.slug}`}
+              href={`/en/demo/veloura-shop/category/${cat.slug}`}
               className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-gray-100"
             >
               <Image
@@ -124,7 +124,7 @@ export default function VelouraShopHome() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-gray-400 mb-2 text-sm">This is a demo storefront built by ForgingApps</p>
           <p className="text-white text-lg font-semibold mb-4">See our AI support assistant handle Veloura customer questions</p>
-          <Link href="/demo/veloura-support" className="inline-block bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+          <Link href="/en/demo/veloura-support" className="inline-block bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
             Try Veloura Support Demo
           </Link>
         </div>
