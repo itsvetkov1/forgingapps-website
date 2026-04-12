@@ -9,10 +9,10 @@ export default function ServicesContent() {
   const data = translations[language].services
 
   const projectPackages = [
-    { id: 'spark', data: data.spark, href: localePath('/contact') },
-    { id: 'ember', data: data.ember, href: localePath('/contact') },
-    { id: 'anvil', data: data.anvil, href: localePath('/contact') },
-    { id: 'forge', data: data.forge, href: localePath('/contact') },
+    { id: 'spark', data: data.spark, href: localePath('/services#spark') },
+    { id: 'ember', data: data.ember, href: localePath('/services#ember') },
+    { id: 'anvil', data: data.anvil, href: localePath('/services#anvil') },
+    { id: 'forge', data: data.forge, href: localePath('/services#forge') },
     { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting#the-oracle') },
   ]
 
