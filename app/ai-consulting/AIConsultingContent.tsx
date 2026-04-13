@@ -8,6 +8,18 @@ import { translations } from '@/lib/i18n/translations'
 export default function AIConsultingContent() {
   const { language, localePath } = useLanguage()
   const data = translations[language].aiConsulting
+  const contactWithSubject = (subject: string) => `${localePath('/contact')}?subject=${subject}`
+  const intakeCtas = language === 'bg'
+    ? [
+        { href: contactWithSubject('ai-readiness'), label: 'Оценка за AI готовност' },
+        { href: contactWithSubject('custom-ai-assistant'), label: 'Изграждане на персонализиран AI асистент' },
+        { href: contactWithSubject('oracle-consulting'), label: 'Oracle консултантска сесия' },
+      ]
+    : [
+        { href: contactWithSubject('ai-readiness'), label: 'Get an AI Readiness Assessment' },
+        { href: contactWithSubject('custom-ai-assistant'), label: 'Build a Custom AI Assistant' },
+        { href: contactWithSubject('oracle-consulting'), label: 'Book an Oracle Consulting Session' },
+      ]
 
   const scenarios = [data.isThisForYou.s1, data.isThisForYou.s2, data.isThisForYou.s3, data.isThisForYou.s4]
   const steps = [data.threeSteps.step1, data.threeSteps.step2, data.threeSteps.step3]
@@ -22,10 +34,16 @@ export default function AIConsultingContent() {
   return (
     <div className="bg-forge-dark min-h-screen">
       <section className="section-py border-b border-forge-ember/20 text-center">
-        <div className="container-custom max-w-4xl">
+        <div className="container-custom max-w-5xl">
           <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{data.heroHeadline}</h1>
           <p className="text-xl text-gray-300 mb-8">{data.heroSubheadline}</p>
-          <Link href={localePath('/contact')} className="btn-primary">{data.heroCTA}</Link>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center">
+            {intakeCtas.map((cta) => (
+              <Link key={cta.href} href={cta.href} className="btn-primary">
+                {cta.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -59,7 +77,7 @@ export default function AIConsultingContent() {
                 {[data.aiReadinessSprint.deliverable1, data.aiReadinessSprint.deliverable2, data.aiReadinessSprint.deliverable3].map((item) => <li key={item}>• {item}</li>)}
               </ul>
               <p className="text-sm text-forge-gold mb-5">{data.aiReadinessSprint.ctaNote}</p>
-              <Link href={localePath('/contact')} className="btn-primary">{data.aiReadinessSprint.cta}</Link>
+              <Link href={contactWithSubject('ai-readiness')} className="btn-primary">{data.aiReadinessSprint.cta}</Link>
             </div>
 
             <div id="ai-chat-assistant" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
@@ -74,7 +92,7 @@ export default function AIConsultingContent() {
                 {[data.aiChatAssistant.deliverable1, data.aiChatAssistant.deliverable2, data.aiChatAssistant.deliverable3].map((item) => <li key={item}>• {item}</li>)}
               </ul>
               <p className="text-sm text-forge-gold mb-5">{data.aiChatAssistant.ctaNote}</p>
-              <Link href={localePath('/contact')} className="btn-primary">{data.aiChatAssistant.cta}</Link>
+              <Link href={contactWithSubject('custom-ai-assistant')} className="btn-primary">{data.aiChatAssistant.cta}</Link>
             </div>
           </div>
 
@@ -90,7 +108,7 @@ export default function AIConsultingContent() {
                 {[data.hourlyConsulting.deliverable1, data.hourlyConsulting.deliverable2, data.hourlyConsulting.deliverable3].map((item) => <li key={item}>✓ {item}</li>)}
               </ul>
               <p className="text-sm text-forge-gold mb-5">{data.hourlyConsulting.ctaNote}</p>
-              <Link href={localePath('/contact')} className="btn-primary">{data.hourlyConsulting.cta}</Link>
+              <Link href={contactWithSubject('oracle-consulting')} className="btn-primary">{data.hourlyConsulting.cta}</Link>
             </div>
             <div id="fixed-price" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
               <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-4">{data.fixedPrice.heading}</h3>
@@ -153,7 +171,7 @@ export default function AIConsultingContent() {
           <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 md:p-10 text-center">
             <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.discoveryWorkshop.heading}</h2>
             <p className="text-gray-300 text-lg mb-8">{data.discoveryWorkshop.description}</p>
-            <Link href={localePath('/contact')} className="btn-primary">{data.discoveryWorkshop.cta}</Link>
+            <Link href={contactWithSubject('discovery-workshop')} className="btn-primary">{data.discoveryWorkshop.cta}</Link>
           </div>
         </div>
       </section>

@@ -7,28 +7,28 @@ import { translations } from '@/lib/i18n/translations'
 function BlogCTA({ category, language, localePath }: { category: string; language: string; localePath: (path: string) => string }) {
   const ctas: Record<string, { href: string; heading: string; body: string; cta: string }> = {
     AI: {
-      href: localePath('/ai-consulting'),
+      href: localePath('/contact'),
       heading: language === 'bg' ? 'Готови ли сте за AI?' : 'Ready to add AI to your business?',
       body: language === 'bg'
         ? 'Помагаме на компании да идентифицират, проектират и внедряват AI решения, които реално работят. Запишете безплатна консултация.'
         : "We help businesses identify, design, and deploy AI systems that actually work. Book a free discovery call and see what's possible.",
-      cta: language === 'bg' ? 'Запишете безплатна консултация →' : 'Book a free discovery call →',
+      cta: language === 'bg' ? 'Запазете безплатен разговор →' : 'Book a free call →',
     },
     Security: {
-      href: localePath('/about'),
+      href: localePath('/contact'),
       heading: language === 'bg' ? 'Сигурността не е опция' : 'Security is non-negotiable',
       body: language === 'bg'
         ? 'ForgingApps е два пъти носител на umlaut Secure App Award. Вижте нашите удостоверения и подхода ни към сигурността.'
         : 'ForgingApps is a two-time umlaut Secure App Award winner. See our credentials and our approach to building secure software.',
-      cta: language === 'bg' ? 'Вижте нашите удостоверения →' : 'See our credentials →',
+      cta: language === 'bg' ? 'Запазете безплатен разговор →' : 'Book a free call →',
     },
     Business: {
-      href: localePath('/services'),
+      href: localePath('/contact'),
       heading: language === 'bg' ? 'Готови да изградим нещо заедно?' : 'Ready to build something?',
       body: language === 'bg'
         ? 'От малък уебсайт до сложна платформа — имаме пакет за всяко ниво. Вземете оферта без ангажимент.'
         : 'From a simple website to a complex platform — we have a package for every stage. Get a quote with no commitment required.',
-      cta: language === 'bg' ? 'Получете оферта →' : 'Get a quote →',
+      cta: language === 'bg' ? 'Запазете безплатен разговор →' : 'Book a free call →',
     },
   }
 
@@ -87,6 +87,15 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="mt-12 border-t border-forge-ember/20 pt-8 text-sm text-gray-400">
+          <p>
+            {language === 'bg' ? 'Искате да обсъдим как това се отнася до Вашия бизнес?' : 'Want to discuss how this applies to your business?'}{' '}
+            <Link href={localePath('/contact')} className="text-forge-gold hover:text-forge-ember transition underline underline-offset-4">
+              {language === 'bg' ? 'Запазете безплатен разговор.' : 'Book a free call.'}
+            </Link>
+          </p>
         </div>
 
         <BlogCTA category={post.category} language={language} localePath={localePath} />

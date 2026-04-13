@@ -5,12 +5,28 @@ import CopyEmailButton from '@/components/CopyEmailButton'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
+// TODO: Replace with the real Google Calendar appointment schedule URL once it is created.
+const GOOGLE_CALENDAR_BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/PLACEHOLDER'
+
 export default function ContactContent() {
   const { language } = useLanguage()
   const data = translations[language].contact
 
   const quickFaqs = [data.quickFaq.q1, data.quickFaq.q2, data.quickFaq.q3, data.quickFaq.q4, data.quickFaq.q5]
   const faqs = [data.faq1, data.faq2, data.faq3]
+  const bookingCopy = language === 'bg'
+    ? {
+        eyebrow: 'Резервирайте разговор',
+        heading: 'Запазете безплатен 30-минутен разговор',
+        description: 'Ако предпочитате директно да намерим удобен час, резервирайте разговор преди да попълните формата. Ако линкът още не е активен, използвайте формата по-долу.',
+        cta: 'Отворете календара',
+      }
+    : {
+        eyebrow: 'Book a call',
+        heading: 'Book a Free 30-Minute Call',
+        description: 'If you prefer to lock in a time first, book a call before filling out the form. If the booking link is not active yet, use the contact form below.',
+        cta: 'Open calendar booking',
+      }
 
   return (
     <div className="bg-forge-dark min-h-screen">
@@ -23,6 +39,26 @@ export default function ContactContent() {
       </section>
 
       <section className="section-py border-b border-forge-ember/20">
+        <div className="container-custom max-w-5xl mb-10">
+          <div className="rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-forge-gold/70">{bookingCopy.eyebrow}</p>
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-3">{bookingCopy.heading}</h2>
+                <p className="max-w-2xl text-gray-300">{bookingCopy.description}</p>
+              </div>
+              <a
+                href={GOOGLE_CALENDAR_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary whitespace-nowrap"
+              >
+                {bookingCopy.cta}
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
             <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.formHeading}</h2>

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from '@/lib/i18n/useTranslation'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -19,6 +19,8 @@ const formCopy = {
     submittedDemoPrompt: 'Want to see our work first?',
     submittedDemoLink: 'Try the live demo →',
     sendAnother: '← Send another message',
+    subjectLabel: 'Subject',
+    subjectPlaceholder: 'What would you like to discuss?',
     budgetPlaceholder: 'Select budget...',
     budgetOptions: ['Under €1,000', '€1,000 - €5,000', '€5,000 - €15,000', '€15,000+', 'Not sure yet'],
     sourcePlaceholder: 'Select source...',
@@ -35,6 +37,8 @@ const formCopy = {
     submittedDemoPrompt: 'Искате първо да видите наша работа?',
     submittedDemoLink: 'Пробвайте живото демо →',
     sendAnother: '← Изпратете друго съобщение',
+    subjectLabel: 'Тема',
+    subjectPlaceholder: 'Какво искате да обсъдим?',
     budgetPlaceholder: 'Изберете бюджет...',
     budgetOptions: ['Под €1,000', '€1,000 - €5,000', '€5,000 - €15,000', '€15,000+', 'Още не съм сигурен/сигурна'],
     sourcePlaceholder: 'Изберете източник...',
@@ -49,11 +53,25 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
   const { localePath } = useLanguage()
   const copy = formCopy[language]
   const defaultPackage = packagePreselect || t('packageOptions.notSure')
-
+  const subjectPresets = {
+    en: {
+      'ai-readiness': 'AI Readiness Assessment',
+      'custom-ai-assistant': 'Build a Custom AI Assistant',
+      'oracle-consulting': 'Book an Oracle Consulting Session',
+      'discovery-workshop': 'Discovery Workshop',
+    },
+    bg: {
+      'ai-readiness': 'Оценка за AI готовност',
+      'custom-ai-assistant': 'Изграждане на персонализиран AI асистент',
+      'oracle-consulting': 'Oracle консултантска сесия',
+      'discovery-workshop': 'Discovery Workshop',
+    },
+  } as const
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    subject: '',
     packageInterest: defaultPackage,
     message: '',
     budget: '',
@@ -63,6 +81,19 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const subjectKey = params.get('subject')
+    const defaultSubject = subjectKey ? subjectPresets[language][subjectKey as keyof typeof subjectPresets[typeof language]] ?? subjectKey : ''
+
+    if (!defaultSubject) return
+
+    setFormData((prev) => ({
+      ...prev,
+      subject: prev.subject || defaultSubject,
+    }))
+  }, [language])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -87,6 +118,7 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
           name: '',
           email: '',
           phone: '',
+          subject: '',
           packageInterest: defaultPackage,
           message: '',
           budget: '',
@@ -170,6 +202,11 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
             <option>{t('packageOptions.hearthstone')}</option>
           </select>
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-semibold text-forge-gold mb-2">{copy.subjectLabel}</label>
+        <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder={copy.subjectPlaceholder} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition" />
       </div>
 
       <div>
