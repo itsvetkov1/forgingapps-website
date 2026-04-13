@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 
+const DEMO_ORDER_NUMBER = 'VLR-DEMO-2026'
+const DEMO_ESTIMATED_DELIVERY = 'Within 5 business days (demo)'
+
 export const metadata: Metadata = {
-  title: 'Order Confirmed — Veloura',
+  title: 'Order Confirmed — Veloura Demo',
+  description: 'Demo confirmation page for the Veloura storefront experience built by ForgingApps.',
 }
 
 export default function SuccessPage() {
-  const orderNumber = `VLR-2026-${Math.floor(Math.random() * 90000) + 10000}`
-  const estimatedDelivery = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  })
+  const orderNumber = DEMO_ORDER_NUMBER
+  const estimatedDelivery = DEMO_ESTIMATED_DELIVERY
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 text-center">
@@ -23,7 +23,7 @@ export default function SuccessPage() {
       </div>
 
       <h1 className="text-4xl font-bold mb-2">Order Confirmed!</h1>
-      <p className="text-gray-500 mb-1">Thank you for your order. We have received it and will begin processing shortly.</p>
+      <p className="text-gray-500 mb-1">Thank you for your order. This demo checkout shows the final storefront step without processing a real purchase.</p>
 
       <div className="bg-gray-50 rounded-lg p-6 my-8 text-left">
         <div className="grid grid-cols-2 gap-4 text-sm">

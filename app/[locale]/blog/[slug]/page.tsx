@@ -16,12 +16,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {}
   const post = translations[locale].blogPosts[slug]
   if (!post) return {}
+  const title = `${post.title} | ForgingApps Blog`
+  const description = post.metaDescription ?? post.intro
+  const ogImage = `/og/blog/${slug}.svg`
+
   return {
-    title: `${post.title} | ForgingApps Blog`,
-    description: post.metaDescription ?? post.intro,
+    title,
+    description,
     alternates: buildLocaleAlternates(locale, `/blog/${slug}`),
-    openGraph: buildOg(`/${locale}/blog/${slug}`, `${post.title} | ForgingApps Blog`, post.metaDescription ?? post.intro),
-    twitter: buildTwitterCard(`${post.title} | ForgingApps Blog`, post.metaDescription ?? post.intro),
+    openGraph: buildOg(`/${locale}/blog/${slug}`, title, description, ogImage, `${post.title} featured image`),
+    twitter: buildTwitterCard(title, description, ogImage),
   }
 }
 

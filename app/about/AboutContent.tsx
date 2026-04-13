@@ -67,7 +67,7 @@ export default function AboutContent() {
                     <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-forge-ember/40">
                       <img
                         src={teamPhotos[person.name] || '/team/placeholder.jpg'}
-                        alt={person.name}
+                        alt={`${person.name}, ${person.role} at ForgingApps`}
                         width={400}
                         height={400}
                         className="w-full h-full object-cover"

@@ -2,11 +2,21 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ContactForm from '@/components/VelouraContactForm'
+import { buildPageMetadata } from '@/lib/i18n/metadata'
 import { isLocale } from '@/lib/i18n/routing'
 
-export const metadata: Metadata = {
-  title: 'Contact Us — Veloura',
-  description: 'Veloura contact information for support, orders, and sizing questions.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  if (!isLocale(locale)) return {}
+
+  const title = 'Contact Us — Veloura Demo'
+  const description = 'Veloura demo contact information for support, orders, and sizing questions.'
+
+  return {
+    title,
+    description,
+    ...buildPageMetadata(locale, '/demo/veloura-shop/contact-us', title, description, '/veloura/hero.jpg', 'Veloura demo contact page image'),
+  }
 }
 
 export default async function LocalizedContactUsPage({ params }: { params: Promise<{ locale: string }> }) {

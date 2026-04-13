@@ -12,20 +12,41 @@ export function buildLocaleAlternates(locale: Locale, path: string) {
   }
 }
 
-export function buildOg(urlPath: string, title: string, description: string): Metadata['openGraph'] {
+export function buildOg(
+  urlPath: string,
+  title: string,
+  description: string,
+  imageUrl = '/og-image.png',
+  imageAlt = title,
+): Metadata['openGraph'] {
   return {
     title,
     description,
     url: `https://forgingapps.com${urlPath}`,
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: title }],
+    images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }],
   }
 }
 
-export function buildTwitterCard(title: string, description: string): Metadata['twitter'] {
+export function buildTwitterCard(title: string, description: string, imageUrl = '/og-image.png'): Metadata['twitter'] {
   return {
     card: 'summary_large_image',
     title,
     description,
-    images: ['/og-image.png'],
+    images: [imageUrl],
+  }
+}
+
+export function buildPageMetadata(
+  locale: Locale,
+  path: string,
+  title: string,
+  description: string,
+  imageUrl = '/og-image.png',
+  imageAlt = title,
+): Pick<Metadata, 'alternates' | 'openGraph' | 'twitter'> {
+  return {
+    alternates: buildLocaleAlternates(locale, path),
+    openGraph: buildOg(`/${locale}${path}`, title, description, imageUrl, imageAlt),
+    twitter: buildTwitterCard(title, description, imageUrl),
   }
 }

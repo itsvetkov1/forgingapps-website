@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 font-cinzel text-lg font-bold text-forge-gold mb-2">
-              <img src="/logo.svg" alt="ForgingApps" width={28} height={28} className="inline-block" />
+              <img src="/logo.svg" alt="ForgingApps logo" width={28} height={28} className="inline-block" />
               <span>ForgingApps</span>
             </div>
             <p className="text-gray-400 text-sm">{t('tagline')}</p>

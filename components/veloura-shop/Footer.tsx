@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { Instagram, Twitter } from "lucide-react"
 
+const DEMO_YEAR = 2026
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
@@ -83,12 +85,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Veloura. Demo by ForgingApps.
+            &copy; {DEMO_YEAR} Veloura. Demo by ForgingApps.
           </p>
           <p className="text-xs text-gray-600">
-            Powered by{" "}
-            <Link href="/en/contact" className="text-gray-500 hover:text-white transition-colors">
-              ForgingApps
+            <Link href="/en/services" className="text-gray-500 hover:text-white transition-colors underline underline-offset-4">
+              Built by ForgingApps
             </Link>
           </p>
         </div>

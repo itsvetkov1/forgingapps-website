@@ -1,11 +1,21 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/i18n/metadata'
 import { isLocale } from '@/lib/i18n/routing'
 
-export const metadata: Metadata = {
-  title: 'Care Instructions — Veloura',
-  description: 'Veloura garment care guide for premium everyday essentials.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  if (!isLocale(locale)) return {}
+
+  const title = 'Care Instructions — Veloura Demo'
+  const description = 'Veloura demo garment care guide for premium everyday essentials.'
+
+  return {
+    title,
+    description,
+    ...buildPageMetadata(locale, '/demo/veloura-shop/care-instructions', title, description, '/veloura/products/heavyweight-hoodie.jpg', 'Veloura garment care preview image'),
+  }
 }
 
 export default async function LocalizedCareInstructionsPage({ params }: { params: Promise<{ locale: string }> }) {

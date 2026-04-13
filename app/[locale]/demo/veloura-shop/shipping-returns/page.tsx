@@ -1,11 +1,21 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/i18n/metadata'
 import { isLocale } from '@/lib/i18n/routing'
 
-export const metadata: Metadata = {
-  title: 'Shipping & Returns — Veloura',
-  description: 'Veloura shipping policy and returns process.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  if (!isLocale(locale)) return {}
+
+  const title = 'Shipping & Returns — Veloura Demo'
+  const description = 'Veloura demo shipping policy and returns process.'
+
+  return {
+    title,
+    description,
+    ...buildPageMetadata(locale, '/demo/veloura-shop/shipping-returns', title, description, '/veloura/hero.jpg', 'Veloura shipping and returns demo image'),
+  }
 }
 
 export default async function LocalizedShippingReturnsPage({ params }: { params: Promise<{ locale: string }> }) {

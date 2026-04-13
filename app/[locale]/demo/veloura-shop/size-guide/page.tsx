@@ -1,11 +1,21 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/i18n/metadata'
 import { isLocale } from '@/lib/i18n/routing'
 
-export const metadata: Metadata = {
-  title: 'Size Guide — Veloura',
-  description: 'Veloura size guide with measurements for tops, outerwear, and essentials.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  if (!isLocale(locale)) return {}
+
+  const title = 'Size Guide — Veloura Demo'
+  const description = 'Veloura demo size guide with measurements for tops, outerwear, and essentials.'
+
+  return {
+    title,
+    description,
+    ...buildPageMetadata(locale, '/demo/veloura-shop/size-guide', title, description, '/veloura/categories/hoodies.jpg', 'Veloura size guide preview image'),
+  }
 }
 
 const MEASUREMENTS = [

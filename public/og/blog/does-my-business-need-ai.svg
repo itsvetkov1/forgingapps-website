@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Does My Business Need AI? An Honest Checklist</title>
+  <desc id="desc">Featured image for the ForgingApps blog post Does My Business Need AI? An Honest Checklist</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1419" />
+      <stop offset="100%" stop-color="#241B17" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)" />
+  <rect x="48" y="48" width="1104" height="534" rx="28" fill="none" stroke="#C97833" stroke-opacity="0.35" />
+  <text x="72" y="118" fill="#C97833" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="4">FORGINGAPPS BLOG</text>
+  <text x="72" y="170" fill="#8E8C88" font-family="Inter, Arial, sans-serif" font-size="26">AI</text>
+  <text x="72" y="250" fill="#F4E3C1" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">Does My Business Need</text>
+  <text x="72" y="324" fill="#F4E3C1" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">AI? An Honest Checklist</text>
+  <text x="72" y="560" fill="#8E8C88" font-family="Inter, Arial, sans-serif" font-size="24">forgingapps.com</text>
+</svg>

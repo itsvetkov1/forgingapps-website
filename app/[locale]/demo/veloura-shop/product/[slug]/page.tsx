@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import ProductPage, { generateStaticParams as generateShopProductParams } from '@/app/demo/veloura-shop/product/[slug]/page'
+import { buildPageMetadata } from '@/lib/i18n/metadata'
 import { getProductBySlug } from '@/lib/veloura-shop-data'
 import { isLocale, locales } from '@/lib/i18n/routing'
 
@@ -17,10 +18,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params
   if (!isLocale(locale)) return {}
   const product = getProductBySlug(slug)
-  if (!product) return { title: 'Product — Veloura' }
+  if (!product) return { title: 'Product — Veloura Demo' }
+  const title = `${product.name} — Veloura Demo`
+  const description = product.description
   return {
-    title: `${product.name} — Veloura`,
-    description: product.description,
+    title,
+    description,
+    ...buildPageMetadata(locale, `/demo/veloura-shop/product/${slug}`, title, description, product.image, `${product.name} product image`),
   }
 }
 
