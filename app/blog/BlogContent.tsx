@@ -77,7 +77,6 @@ export default function BlogContent() {
                     </div>
                     <h2 className="font-cinzel text-2xl font-bold text-forge-gold mb-3 group-hover:text-forge-ember transition">{postData.title}</h2>
                     <p className="text-gray-400 mb-4">{postMeta?.description}</p>
-                    <p className="text-sm text-gray-500">{blog[post.authorKey]}</p>
                   </div>
                 </Link>
               )

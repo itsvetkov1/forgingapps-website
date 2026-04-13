@@ -88,7 +88,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
           </div>
           <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{post.title}</h1>
           <p className="text-xl text-gray-400">{post.intro}</p>
-          <p className="text-sm text-gray-500 mt-4">{post.author}</p>
         </div>
 
         <div className="prose prose-invert max-w-none mb-12">
