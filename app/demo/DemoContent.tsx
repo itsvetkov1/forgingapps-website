@@ -16,6 +16,7 @@ const demoCopy = {
     ctaPrompt: 'Want something like this for your business?',
     contact: 'Get in Touch',
     tryLive: 'Try it live',
+    demoLanguageNotice: '',
     outcomesHeading: 'Business outcomes this approach enables',
     outcomes: [
       'Reduced support load, AI assistants handle repeat queries so human agents can focus on complex cases.',
@@ -58,6 +59,7 @@ const demoCopy = {
     ctaPrompt: 'Искате нещо подобно за Вашия бизнес?',
     contact: 'Свържете се с нас',
     tryLive: 'Пробвайте демото',
+    demoLanguageNotice: 'Демотата са на английски, защото симулират международни продуктови изживявания.',
     outcomesHeading: 'Бизнес резултати, които този подход позволява',
     outcomes: [
       'По-малко натоварване за support екипа, AI поема повтарящите се въпроси и оставя сложните случаи на хората.',
@@ -106,6 +108,9 @@ export default function DemoContent() {
           <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{data.headline}</h1>
           <p className="text-xl text-gray-300 mb-4">{data.subheadline}</p>
           <p className="max-w-3xl mx-auto text-sm leading-7 text-gray-400">{data.intro}</p>
+          {data.demoLanguageNotice && (
+            <p className="mt-3 max-w-3xl mx-auto text-xs leading-5 text-gray-500 italic">{data.demoLanguageNotice}</p>
+          )}
         </div>
       </section>
 
