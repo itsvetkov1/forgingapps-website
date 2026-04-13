@@ -1,16 +1,32 @@
 'use client'
 
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import ContactForm from '@/components/ContactForm'
 import CopyEmailButton from '@/components/CopyEmailButton'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
+import { resolveContactFormVariant } from '@/lib/contactFormConfigs'
 
 // TODO: Replace with the real Google Calendar appointment schedule URL once it is created.
 const GOOGLE_CALENDAR_BOOKING_URL = '' // TODO: Add real Google Calendar appointment URL
 
-export default function ContactContent() {
+function ContactContentWithParams() {
+  const searchParams = useSearchParams()
+  return <ContactContentBody productParam={searchParams.get('product')} subjectParam={searchParams.get('subject')} />
+}
+
+function ContactContentBody({ productParam, subjectParam }: { productParam?: string | null; subjectParam?: string | null }) {
   const { language } = useLanguage()
   const data = translations[language].contact
+  const contactForms = translations[language].contactForms ?? {}
+  const resolvedVariant = resolveContactFormVariant(productParam, subjectParam)
+  const activeVariantCopy = resolvedVariant ? contactForms[resolvedVariant] : undefined
+
+  const pageHeading = activeVariantCopy?.heading || data.heading
+  const pageSubheading = activeVariantCopy?.description || data.subheading
+  const pageKicker = activeVariantCopy?.priceNote || data.accepting
+  const formHeading = activeVariantCopy?.heading || data.formHeading
 
   const quickFaqs = [data.quickFaq.q1, data.quickFaq.q2, data.quickFaq.q3, data.quickFaq.q4, data.quickFaq.q5]
   const faqs = [data.faq1, data.faq2, data.faq3]
@@ -29,53 +45,52 @@ export default function ContactContent() {
       }
 
   return (
-    <div className="bg-forge-dark min-h-screen">
+    <div className="min-h-screen bg-forge-dark">
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-4xl text-center">
-          <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{data.heading}</h1>
-          <p className="text-xl text-gray-300 mb-4">{data.subheading}</p>
-          <p className="text-sm text-forge-gold">{data.accepting}</p>
+          <h1 className="mb-4 font-cinzel text-5xl font-bold text-forge-gold">{pageHeading}</h1>
+          <p className="mb-4 text-xl text-gray-300">{pageSubheading}</p>
+          <p className="text-sm text-forge-gold">{pageKicker}</p>
         </div>
       </section>
 
-      {GOOGLE_CALENDAR_BOOKING_URL && (
-      <section className="section-py border-b border-forge-ember/20">
-        <div className="container-custom max-w-5xl mb-10">
-          <div className="rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-forge-gold/70">{bookingCopy.eyebrow}</p>
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-3">{bookingCopy.heading}</h2>
-                <p className="max-w-2xl text-gray-300">{bookingCopy.description}</p>
+      {GOOGLE_CALENDAR_BOOKING_URL ? (
+        <section className="section-py border-b border-forge-ember/20">
+          <div className="container-custom mb-10 max-w-5xl">
+            <div className="rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-forge-gold/70">{bookingCopy.eyebrow}</p>
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h2 className="mb-3 font-cinzel text-3xl font-bold text-forge-gold">{bookingCopy.heading}</h2>
+                  <p className="max-w-2xl text-gray-300">{bookingCopy.description}</p>
+                </div>
+                <a
+                  href={GOOGLE_CALENDAR_BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary whitespace-nowrap"
+                >
+                  {bookingCopy.cta}
+                </a>
               </div>
-              <a
-                href={GOOGLE_CALENDAR_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary whitespace-nowrap"
-              >
-                {bookingCopy.cta}
-              </a>
             </div>
           </div>
-        </div>
-
-      </section>
-      )}
+        </section>
+      ) : null}
 
       <section className="section-py border-b border-forge-ember/20">
-        <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
-            <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.formHeading}</h2>
-            <ContactForm />
+        <div className="container-custom grid grid-cols-1 items-start gap-10 lg:grid-cols-2">
+          <div className="rounded-xl border border-forge-ember/30 bg-forge-stone p-8">
+            <h2 className="mb-6 font-cinzel text-3xl font-bold text-forge-gold">{formHeading}</h2>
+            <ContactForm variant={resolvedVariant} productParam={productParam} subjectParam={subjectParam} />
           </div>
 
           <div className="space-y-8">
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
-              <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.directContact.heading}</h2>
+            <div className="rounded-xl border border-forge-ember/30 bg-forge-stone p-8">
+              <h2 className="mb-6 font-cinzel text-3xl font-bold text-forge-gold">{data.directContact.heading}</h2>
               <div className="space-y-4 text-gray-300">
                 <div className="flex items-center gap-2">
-                  <a href="mailto:hello@forgingapps.com" className="text-forge-gold hover:text-forge-ember transition">{data.directContact.email}</a>
+                  <a href="mailto:hello@forgingapps.com" className="text-forge-gold transition hover:text-forge-ember">{data.directContact.email}</a>
                   <CopyEmailButton />
                 </div>
                 <p>{data.directContact.location}</p>
@@ -83,9 +98,9 @@ export default function ContactContent() {
               </div>
             </div>
 
-            <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
-              <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.faqHeading}</h2>
-              <div className="space-y-5">{faqs.map((faq: any) => <div key={faq.q}><h3 className="font-semibold text-white mb-2">{faq.q}</h3><p className="text-gray-400">{faq.a}</p></div>)}</div>
+            <div className="rounded-xl border border-forge-ember/30 bg-forge-stone p-8">
+              <h2 className="mb-6 font-cinzel text-3xl font-bold text-forge-gold">{data.faqHeading}</h2>
+              <div className="space-y-5">{faqs.map((faq: { q: string; a: string }) => <div key={faq.q}><h3 className="mb-2 font-semibold text-white">{faq.q}</h3><p className="text-gray-400">{faq.a}</p></div>)}</div>
             </div>
           </div>
         </div>
@@ -93,17 +108,25 @@ export default function ContactContent() {
 
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-4xl">
-          <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.quickFaq.heading}</h2>
-          <div className="space-y-6">{quickFaqs.map((faq: any) => <div key={faq.q} className="bg-forge-stone border border-forge-ember/20 rounded-lg p-6"><h3 className="font-semibold text-white mb-2">{faq.q}</h3><p className="text-gray-400">{faq.a}</p></div>)}</div>
+          <h2 className="mb-10 text-center font-cinzel text-4xl font-bold text-forge-gold">{data.quickFaq.heading}</h2>
+          <div className="space-y-6">{quickFaqs.map((faq: { q: string; a: string }) => <div key={faq.q} className="rounded-lg border border-forge-ember/20 bg-forge-stone p-6"><h3 className="mb-2 font-semibold text-white">{faq.q}</h3><p className="text-gray-400">{faq.a}</p></div>)}</div>
         </div>
       </section>
 
       <section className="section-py">
-        <div className="container-custom text-center max-w-3xl">
-          <h2 className="font-cinzel text-4xl font-bold text-forge-gold mb-4">{data.bottomCta.heading}</h2>
-          <p className="text-gray-300 text-lg">{data.bottomCta.description}</p>
+        <div className="container-custom max-w-3xl text-center">
+          <h2 className="mb-4 font-cinzel text-4xl font-bold text-forge-gold">{data.bottomCta.heading}</h2>
+          <p className="text-lg text-gray-300">{data.bottomCta.description}</p>
         </div>
       </section>
     </div>
+  )
+}
+
+export default function ContactContent() {
+  return (
+    <Suspense fallback={<ContactContentBody />}>
+      <ContactContentWithParams />
+    </Suspense>
   )
 }

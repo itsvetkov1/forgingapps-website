@@ -7,13 +7,14 @@ import { translations } from '@/lib/i18n/translations'
 export default function ServicesContent() {
   const { language, localePath } = useLanguage()
   const data = translations[language].services
+  const contactWithProduct = (product: string) => `${localePath('/contact')}?product=${product}`
 
   const projectPackages = [
-    { id: 'spark', data: data.spark, href: localePath('/services#spark') },
-    { id: 'ember', data: data.ember, href: localePath('/services#ember') },
-    { id: 'anvil', data: data.anvil, href: localePath('/services#anvil') },
-    { id: 'forge', data: data.forge, href: localePath('/services#forge') },
-    { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting#the-oracle') },
+    { id: 'spark', data: data.spark, href: contactWithProduct('spark') },
+    { id: 'ember', data: data.ember, href: contactWithProduct('ember') },
+    { id: 'anvil', data: data.anvil, href: contactWithProduct('anvil') },
+    { id: 'forge', data: data.forge, href: contactWithProduct('forge') },
+    { id: 'oracle', data: data.oracle, href: contactWithProduct('oracle') },
   ]
 
   const comparisonRows = [
@@ -143,7 +144,7 @@ export default function ServicesContent() {
               ))}
             </div>
             <p className="text-sm text-forge-gold mb-6">{data.discoveryWorkshop.creditNote}</p>
-            <Link href={localePath('/contact')} className="btn-primary">{data.discoveryWorkshop.cta}</Link>
+            <Link href={contactWithProduct('discovery-workshop')} className="btn-primary">{data.discoveryWorkshop.cta}</Link>
           </div>
         </div>
       </section>
@@ -172,7 +173,7 @@ export default function ServicesContent() {
             </div>
             <p className="text-sm text-forge-gold mb-2">{data.hearthstone.annualNote}</p>
             <p className="text-sm text-gray-400 mb-6">{data.hearthstone.switchNote}</p>
-            <Link href={localePath('/contact')} className="btn-primary">{data.hearthstone.cta}</Link>
+            <Link href={contactWithProduct('hearthstone')} className="btn-primary">{data.hearthstone.cta}</Link>
           </div>
         </div>
       </section>

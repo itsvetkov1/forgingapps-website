@@ -1,20 +1,41 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import MultiSelect from '@/components/MultiSelect'
 import { useTranslation } from '@/lib/i18n/useTranslation'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { translations } from '@/lib/i18n/translations'
+import { contactFormConfigs, resolveContactFormVariant, type ContactFormVariant, type FormVariantConfig } from '@/lib/contactFormConfigs'
 
 interface ContactFormProps {
   packagePreselect?: string
+  variant?: string
+  productParam?: string | null
+  subjectParam?: string | null
 }
 
-const formCopy = {
+type VariantFieldValue = string | string[]
+type VariantFormState = Record<string, VariantFieldValue>
+
+interface GenericFormState {
+  name: string
+  email: string
+  phone: string
+  subject: string
+  packageInterest: string
+  message: string
+  budget: string
+  source: string
+}
+
+const genericCopy = {
   en: {
     submittedTitle: 'We Got Your Message!',
     submittedNext: "Here's what happens next:",
-    submittedStep1: 'We read your brief carefully — usually same day.',
-    submittedStep2: 'We prepare a quick assessment: fit, approach, ballpark.',
+    submittedStep1: 'We read your brief carefully, usually the same day.',
+    submittedStep2: 'We prepare a quick assessment: fit, approach, and ballpark.',
     submittedStep3: 'You hear from us within 24 hours on business days.',
     submittedDemoPrompt: 'Want to see our work first?',
     submittedDemoLink: 'Try the live demo →',
@@ -25,6 +46,7 @@ const formCopy = {
     budgetOptions: ['Under €2,000', '€2,000 - €5,000', '€5,000 - €12,000', '€12,000+', 'Not sure yet'],
     sourcePlaceholder: 'Select source...',
     sourceOptions: ['Google Search', 'Social Media', 'Referral', 'Other'],
+    selectPlaceholder: 'Select...',
     error: 'Something went wrong. Please try again or email us directly at',
     sending: 'Sending...',
   },
@@ -43,61 +65,115 @@ const formCopy = {
     budgetOptions: ['Под €2,000', '€2,000 - €5,000', '€5,000 - €12,000', '€12,000+', 'Още не съм сигурен/сигурна'],
     sourcePlaceholder: 'Изберете източник...',
     sourceOptions: ['Google търсене', 'Социални мрежи', 'Препоръка', 'Друго'],
+    selectPlaceholder: 'Изберете...',
     error: 'Нещо се обърка. Моля, опитайте отново или ни пишете директно на',
     sending: 'Изпращане...',
   },
-}
+} as const
 
-export default function ContactForm({ packagePreselect }: ContactFormProps) {
-  const { t, language } = useTranslation('contact')
-  const { localePath } = useLanguage()
-  const copy = formCopy[language]
-  const defaultPackage = packagePreselect || t('packageOptions.notSure')
-  const subjectPresets = {
-    en: {
-      'ai-readiness': 'AI Readiness Assessment',
-      'custom-ai-assistant': 'Build a Custom AI Assistant',
-      'oracle-consulting': 'Book an Oracle Consulting Session',
-      'discovery-workshop': 'Discovery Workshop',
-    },
-    bg: {
-      'ai-readiness': 'Оценка за AI готовност',
-      'custom-ai-assistant': 'Изграждане на персонализиран AI асистент',
-      'oracle-consulting': 'Oracle консултантска сесия',
-      'discovery-workshop': 'Discovery Workshop',
-    },
-  } as const
-  const [formData, setFormData] = useState({
+const subjectPresets = {
+  en: {
+    'ai-readiness': 'AI Readiness Assessment',
+    'custom-ai-assistant': 'Build a Custom AI Assistant',
+    'oracle-consulting': 'Book an Oracle Consulting Session',
+    'discovery-workshop': 'Discovery Workshop',
+  },
+  bg: {
+    'ai-readiness': 'Оценка за AI готовност',
+    'custom-ai-assistant': 'Изграждане на персонализиран AI асистент',
+    'oracle-consulting': 'Oracle консултантска сесия',
+    'discovery-workshop': 'Discovery Workshop',
+  },
+} as const
+
+function buildGenericState(defaultPackage: string, subject = ''): GenericFormState {
+  return {
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    subject,
     packageInterest: defaultPackage,
     message: '',
     budget: '',
     source: '',
-  })
+  }
+}
 
+function buildVariantState(config: FormVariantConfig): VariantFormState {
+  return config.fields.reduce<VariantFormState>((acc, field) => {
+    acc[field.name] = field.type === 'multiselect' ? [] : ''
+    return acc
+  }, {})
+}
+
+function normalizeVariantPayload(values: VariantFormState): Record<string, string> {
+  return Object.entries(values).reduce<Record<string, string>>((acc, [key, value]) => {
+    acc[key] = Array.isArray(value) ? value.join(', ') : value
+    return acc
+  }, {})
+}
+
+function ContactFormWithSearch(props: ContactFormProps) {
+  const searchParams = useSearchParams()
+  return (
+    <ContactFormRenderer
+      {...props}
+      productParam={props.productParam ?? searchParams.get('product')}
+      subjectParam={props.subjectParam ?? searchParams.get('subject')}
+    />
+  )
+}
+
+function ContactFormRenderer({ packagePreselect, variant, productParam, subjectParam }: ContactFormProps) {
+  const { t, language } = useTranslation('contact')
+  const { localePath } = useLanguage()
+  const copy = genericCopy[language]
+  const contactForms = translations[language].contactForms ?? {}
+  const defaultPackage = packagePreselect || t('packageOptions.notSure')
+
+  const resolvedVariant = useMemo(
+    () => resolveContactFormVariant(variant ?? productParam, subjectParam),
+    [productParam, subjectParam, variant],
+  )
+
+  const variantConfig = resolvedVariant ? contactFormConfigs[resolvedVariant] : undefined
+  const variantCopy = resolvedVariant ? contactForms[resolvedVariant] : undefined
+
+  const [genericFormData, setGenericFormData] = useState<GenericFormState>(() => buildGenericState(defaultPackage))
+  const [variantFormData, setVariantFormData] = useState<VariantFormState>(() => (variantConfig ? buildVariantState(variantConfig) : {}))
+  const [sourcePage, setSourcePage] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const subjectKey = params.get('subject')
-    const defaultSubject = subjectKey ? subjectPresets[language][subjectKey as keyof typeof subjectPresets[typeof language]] ?? subjectKey : ''
+    setSourcePage(document.referrer || window.location.href)
+  }, [])
 
-    if (!defaultSubject) return
+  useEffect(() => {
+    if (variantConfig) {
+      setVariantFormData(buildVariantState(variantConfig))
+      return
+    }
 
-    setFormData((prev) => ({
-      ...prev,
-      subject: prev.subject || defaultSubject,
-    }))
-  }, [language])
+    const preset = subjectParam
+      ? subjectPresets[language][subjectParam as keyof (typeof subjectPresets)[typeof language]] ?? subjectParam
+      : ''
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setGenericFormData(buildGenericState(defaultPackage, preset))
+  }, [defaultPackage, language, subjectParam, variantConfig])
+
+  const handleGenericChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setGenericFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleVariantChange = (name: string, value: VariantFieldValue) => {
+    setVariantFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const resetVariantForm = (activeVariant: ContactFormVariant) => {
+    setVariantFormData(buildVariantState(contactFormConfigs[activeVariant]))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -105,26 +181,37 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
     setLoading(true)
     setError(false)
 
+    const payload = variantConfig && resolvedVariant
+      ? {
+          ...normalizeVariantPayload(variantFormData),
+          product_tag: variantConfig.hiddenValues.product_tag,
+          budget_range: variantConfig.hiddenValues.budget_range || (typeof variantFormData.budget === 'string' ? variantFormData.budget : ''),
+          source_page: sourcePage,
+        }
+      : {
+          ...genericFormData,
+          product_tag: 'general',
+          budget_range: genericFormData.budget,
+          source_page: sourcePage,
+        }
+
     try {
       const response = await fetch('https://formspree.io/f/xlgwoabo', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
         headers: { 'Content-Type': 'application/json' },
       })
 
       if (response.ok) {
         setSubmitted(true)
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          packageInterest: defaultPackage,
-          message: '',
-          budget: '',
-          source: '',
-        })
-        setTimeout(() => setSubmitted(false), 5000)
+        if (variantConfig && resolvedVariant) {
+          resetVariantForm(resolvedVariant)
+        } else {
+          const preset = subjectParam
+            ? subjectPresets[language][subjectParam as keyof (typeof subjectPresets)[typeof language]] ?? subjectParam
+            : ''
+          setGenericFormData(buildGenericState(defaultPackage, preset))
+        }
       } else {
         setError(true)
       }
@@ -136,34 +223,59 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
   }
 
   if (submitted) {
-    return (
-      <div className="bg-forge-stone border border-forge-gold rounded-lg p-8 text-center">
-        <div className="text-5xl mb-4">✓</div>
-        <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-2">{copy.submittedTitle}</h3>
-        <p className="text-gray-300 mb-6">{copy.submittedNext}</p>
-        <div className="text-left space-y-3 mb-6 bg-forge-dark rounded-lg p-4 border border-forge-ember/20">
-          <div className="flex items-start gap-3">
-            <span className="text-forge-ember font-bold">1.</span>
-            <p className="text-gray-300 text-sm">{copy.submittedStep1}</p>
+    if (variantCopy?.success) {
+      return (
+        <div className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
+          <div className="mb-4 text-5xl">✓</div>
+          <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{variantCopy.success.title}</h3>
+          <p className="mb-6 text-gray-300">{variantCopy.success.description}</p>
+          <div className="mb-6 space-y-3 rounded-lg border border-forge-ember/20 bg-forge-dark p-4 text-left">
+            {variantCopy.success.steps.map((step: string, index: number) => (
+              <div key={step} className="flex items-start gap-3">
+                <span className="font-bold text-forge-ember">{index + 1}.</span>
+                <p className="text-sm text-gray-300">{step}</p>
+              </div>
+            ))}
           </div>
-          <div className="flex items-start gap-3">
-            <span className="text-forge-ember font-bold">2.</span>
-            <p className="text-gray-300 text-sm">{copy.submittedStep2}</p>
-          </div>
-          <div className="flex items-start gap-3">
-            <span className="text-forge-ember font-bold">3.</span>
-            <p className="text-gray-300 text-sm">{copy.submittedStep3}</p>
-          </div>
-        </div>
-        <p className="text-gray-400 text-sm mb-4">{copy.submittedDemoPrompt}</p>
-        <Link href={localePath('/demo')} className="text-forge-gold text-sm font-semibold hover:text-forge-ember transition">
-          {copy.submittedDemoLink}
-        </Link>
-        <div className="mt-4 pt-4 border-t border-forge-ember/20">
           <button
             type="button"
             onClick={() => setSubmitted(false)}
-            className="text-gray-500 text-xs hover:text-gray-300 transition"
+            className="text-xs text-gray-500 transition hover:text-gray-300"
+          >
+            {copy.sendAnother}
+          </button>
+        </div>
+      )
+    }
+
+    return (
+      <div className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
+        <div className="mb-4 text-5xl">✓</div>
+        <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{copy.submittedTitle}</h3>
+        <p className="mb-6 text-gray-300">{copy.submittedNext}</p>
+        <div className="mb-6 space-y-3 rounded-lg border border-forge-ember/20 bg-forge-dark p-4 text-left">
+          <div className="flex items-start gap-3">
+            <span className="font-bold text-forge-ember">1.</span>
+            <p className="text-sm text-gray-300">{copy.submittedStep1}</p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="font-bold text-forge-ember">2.</span>
+            <p className="text-sm text-gray-300">{copy.submittedStep2}</p>
+          </div>
+          <div className="flex items-start gap-3">
+            <span className="font-bold text-forge-ember">3.</span>
+            <p className="text-sm text-gray-300">{copy.submittedStep3}</p>
+          </div>
+        </div>
+        <p className="mb-4 text-sm text-gray-400">{copy.submittedDemoPrompt}</p>
+        <Link href={localePath('/demo')} className="text-sm font-semibold text-forge-gold transition hover:text-forge-ember">
+          {copy.submittedDemoLink}
+        </Link>
+        <div className="mt-4 border-t border-forge-ember/20 pt-4">
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="text-xs text-gray-500 transition hover:text-gray-300"
           >
             {copy.sendAnother}
           </button>
@@ -172,75 +284,178 @@ export default function ContactForm({ packagePreselect }: ContactFormProps) {
     )
   }
 
+  const renderVariantField = (field: FormVariantConfig['fields'][number]) => {
+    if (!variantCopy) return null
+
+    const fieldCopy = variantCopy.fields?.[field.name]
+    const value = variantFormData[field.name] ?? (field.type === 'multiselect' ? [] : '')
+    const label = fieldCopy?.label || field.name
+    const placeholder = fieldCopy?.placeholder
+    const options = fieldCopy?.options as string[] | undefined
+    const isFullWidth = field.type === 'textarea' || field.type === 'multiselect'
+    const wrapperClass = isFullWidth ? 'md:col-span-2' : ''
+    const inputClass = 'w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:outline-none focus:border-forge-gold'
+
+    if (field.type === 'textarea') {
+      return (
+        <div key={field.name} className={wrapperClass}>
+          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <textarea
+            name={field.name}
+            value={typeof value === 'string' ? value : ''}
+            onChange={(e) => handleVariantChange(field.name, e.target.value)}
+            placeholder={placeholder}
+            required={field.required}
+            rows={field.rows ?? 4}
+            className={inputClass}
+          />
+        </div>
+      )
+    }
+
+    if (field.type === 'select') {
+      return (
+        <div key={field.name} className={wrapperClass}>
+          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <select
+            name={field.name}
+            value={typeof value === 'string' ? value : ''}
+            onChange={(e) => handleVariantChange(field.name, e.target.value)}
+            required={field.required}
+            className={inputClass}
+          >
+            <option value="">{placeholder || copy.selectPlaceholder}</option>
+            {(options ?? []).map((option) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+      )
+    }
+
+    if (field.type === 'multiselect') {
+      return (
+        <div key={field.name} className={wrapperClass}>
+          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <MultiSelect
+            label={placeholder}
+            options={options ?? []}
+            value={Array.isArray(value) ? value : []}
+            onChange={(selected) => handleVariantChange(field.name, selected)}
+          />
+        </div>
+      )
+    }
+
+    return (
+      <div key={field.name} className={wrapperClass}>
+        <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+        <input
+          type={field.type}
+          name={field.name}
+          value={typeof value === 'string' ? value : ''}
+          onChange={(e) => handleVariantChange(field.name, e.target.value)}
+          placeholder={placeholder || label}
+          required={field.required}
+          className={inputClass}
+        />
+      </div>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formName')} *</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder={t('formName')} required className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition" />
-        </div>
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formEmail')} *</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="your.name@company.com" required className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition" />
-        </div>
-      </div>
+      {variantConfig && variantCopy ? (
+        <>
+          <div className="rounded-xl border border-forge-ember/30 bg-forge-dark p-5">
+            <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{variantCopy.heading}</h3>
+            <p className="text-gray-300">{variantCopy.description}</p>
+            {variantConfig.showPriceNote && variantCopy.priceNote ? <p className="mt-3 text-sm font-semibold text-forge-gold">{variantCopy.priceNote}</p> : null}
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formPhone')}</label>
-          <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+359..." className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition" />
-        </div>
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formPackage')}</label>
-          <select name="packageInterest" value={formData.packageInterest} onChange={handleChange} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition">
-            <option>{t('packageOptions.notSure')}</option>
-            <option>{t('packageOptions.spark')}</option>
-            <option>{t('packageOptions.ember')}</option>
-            <option>{t('packageOptions.anvil')}</option>
-            <option>{t('packageOptions.forge')}</option>
-            <option>{t('packageOptions.oracle')}</option>
-            <option>{t('packageOptions.hearthstone')}</option>
-          </select>
-        </div>
-      </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {variantConfig.fields.map(renderVariantField)}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formName')} *</label>
+              <input type="text" name="name" value={genericFormData.name} onChange={handleGenericChange} placeholder={t('formName')} required className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+            </div>
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formEmail')} *</label>
+              <input type="email" name="email" value={genericFormData.email} onChange={handleGenericChange} placeholder="your.name@company.com" required className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+            </div>
+          </div>
 
-      <div>
-        <label className="block text-sm font-semibold text-forge-gold mb-2">{copy.subjectLabel}</label>
-        <input type="text" name="subject" value={formData.subject} onChange={handleChange} placeholder={copy.subjectPlaceholder} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition" />
-      </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPhone')}</label>
+              <input type="tel" name="phone" value={genericFormData.phone} onChange={handleGenericChange} placeholder="+359..." className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+            </div>
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPackage')}</label>
+              <select name="packageInterest" value={genericFormData.packageInterest} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+                <option>{t('packageOptions.notSure')}</option>
+                <option>{t('packageOptions.spark')}</option>
+                <option>{t('packageOptions.ember')}</option>
+                <option>{t('packageOptions.anvil')}</option>
+                <option>{t('packageOptions.forge')}</option>
+                <option>{t('packageOptions.oracle')}</option>
+                <option>{t('packageOptions.hearthstone')}</option>
+              </select>
+            </div>
+          </div>
 
-      <div>
-        <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formProject')} *</label>
-        <textarea name="message" value={formData.message} onChange={handleChange} placeholder={t('formProjectHelper')} required rows={5} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition"></textarea>
-        <p className="text-gray-500 text-xs mt-2">{t('formProjectHelper')}</p>
-      </div>
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-forge-gold">{copy.subjectLabel}</label>
+            <input type="text" name="subject" value={genericFormData.subject} onChange={handleGenericChange} placeholder={copy.subjectPlaceholder} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formBudget')}</label>
-          <select name="budget" value={formData.budget} onChange={handleChange} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition">
-            <option value="">{copy.budgetPlaceholder}</option>
-            {copy.budgetOptions.map((option) => <option key={option}>{option}</option>)}
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-semibold text-forge-gold mb-2">{t('formSource')}</label>
-          <select name="source" value={formData.source} onChange={handleChange} className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-2 text-white focus:outline-none focus:border-forge-gold transition">
-            <option value="">{copy.sourcePlaceholder}</option>
-            {copy.sourceOptions.map((option) => <option key={option}>{option}</option>)}
-          </select>
-        </div>
-      </div>
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formProject')} *</label>
+            <textarea name="message" value={genericFormData.message} onChange={handleGenericChange} placeholder={t('formProjectHelper')} required rows={5} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none"></textarea>
+            <p className="mt-2 text-xs text-gray-500">{t('formProjectHelper')}</p>
+          </div>
 
-      {error && (
-        <div className="bg-red-900/30 border border-red-500/50 rounded-lg p-4 text-red-300 text-sm">
-          {copy.error} <a href="mailto:hello@forgingapps.com" className="text-forge-gold hover:text-forge-ember transition underline">hello@forgingapps.com</a>.
-        </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formBudget')}</label>
+              <select name="budget" value={genericFormData.budget} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+                <option value="">{copy.budgetPlaceholder}</option>
+                {copy.budgetOptions.map((option) => <option key={option}>{option}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formSource')}</label>
+              <select name="source" value={genericFormData.source} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+                <option value="">{copy.sourcePlaceholder}</option>
+                {copy.sourceOptions.map((option) => <option key={option}>{option}</option>)}
+              </select>
+            </div>
+          </div>
+        </>
       )}
 
-      <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed">
+      {error ? (
+        <div className="rounded-lg border border-red-500/50 bg-red-900/30 p-4 text-sm text-red-300">
+          {copy.error} <a href="mailto:hello@forgingapps.com" className="text-forge-gold underline transition hover:text-forge-ember">hello@forgingapps.com</a>.
+        </div>
+      ) : null}
+
+      <button type="submit" disabled={loading} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
         {loading ? copy.sending : t('formSubmit')}
       </button>
     </form>
+  )
+}
+
+export default function ContactForm(props: ContactFormProps) {
+  return (
+    <Suspense fallback={<ContactFormRenderer {...props} />}>
+      <ContactFormWithSearch {...props} />
+    </Suspense>
   )
 }
