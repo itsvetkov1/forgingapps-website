@@ -149,7 +149,7 @@ export const en: Record<string, any> = {
     teamHeading: "Meet the Team",
     ivaylo: {
       name: "Ivaylo Tsvetkov",
-      role: "Co-Founder, AI & Ops",
+      role: "Founder, AI & Ops",
       linkedin: "Profile",
       linkedInUrl: "https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/",
       bio: "Co-founder who bridges AI capability with business need. Leads product vision, AI solution design, and quality engineering. Every product ships with the security and polish it deserves.",
@@ -161,7 +161,7 @@ export const en: Record<string, any> = {
     },
     radoslav: {
       name: "Radoslav Lambrev",
-      role: "Founder & Lead Developer",
+      role: "Co-Founder & Lead Developer",
       linkedin: "Profile",
       linkedInUrl: "https://www.linkedin.com/in/radoslav-lambrev/",
       bio: "Kotlin and Java developer with years of experience building production-grade mobile and backend systems. Deep expertise in Android native development, server architecture, and performance optimization. The hands that build your product.",
@@ -560,8 +560,8 @@ export const en: Record<string, any> = {
       localStudioVsFreelancer: { title: "Why a Local Dev Studio Beats a Freelancer for Custom Software", description: "Freelancers are cheap. Agencies are expensive. The right answer for most small businesses is a boutique studio where senior people build your product directly." },
       customVsOffTheShelf: { title: "Custom Software vs Off-the-Shelf: When to Build, When to Buy", description: "Not every business needs custom software. But some are paying SaaS fees forever for a tool that barely fits. Here is a practical framework for deciding." },
     },
-    authorIvaylo: "Ivaylo Tsvetkov, Co-Founder, AI & Ops",
-    authorRadoslav: "Radoslav Lambrev, Founder & Lead Developer",
+    authorIvaylo: "Ivaylo Tsvetkov, Founder, AI & Ops",
+    authorRadoslav: "Radoslav Lambrev, Co-Founder & Lead Developer",
   },
   demo: {
     support: {

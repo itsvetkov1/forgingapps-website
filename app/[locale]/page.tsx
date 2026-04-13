@@ -44,8 +44,8 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
       addressCountry: 'BG',
     },
     founders: [
-      { '@type': 'Person', name: 'Ivaylo Tsvetkov', jobTitle: 'Co-Founder, AI & Ops' },
-      { '@type': 'Person', name: 'Radoslav Lambrev', jobTitle: 'Founder & Lead Developer' },
+      { '@type': 'Person', name: 'Ivaylo Tsvetkov', jobTitle: 'Founder, AI & Ops' },
+      { '@type': 'Person', name: 'Radoslav Lambrev', jobTitle: 'Co-Founder & Lead Developer' },
     ],
   }
 
