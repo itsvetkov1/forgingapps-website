@@ -20,7 +20,7 @@ const demoCopy = {
     bottomIntro: 'Built by the ForgingApps team.',
     bottomMeetUs: 'Meet us',
     bottomHeading: 'Built by a product team that ships real client work',
-    bottomDescription: '{data.bottomDescription}',
+    bottomDescription: 'These demos are built by ForgingApps to show what polished AI-assisted product experiences can look like in practice, from storefront UX to embedded support flows.',
     bottomProof1Title: 'Live AI agent in a working storefront',
     bottomProof1Desc: 'The support experience is interactive and responds to real product and policy questions in the demo.',
     bottomProof2Title: 'Two-time umlaut Secure App Award winner',
@@ -191,7 +191,7 @@ export default function DemoContent() {
             <div className="mb-6 text-sm leading-7 text-gray-400">
               {data.bottomIntro}{' '}
               <Link href={localePath('/about')} className="text-forge-gold hover:text-forge-ember transition-colors underline underline-offset-4">
-                Meet us
+                {data.bottomMeetUs}
               </Link>
               .
             </div>
@@ -200,7 +200,7 @@ export default function DemoContent() {
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-forge-gold/70">ForgingApps</p>
                 <h2 className="mb-3 font-cinzel text-3xl font-bold text-forge-gold">{data.bottomHeading}</h2>
                 <p className="max-w-2xl text-sm leading-7 text-gray-300">
-                  These demos are built by ForgingApps to show what polished AI-assisted product experiences can look like in practice, from storefront UX to embedded support flows.
+                  {data.bottomDescription}
                 </p>
               </div>
 
