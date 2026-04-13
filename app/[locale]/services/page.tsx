@@ -17,5 +17,44 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LocaleServicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   if (!isLocale(locale)) notFound()
-  return <ServicesContent />
+
+  const data = translations[locale].services
+  const servicesSchema = [
+    { slug: 'spark', pkg: data.spark },
+    { slug: 'ember', pkg: data.ember },
+    { slug: 'anvil', pkg: data.anvil },
+    { slug: 'forge', pkg: data.forge },
+    { slug: 'oracle', pkg: data.oracle },
+    { slug: 'hearthstone', pkg: data.hearthstone },
+  ].map(({ slug, pkg }) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${pkg.subtitle} (${pkg.name})`,
+    serviceType: pkg.subtitle,
+    description: pkg.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'ForgingApps',
+      url: 'https://forgingapps.com',
+    },
+    areaServed: [
+      { '@type': 'Country', name: 'Bulgaria' },
+      { '@type': 'Continent', name: 'Europe' },
+    ],
+    url: `https://forgingapps.com/${locale}/services#${slug}`,
+    offers: pkg.launchPrice
+      ? {
+          '@type': 'Offer',
+          priceCurrency: 'EUR',
+          description: pkg.launchPrice,
+        }
+      : undefined,
+  }))
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }} />
+      <ServicesContent />
+    </>
+  )
 }

@@ -50,10 +50,10 @@ export default function HomeContent() {
         trustBadge={data.trustBadge}
       />
 
-      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.whatWeForge}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.whatWeForge}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} launchPrice={data.spark.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#spark')} />
             <ServiceCard icon={<Globe size={40} />} title={data.ember.title} tier={data.ember.tier} outcome={data.ember.outcome} description={data.ember.description} launchPrice={data.ember.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#ember')} />
             <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} ctaLabel={common.learnMore + ' →'} href={localePath('/services#anvil')} />
@@ -65,15 +65,15 @@ export default function HomeContent() {
             <Link href={localePath('/ai-consulting')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{data.exploreAiConsulting} →</Link>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6">
             <Link href={localePath('/services')} className="btn-primary">{data.viewAllPackages} →</Link>
           </div>
         </div>
       </section>
 
-      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
-          <div className="bg-forge-dark border border-forge-ember/30 rounded-xl p-8 md:p-12 text-center">
+          <div className="bg-forge-dark border border-forge-ember/30 rounded-xl p-8 md:p-10 text-center">
             <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-forge-gold mb-4">{data.demoTeaser.heading}</h2>
             <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">{data.demoTeaser.description}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
@@ -89,10 +89,10 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.difference.heading}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.difference.heading}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center"><div className="text-forge-gold mb-4 flex justify-center"><Users size={36} /></div><h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">{data.difference.directAccess.title}</h3><p className="text-gray-400 text-sm">{data.difference.directAccess.description}</p></div>
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center"><div className="text-forge-gold mb-4 flex justify-center"><Zap size={36} /></div><h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">{data.difference.fastDelivery.title}</h3><p className="text-gray-400 text-sm">{data.difference.fastDelivery.description}</p></div>
             <div className="bg-forge-dark border border-forge-ember/30 rounded-lg p-6 text-center"><div className="text-forge-gold mb-4 flex justify-center"><DollarSign size={36} /></div><h3 className="font-cinzel text-lg font-bold text-forge-gold mb-2">{data.difference.affordable.title}</h3><p className="text-gray-400 text-sm">{data.difference.affordable.description}</p></div>
@@ -101,10 +101,10 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.process.heading}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.process.heading}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
             {steps.map((step: any, i: number) => (
               <div key={i} className="relative">
                 <div className="bg-forge-stone border border-forge-ember/30 rounded-lg p-6">
@@ -119,10 +119,10 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <section className="section-py bg-forge-stone border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-stone border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.credentials.heading}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.credentials.heading}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">{data.credentials.credentialsTitle}</h3>
               <ul className="space-y-3 text-gray-400">
@@ -143,10 +143,10 @@ export default function HomeContent() {
         </div>
       </section>
 
-      <section className="section-py bg-forge-dark border-t border-forge-ember/20">
+      <section className="py-12 md:py-16 bg-forge-dark border-t border-forge-ember/20">
         <div className="container-custom">
-          <h2 className="font-cinzel text-4xl font-bold text-center mb-12">{data.latestFromBlog.heading}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.latestFromBlog.heading}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {latestPosts.map((post) => {
               const postMeta = (blog.posts as Record<string, any>)[post.postKey]
               return (
@@ -168,7 +168,7 @@ export default function HomeContent() {
         </div>
       </section>
 
-            <section className="section-py section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
+      <section className="py-12 md:py-14 section-fluent-merge bg-gradient-to-r from-forge-ember to-forge-gold text-forge-dark">
         <div className="container-custom text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-4">{data.cta.heading}</h2>
           <p className="text-lg mb-8 text-forge-dark/80">{data.cta.subheading}</p>

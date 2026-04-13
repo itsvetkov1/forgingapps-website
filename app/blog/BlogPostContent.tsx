@@ -4,6 +4,15 @@ import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
+const recentPostSlugs = [
+  'ai-security-is-now-a-buying-issue',
+  'local-studio-vs-freelancer',
+  'custom-software-vs-off-the-shelf',
+  'voice-agents-just-got-useful',
+  'why-forgingapps-ai',
+  'how-to-choose-ai-consultant',
+]
+
 function BlogCTA({ category, language, localePath }: { category: string; language: string; localePath: (path: string) => string }) {
   const ctas: Record<string, { href: string; heading: string; body: string; cta: string }> = {
     AI: {
@@ -51,6 +60,10 @@ function BlogCTA({ category, language, localePath }: { category: string; languag
 export default function BlogPostContent({ slug }: { slug: string }) {
   const { language, localePath } = useLanguage()
   const post = translations[language].blogPosts[slug]
+  const relatedPosts = recentPostSlugs
+    .filter((candidate) => candidate !== slug && translations[language].blogPosts[candidate])
+    .slice(0, 3)
+    .map((candidate) => ({ slug: candidate, post: translations[language].blogPosts[candidate] }))
 
   if (!post) {
     return (
@@ -99,6 +112,35 @@ export default function BlogPostContent({ slug }: { slug: string }) {
         </div>
 
         <BlogCTA category={post.category} language={language} localePath={localePath} />
+
+        <section className="mt-16 border-t border-forge-ember/20 pt-10">
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <h2 className="font-cinzel text-3xl font-bold text-forge-gold">
+              {language === 'bg' ? 'Свързани статии' : 'Related Posts'}
+            </h2>
+            <Link href={localePath('/blog')} className="text-sm font-semibold text-forge-gold hover:text-forge-ember transition">
+              {language === 'bg' ? 'Всички статии →' : 'View all posts →'}
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {relatedPosts.map(({ slug: relatedSlug, post: relatedPost }) => (
+              <Link
+                key={relatedSlug}
+                href={localePath(`/blog/${relatedSlug}`)}
+                className="group rounded-xl border border-forge-ember/20 bg-forge-stone p-5 transition hover:border-forge-gold/40"
+              >
+                <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                  <span className="rounded bg-forge-ember/10 px-2 py-1 text-forge-ember">{relatedPost.category}</span>
+                  <span>{relatedPost.date}</span>
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-3 group-hover:text-forge-ember transition">
+                  {relatedPost.title}
+                </h3>
+                <p className="text-sm text-gray-400">{relatedPost.metaDescription ?? relatedPost.intro}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </article>
   )

@@ -21,6 +21,11 @@ export const bg: Record<string, any> = {
       contact: "Контакт",
       email: "hello@forgingapps.com",
       location: "София, България",
+      legalHeading: "Правна информация",
+      registrationLabel: "Фирмена регистрация",
+      registrationValue: "TODO: добавете официален ЕИК / БУЛСТАТ",
+      vatLabel: "ДДС статус",
+      vatValue: "TODO: потвърдете регистрацията по ДДС",
       freeConsultation: "Безплатна консултация",
       copyright: "© 2026 ForgingApps. Всички права запазени.",
       privacyPolicy: "Политика за поверителност",
@@ -42,7 +47,7 @@ export const bg: Record<string, any> = {
   },
   home: {
     headline: "Приложения, изковани да издържат",
-    subheadline: "Опитни разработчици, които създават готови за пазара мобилни приложения, уеб платформи и AI интеграции за развиващи се бизнеси в София и цяла Европа.",
+    subheadline: "Персонализиран софтуер и AI решения за развиващи се бизнеси. Работите директно с основателите, без агенционни слоеве.",
     primaryCTA: "Вижте на живо",
     secondaryCTA: "Започнете",
     trustBadge: "Потвърден партньор от umlaut",
@@ -224,7 +229,7 @@ export const bg: Record<string, any> = {
     },
     spark: {
       name: "The Spark",
-      subtitle: "Landing Pages и прости сайтове",
+      subtitle: "Лендинг страница / прост уебсайт",
       regularPrice: "",
       launchPrice: "От €1,500",
       delivery: "1–2 седмици",
@@ -241,7 +246,7 @@ export const bg: Record<string, any> = {
     },
     ember: {
       name: "The Ember",
-      subtitle: "Прост уеб продукт",
+      subtitle: "Уеб приложение",
       regularPrice: "",
       launchPrice: "От €3,000",
       delivery: "2–3 седмици",
@@ -258,7 +263,7 @@ export const bg: Record<string, any> = {
     },
     anvil: {
       name: "The Anvil",
-      subtitle: "Персонализирано приложение или мобилен продукт",
+      subtitle: "Персонализирано приложение",
       regularPrice: "",
       launchPrice: "От €5,000",
       delivery: "4–8 седмици",
@@ -276,7 +281,7 @@ export const bg: Record<string, any> = {
     },
     forge: {
       name: "The Forge",
-      subtitle: "Сложна платформа или пълен MVP",
+      subtitle: "Пълна платформа / MVP",
       regularPrice: "",
       launchPrice: "От €10,000",
       delivery: "Обхватът се определя индивидуално",

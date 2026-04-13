@@ -6,12 +6,12 @@ import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Footer() {
   const { t } = useTranslation('common.footer')
-  const { localePath } = useLanguage()
+  const { language, localePath } = useLanguage()
 
   return (
     <footer className="bg-forge-stone border-t border-forge-ember/30">
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 font-cinzel text-lg font-bold text-forge-gold mb-2">
               <img src="/logo.svg" alt="ForgingApps" width={28} height={28} className="inline-block" />
@@ -44,6 +44,17 @@ export default function Footer() {
               <li><a href="mailto:hello@forgingapps.com" className="text-gray-400 hover:text-forge-gold transition">hello@forgingapps.com</a></li>
               <li className="text-gray-400">{t('location')}</li>
               <li><Link href={localePath('/contact')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{t('freeConsultation')}</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-cinzel text-forge-gold mb-4">{t('legalHeading')}</h3>
+            {/* TODO: Replace placeholder company registration and VAT details with the official legal entity information. */}
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>{t('location')}</li>
+              <li>{t('registrationLabel')}: {t('registrationValue')}</li>
+              <li>{t('vatLabel')}: {t('vatValue')}</li>
+              {language === 'bg' ? <li>Дружеството е регистрирано в България.</li> : <li>Company registered in Bulgaria.</li>}
             </ul>
           </div>
         </div>

@@ -21,6 +21,11 @@ export const en: Record<string, any> = {
       contact: "Contact",
       email: "hello@forgingapps.com",
       location: "Sofia, Bulgaria",
+      legalHeading: "Legal",
+      registrationLabel: "Company registration",
+      registrationValue: "TODO: add official EIK / BULSTAT",
+      vatLabel: "VAT status",
+      vatValue: "TODO: confirm VAT registration",
       freeConsultation: "Free Consultation",
       copyright: "\u00a9 2026 ForgingApps. All rights reserved.",
       privacyPolicy: "Privacy Policy",
@@ -42,7 +47,7 @@ export const en: Record<string, any> = {
   },
   home: {
     headline: "Apps Forged to Last",
-    subheadline: "A founding team that builds and ships production-ready mobile apps, web platforms, and AI integrations for growing businesses in Sofia and across Europe.",
+    subheadline: "Custom software and AI solutions for growing businesses. Built directly by the founders, without agency layers.",
     primaryCTA: "See It In Action",
     secondaryCTA: "Get Started",
     trustBadge: "umlaut Verified Partner",
@@ -224,7 +229,7 @@ export const en: Record<string, any> = {
     },
     spark: {
       name: "The Spark",
-      subtitle: "Landing Pages & Simple Sites",
+      subtitle: "Landing Page / Simple Website",
       regularPrice: "",
       launchPrice: "From €1,500",
       delivery: "1–2 weeks",
@@ -241,7 +246,7 @@ export const en: Record<string, any> = {
     },
     ember: {
       name: "The Ember",
-      subtitle: "Simple Web Product",
+      subtitle: "Web Application",
       regularPrice: "",
       launchPrice: "From €3,000",
       delivery: "2–3 weeks",
@@ -258,7 +263,7 @@ export const en: Record<string, any> = {
     },
     anvil: {
       name: "The Anvil",
-      subtitle: "Custom App or Mobile Product",
+      subtitle: "Custom Application",
       regularPrice: "",
       launchPrice: "From €5,000",
       delivery: "4–8 weeks",
@@ -276,7 +281,7 @@ export const en: Record<string, any> = {
     },
     forge: {
       name: "The Forge",
-      subtitle: "Complex Platform or Full MVP",
+      subtitle: "Full Platform / MVP",
       regularPrice: "",
       launchPrice: "From €10,000",
       delivery: "Scoped individually",

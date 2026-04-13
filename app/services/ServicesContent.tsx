@@ -63,10 +63,10 @@ export default function ServicesContent() {
             <thead>
               <tr className="bg-forge-stone">
                 <th className="p-4 text-left text-forge-gold">Feature</th>
-                <th className="p-4 text-left text-forge-gold">{data.spark.name}</th>
-                <th className="p-4 text-left text-forge-gold">{data.ember.name}</th>
-                <th className="p-4 text-left text-forge-gold">{data.anvil.name}</th>
-                <th className="p-4 text-left text-forge-gold">{data.forge.name}</th>
+                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.spark.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.spark.name}</div></th>
+                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.ember.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.ember.name}</div></th>
+                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.anvil.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.anvil.name}</div></th>
+                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.forge.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.forge.name}</div></th>
               </tr>
             </thead>
             <tbody>
@@ -92,8 +92,10 @@ export default function ServicesContent() {
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projectPackages.map(({ id, data: pkg, href }) => (
             <div key={id} id={id} className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
-              <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-2">{pkg.name}</h2>
-              <p className="text-forge-ember font-semibold mb-2">{pkg.subtitle}</p>
+              <div className="flex flex-col gap-3 mb-3">
+                <span className="inline-flex w-fit rounded-full border border-forge-ember/30 bg-forge-dark px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-forge-ember">{pkg.name}</span>
+                <h2 className="font-cinzel text-3xl font-bold text-forge-gold">{pkg.subtitle}</h2>
+              </div>
               <p className="text-2xl font-bold text-white mb-2">{pkg.launchPrice}</p>
               {'paymentTerms' in pkg && pkg.paymentTerms ? <p className="text-xs text-gray-500 mb-2">{pkg.paymentTerms}</p> : null}
               {'delivery' in pkg ? <p className="text-sm text-gray-400 mb-4">{data.comparison.delivery}: {pkg.delivery}</p> : null}
