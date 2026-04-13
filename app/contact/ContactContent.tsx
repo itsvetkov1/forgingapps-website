@@ -38,6 +38,7 @@ export default function ContactContent() {
         </div>
       </section>
 
+      {GOOGLE_CALENDAR_BOOKING_URL && (
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-5xl mb-10">
           <div className="rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
@@ -85,6 +86,7 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
+      )}
 
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-4xl">
