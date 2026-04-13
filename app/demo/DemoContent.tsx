@@ -17,6 +17,15 @@ const demoCopy = {
     contact: 'Get in Touch',
     tryLive: 'Try it live',
     demoLanguageNotice: '',
+    bottomIntro: 'Built by the ForgingApps team.',
+    bottomMeetUs: 'Meet us',
+    bottomHeading: 'Built by a product team that ships real client work',
+    bottomDescription: '{data.bottomDescription}',
+    bottomProof1Title: 'Live AI agent in a working storefront',
+    bottomProof1Desc: 'The support experience is interactive and responds to real product and policy questions in the demo.',
+    bottomProof2Title: 'Two-time umlaut Secure App Award winner',
+    bottomProof2Desc: 'Security-minded product delivery is part of the team background behind the work you are seeing here.',
+    bottomCta: 'Want something like this?',
     outcomesHeading: 'Business outcomes this approach enables',
     outcomes: [
       'Reduced support load, AI assistants handle repeat queries so human agents can focus on complex cases.',
@@ -60,6 +69,15 @@ const demoCopy = {
     contact: 'Свържете се с нас',
     tryLive: 'Пробвайте демото',
     demoLanguageNotice: 'Демотата са на английски, защото симулират международни продуктови изживявания.',
+    bottomIntro: 'Изградено от екипа на ForgingApps.',
+    bottomMeetUs: 'Запознайте се с нас',
+    bottomHeading: 'Изградено от продуктов екип, който доставя реални клиентски проекти',
+    bottomDescription: 'Тези демота са изградени от ForgingApps, за да покажат как изглеждат полирани AI-подпомогнати продуктови изживявания на практика.',
+    bottomProof1Title: 'Жив AI агент в работещ магазин',
+    bottomProof1Desc: 'Поддръжката е интерактивна и отговаря на реални въпроси за продукти и политики в демото.',
+    bottomProof2Title: 'Двукратен носител на umlaut Secure App Award',
+    bottomProof2Desc: 'Сигурността е част от фона на екипа, който стои зад това, което виждате тук.',
+    bottomCta: 'Искате нещо подобно?',
     outcomesHeading: 'Бизнес резултати, които този подход позволява',
     outcomes: [
       'По-малко натоварване за support екипа, AI поема повтарящите се въпроси и оставя сложните случаи на хората.',
@@ -171,7 +189,7 @@ export default function DemoContent() {
 
           <div className="mt-12 rounded-2xl border border-forge-ember/30 bg-forge-stone p-8">
             <div className="mb-6 text-sm leading-7 text-gray-400">
-              Built by the ForgingApps team.{' '}
+              {data.bottomIntro}{' '}
               <Link href={localePath('/about')} className="text-forge-gold hover:text-forge-ember transition-colors underline underline-offset-4">
                 Meet us
               </Link>
@@ -180,7 +198,7 @@ export default function DemoContent() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr]">
               <div>
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-forge-gold/70">ForgingApps</p>
-                <h2 className="mb-3 font-cinzel text-3xl font-bold text-forge-gold">Built by a product team that ships real client work</h2>
+                <h2 className="mb-3 font-cinzel text-3xl font-bold text-forge-gold">{data.bottomHeading}</h2>
                 <p className="max-w-2xl text-sm leading-7 text-gray-300">
                   These demos are built by ForgingApps to show what polished AI-assisted product experiences can look like in practice, from storefront UX to embedded support flows.
                 </p>
@@ -188,20 +206,20 @@ export default function DemoContent() {
 
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
                 <div className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-4">
-                  <p className="text-sm font-semibold text-white">Live AI agent in a working storefront</p>
-                  <p className="mt-1 text-xs leading-6 text-gray-400">The support experience is interactive and responds to real product and policy questions in the demo.
+                  <p className="text-sm font-semibold text-white">{data.bottomProof1Title}</p>
+                  <p className="mt-1 text-xs leading-6 text-gray-400">{data.bottomProof1Desc}
                   </p>
                 </div>
                 <div className="rounded-xl border border-forge-ember/20 bg-forge-dark/60 p-4">
-                  <p className="text-sm font-semibold text-white">Two-time umlaut Secure App Award winner</p>
-                  <p className="mt-1 text-xs leading-6 text-gray-400">Security-minded product delivery is part of the team background behind the work you are seeing here.</p>
+                  <p className="text-sm font-semibold text-white">{data.bottomProof2Title}</p>
+                  <p className="mt-1 text-xs leading-6 text-gray-400">{data.bottomProof2Desc}</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-forge-ember/20 pt-6 sm:flex-row sm:items-center">
               <p className="text-sm text-gray-400">{data.ctaPrompt}</p>
-              <Link href={localePath('/contact')} className="btn-primary">Want something like this?</Link>
+              <Link href={localePath('/contact')} className="btn-primary">{data.bottomCta}</Link>
             </div>
           </div>
         </div>
