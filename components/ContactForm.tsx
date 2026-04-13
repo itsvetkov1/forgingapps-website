@@ -367,12 +367,6 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     <form onSubmit={handleSubmit} className="space-y-6">
       {variantConfig && variantCopy ? (
         <>
-          <div className="rounded-xl border border-forge-ember/30 bg-forge-dark p-5">
-            <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{variantCopy.heading}</h3>
-            <p className="text-gray-300">{variantCopy.description}</p>
-            {variantConfig.showPriceNote && variantCopy.priceNote ? <p className="mt-3 text-sm font-semibold text-forge-gold">{variantCopy.priceNote}</p> : null}
-          </div>
-
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {variantConfig.fields.map(renderVariantField)}
           </div>

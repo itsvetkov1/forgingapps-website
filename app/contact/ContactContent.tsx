@@ -26,7 +26,7 @@ function ContactContentBody({ productParam, subjectParam }: { productParam?: str
   const pageHeading = activeVariantCopy?.heading || data.heading
   const pageSubheading = activeVariantCopy?.description || data.subheading
   const pageKicker = activeVariantCopy?.priceNote || data.accepting
-  const formHeading = activeVariantCopy?.heading || data.formHeading
+  const formHeading = data.formHeading
 
   const quickFaqs = [data.quickFaq.q1, data.quickFaq.q2, data.quickFaq.q3, data.quickFaq.q4, data.quickFaq.q5]
   const faqs = [data.faq1, data.faq2, data.faq3]
