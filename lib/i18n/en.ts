@@ -78,7 +78,7 @@ export const en: Record<string, any> = {
       title: "Complex Apps & Full MVPs",
       tier: "The Forge",
       outcome: "Production-ready in 8-16 weeks",
-      description: "Full MVPs, complex web platforms, and multi-service systems. The same architecture patterns a VC-funded startup would get from a EUR50K build — delivered at a fraction of the cost because two people are doing the work of eight.",
+      description: "Full MVPs, complex web platforms, and multi-service systems. The same architecture patterns a VC-funded startup would get from a €50K build — delivered at a fraction of the cost because two people are doing the work of eight.",
       launchPrice: "From \u20ac10,000",
     },
     readyForCustomAi: "Ready for custom AI?",
@@ -436,7 +436,7 @@ export const en: Record<string, any> = {
     hourlyConsulting: {
       title: "The Oracle",
       badge: "Senior consulting",
-      launchPrice: "EUR 100–EUR 150 / hr",
+      launchPrice: "€100–€150/hr",
       description: "You have a real AI ambition — or a real technical uncertainty — and you need a senior engineer in the room, not a slide deck. The Oracle is structured consulting delivered directly by ForgingApps founders. We have deployed autonomous AI agents in live production systems, won the umlaut Secure App Award twice, and bring software architecture thinking to every engagement. Typical engagements run 10–20 hours over 2–4 weeks, covering architecture review, model and tool selection, workflow design, and implementation planning. Most clients pair Oracle consulting with a subsequent build project.",
       deliverable1: "Architecture review and AI tool selection matched to your specific stack and constraints",
       deliverable2: "Workflow automation map — where AI creates real leverage in your operations",
