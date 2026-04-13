@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
 // TODO: Replace with the real Google Calendar appointment schedule URL once it is created.
-const GOOGLE_CALENDAR_BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/PLACEHOLDER'
+const GOOGLE_CALENDAR_BOOKING_URL = '' // TODO: Add real Google Calendar appointment URL
 
 export default function ContactContent() {
   const { language } = useLanguage()

@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-forge-stone border-t border-forge-ember/30">
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 font-cinzel text-lg font-bold text-forge-gold mb-2">
               <img src="/logo.svg" alt="ForgingApps logo" width={28} height={28} className="inline-block" />
@@ -47,9 +47,9 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Legal entity section hidden until real EIK/BULSTAT and VAT data is available
           <div>
             <h3 className="font-cinzel text-forge-gold mb-4">{t('legalHeading')}</h3>
-            {/* TODO: Replace placeholder company registration and VAT details with the official legal entity information. */}
             <ul className="space-y-2 text-sm text-gray-400">
               <li>{t('location')}</li>
               <li>{t('registrationLabel')}: {t('registrationValue')}</li>
@@ -57,6 +57,7 @@ export default function Footer() {
               {language === 'bg' ? <li>Дружеството е регистрирано в България.</li> : <li>Company registered in Bulgaria.</li>}
             </ul>
           </div>
+          */}
         </div>
 
         <div className="border-t border-forge-ember/20 pt-8 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">

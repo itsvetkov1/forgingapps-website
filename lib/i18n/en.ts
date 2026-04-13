@@ -152,7 +152,7 @@ export const en: Record<string, any> = {
       role: "Founder, AI & Ops",
       linkedin: "Profile",
       linkedInUrl: "https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/",
-      bio: "Co-founder who bridges AI capability with business need. Leads product vision, AI solution design, and quality engineering. Every product ships with the security and polish it deserves.",
+      bio: "Founder who bridges AI capability with business need. Leads product vision, AI solution design, and quality engineering. Every product ships with the security and polish it deserves.",
       background: "A two-time recipient of the umlaut Secure App Award who has built autonomous AI agents running in production. Focused on making AI actually useful for real businesses, not just impressive in demos.",
       credentialsTitle: "Credentials",
       cred1: "umlaut Secure App Award (2x)",
