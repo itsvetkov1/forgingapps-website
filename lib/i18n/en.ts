@@ -542,6 +542,7 @@ export const en: Record<string, any> = {
     },
     categories: { ai: "AI", security: "Security", business: "Business" },
     posts: {
+      aiSecurityBuyingIssue: { title: "AI Security Is Now a Buying Issue", description: "Anthropic's Mythos preview and a fresh OpenAI tool issue point to the same conclusion: businesses buying AI need to vet permissions, connectors, and blast radius, not just model quality." },
       voiceAgents: { title: "Voice Agents Just Got a Lot More Useful", description: "The latest audio model push is not just a demo upgrade. It changes what voice agents can realistically do for support, sales, and operations." },
       whyForgingappsAi: { title: "Why ForgingApps for AI Consulting", description: "Who we are, how we work, what we actually build, and why clients choose a founding team with senior engineering over bloated process and vague AI promises." },
       chooseConsultant: { title: "How to Choose an AI Consulting Partner (Without Getting Burned)", description: "The AI consulting market is full of noise. Here is how to separate people who build useful systems from people who just sell the idea of AI." },

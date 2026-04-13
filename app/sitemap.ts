@@ -3,6 +3,7 @@ import type { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 const blogSlugs = [
+  'ai-security-is-now-a-buying-issue',
   'voice-agents-just-got-useful',
   'why-forgingapps-ai',
   'how-to-choose-ai-consultant',
@@ -15,6 +16,7 @@ const blogSlugs = [
 ]
 
 const blogPostDates: Record<string, string> = {
+  'ai-security-is-now-a-buying-issue': '2026-04-13',
   'voice-agents-just-got-useful': '2026-04-06',
   'why-forgingapps-ai': '2026-04-05',
   'how-to-choose-ai-consultant': '2026-03-29',
