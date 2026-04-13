@@ -24,7 +24,7 @@ export default function ContactContent() {
     : {
         eyebrow: 'Book a call',
         heading: 'Book a Free 30-Minute Call',
-        description: 'If you prefer to lock in a time first, book a call before filling out the form. If the booking link is not active yet, use the contact form below.',
+        description: 'Pick a time that works. No prep needed.',
         cta: 'Open calendar booking',
       }
 
@@ -60,6 +60,10 @@ export default function ContactContent() {
           </div>
         </div>
 
+      </section>
+      )}
+
+      <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8">
             <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-6">{data.formHeading}</h2>
@@ -86,7 +90,6 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
-      )}
 
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom max-w-4xl">

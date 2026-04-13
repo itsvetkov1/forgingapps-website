@@ -50,7 +50,7 @@ export const en: Record<string, any> = {
     subheadline: "Custom software and AI solutions for growing businesses. Built directly by the founders, without agency layers.",
     primaryCTA: "See It In Action",
     secondaryCTA: "Get Started",
-    trustBadge: "umlaut Verified Partner",
+    trustBadge: "umlaut Verified Partner — Certified by umlaut, a Deutsche Telekom company",
     whatWeForge: "What We Forge",
     spark: {
       title: "Landing Pages & Simple Sites",
@@ -104,8 +104,8 @@ export const en: Record<string, any> = {
         description: "AI-assisted development cuts timelines in half. Most projects ship within 2-8 weeks \u2014 not months.",
       },
       affordable: {
-        title: "40% Less Than Agencies",
-        description: "No bloated teams or overhead. Deep expertise, boutique attention — without the overhead of a 50-person agency.",
+        title: "Boutique Pricing, No Overhead",
+        description: "Projects that cost €30K+ at a traditional agency start from €5K–15K with us. Two senior builders. No account managers billing you for meetings about meetings.",
       },
       secure: {
         title: "umlaut Secure App Award",
