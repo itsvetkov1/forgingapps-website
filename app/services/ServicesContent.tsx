@@ -29,7 +29,7 @@ export default function ServicesContent() {
     ['bilingualEnBg', 'Optional', 'Optional', 'Optional', '✓'],
     ['adminDashboard', '—', 'Optional', 'Optional', '✓'],
     ['revisionsIncluded', data.comparison.oneRound, data.comparison.oneRound, data.comparison.twoRounds, data.comparison.twoRounds],
-    ['bugFixWarranty', data.comparison.thirtyDays, data.comparison.thirtyDays, data.comparison.sixtyDays, data.comparison.sixtyDays],
+    ['bugFixWarranty', data.comparison.thirtyDays, data.comparison.thirtyDays, data.comparison.thirtyDays, data.comparison.sixtyDays],
   ]
 
   const retainers = [data.hearthstone.maintenance, data.hearthstone.growth, data.hearthstone.partner]
@@ -63,7 +63,7 @@ export default function ServicesContent() {
           <table className="w-full min-w-[980px] border border-forge-ember/20 text-sm">
             <thead>
               <tr className="bg-forge-stone">
-                <th className="p-4 text-left text-forge-gold">Feature</th>
+                <th className="p-4 text-left text-forge-gold">{data.comparison.featureLabel}</th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.spark.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.spark.name}</div></th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.ember.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.ember.name}</div></th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.anvil.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.anvil.name}</div></th>

@@ -26,7 +26,6 @@ interface GenericFormState {
   subject: string
   packageInterest: string
   message: string
-  budget: string
   source: string
 }
 
@@ -42,8 +41,6 @@ const genericCopy = {
     sendAnother: '← Send another message',
     subjectLabel: 'Subject',
     subjectPlaceholder: 'What would you like to discuss?',
-    budgetPlaceholder: 'Select budget...',
-    budgetOptions: ['Under €2,000', '€2,000 - €5,000', '€5,000 - €12,000', '€12,000+', 'Not sure yet'],
     sourcePlaceholder: 'Select source...',
     sourceOptions: ['Google Search', 'Social Media', 'Referral', 'Other'],
     selectPlaceholder: 'Select...',
@@ -61,8 +58,6 @@ const genericCopy = {
     sendAnother: '← Изпратете друго съобщение',
     subjectLabel: 'Тема',
     subjectPlaceholder: 'Какво искате да обсъдим?',
-    budgetPlaceholder: 'Изберете бюджет...',
-    budgetOptions: ['Под €2,000', '€2,000 - €5,000', '€5,000 - €12,000', '€12,000+', 'Още не съм сигурен/сигурна'],
     sourcePlaceholder: 'Изберете източник...',
     sourceOptions: ['Google търсене', 'Социални мрежи', 'Препоръка', 'Друго'],
     selectPlaceholder: 'Изберете...',
@@ -94,7 +89,6 @@ function buildGenericState(defaultPackage: string, subject = ''): GenericFormSta
     subject,
     packageInterest: defaultPackage,
     message: '',
-    budget: '',
     source: '',
   }
 }
@@ -191,7 +185,6 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
       : {
           ...genericFormData,
           product_tag: 'general',
-          budget_range: genericFormData.budget,
           source_page: sourcePage,
         }
 
@@ -414,21 +407,12 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
             <p className="mt-2 text-xs text-gray-500">{t('formProjectHelper')}</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formBudget')}</label>
-              <select name="budget" value={genericFormData.budget} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
-                <option value="">{copy.budgetPlaceholder}</option>
-                {copy.budgetOptions.map((option) => <option key={option}>{option}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formSource')}</label>
-              <select name="source" value={genericFormData.source} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
-                <option value="">{copy.sourcePlaceholder}</option>
-                {copy.sourceOptions.map((option) => <option key={option}>{option}</option>)}
-              </select>
-            </div>
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formSource')}</label>
+            <select name="source" value={genericFormData.source} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+              <option value="">{copy.sourcePlaceholder}</option>
+              {copy.sourceOptions.map((option) => <option key={option}>{option}</option>)}
+            </select>
           </div>
         </>
       )}
