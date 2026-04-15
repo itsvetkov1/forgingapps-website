@@ -6,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
 const postKeyMap: Record<string, string> = {
+  'ai-eating-internal-headcount': 'aiEatingInternalHeadcount',
   'ai-security-is-now-a-buying-issue': 'aiSecurityBuyingIssue',
   'voice-agents-just-got-useful': 'voiceAgents',
   'why-forgingapps-ai': 'whyForgingappsAi',
@@ -21,6 +22,7 @@ const postKeyMap: Record<string, string> = {
 }
 
 const posts = [
+  { slug: 'ai-eating-internal-headcount', date: 'Apr 15, 2026', readTime: '6 min', category: 'ai', image: 'bot', authorKey: 'authorIvaylo' },
   { slug: 'ai-security-is-now-a-buying-issue', date: 'Apr 13, 2026', readTime: '6 min', category: 'ai', image: 'shield', authorKey: 'authorIvaylo' },
   { slug: 'local-studio-vs-freelancer', date: 'Apr 10, 2026', readTime: '6 min', category: 'business', image: 'bookopen', authorKey: 'authorRadoslav' },
   { slug: 'custom-software-vs-off-the-shelf', date: 'Apr 8, 2026', readTime: '7 min', category: 'business', image: 'trending', authorKey: 'authorIvaylo' },
