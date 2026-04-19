@@ -1,6 +1,7 @@
 # Cloudflare Pages redirects
 # Format: source destination [status]
 
-/home / 301
-/portfolio / 301
+/ /en 301
+/home /en 301
+/portfolio /en 301
 /blog /en/blog 301
