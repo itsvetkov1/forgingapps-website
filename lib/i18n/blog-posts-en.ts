@@ -33,6 +33,22 @@ export const blogPostsEn: Record<string, any> = {
       { heading: "The Bottom Line", content: "The right question is not 'what is the cheapest way to build this?' It is 'what scope creates the business result we need without paying for the wrong complexity?' That is where good software pricing starts." }
     ]
   },
+  "signs-your-business-is-ready-for-ai-integration": {
+    title: "5 Signs Your Business Is Ready for AI Integration",
+    metaDescription: "Five clear signals that AI integration can save time, speed up response, and eliminate repetitive work in your business.",
+    author: "Ivaylo Tsvetkov, Co-Founder",
+    date: "Apr 10, 2026",
+    readTime: "6 min read",
+    category: "AI",
+    intro: "Not every business is ready for AI. But when the same problems keep repeating every day, automation starts to make real sense.",
+    sections: [
+      { heading: "Repetitive customer questions", content: "If your team answers the same questions every day, an AI assistant can take the first layer of support and free up time for more complex cases." },
+      { heading: "Slow first response", content: "When inquiries wait for hours, you lose trust and revenue. AI can deliver an instant first response and gather context before a human steps in." },
+      { heading: "Manual work between systems", content: "If people are copying data between tools, there is a real automation opportunity. This is one of the most common signals that AI and workflow integrations are worth the investment." },
+      { heading: "Predictable processes", content: "AI works best where tasks follow repeatable patterns. If the process is clear, the system can help reliably." },
+      { heading: "Readiness for upkeep", content: "AI is not a one-time install. If you have a process owner, documentation, and the willingness to improve the system after launch, your odds of success are much higher." }
+    ]
+  },
   "voice-agents-just-got-useful": {
     title: "Voice Agents Just Got a Lot More Useful",
     metaDescription: "New audio APIs make voice AI practical for real businesses. Better transcription, steerable TTS, and cleaner tooling for support, sales, and booking automation.",
