@@ -6,6 +6,7 @@ import {
   sendMeetingConfirmation,
   sendVisitorSummary,
 } from './ember-resend.mjs'
+import { getAllowedOrigin, isAllowedOrigin } from './ember-origin-allowlist.mjs'
 import { getProxyTarget } from './ember-proxy-routing.mjs'
 
 const execFileAsync = promisify(execFile)
@@ -15,13 +16,6 @@ const BOT_CONTAINER = process.env.EMBER_CONTAINER || 'ember-openclaw-gateway-1'
 const BOT_AGENT = process.env.EMBER_AGENT || 'main'
 const BOT_TIMEOUT_MS = Number(process.env.EMBER_TIMEOUT_MS || 120000)
 const SESSION_PREFIX = 'ember-web:'
-const ORIGIN_ALLOWLIST = new Set([
-  'https://forgingapps.com',
-  'https://www.forgingapps.com',
-  'https://forgingapps.pages.dev',
-  'http://localhost:3000',
-  'http://localhost:3001',
-])
 const ACTION_TAG_REGEX = /\[ACTION:([A-Z_]+)(?::([^\]]+))?\]/g
 const emailStore = new Map()
 
@@ -476,9 +470,9 @@ async function handleCollectEmail(body) {
 
 const server = http.createServer(async (req, res) => {
   const origin = req.headers.origin
-  const allowedOrigin = origin && ORIGIN_ALLOWLIST.has(origin) ? origin : '*'
+  const allowedOrigin = getAllowedOrigin(origin)
 
-  if (origin && !ORIGIN_ALLOWLIST.has(origin)) {
+  if (origin && !isAllowedOrigin(origin)) {
     sendJson(res, 403, { error: 'Origin not allowed' }, allowedOrigin)
     return
   }
