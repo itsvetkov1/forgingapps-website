@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import EmberChatWindow from '@/components/ember/EmberChatWindow'
 import EmberFlameIcon from '@/components/ember/EmberFlameIcon'
@@ -8,17 +7,8 @@ import { EmberChatProvider, useEmberChat } from '@/components/ember/EmberChatCon
 
 function EmberChatWidgetInner() {
   const pathname = usePathname()
-  const { isOpen, open, toggle } = useEmberChat()
+  const { isOpen, open } = useEmberChat()
   const isVelouraShop = pathname?.startsWith('/demo/veloura-shop') || pathname?.startsWith('/en/demo/veloura-shop') || pathname?.startsWith('/bg/demo/veloura-shop')
-
-  useEffect(() => {
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape' && isOpen) toggle()
-    }
-
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [isOpen, toggle])
 
   if (isVelouraShop) return null
 
@@ -27,6 +17,8 @@ function EmberChatWidgetInner() {
       {isOpen ? <EmberChatWindow /> : null}
       {!isOpen ? (
         <button
+          id="ember-chat-widget-launcher"
+          data-test="ember-chat-widget-launcher"
           type="button"
           onClick={open}
           aria-label="Open Ember chat"

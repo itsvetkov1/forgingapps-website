@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useSearchParams } from 'next/navigation'
 import MultiSelect from '@/components/MultiSelect'
 import { useTranslation } from '@/lib/i18n/useTranslation'
@@ -18,6 +18,7 @@ interface ContactFormProps {
 
 type VariantFieldValue = string | string[]
 type VariantFormState = Record<string, VariantFieldValue>
+type FieldErrors = Record<string, string>
 
 interface GenericFormState {
   name: string
@@ -46,6 +47,9 @@ const genericCopy = {
     selectPlaceholder: 'Select...',
     error: 'Something went wrong. Please try again or email us directly at',
     sending: 'Sending...',
+    validationRequired: 'Please complete this field.',
+    validationEmail: 'Please enter a valid email address.',
+    honeypotLabel: 'Leave this field empty',
   },
   bg: {
     submittedTitle: 'Получихме съобщението Ви!',
@@ -63,6 +67,9 @@ const genericCopy = {
     selectPlaceholder: 'Изберете...',
     error: 'Нещо се обърка. Моля, опитайте отново или ни пишете директно на',
     sending: 'Изпращане...',
+    validationRequired: 'Моля, попълнете това поле.',
+    validationEmail: 'Моля, въведете валиден имейл адрес.',
+    honeypotLabel: 'Оставете това поле празно',
   },
 } as const
 
@@ -80,6 +87,9 @@ const subjectPresets = {
     'discovery-workshop': 'Discovery Workshop',
   },
 } as const
+
+const genericRequiredFields = ['name', 'email', 'message'] as const
+const honeypotFieldName = 'website'
 
 function buildGenericState(defaultPackage: string, subject = ''): GenericFormState {
   return {
@@ -105,6 +115,35 @@ function normalizeVariantPayload(values: VariantFormState): Record<string, strin
     acc[key] = Array.isArray(value) ? value.join(', ') : value
     return acc
   }, {})
+}
+
+function createFieldId(name: string) {
+  return `contact-form-${name}`
+}
+
+function createErrorId(name: string) {
+  return `${createFieldId(name)}-error`
+}
+
+function createHelpId(name: string) {
+  return `${createFieldId(name)}-help`
+}
+
+function joinDescriptorIds(...ids: Array<string | undefined>) {
+  const value = ids.filter(Boolean).join(' ')
+  return value || undefined
+}
+
+function isBlankValue(value: VariantFieldValue) {
+  if (Array.isArray(value)) {
+    return value.length === 0
+  }
+
+  return value.trim() === ''
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
 }
 
 function ContactFormWithSearch(props: ContactFormProps) {
@@ -139,12 +178,17 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+  const [honeypot, setHoneypot] = useState('')
 
   useEffect(() => {
     setSourcePage(document.referrer || window.location.href)
   }, [])
 
   useEffect(() => {
+    setFieldErrors({})
+    setHoneypot('')
+
     if (variantConfig) {
       setVariantFormData(buildVariantState(variantConfig))
       return
@@ -157,12 +201,69 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     setGenericFormData(buildGenericState(defaultPackage, preset))
   }, [defaultPackage, language, subjectParam, variantConfig])
 
-  const handleGenericChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const focusField = (fieldName: string) => {
+    window.requestAnimationFrame(() => {
+      const field = document.getElementById(createFieldId(fieldName))
+      if (field instanceof HTMLElement) {
+        field.focus()
+      }
+    })
+  }
+
+  const validateGenericForm = () => {
+    const nextErrors: FieldErrors = {}
+
+    for (const fieldName of genericRequiredFields) {
+      if (!genericFormData[fieldName].trim()) {
+        nextErrors[fieldName] = copy.validationRequired
+      }
+    }
+
+    if (genericFormData.email.trim() && !isValidEmail(genericFormData.email)) {
+      nextErrors.email = copy.validationEmail
+    }
+
+    return nextErrors
+  }
+
+  const validateVariantForm = () => {
+    const nextErrors: FieldErrors = {}
+
+    if (!variantConfig) return nextErrors
+
+    for (const field of variantConfig.fields) {
+      const value = variantFormData[field.name] ?? (field.type === 'multiselect' ? [] : '')
+
+      if (field.required && isBlankValue(value)) {
+        nextErrors[field.name] = copy.validationRequired
+        continue
+      }
+
+      if (field.type === 'email' && typeof value === 'string' && value.trim() && !isValidEmail(value)) {
+        nextErrors[field.name] = copy.validationEmail
+      }
+    }
+
+    return nextErrors
+  }
+
+  const clearFieldError = (fieldName: string) => {
+    setFieldErrors((prev) => {
+      if (!prev[fieldName]) return prev
+      const next = { ...prev }
+      delete next[fieldName]
+      return next
+    })
+  }
+
+  const handleGenericChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    clearFieldError(name)
     setGenericFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleVariantChange = (name: string, value: VariantFieldValue) => {
+    clearFieldError(name)
     setVariantFormData((prev) => ({ ...prev, [name]: value }))
   }
 
@@ -170,10 +271,29 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     setVariantFormData(buildVariantState(contactFormConfigs[activeVariant]))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setLoading(true)
     setError(false)
+
+    if (honeypot.trim()) {
+      setSubmitted(true)
+      setHoneypot('')
+      return
+    }
+
+    const nextErrors = variantConfig ? validateVariantForm() : validateGenericForm()
+
+    if (Object.keys(nextErrors).length > 0) {
+      setFieldErrors(nextErrors)
+      const firstErrorField = Object.keys(nextErrors)[0]
+      if (firstErrorField) {
+        focusField(firstErrorField)
+      }
+      return
+    }
+
+    setLoading(true)
+    setFieldErrors({})
 
     const payload = variantConfig && resolvedVariant
       ? {
@@ -181,11 +301,13 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
           product_tag: variantConfig.hiddenValues.product_tag,
           budget_range: variantConfig.hiddenValues.budget_range || (typeof variantFormData.budget === 'string' ? variantFormData.budget : ''),
           source_page: sourcePage,
+          [honeypotFieldName]: honeypot,
         }
       : {
           ...genericFormData,
           product_tag: 'general',
           source_page: sourcePage,
+          [honeypotFieldName]: honeypot,
         }
 
     try {
@@ -197,6 +319,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
 
       if (response.ok) {
         setSubmitted(true)
+        setHoneypot('')
         if (variantConfig && resolvedVariant) {
           resetVariantForm(resolvedVariant)
         } else {
@@ -215,10 +338,26 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     setLoading(false)
   }
 
+  const renderFieldError = (fieldName: string) => {
+    const message = fieldErrors[fieldName]
+    if (!message) return null
+
+    return (
+      <p
+        id={createErrorId(fieldName)}
+        data-test={`contact-form-error-${fieldName}`}
+        className="mt-2 text-sm text-red-300"
+        role="alert"
+      >
+        {message}
+      </p>
+    )
+  }
+
   if (submitted) {
     if (variantCopy?.success) {
       return (
-        <div className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
+        <div data-test="contact-form-success" className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
           <div className="mb-4 text-5xl">✓</div>
           <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{variantCopy.success.title}</h3>
           <p className="mb-6 text-gray-300">{variantCopy.success.description}</p>
@@ -242,7 +381,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     }
 
     return (
-      <div className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
+      <div data-test="contact-form-success" className="rounded-lg border border-forge-gold bg-forge-stone p-8 text-center">
         <div className="mb-4 text-5xl">✓</div>
         <h3 className="mb-2 font-cinzel text-2xl font-bold text-forge-gold">{copy.submittedTitle}</h3>
         <p className="mb-6 text-gray-300">{copy.submittedNext}</p>
@@ -288,20 +427,27 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     const isFullWidth = field.type === 'textarea' || field.type === 'multiselect'
     const wrapperClass = isFullWidth ? 'md:col-span-2' : ''
     const inputClass = 'w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:outline-none focus:border-forge-gold'
+    const fieldId = createFieldId(field.name)
+    const hasError = Boolean(fieldErrors[field.name])
+    const describedBy = joinDescriptorIds(hasError ? createErrorId(field.name) : undefined)
 
     if (field.type === 'textarea') {
       return (
         <div key={field.name} className={wrapperClass}>
-          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
           <textarea
+            id={fieldId}
             name={field.name}
             value={typeof value === 'string' ? value : ''}
-            onChange={(e) => handleVariantChange(field.name, e.target.value)}
+            onChange={(event) => handleVariantChange(field.name, event.target.value)}
             placeholder={placeholder}
             required={field.required}
             rows={field.rows ?? 4}
+            aria-invalid={hasError ? 'true' : undefined}
+            aria-describedby={describedBy}
             className={inputClass}
           />
+          {renderFieldError(field.name)}
         </div>
       )
     }
@@ -309,12 +455,15 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     if (field.type === 'select') {
       return (
         <div key={field.name} className={wrapperClass}>
-          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
           <select
+            id={fieldId}
             name={field.name}
             value={typeof value === 'string' ? value : ''}
-            onChange={(e) => handleVariantChange(field.name, e.target.value)}
+            onChange={(event) => handleVariantChange(field.name, event.target.value)}
             required={field.required}
+            aria-invalid={hasError ? 'true' : undefined}
+            aria-describedby={describedBy}
             className={inputClass}
           >
             <option value="">{placeholder || copy.selectPlaceholder}</option>
@@ -322,6 +471,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
+          {renderFieldError(field.name)}
         </div>
       )
     }
@@ -329,35 +479,55 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     if (field.type === 'multiselect') {
       return (
         <div key={field.name} className={wrapperClass}>
-          <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
-          <MultiSelect
-            label={placeholder}
-            options={options ?? []}
-            value={Array.isArray(value) ? value : []}
-            onChange={(selected) => handleVariantChange(field.name, selected)}
-          />
+          <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+          <div id={fieldId} aria-describedby={describedBy} aria-invalid={hasError ? 'true' : undefined}>
+            <MultiSelect
+              label={placeholder}
+              options={options ?? []}
+              value={Array.isArray(value) ? value : []}
+              onChange={(selected) => handleVariantChange(field.name, selected)}
+            />
+          </div>
+          {renderFieldError(field.name)}
         </div>
       )
     }
 
     return (
       <div key={field.name} className={wrapperClass}>
-        <label className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
+        <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-forge-gold">{label}{field.required ? ' *' : ''}</label>
         <input
+          id={fieldId}
           type={field.type}
           name={field.name}
           value={typeof value === 'string' ? value : ''}
-          onChange={(e) => handleVariantChange(field.name, e.target.value)}
+          onChange={(event) => handleVariantChange(field.name, event.target.value)}
           placeholder={placeholder || label}
           required={field.required}
+          aria-invalid={hasError ? 'true' : undefined}
+          aria-describedby={describedBy}
           className={inputClass}
         />
+        {renderFieldError(field.name)}
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" data-test="contact-form" data-variant={resolvedVariant ?? 'generic'} noValidate>
+      <div style={{display:'none'}} aria-hidden="true">
+        <label htmlFor={createFieldId(honeypotFieldName)}>{copy.honeypotLabel}</label>
+        <input
+          id={createFieldId(honeypotFieldName)}
+          name={honeypotFieldName}
+          type="text"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+          autoComplete="off"
+          tabIndex={-1}
+        />
+      </div>
+
       {variantConfig && variantCopy ? (
         <>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -368,23 +538,26 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
         <>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formName')} *</label>
-              <input type="text" name="name" value={genericFormData.name} onChange={handleGenericChange} placeholder={t('formName')} required className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              <label htmlFor={createFieldId('name')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formName')} *</label>
+              <input id={createFieldId('name')} data-test="contact-form-name" type="text" name="name" value={genericFormData.name} onChange={handleGenericChange} placeholder={t('formName')} required aria-invalid={fieldErrors.name ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.name ? createErrorId('name') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              {renderFieldError('name')}
             </div>
             <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formEmail')} *</label>
-              <input type="email" name="email" value={genericFormData.email} onChange={handleGenericChange} placeholder="your.name@company.com" required className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              <label htmlFor={createFieldId('email')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formEmail')} *</label>
+              <input id={createFieldId('email')} data-test="contact-form-email" type="email" name="email" value={genericFormData.email} onChange={handleGenericChange} placeholder="your.name@company.com" required aria-invalid={fieldErrors.email ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.email ? createErrorId('email') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              {renderFieldError('email')}
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPhone')}</label>
-              <input type="tel" name="phone" value={genericFormData.phone} onChange={handleGenericChange} placeholder="+359..." className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              <label htmlFor={createFieldId('phone')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPhone')}</label>
+              <input id={createFieldId('phone')} data-test="contact-form-phone" type="tel" name="phone" value={genericFormData.phone} onChange={handleGenericChange} placeholder="+359..." aria-invalid={fieldErrors.phone ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.phone ? createErrorId('phone') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+              {renderFieldError('phone')}
             </div>
             <div>
-              <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPackage')}</label>
-              <select name="packageInterest" value={genericFormData.packageInterest} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+              <label htmlFor={createFieldId('packageInterest')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formPackage')}</label>
+              <select id={createFieldId('packageInterest')} name="packageInterest" value={genericFormData.packageInterest} onChange={handleGenericChange} aria-invalid={fieldErrors.packageInterest ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.packageInterest ? createErrorId('packageInterest') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
                 <option>{t('packageOptions.notSure')}</option>
                 <option>{t('packageOptions.spark')}</option>
                 <option>{t('packageOptions.ember')}</option>
@@ -393,26 +566,30 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
                 <option>{t('packageOptions.oracle')}</option>
                 <option>{t('packageOptions.hearthstone')}</option>
               </select>
+              {renderFieldError('packageInterest')}
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold text-forge-gold">{copy.subjectLabel}</label>
-            <input type="text" name="subject" value={genericFormData.subject} onChange={handleGenericChange} placeholder={copy.subjectPlaceholder} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+            <label htmlFor={createFieldId('subject')} className="mb-2 block text-sm font-semibold text-forge-gold">{copy.subjectLabel}</label>
+            <input id={createFieldId('subject')} type="text" name="subject" value={genericFormData.subject} onChange={handleGenericChange} placeholder={copy.subjectPlaceholder} aria-invalid={fieldErrors.subject ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.subject ? createErrorId('subject') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none" />
+            {renderFieldError('subject')}
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formProject')} *</label>
-            <textarea name="message" value={genericFormData.message} onChange={handleGenericChange} placeholder={t('formProjectHelper')} required rows={5} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none"></textarea>
-            <p className="mt-2 text-xs text-gray-500">{t('formProjectHelper')}</p>
+            <label htmlFor={createFieldId('message')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formProject')} *</label>
+            <textarea id={createFieldId('message')} data-test="contact-form-message" name="message" value={genericFormData.message} onChange={handleGenericChange} placeholder={t('formProjectHelper')} required rows={5} aria-invalid={fieldErrors.message ? 'true' : undefined} aria-describedby={joinDescriptorIds(createHelpId('message'), fieldErrors.message ? createErrorId('message') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none"></textarea>
+            <p id={createHelpId('message')} className="mt-2 text-xs text-gray-500">{t('formProjectHelper')}</p>
+            {renderFieldError('message')}
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold text-forge-gold">{t('formSource')}</label>
-            <select name="source" value={genericFormData.source} onChange={handleGenericChange} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
+            <label htmlFor={createFieldId('source')} className="mb-2 block text-sm font-semibold text-forge-gold">{t('formSource')}</label>
+            <select id={createFieldId('source')} name="source" value={genericFormData.source} onChange={handleGenericChange} aria-invalid={fieldErrors.source ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.source ? createErrorId('source') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
               <option value="">{copy.sourcePlaceholder}</option>
               {copy.sourceOptions.map((option) => <option key={option}>{option}</option>)}
             </select>
+            {renderFieldError('source')}
           </div>
         </>
       )}
@@ -423,7 +600,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
         </div>
       ) : null}
 
-      <button type="submit" disabled={loading} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
+      <button data-test="contact-form-submit" type="submit" disabled={loading} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
         {loading ? copy.sending : t('formSubmit')}
       </button>
     </form>
