@@ -41,7 +41,7 @@ export default function Footer() {
           <div>
             <h3 className="font-cinzel text-forge-gold mb-4">{t('contact')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="mailto:hello@forgingapps.com" className="text-gray-400 hover:text-forge-gold transition">hello@forgingapps.com</a></li>
+              <li><a href="mailto:hello@forgingapps.com" className="text-gray-400 hover:text-forge-gold transition">{t('email')}</a></li>
               <li className="text-gray-400">{t('location')}</li>
               <li><Link href={localePath('/contact')} className="text-forge-gold hover:text-forge-ember transition font-semibold">{t('freeConsultation')}</Link></li>
             </ul>

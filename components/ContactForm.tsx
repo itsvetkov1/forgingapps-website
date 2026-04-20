@@ -46,6 +46,7 @@ const genericCopy = {
     sourceOptions: ['Google Search', 'Social Media', 'Referral', 'Other'],
     selectPlaceholder: 'Select...',
     error: 'Something went wrong. Please try again or email us directly at',
+    directEmailLabel: 'email us directly',
     sending: 'Sending...',
     validationRequired: 'Please complete this field.',
     validationEmail: 'Please enter a valid email address.',
@@ -66,6 +67,7 @@ const genericCopy = {
     sourceOptions: ['Google търсене', 'Социални мрежи', 'Препоръка', 'Друго'],
     selectPlaceholder: 'Изберете...',
     error: 'Нещо се обърка. Моля, опитайте отново или ни пишете директно на',
+    directEmailLabel: 'пишете ни директно по имейл',
     sending: 'Изпращане...',
     validationRequired: 'Моля, попълнете това поле.',
     validationEmail: 'Моля, въведете валиден имейл адрес.',
@@ -596,7 +598,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
 
       {error ? (
         <div className="rounded-lg border border-red-500/50 bg-red-900/30 p-4 text-sm text-red-300">
-          {copy.error} <a href="mailto:hello@forgingapps.com" className="text-forge-gold underline transition hover:text-forge-ember">hello@forgingapps.com</a>.
+          {copy.error} <a href="mailto:hello@forgingapps.com" className="text-forge-gold underline transition hover:text-forge-ember">{copy.directEmailLabel}</a>.
         </div>
       ) : null}
 
