@@ -6,6 +6,7 @@ import {
   sendMeetingConfirmation,
   sendVisitorSummary,
 } from './ember-resend.mjs'
+import { getProxyTarget } from './ember-proxy-routing.mjs'
 
 const execFileAsync = promisify(execFile)
 
@@ -572,14 +573,14 @@ const server = http.createServer(async (req, res) => {
       return
     }
 
-    // Forward /api/chat/* to veloura-chat-bridge on port 18889
-    if (url.pathname.startsWith('/api/chat/')) {
-      const body = await parseBody(req)
+    const proxyTarget = getProxyTarget(url.pathname, url.search || '')
+    if (proxyTarget) {
+      const body = req.method === 'POST' || req.method === 'PUT' ? await parseBody(req) : null
       const downstream = http.request(
         {
-          hostname: '127.0.0.1',
-          port: 18889,
-          path: url.pathname + (url.search || ''),
+          hostname: proxyTarget.hostname,
+          port: proxyTarget.port,
+          path: proxyTarget.path,
           method: req.method,
           headers: { 'Content-Type': 'application/json' },
         },
@@ -587,8 +588,8 @@ const server = http.createServer(async (req, res) => {
           let data = ''
           proxyRes.on('data', (chunk) => { data += chunk })
           proxyRes.on('end', () => {
-            res.writeHead(proxyRes.statusCode, {
-              'Content-Type': 'application/json; charset=utf-8',
+            res.writeHead(proxyRes.statusCode || 502, {
+              'Content-Type': proxyRes.headers['content-type'] || 'application/json; charset=utf-8',
               'Access-Control-Allow-Origin': allowedOrigin,
               'Access-Control-Allow-Headers': 'Content-Type',
               'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
@@ -599,10 +600,10 @@ const server = http.createServer(async (req, res) => {
         },
       )
       downstream.on('error', (err) => {
-        console.error('[ember-chat-proxy] veloura-bridge proxy error:', err.message)
-        sendJson(res, 502, { error: 'Veloura bridge unavailable: ' + err.message }, allowedOrigin)
+        console.error('[ember-chat-proxy] proxy error:', err.message)
+        sendJson(res, 502, { error: 'Upstream unavailable: ' + err.message }, allowedOrigin)
       })
-      if (req.method === 'POST' || req.method === 'PUT') {
+      if (body !== null) {
         downstream.write(JSON.stringify(body))
       }
       downstream.end()
