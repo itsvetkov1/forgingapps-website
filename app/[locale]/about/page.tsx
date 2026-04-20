@@ -10,7 +10,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {}
   const data = translations[locale].about
   const title = `${data.whyHeading} | ForgingApps`
-  const description = data.whyP1
+  const description =
+    locale === 'bg'
+      ? 'ForgingApps създава персонализиран софтуер и AI решения за растящи бизнеси — директно с основателите и с корпоративен стандарт на изпълнение.'
+      : 'ForgingApps builds custom software and AI systems for growing businesses — founder-led delivery, enterprise-grade standards, and direct collaboration.'
   return { title, description, alternates: buildLocaleAlternates(locale, '/about'), openGraph: buildOg(`/${locale}/about`, title, description), twitter: buildTwitterCard(title, description) }
 }
 

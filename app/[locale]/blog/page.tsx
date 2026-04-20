@@ -10,8 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {}
   const data = translations[locale].blog
   const title = `${data.heading} | ForgingApps`
-    const description = data.subheadline
-    return { title, description, alternates: buildLocaleAlternates(locale, '/blog'), openGraph: buildOg(`/${locale}/blog`, `${data.heading} | ForgingApps`, data.subheadline), twitter: buildTwitterCard(title, description) }
+  const description =
+    locale === 'bg'
+      ? 'Четете анализи от ForgingApps за AI, персонализиран софтуер, продуктова стратегия, сигурност и изграждане на устойчиви дигитални продукти.'
+      : 'Read practical ForgingApps insights on AI, custom software, product strategy, security, and building digital products that last.'
+  return { title, description, alternates: buildLocaleAlternates(locale, '/blog'), openGraph: buildOg(`/${locale}/blog`, title, description), twitter: buildTwitterCard(title, description) }
 }
 
 export default async function LocaleBlogPage({ params }: { params: Promise<{ locale: string }> }) {
