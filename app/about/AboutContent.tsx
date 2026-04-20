@@ -14,6 +14,13 @@ const teamPhotos: Record<string, string> = {
   'Радослав Ламбрев': '/team/radoslav-lambrev.jpg',
 }
 
+const teamLinkedIn: Record<string, string> = {
+  'Ivaylo Tsvetkov': 'https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/',
+  'Radoslav Lambrev': 'https://www.linkedin.com/in/radoslav-lambrev/',
+  'Ивайло Цветков': 'https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/',
+  'Радослав Ламбрев': 'https://www.linkedin.com/in/radoslav-lambrev/',
+}
+
 export default function AboutContent() {
   const { language, localePath } = useLanguage()
   const data = translations[language].about
@@ -86,10 +93,10 @@ export default function AboutContent() {
                       <li key={key} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{renderAwardText(person[key])}</span></li>
                     ))}
                   </ul>
-                  {person.linkedInUrl && (
+                  {teamLinkedIn[person.name] && (
                     <div className="mt-6 pt-5 border-t border-forge-ember/20">
                       <a
-                        href={person.linkedInUrl}
+                        href={teamLinkedIn[person.name]}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-forge-ember hover:text-forge-gold transition-colors text-sm font-medium"
