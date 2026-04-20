@@ -561,7 +561,7 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
 export function formatPrice(price: number): string {
   return new Intl.NumberFormat("de-DE", {
     style: "currency",
-    currency: "EUR",
+    currency: 'EUR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(price)

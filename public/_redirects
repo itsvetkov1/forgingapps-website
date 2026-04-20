@@ -1,7 +1,8 @@
 # Cloudflare Pages redirects
 # Format: source destination [status]
 
-/ /en 301
+/en/ https://forgingapps.com/en 301
+/bg/ https://forgingapps.com/bg 301
 /home /en 301
 /portfolio /en 301
 /blog /en/blog 301

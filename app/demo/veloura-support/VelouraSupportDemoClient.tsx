@@ -77,7 +77,7 @@ export default function VelouraSupportDemoClient() {
 
           <div className="mb-8">
             <DemoPackageCallout
-              title="AI Chat Assistant — EUR 2,500 flat"
+              title="AI Chat Assistant — €2,500 flat"
               rationale="A custom AI assistant trained on your content, embedded in your website. Fixed scope, fixed price, deployed in 2 weeks."
               href="/en/ai-consulting#ai-chat-assistant"
             />
