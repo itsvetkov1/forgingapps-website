@@ -1,9 +1,10 @@
 export function getProxyTarget(pathname, search = '') {
-  if (pathname === '/intake' || pathname.startsWith('/intake/')) {
+  if (pathname === '/intake/health') {
     return {
       hostname: '127.0.0.1',
       port: 8001,
       path: `${pathname}${search}`,
+      contentType: 'application/json; charset=utf-8',
     }
   }
 
@@ -12,6 +13,7 @@ export function getProxyTarget(pathname, search = '') {
       hostname: '127.0.0.1',
       port: 18889,
       path: `${pathname}${search}`,
+      contentType: 'application/json; charset=utf-8',
     }
   }
 

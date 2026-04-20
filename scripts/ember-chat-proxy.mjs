@@ -589,7 +589,7 @@ const server = http.createServer(async (req, res) => {
           proxyRes.on('data', (chunk) => { data += chunk })
           proxyRes.on('end', () => {
             res.writeHead(proxyRes.statusCode || 502, {
-              'Content-Type': proxyRes.headers['content-type'] || 'application/json; charset=utf-8',
+              'Content-Type': proxyRes.headers['content-type'] || proxyTarget.contentType,
               'Access-Control-Allow-Origin': allowedOrigin,
               'Access-Control-Allow-Headers': 'Content-Type',
               'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
