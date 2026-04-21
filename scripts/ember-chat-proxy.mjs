@@ -8,6 +8,7 @@ import {
 } from './ember-resend.mjs'
 import { getAllowedOrigin, isAllowedOrigin } from './ember-origin-allowlist.mjs'
 import { getProxyTarget } from './ember-proxy-routing.mjs'
+import { buildProxyHeaders } from './ember-proxy-headers.mjs'
 
 const execFileAsync = promisify(execFile)
 
@@ -584,7 +585,7 @@ const server = http.createServer(async (req, res) => {
           port: proxyTarget.port,
           path: proxyTarget.path,
           method: req.method,
-          headers: { 'Content-Type': 'application/json' },
+          headers: buildProxyHeaders(req.headers),
         },
         (proxyRes) => {
           let data = ''

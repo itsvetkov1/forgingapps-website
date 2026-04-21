@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 
 import { getProxyTarget } from '../scripts/ember-proxy-routing.mjs'
 import { getAllowedOrigin } from '../scripts/ember-origin-allowlist.mjs'
+import { buildProxyHeaders } from '../scripts/ember-proxy-headers.mjs'
 
 for (const pathname of ['/intake/health', '/intake/test', '/intake/message']) {
   test(`getProxyTarget routes ${pathname} to the chat-intake backend`, () => {
@@ -24,6 +25,15 @@ test('getProxyTarget routes brief bootstrap paths to the chat-intake backend', (
   })
 })
 
+test('getProxyTarget routes brief ingest paths to the chat-intake backend', () => {
+  assert.deepEqual(getProxyTarget('/intake/brief/ingest'), {
+    hostname: '127.0.0.1',
+    port: 8001,
+    path: '/intake/brief/ingest',
+    contentType: 'application/json; charset=utf-8',
+  })
+})
+
 test('getProxyTarget does not expose the rest of the intake namespace yet', () => {
   assert.equal(getProxyTarget('/intake/session/abc'), null)
 })
@@ -40,4 +50,16 @@ test('getAllowedOrigin falls back to wildcard for missing or disallowed origins'
 test('getAllowedOrigin echoes allowlisted origins for credentialed requests', () => {
   assert.equal(getAllowedOrigin('https://forgingapps.com'), 'https://forgingapps.com')
   assert.equal(getAllowedOrigin('https://chat.forgingapps.com'), 'https://chat.forgingapps.com')
+})
+
+test('buildProxyHeaders forwards shared-secret ingest headers to chat-intake', () => {
+  assert.deepEqual(buildProxyHeaders({
+    'content-type': 'application/json',
+    accept: 'application/json',
+    'x-intake-secret': 'test-shared-secret',
+  }), {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'X-Intake-Secret': 'test-shared-secret',
+  })
 })
