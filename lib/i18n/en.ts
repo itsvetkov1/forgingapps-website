@@ -845,6 +845,56 @@ export const en: Record<string, any> = {
       },
     },
   },
+  briefReceived: {
+    meta: {
+      title: "Continue the conversation",
+      description: "Review your submitted brief and continue the conversation with Cinder.",
+    },
+    leftPanel: {
+      kicker: "Post-contact intake",
+      greeting: "Thanks, {firstName} — we've got your brief.",
+      timeline: {
+        eyebrow: "What happens next",
+        heading: "A founder-led handoff, without losing the context you already gave us.",
+      },
+      footnote: {
+        title: "Private · forgingapps.com",
+        body: "This page keeps your original brief and your follow-up chat in one place, so Ivaylo and Radoslav can pick up the thread without asking you to repeat yourself.",
+      },
+    },
+    contextStrip: {
+      project: "Project",
+      interest: "Interest",
+      launch: "Launch",
+    },
+    chat: {
+      header: {
+        title: "Cinder",
+        subtitle: "Concierge for scope, timing, and next-step questions",
+      },
+      loading: "I’m pulling your brief into view now.",
+      missingBrief: "This page needs a valid brief ID before the conversation can continue.",
+      invalidBrief: "We could not load that brief. Please use the link from your contact-form confirmation or ask us to resend it.",
+      typingLabel: "Cinder is typing",
+      submitReadyAnnouncement: "Brief ready to submit",
+      submittedAnnouncement: "Brief submitted",
+      submittedConfirmation: "Thanks — Ivaylo has your full brief, and he’ll be in touch within a week.",
+      composer: {
+        hint: "Enter sends. Shift+Enter adds a new line.",
+        placeholder: "Ask about scope, timing, payment structure, or what happens next...",
+        send: "Send message",
+        submitted: "This brief has already been submitted to the founder.",
+      },
+      submit: {
+        label: "Submit — send this brief to the founder",
+        loading: "Submitting your brief...",
+      },
+      errors: {
+        turnFailed: "The message did not go through. Please try again in a moment.",
+        submitFailed: "We could not submit the brief just yet. Please try again shortly.",
+      },
+    },
+  },
   privacy: {
     title: "Privacy Policy",
     effectiveDate: "Effective Date: January 1, 2026",

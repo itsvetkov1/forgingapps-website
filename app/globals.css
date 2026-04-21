@@ -8,6 +8,18 @@
   box-sizing: border-box;
 }
 
+:root {
+  --forge-ember: #D8660B;
+  --forge-ember-soft: #E8852F;
+  --forge-gold: #C4A062;
+  --forge-dark: #0F1419;
+  --dark-panel: #141A22;
+  --dark-hairline: rgba(196, 160, 98, 0.12);
+  --dark-ink-100: #E8E6E1;
+  --dark-ink-300: #A8A39B;
+  --dark-ink-500: #6B6963;
+}
+
 html {
   scroll-behavior: smooth;
 }

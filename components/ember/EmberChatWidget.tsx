@@ -4,13 +4,15 @@ import { usePathname } from 'next/navigation'
 import EmberChatWindow from '@/components/ember/EmberChatWindow'
 import EmberFlameIcon from '@/components/ember/EmberFlameIcon'
 import { EmberChatProvider, useEmberChat } from '@/components/ember/EmberChatContext'
+import { shouldHideSiteChrome } from '@/lib/brief-received-routing.mjs'
 
 function EmberChatWidgetInner() {
   const pathname = usePathname()
   const { isOpen, open } = useEmberChat()
   const isVelouraShop = pathname?.startsWith('/demo/veloura-shop') || pathname?.startsWith('/en/demo/veloura-shop') || pathname?.startsWith('/bg/demo/veloura-shop')
+  const hideSiteChrome = shouldHideSiteChrome(pathname ?? '')
 
-  if (isVelouraShop) return null
+  if (isVelouraShop || hideSiteChrome) return null
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999]">

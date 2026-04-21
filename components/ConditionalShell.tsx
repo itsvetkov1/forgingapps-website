@@ -4,10 +4,12 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { shouldHideSiteChrome } from '@/lib/brief-received-routing.mjs'
 
 export default function ConditionalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isVeloura = pathname?.startsWith('/demo/veloura-shop') || pathname?.startsWith('/en/demo/veloura-shop') || pathname?.startsWith('/bg/demo/veloura-shop')
+  const hideSiteChrome = shouldHideSiteChrome(pathname ?? '')
 
   useEffect(() => {
     if (isVeloura) {
@@ -30,9 +32,9 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
 
   return (
     <>
-      {!isVeloura && <Navbar />}
+      {!isVeloura && !hideSiteChrome && <Navbar />}
       <main>{children}</main>
-      {!isVeloura && <Footer />}
+      {!isVeloura && !hideSiteChrome && <Footer />}
     </>
   )
 }

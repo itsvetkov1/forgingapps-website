@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { Suspense, useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import MultiSelect from '@/components/MultiSelect'
 import { useTranslation } from '@/lib/i18n/useTranslation'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 import { contactFormConfigs, resolveContactFormVariant, type ContactFormVariant, type FormVariantConfig } from '@/lib/contactFormConfigs'
+import { buildBriefReceivedPath, extractBriefIdFromSubmissionResponse } from '@/lib/brief-received-routing.mjs'
 
 interface ContactFormProps {
   packagePreselect?: string
@@ -162,6 +163,7 @@ function ContactFormWithSearch(props: ContactFormProps) {
 function ContactFormRenderer({ packagePreselect, variant, productParam, subjectParam }: ContactFormProps) {
   const { t, language } = useTranslation('contact')
   const { localePath } = useLanguage()
+  const router = useRouter()
   const copy = genericCopy[language]
   const contactForms = translations[language].contactForms ?? {}
   const defaultPackage = packagePreselect || t('packageOptions.notSure')
@@ -319,8 +321,11 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
         headers: { 'Content-Type': 'application/json' },
       })
 
+      const responseText = await response.text()
+
       if (response.ok) {
-        setSubmitted(true)
+        const briefId = extractBriefIdFromSubmissionResponse(responseText)
+
         setHoneypot('')
         if (variantConfig && resolvedVariant) {
           resetVariantForm(resolvedVariant)
@@ -330,6 +335,23 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
             : ''
           setGenericFormData(buildGenericState(defaultPackage, preset))
         }
+
+        if (briefId) {
+          try {
+            const briefResponse = await fetch(`https://chat.forgingapps.com/intake/brief/${encodeURIComponent(briefId)}`, {
+              headers: { Accept: 'application/json' },
+            })
+
+            if (briefResponse.ok) {
+              router.push(buildBriefReceivedPath(language, briefId))
+              return
+            }
+          } catch {
+            // Preserve the confirmed-success fallback below until the brief endpoint is live.
+          }
+        }
+
+        setSubmitted(true)
       } else {
         setError(true)
       }
