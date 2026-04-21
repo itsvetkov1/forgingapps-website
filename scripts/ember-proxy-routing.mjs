@@ -1,5 +1,10 @@
 export function getProxyTarget(pathname, search = '') {
-  if (pathname === '/intake/health' || pathname === '/intake/message' || pathname === '/intake/test') {
+  if (
+    pathname === '/intake/health' ||
+    pathname === '/intake/message' ||
+    pathname === '/intake/test' ||
+    pathname.startsWith('/intake/brief/')
+  ) {
     return {
       hostname: '127.0.0.1',
       port: 8001,

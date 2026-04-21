@@ -187,13 +187,17 @@ const BLOCKED_LEAK_RESPONSE = "I'd be happy to help with questions about Forging
 // ============================================================================
 
 function sendJson(res, statusCode, payload, origin = '*') {
-  res.writeHead(statusCode, {
+  const headers = {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
     'Cache-Control': 'no-store',
-  })
+  }
+  if (origin !== '*') {
+    headers['Access-Control-Allow-Credentials'] = 'true'
+  }
+  res.writeHead(statusCode, headers)
   res.end(JSON.stringify(payload))
 }
 
@@ -478,12 +482,16 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (req.method === 'OPTIONS') {
-    res.writeHead(204, {
+    const headers = {
       'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
       'Cache-Control': 'no-store',
-    })
+    }
+    if (allowedOrigin !== '*') {
+      headers['Access-Control-Allow-Credentials'] = 'true'
+    }
+    res.writeHead(204, headers)
     res.end()
     return
   }
@@ -582,13 +590,17 @@ const server = http.createServer(async (req, res) => {
           let data = ''
           proxyRes.on('data', (chunk) => { data += chunk })
           proxyRes.on('end', () => {
-            res.writeHead(proxyRes.statusCode || 502, {
+            const headers = {
               'Content-Type': proxyRes.headers['content-type'] || proxyTarget.contentType,
               'Access-Control-Allow-Origin': allowedOrigin,
               'Access-Control-Allow-Headers': 'Content-Type',
               'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
               'Cache-Control': 'no-store',
-            })
+            }
+            if (allowedOrigin !== '*') {
+              headers['Access-Control-Allow-Credentials'] = 'true'
+            }
+            res.writeHead(proxyRes.statusCode || 502, headers)
             res.end(data)
           })
         },
