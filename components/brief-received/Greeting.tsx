@@ -7,7 +7,10 @@ interface GreetingProps {
 
 export default function Greeting({ firstName, label, locale, phase }: GreetingProps) {
   const resolvedName = firstName?.trim() || (locale === 'bg' ? 'там' : 'there')
-  const title = label.replace('{firstName}', resolvedName)
+  const title = label
+    .replace('{firstName}', resolvedName)
+    .replace('{name}', resolvedName)
+    .replace('{име}', resolvedName)
 
   return (
     <div className="mb-8">
