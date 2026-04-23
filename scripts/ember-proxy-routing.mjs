@@ -3,6 +3,7 @@ export function getProxyTarget(pathname, search = '') {
     pathname === '/intake/health' ||
     pathname === '/intake/message' ||
     pathname === '/intake/test' ||
+    pathname === '/intake/finalize' ||
     pathname.startsWith('/intake/brief/')
   ) {
     return {
