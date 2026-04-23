@@ -88,39 +88,71 @@ def build_chat_turn_timestamps() -> tuple[str, str]:
 # the [CINDER_READY] marker (gpt-5.4 instruction-following on trailing tokens is
 # unreliable), we promote to 'ready' by detecting explicit hand-off language.
 # EN + BG patterns. Case-insensitive.
+# Closure-posture heuristics: gpt-5.4's trailing-token instruction-following proved
+# unreliable for the [CINDER_READY] marker, so we detect the ready state semantically
+# from Cinder's reply text. Broad EN + BG patterns. Case-insensitive.
 CLOSURE_PHRASES_RE = re.compile(
     r"""(?ix)
-    \b(
-        hand\s+(?:this|it|that)\s+off       # "hand this off"
-        | handing\s+(?:this|it|that)\s+off    # "handing this off"
-        | hand\s+(?:this|it|that)\s+over     # "hand this over"
-        | leave\s+(?:it|this|things)\s+(?:here|there)  # "leave it here"
-        | enough\s+(?:context\s+)?to\s+hand  # "enough to hand"
-        | enough\s+to\s+hand\s+(?:this|it)   # "enough to hand this"
-        | (?:i'?ve|i\s+have)\s+got\s+enough\s+to\s+hand
-        | ready\s+to\s+hand\s+(?:this|it)   # "ready to hand this"
-        | send(?:ing)?\s+(?:this\s+)?(?:summary|to\s+ivaylo)  # "sending this summary"
-        | summary\s+(?:is\s+)?on\s+its?\s+way
+    (
+        # Handoff verbs
+        hand(?:ing|ed)?\s+(?:this|it|that)\s+(?:off|over)
+        | hand\s+this\s+off                                # "hand this off"
+        | leave\s+(?:it|this|things)\s+(?:here|there)         # "leave it there"
         | pick\s+this\s+up\s+with\s+the\s+right\s+context
-        | достатъчно\s+контекст                # BG: "enough context"
-        | ще\s+приключа                         # BG: "I'll wrap up"
-        | приключвам\s+тук                      # BG: "I'm closing here"
-        | изпращам\s+резюмето                   # BG: "sending the summary"
-        | подготвен\s+за\s+разговора            # BG: "prepared for the call"
-        | предавам\s+(?:това|го)\s+нататък      # BG: "handing this off"
-    )\b
+        # "Enough" families
+        | enough\s+(?:context\s+)?to\s+hand
+        | enough\s+(?:for|to)\s+(?:ivaylo|the\s+founders)
+        | (?:i'?ve|i\s+have)\s+got\s+enough
+        # "Ready" families
+        | ready\s+(?:to\s+hand|for\s+(?:ivaylo|the\s+founders|them|him|review|the\s+team))
+        | this\s+is\s+ready\s+(?:for|to)                     # "this is ready for..."
+        | ready\s+(?:to|for)\s+review
+        # Summary / send language
+        | send(?:ing)?\s+(?:the\s+|this\s+)?summary
+        | summary\s+(?:is\s+)?on\s+its?\s+way
+        | i'?ll\s+send\s+(?:this|the\s+summary|ivaylo|him)
+        # BG closures
+        | достатъчно\s+контекст
+        | ще\s+приключа
+        | приключвам\s+тук
+        | изпращам\s+(?:резюмето|го\s+на\s+ивайло)
+        | подготвен\s+за\s+разговора
+        | предавам\s+(?:това|го)\s+нататък
+        | готово\s+за\s+преглед\s+от\s+основателите
+    )
     """
 )
 
 
-def resolve_completion(reply: str) -> tuple[str, Literal['none', 'partial', 'ready']]:
+def _reply_signals_ready(text: str) -> bool:
+    text = str(text or '').strip()
+    if not text:
+        return False
+    if READY_MARKER_RE.search(text):
+        return True
+    return bool(CLOSURE_PHRASES_RE.search(text))
+
+
+def resolve_completion(reply: str, history: list | None = None) -> tuple[str, Literal['none', 'partial', 'ready']]:
     cleaned = str(reply or '').strip()
+    # Marker present in the current reply — strip + ready
     if READY_MARKER_RE.search(cleaned):
         stripped = READY_MARKER_RE.sub('', cleaned).strip()
         return stripped, 'ready'
-    # Fallback — persona decided to close but forgot the marker
+    # Closure phrase in the current reply — ready
     if CLOSURE_PHRASES_RE.search(cleaned):
         return cleaned, 'ready'
+    # Sticky: if any prior assistant message in the session signaled ready,
+    # subsequent turns stay ready even if they don't re-signal
+    if history:
+        for turn in history:
+            try:
+                role = getattr(turn, 'role', None) or (turn.get('role') if isinstance(turn, dict) else None)
+                content = getattr(turn, 'content', None) or (turn.get('content') if isinstance(turn, dict) else None)
+            except Exception:
+                role, content = None, None
+            if str(role).lower() == 'assistant' and _reply_signals_ready(str(content or '')):
+                return cleaned, 'ready'
     if len(cleaned) > 40:
         return cleaned, 'partial'
     return cleaned, 'none'
@@ -1015,7 +1047,7 @@ def intake_message(request: MessageRequest) -> JSONResponse:
             message=request.message,
             model=model,
         )
-        reply, completion = resolve_completion(str(result.get('reply', '')))
+        reply, completion = resolve_completion(str(result.get('reply', '')), history=request.history)
         result['reply'] = reply
         result['completion'] = completion
 
