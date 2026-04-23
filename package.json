@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "check-i18n": "node scripts/check-i18n-parity.mjs"
+    "check-i18n": "node scripts/check-i18n-parity.mjs && node scripts/check-blog-posts-parity.mjs",
+    "check-blog-parity": "node scripts/check-blog-posts-parity.mjs"
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
