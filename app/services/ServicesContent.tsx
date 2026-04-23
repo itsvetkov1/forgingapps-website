@@ -14,7 +14,7 @@ export default function ServicesContent() {
     { id: 'ember', data: data.ember, href: contactWithProduct('ember') },
     { id: 'anvil', data: data.anvil, href: contactWithProduct('anvil') },
     { id: 'forge', data: data.forge, href: contactWithProduct('forge') },
-    { id: 'oracle', data: data.oracle, href: contactWithProduct('oracle') },
+    { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting') },
   ]
 
   const comparisonRows = [
