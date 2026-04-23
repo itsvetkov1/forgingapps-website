@@ -1,0 +1,49 @@
+# Runtime state
+intakes/
+briefs.db
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.journal
+*.wal
+*.shm
+
+# Generated artifacts
+brief.html
+brief.md
+conversation.jsonl
+conversation_redacted.jsonl
+form_data.json
+state.json
+summary_*.md
+*.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Build / temp
+build/
+dist/
+*.egg-info/
+.tmp/
+tmp/
+.cache/
+
+# Local env / secrets
+.env
+.env.*
+*.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
