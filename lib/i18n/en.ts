@@ -48,10 +48,10 @@ export const en: Record<string, any> = {
     mostPopular: "Most Popular",
   },
   home: {
-    headline: "Apps Forged to Last",
-    subheadline: "Custom software and AI solutions for growing businesses. Built directly by the founders, without agency layers.",
-    primaryCTA: "See It In Action",
-    secondaryCTA: "Get a Free Quote",
+    headline: "Custom software and AI systems, built by the founders.",
+    subheadline: "Two senior builders in Sofia. Direct access, fixed-price scope, no agencies, no juniors on your project.",
+    primaryCTA: "See live demos",
+    secondaryCTA: "Book a consultation",
     trustBadge: "umlaut Verified Partner — Certified by umlaut, a Deutsche Telekom company",
     whatWeForge: "What We Forge",
     spark: {
