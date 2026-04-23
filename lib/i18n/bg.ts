@@ -9,6 +9,8 @@ export const bg: Record<string, any> = {
       about: "За нас",
       blog: "Блог",
       contact: "Контакт",
+      openMenu: "Отваряне на менюто",
+      closeMenu: "Затваряне на менюто",
     },
     footer: {
       tagline: "Приложения, изковани с прецизност. Създадени да издържат.",

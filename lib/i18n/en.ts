@@ -7,6 +7,8 @@ export const en: Record<string, any> = {
       about: "About",
       blog: "Blog",
       contact: "Contact",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
     },
     footer: {
       tagline: "Apps built with precision. Built to last.",
