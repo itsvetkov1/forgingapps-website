@@ -44,7 +44,12 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
     if (!id) return
     const doScroll = () => {
       const el = document.getElementById(id)
-      if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' })
+      if (!el) return
+      // html { scroll-behavior: smooth } hijacks scrollIntoView with behavior:auto
+      // and silently fails in automated / cold-load contexts. Use explicit
+      // 'instant' on window.scrollTo computed from offsetTop to force a jump.
+      const top = el.getBoundingClientRect().top + window.scrollY
+      window.scrollTo({ top, behavior: 'instant' as ScrollBehavior })
     }
     const timeouts = [50, 200, 500, 900, 1400, 2000].map((d) => window.setTimeout(doScroll, d))
     return () => timeouts.forEach((t) => window.clearTimeout(t))
