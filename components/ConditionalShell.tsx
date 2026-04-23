@@ -34,22 +34,20 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
   }, [isVelouraShop])
 
   // Scroll to anchor after client-rendered content has mounted.
-  // Client components populate the DOM after initial HTML, so the browser's
-  // native anchor resolution misses. This effect re-runs the scroll once
-  // children have rendered and again on path change.
+  // Client components populate the DOM after initial HTML, and late-loading
+  // content (images, below-the-fold sections) causes layout shifts that
+  // invalidate a single scroll attempt. Multiple staggered attempts converge
+  // on the final offset even through shifts.
   useEffect(() => {
     if (typeof window === 'undefined' || !window.location.hash) return
     const id = window.location.hash.slice(1)
     if (!id) return
-    const attempt = (remaining: number) => {
+    const doScroll = () => {
       const el = document.getElementById(id)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return
-      }
-      if (remaining > 0) setTimeout(() => attempt(remaining - 1), 80)
+      if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' })
     }
-    attempt(10)
+    const timeouts = [50, 200, 500, 900, 1400, 2000].map((d) => window.setTimeout(doScroll, d))
+    return () => timeouts.forEach((t) => window.clearTimeout(t))
   }, [pathname])
 
   return (
