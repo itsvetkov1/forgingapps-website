@@ -92,7 +92,7 @@ export default function AIConsultingContent() {
                 {[data.aiChatAssistant.deliverable1, data.aiChatAssistant.deliverable2].map((item) => <li key={item}>· {item}</li>)}
               </ul>
               <p className="text-xs text-forge-gold mb-4">{data.aiChatAssistant.ctaNote}</p>
-              <Link href={contactWithProduct('ai-chat-assistant')} className="btn-primary mt-auto text-center">{data.aiChatAssistant.cta}</Link>
+              <Link href={localePath('/offers/ai-chat-assistant')} className="btn-primary mt-auto text-center">{data.aiChatAssistant.cta}</Link>
             </div>
 
             <div id="the-oracle" className="bg-forge-stone border border-forge-gold/50 rounded-xl p-8 scroll-mt-20 flex flex-col">
