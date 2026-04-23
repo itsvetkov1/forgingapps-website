@@ -64,63 +64,63 @@ export default function AIConsultingContent() {
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom">
           <h2 className="font-cinzel text-4xl font-bold text-center text-forge-gold mb-10">{data.servicesHeading}</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div id="ai-readiness-sprint" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiReadinessSprint.title}</h3>
-                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiReadinessSprint.badge}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div id="ai-readiness-sprint" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20 flex flex-col">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <h3 className="font-cinzel text-2xl font-bold text-forge-gold">{data.aiReadinessSprint.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-2 py-1 rounded text-[10px] font-semibold whitespace-nowrap">{data.aiReadinessSprint.badge}</span>
               </div>
-              <p className="text-2xl font-bold text-white mb-2">{data.aiReadinessSprint.price}</p>
-              <p className="text-sm text-gray-400 mb-4">{data.aiReadinessSprint.delivery}</p>
-              <p className="text-gray-300 mb-5">{data.aiReadinessSprint.description}</p>
-              <ul className="space-y-2 text-gray-400 mb-5">
-                {[data.aiReadinessSprint.deliverable1, data.aiReadinessSprint.deliverable2, data.aiReadinessSprint.deliverable3].map((item) => <li key={item}>• {item}</li>)}
+              <p className="text-xl font-bold text-white mb-1">{data.aiReadinessSprint.price}</p>
+              <p className="text-xs text-gray-400 mb-4">{data.aiReadinessSprint.delivery}</p>
+              <p className="text-gray-300 text-sm mb-5 flex-grow">{data.aiReadinessSprint.description}</p>
+              <ul className="space-y-2 text-gray-400 text-sm mb-5">
+                {[data.aiReadinessSprint.deliverable1, data.aiReadinessSprint.deliverable2, data.aiReadinessSprint.deliverable3].map((item) => <li key={item}>· {item}</li>)}
               </ul>
-              <p className="text-sm text-forge-gold mb-5">{data.aiReadinessSprint.ctaNote}</p>
-              <Link href={contactWithProduct('ai-readiness')} className="btn-primary">{data.aiReadinessSprint.cta}</Link>
+              <p className="text-xs text-forge-gold mb-4">{data.aiReadinessSprint.ctaNote}</p>
+              <Link href={contactWithProduct('ai-readiness')} className="btn-primary mt-auto text-center">{data.aiReadinessSprint.cta}</Link>
             </div>
 
-            <div id="ai-chat-assistant" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.aiChatAssistant.title}</h3>
-                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.aiChatAssistant.badge}</span>
+            <div id="ai-chat-assistant" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20 flex flex-col">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <h3 className="font-cinzel text-2xl font-bold text-forge-gold">{data.aiChatAssistant.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-2 py-1 rounded text-[10px] font-semibold whitespace-nowrap">{data.aiChatAssistant.badge}</span>
               </div>
-              <p className="text-2xl font-bold text-white mb-2">{data.aiChatAssistant.price}</p>
-              <p className="text-sm text-gray-400 mb-4">{data.aiChatAssistant.delivery}</p>
-              <p className="text-gray-300 mb-5">{data.aiChatAssistant.description}</p>
-              <ul className="space-y-2 text-gray-400 mb-5">
-                {[data.aiChatAssistant.deliverable1, data.aiChatAssistant.deliverable2, data.aiChatAssistant.deliverable3].map((item) => <li key={item}>• {item}</li>)}
+              <p className="text-xl font-bold text-white mb-1">{data.aiChatAssistant.price}</p>
+              <p className="text-xs text-gray-400 mb-4">{data.aiChatAssistant.delivery}</p>
+              <p className="text-gray-300 text-sm mb-5 flex-grow">{data.aiChatAssistant.description}</p>
+              <ul className="space-y-2 text-gray-400 text-sm mb-5">
+                {[data.aiChatAssistant.deliverable1, data.aiChatAssistant.deliverable2].map((item) => <li key={item}>· {item}</li>)}
               </ul>
-              <p className="text-sm text-forge-gold mb-5">{data.aiChatAssistant.ctaNote}</p>
-              <Link href={contactWithProduct('ai-chat-assistant')} className="btn-primary">{data.aiChatAssistant.cta}</Link>
+              <p className="text-xs text-forge-gold mb-4">{data.aiChatAssistant.ctaNote}</p>
+              <Link href={contactWithProduct('ai-chat-assistant')} className="btn-primary mt-auto text-center">{data.aiChatAssistant.cta}</Link>
+            </div>
+
+            <div id="the-oracle" className="bg-forge-stone border border-forge-gold/50 rounded-xl p-8 scroll-mt-20 flex flex-col">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <h3 className="font-cinzel text-2xl font-bold text-forge-gold">{data.hourlyConsulting.title}</h3>
+                <span className="price-discount bg-forge-ember/20 text-forge-ember px-2 py-1 rounded text-[10px] font-semibold whitespace-nowrap">{data.hourlyConsulting.badge}</span>
+              </div>
+              <p className="text-xl font-bold text-white mb-4">{data.hourlyConsulting.launchPrice}</p>
+              <p className="text-gray-300 text-sm mb-5 flex-grow">{data.hourlyConsulting.description}</p>
+              <ul className="space-y-2 text-gray-400 text-sm mb-5">
+                {[data.hourlyConsulting.deliverable1, data.hourlyConsulting.deliverable2, data.hourlyConsulting.deliverable3].map((item) => <li key={item}>· {item}</li>)}
+              </ul>
+              <p className="text-xs text-forge-gold mb-4">{data.hourlyConsulting.ctaNote}</p>
+              <Link href={contactWithProduct('oracle')} className="btn-primary mt-auto text-center">{data.hourlyConsulting.cta}</Link>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div id="the-oracle" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <h3 className="font-cinzel text-3xl font-bold text-forge-gold">{data.hourlyConsulting.title}</h3>
-                <span className="price-discount bg-forge-ember/20 text-forge-ember px-3 py-1 rounded text-xs font-semibold">{data.hourlyConsulting.badge}</span>
-              </div>
-              <p className="text-2xl font-bold text-white mb-4">{data.hourlyConsulting.launchPrice}</p>
-              <p className="text-gray-300 mb-5">{data.hourlyConsulting.description}</p>
-              <ul className="space-y-2 text-gray-400 mb-5">
-                {[data.hourlyConsulting.deliverable1, data.hourlyConsulting.deliverable2, data.hourlyConsulting.deliverable3].map((item) => <li key={item}>✓ {item}</li>)}
-              </ul>
-              <p className="text-sm text-forge-gold mb-5">{data.hourlyConsulting.ctaNote}</p>
-              <Link href={contactWithProduct('oracle')} className="btn-primary">{data.hourlyConsulting.cta}</Link>
-            </div>
-            <div id="fixed-price" className="bg-forge-stone border border-forge-ember/30 rounded-xl p-8 scroll-mt-20">
-              <h3 className="font-cinzel text-3xl font-bold text-forge-gold mb-4">{data.fixedPrice.heading}</h3>
-              <div className="space-y-4">
-                {fixed.map((item: any) => (
-                  <div key={item.title} className="border border-forge-ember/20 rounded-lg p-4 bg-forge-dark">
-                    <p className="font-semibold text-white">{item.title}</p>
-                    <p className="text-forge-gold font-semibold mb-2">{item.launchPrice}</p>
-                    <p className="text-gray-400 text-sm">{item.description}</p>
-                  </div>
-                ))}
-              </div>
+          <div id="fixed-price" className="mt-4 rounded-xl border border-forge-ember/20 bg-forge-stone/60 p-6 scroll-mt-20">
+            <h3 className="font-cinzel text-xl font-bold text-forge-gold mb-2">{data.fixedPrice.heading}</h3>
+            <p className="text-sm text-gray-400 mb-4">{language === 'bg' ? 'Споменете това в контакт формата и ще отговорим с фиксирана цена и обхват.' : 'Mention any of these in the contact form and we will reply with a fixed price and scope.'}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {fixed.map((item: any) => (
+                <div key={item.title} className="border border-forge-ember/20 rounded-lg p-3 bg-forge-dark">
+                  <p className="font-semibold text-white text-sm">{item.title}</p>
+                  <p className="text-forge-gold text-xs font-semibold mb-1">{item.launchPrice}</p>
+                  <p className="text-gray-400 text-xs leading-snug">{item.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

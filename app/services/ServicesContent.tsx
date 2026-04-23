@@ -57,6 +57,25 @@ export default function ServicesContent() {
         </div>
       </section>
 
+      <section id="founding-clients" className="section-py border-b border-forge-ember/20 scroll-mt-20">
+        <div className="container-custom max-w-4xl">
+          <div className="bg-forge-gold/10 border-2 border-forge-gold/40 rounded-xl p-8 md:p-10">
+            <div className="mb-4">
+              <span className="price-discount text-forge-gold bg-forge-gold/20 px-3 py-1 text-xs uppercase tracking-[0.18em]">{data.foundingClients.badge}</span>
+            </div>
+            <h2 className="font-cinzel text-3xl font-bold text-forge-gold mb-4">{data.foundingClients.heading}</h2>
+            <p className="text-gray-300 text-lg mb-5">{data.foundingClients.body}</p>
+            <ul className="space-y-2 text-gray-300 mb-5 list-disc list-inside">
+              <li>{data.foundingClients.bullet1}</li>
+              <li>{data.foundingClients.bullet2}</li>
+              <li>{data.foundingClients.bullet3}</li>
+            </ul>
+            <p className="text-sm text-gray-400 mb-6">{data.foundingClients.note}</p>
+            <Link href={contactWithProduct('founding-client')} className="btn-primary">{data.foundingClients.cta}</Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section-py border-b border-forge-ember/20">
         <div className="container-custom overflow-x-auto">
           <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.comparison.heading}</h2>

@@ -88,26 +88,41 @@ const subjectPresets = {
     'custom-ai-assistant': 'Build a Custom AI Assistant',
     'oracle-consulting': 'Book an Oracle Consulting Session',
     'discovery-workshop': 'Discovery Workshop',
+    'veloura-support-demo': 'From the Veloura Support demo — AI Chat Assistant interest',
+    'veloura-shop-demo': 'From the Veloura Shop demo — custom storefront project',
   },
   bg: {
     'ai-readiness': 'Оценка за AI готовност',
     'custom-ai-assistant': 'Изграждане на персонализиран AI асистент',
     'oracle-consulting': 'Oracle консултантска сесия',
     'discovery-workshop': 'Discovery Workshop',
+    'veloura-support-demo': 'От Veloura Support демото — интерес към AI Chat Assistant',
+    'veloura-shop-demo': 'От Veloura Shop демото — проект за custom магазин',
+  },
+} as const
+
+const messagePresets = {
+  en: {
+    'veloura-support-demo': 'I came from the Veloura Support demo and I am interested in the AI Chat Assistant package for my own site.',
+    'veloura-shop-demo': 'I came from the Veloura Shop demo and I would like to discuss a custom storefront (Ember or Anvil package).',
+  },
+  bg: {
+    'veloura-support-demo': 'Дойдох от Veloura Support демото и се интересувам от AI Chat Assistant пакета за моя сайт.',
+    'veloura-shop-demo': 'Дойдох от Veloura Shop демото и бих искал да обсъдим custom магазин (Ember или Anvil пакет).',
   },
 } as const
 
 const genericRequiredFields = ['name', 'email', 'message'] as const
 const honeypotFieldName = 'website'
 
-function buildGenericState(defaultPackage: string, subject = ''): GenericFormState {
+function buildGenericState(defaultPackage: string, subject = '', message = ''): GenericFormState {
   return {
     name: '',
     email: '',
     phone: '',
     subject,
     packageInterest: defaultPackage,
-    message: '',
+    message,
     source: '',
   }
 }
@@ -182,7 +197,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
   const variantConfig = resolvedVariant ? contactFormConfigs[resolvedVariant] : undefined
   const variantCopy = resolvedVariant ? contactForms[resolvedVariant] : undefined
 
-  const [genericFormData, setGenericFormData] = useState<GenericFormState>(() => buildGenericState(defaultPackage))
+  const [genericFormData, setGenericFormData] = useState<GenericFormState>(() => buildGenericState(defaultPackage, subjectParam ? subjectPresets[language][subjectParam as keyof (typeof subjectPresets)[typeof language]] ?? subjectParam : '', subjectParam ? (messagePresets[language] as Record<string, string>)[subjectParam] ?? '' : ''))
   const [variantFormData, setVariantFormData] = useState<VariantFormState>(() => (variantConfig ? buildVariantState(variantConfig) : {}))
   const [sourcePage, setSourcePage] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -207,8 +222,11 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
     const preset = subjectParam
       ? subjectPresets[language][subjectParam as keyof (typeof subjectPresets)[typeof language]] ?? subjectParam
       : ''
+    const msgPreset = subjectParam
+      ? (messagePresets[language] as Record<string, string>)[subjectParam] ?? ''
+      : ''
 
-    setGenericFormData(buildGenericState(defaultPackage, preset))
+    setGenericFormData(buildGenericState(defaultPackage, preset, msgPreset))
   }, [defaultPackage, language, subjectParam, variantConfig])
 
   const focusField = (fieldName: string) => {
@@ -339,7 +357,8 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
           const preset = subjectParam
             ? subjectPresets[language][subjectParam as keyof (typeof subjectPresets)[typeof language]] ?? subjectParam
             : ''
-          setGenericFormData(buildGenericState(defaultPackage, preset))
+          const msgPreset = subjectParam ? (messagePresets[language] as Record<string, string>)[subjectParam] ?? '' : ''
+          setGenericFormData(buildGenericState(defaultPackage, preset, msgPreset))
         }
 
         if (briefId) {

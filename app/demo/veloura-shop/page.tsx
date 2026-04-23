@@ -160,7 +160,7 @@ export default function VelouraShopHome() {
               <h2 className="mb-3 text-3xl font-bold">Ready to build your own storefront?</h2>
               <p className="text-sm leading-7 text-white/70">We design and ship branded storefronts like this, including catalog, cart, checkout, and support-ready flows, in 2-4 weeks.</p>
             </div>
-            <Link href="/en/contact" className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 transition-colors whitespace-nowrap">
+            <Link href="/en/contact?subject=veloura-shop-demo" className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-100 transition-colors whitespace-nowrap">
               Plan your storefront build
             </Link>
           </div>

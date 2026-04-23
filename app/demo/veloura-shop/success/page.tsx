@@ -63,7 +63,7 @@ export default function SuccessPage() {
             Want something like this for real?
           </p>
           <Link
-            href="/en/contact"
+            href="/en/contact?subject=veloura-shop-demo"
             className="inline-block bg-gray-900 text-white px-6 py-3 font-semibold rounded-lg hover:bg-gray-800 transition-colors text-sm"
           >
             Talk to ForgingApps →

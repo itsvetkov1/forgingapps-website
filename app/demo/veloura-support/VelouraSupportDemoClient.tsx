@@ -157,7 +157,7 @@ export default function VelouraSupportDemoClient() {
                 <h3 className="font-cinzel text-lg font-bold text-forge-gold mb-1">Build something like this</h3>
                 <p className="text-gray-400 text-sm">Branded AI chat for your e-commerce or SaaS product</p>
               </div>
-              <Link href="/en/contact" className="btn-primary whitespace-nowrap">
+              <Link href="/en/contact?subject=veloura-support-demo" className="btn-primary whitespace-nowrap">
                 Get in Touch →
               </Link>
             </div>
@@ -265,7 +265,7 @@ export default function VelouraSupportDemoClient() {
                 <p className="text-sm leading-7 text-gray-300">We build branded support experiences like this and ship working client-ready implementations in 2-4 weeks.</p>
               </div>
               <div className="flex flex-col items-start lg:items-end gap-3">
-                <Link href="/en/contact" className="btn-primary whitespace-nowrap">
+                <Link href="/en/contact?subject=veloura-support-demo" className="btn-primary whitespace-nowrap">
                   Start your AI assistant project
                 </Link>
                 <Link href="/en/ai-consulting#ai-chat-assistant" className="text-forge-gold text-sm hover:text-forge-ember transition">
