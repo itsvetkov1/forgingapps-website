@@ -22,7 +22,7 @@ export default function RightPanel(props: RightPanelProps) {
   const { brief, copy } = props
 
   return (
-    <section className="flex min-h-screen flex-col justify-between bg-[#f4ede3] px-4 py-4 min-[840px]:px-6 min-[840px]:py-6">
+    <section className="order-1 flex min-h-[100svh] flex-col gap-4 bg-[#f4ede3] px-4 py-4 min-[840px]:order-2 min-[840px]:sticky min-[840px]:top-0 min-[840px]:h-screen min-[840px]:px-6 min-[840px]:py-6">
       <CinderChat {...props} />
       <BriefContextStrip brief={brief} copy={copy.contextStrip} />
     </section>

@@ -61,10 +61,10 @@ export default function ChatSurface({
   const disableComposer = phase !== 'ready' || sessionState === 'submitted' || submitting
 
   return (
-    <section className="flex min-h-[60vh] flex-1 flex-col overflow-hidden rounded-[32px] border border-[#d7cdb8] bg-[#fffaf3] shadow-[0_30px_80px_rgba(15,20,25,0.08)]">
+    <section data-test="brief-received-chat-panel" className="flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-[32px] border border-[#d7cdb8] bg-[#fffaf3] shadow-[0_30px_80px_rgba(15,20,25,0.08)]">
       <ChatHeader copy={copy.chat.header} />
       <div className="sr-only" aria-live="polite">{announcement}</div>
-      <div className="flex-1 overflow-hidden px-4 py-4 min-[840px]:px-6">
+      <div className="flex flex-1 min-h-0 flex-col overflow-hidden px-4 py-4 min-[840px]:px-6">
         <MessageList messages={placeholderMessage} />
         {typing ? <TypingDots label={copy.chat.typingLabel} /> : null}
         {showStarters ? <StarterPrompts prompts={starterPrompts} onSelect={onSelectStarterPrompt} /> : null}
@@ -78,12 +78,14 @@ export default function ChatSurface({
         ) : null}
         {chatError ? <p className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{chatError}</p> : null}
       </div>
-      <Composer
-        copy={copy.chat.composer}
-        disabled={disableComposer}
-        onSend={onSendMessage}
-        submitted={sessionState === 'submitted'}
-      />
+      <div className="sticky bottom-0 bg-[#fffaf3]">
+        <Composer
+          copy={copy.chat.composer}
+          disabled={disableComposer}
+          onSend={onSendMessage}
+          submitted={sessionState === 'submitted'}
+        />
+      </div>
     </section>
   )
 }

@@ -880,7 +880,7 @@ export const bg: Record<string, any> = {
       typingLabel: "Cinder пише",
       submitReadyAnnouncement: "Брифът е готов за изпращане",
       submittedAnnouncement: "Брифът е изпратен",
-      submittedConfirmation: "Благодарим Ви — Ивайло вече има пълния Ви бриф и ще се свърже с Вас до една седмица.",
+      submittedConfirmation: "Благодарим Ви — Ивайло вече има пълния Ви бриф и ще се свърже с Вас до 24 часа в работни дни.",
       composer: {
         hint: "Enter изпраща. Shift+Enter добавя нов ред.",
         placeholder: "Попитайте за обхвата, сроковете, плащането или какво следва...",

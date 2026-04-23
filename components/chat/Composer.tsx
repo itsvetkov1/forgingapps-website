@@ -42,6 +42,7 @@ export default function Composer({ copy, disabled, onSend, submitted }: Composer
         <textarea
           ref={textareaRef}
           rows={2}
+          data-test="brief-received-chat-input"
           disabled={disabled}
           placeholder={submitted ? copy.submitted : copy.placeholder}
           className="min-h-[56px] w-full resize-none bg-transparent px-2 py-2 text-sm leading-6 text-[#141a22] outline-none placeholder:text-[#8a8177] disabled:cursor-not-allowed disabled:text-[#8a8177]"
@@ -57,6 +58,7 @@ export default function Composer({ copy, disabled, onSend, submitted }: Composer
           <p className="text-xs text-[#8a8177]">{copy.hint}</p>
           <button
             type="button"
+            data-test="brief-received-chat-send"
             onClick={handleSend}
             disabled={disabled}
             aria-label={copy.send}

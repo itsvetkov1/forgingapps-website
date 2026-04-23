@@ -5,7 +5,7 @@ interface MessageProps {
   message: ChatMessageRecord
 }
 
-function renderInline(content: string, keyPrefix: string): ReactNode[] {
+function renderInline(content: string, keyPrefix: string, isAssistant: boolean): ReactNode[] {
   const segments: ReactNode[] = []
   const pattern = /(\*\*([^*]+)\*\*)|(\[([^\]]+)\]\((https?:\/\/[^)]+)\))/g
   let lastIndex = 0
@@ -17,7 +17,14 @@ function renderInline(content: string, keyPrefix: string): ReactNode[] {
     }
 
     if (match[2]) {
-      segments.push(<strong key={`${keyPrefix}-strong-${match.index}`} className="font-semibold text-[#141a22]">{match[2]}</strong>)
+      segments.push(
+        <strong
+          key={`${keyPrefix}-strong-${match.index}`}
+          className={`font-semibold ${isAssistant ? 'text-[#141a22]' : 'text-[#f8f0e3]'}`}
+        >
+          {match[2]}
+        </strong>,
+      )
     } else if (match[4] && match[5]) {
       segments.push(
         <a
@@ -25,7 +32,7 @@ function renderInline(content: string, keyPrefix: string): ReactNode[] {
           href={match[5]}
           target="_blank"
           rel="noreferrer"
-          className="font-medium text-[#b04f00] underline decoration-[#d8660b]/45 underline-offset-4"
+          className={`font-medium underline underline-offset-4 ${isAssistant ? 'text-[#b04f00] decoration-[#d8660b]/45' : 'text-[#ffd4af] decoration-[#ffd4af]/45'}`}
         >
           {match[4]}
         </a>,
@@ -43,7 +50,7 @@ function renderInline(content: string, keyPrefix: string): ReactNode[] {
   return segments.length ? segments : [content]
 }
 
-function renderBlocks(content: string) {
+function renderBlocks(content: string, isAssistant: boolean) {
   const lines = content.split(/\n+/).map((line) => line.trim()).filter(Boolean)
   const nodes: ReactNode[] = []
   let bulletBuffer: string[] = []
@@ -51,9 +58,12 @@ function renderBlocks(content: string) {
   const flushBullets = () => {
     if (!bulletBuffer.length) return
     nodes.push(
-      <ul key={`bullets-${nodes.length}`} className="space-y-2 pl-5 text-sm leading-6 text-[#2c3137] list-disc marker:text-[#d8660b]">
+      <ul
+        key={`bullets-${nodes.length}`}
+        className={`list-disc space-y-2 pl-5 text-sm leading-6 ${isAssistant ? 'text-[#2c3137] marker:text-[#d8660b]' : 'text-[#f8f0e3] marker:text-[#ffd4af]'}`}
+      >
         {bulletBuffer.map((item, index) => (
-          <li key={`${item}-${index}`}>{renderInline(item, `bullet-${index}`)}</li>
+          <li key={`${item}-${index}`}>{renderInline(item, `bullet-${index}`, isAssistant)}</li>
         ))}
       </ul>,
     )
@@ -68,8 +78,8 @@ function renderBlocks(content: string) {
 
     flushBullets()
     nodes.push(
-      <p key={`paragraph-${index}`} className="text-sm leading-7 text-[#2c3137]">
-        {renderInline(line, `paragraph-${index}`)}
+      <p key={`paragraph-${index}`} className={`text-sm leading-7 ${isAssistant ? 'text-[#2c3137]' : 'text-[#f8f0e3]'}`}>
+        {renderInline(line, `paragraph-${index}`, isAssistant)}
       </p>,
     )
   })
@@ -82,11 +92,11 @@ export default function Message({ message }: MessageProps) {
   const isAssistant = message.role === 'assistant'
 
   return (
-    <article className={`max-w-[90%] rounded-[24px] px-4 py-3 shadow-[0_12px_28px_rgba(15,20,25,0.06)] ${isAssistant ? 'self-start border border-[#eadfca] bg-white' : 'self-end bg-[#141a22] text-white'}`}>
+    <article className={`max-w-[90%] rounded-[24px] px-4 py-3 shadow-[0_12px_28px_rgba(15,20,25,0.06)] ${isAssistant ? 'self-start border border-[#eadfca] bg-white' : 'self-end bg-[#141a22] text-[#f8f0e3]'}`}>
       <p className={`mb-2 font-mono text-[11px] uppercase tracking-[0.22em] ${isAssistant ? 'text-[#8a8177]' : 'text-white/60'}`}>
         {isAssistant ? 'Cinder' : 'You'}
       </p>
-      <div className={isAssistant ? 'text-[#141a22]' : 'text-white [&_strong]:text-white [&_a]:text-[#ffd4af]'}>{renderBlocks(message.content)}</div>
+      <div>{renderBlocks(message.content, isAssistant)}</div>
     </article>
   )
 }

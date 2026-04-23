@@ -878,7 +878,7 @@ export const en: Record<string, any> = {
       typingLabel: "Cinder is typing",
       submitReadyAnnouncement: "Brief ready to submit",
       submittedAnnouncement: "Brief submitted",
-      submittedConfirmation: "Thanks — Ivaylo has your full brief, and he’ll be in touch within a week.",
+      submittedConfirmation: "Thanks — Ivaylo has your full brief, and he’ll be in touch within 24 hours on business days.",
       composer: {
         hint: "Enter sends. Shift+Enter adds a new line.",
         placeholder: "Ask about scope, timing, payment structure, or what happens next...",

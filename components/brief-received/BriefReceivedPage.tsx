@@ -39,7 +39,7 @@ export default function BriefReceivedPage(props: BriefReceivedPageProps) {
 
   return (
     <div className="min-h-screen bg-[#f4ede3] text-slate-900">
-      <div className="mx-auto grid min-h-screen max-w-[1440px] min-[840px]:grid-cols-[520px_minmax(0,1fr)]">
+      <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col min-[840px]:grid min-[840px]:grid-cols-[520px_minmax(0,1fr)] min-[840px]:items-start">
         <LeftPanel brief={brief} copy={copy} locale={locale} phase={phase} />
         <RightPanel
           announcement={announcement}

@@ -12,7 +12,7 @@ interface LeftPanelProps {
 
 export default function LeftPanel({ brief, copy, locale, phase }: LeftPanelProps) {
   return (
-    <aside className="flex flex-col justify-between bg-[#111821] px-6 py-8 text-[#e8e6e1] min-[840px]:px-10 min-[840px]:py-10">
+    <aside className="order-2 flex flex-col justify-between bg-[#111821] px-6 py-8 text-[#e8e6e1] min-[840px]:order-1 min-[840px]:px-10 min-[840px]:py-10">
       <div>
         <div className="mb-10 flex items-center gap-3">
           <img src="/logo.svg" alt="ForgingApps logo" width={42} height={42} className="h-10 w-10" />

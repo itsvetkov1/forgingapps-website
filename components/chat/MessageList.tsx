@@ -17,7 +17,7 @@ export default function MessageList({ messages }: MessageListProps) {
   }, [messages])
 
   return (
-    <div ref={listRef} role="log" aria-live="polite" className="flex max-h-[50vh] flex-col gap-4 overflow-y-auto pr-1">
+    <div ref={listRef} role="log" aria-live="polite" className="flex flex-1 min-h-0 flex-col gap-4 overflow-y-auto pr-1">
       {messages.map((message) => (
         <Message key={message.id} message={message} />
       ))}
