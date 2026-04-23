@@ -954,6 +954,7 @@ export const en: Record<string, any> = {
     },
     categories: { ai: "AI", security: "Security", business: "Business" },
     posts: {
+      aiAgentFleet: { title: "Inside Our AI Agent Fleet", description: "A concrete look at the small AI agent fleet ForgingApps runs in production every day. Architecture, runtime, durable memory, and why it shapes how we advise clients on AI." },
       aiEatingInternalHeadcount: { title: "AI Is Eating Internal Headcount — Not Your Customer-Facing Roles", description: "Snap just cut 1,000 jobs and blamed AI. The real story is more specific and more useful than the headlines suggest. Here is what business leaders should actually take away." },
       aiSecurityBuyingIssue: { title: "AI Security Is Now a Buying Issue", description: "Anthropic's Mythos preview and a fresh OpenAI tool issue point to the same conclusion: businesses buying AI need to vet permissions, connectors, and blast radius, not just model quality." },
       voiceAgents: { title: "Voice Agents Just Got a Lot More Useful", description: "The latest audio model push is not just a demo upgrade. It changes what voice agents can realistically do for support, sales, and operations." },

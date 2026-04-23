@@ -1,4 +1,43 @@
 export const blogPostsEn: Record<string, any> = {
+  "inside-our-ai-agent-fleet": {
+  title: "Inside Our AI Agent Fleet",
+  metaDescription: "A concrete look at the AI agent fleet ForgingApps runs every day in production. What each agent does, the runtime it lives on, how we avoid the usual failure modes, and why it shapes how we advise clients on AI.",
+  author: "Ivaylo Tsvetkov, Co-Founder",
+  date: "Apr 23, 2026",
+  readTime: "7 min read",
+  category: "AI",
+  intro: "When an AI consultant tells you they run agents in production, the honest follow-up is: show me. This is our answer. We operate a small fleet of AI agents on our own infrastructure every day. It is not a slide deck or a pilot. It is the nervous system that plans, writes, delegates, and verifies work across ForgingApps. Here is what is inside it, why it is shaped the way it is, and what we have learned from running it long enough for the novelty to wear off.",
+  sections: [
+    { 
+      heading: "What the Fleet Actually Does",
+      content: "The fleet is a small set of specialised agents, each with a role, a memory, and a lane. Prime is the operator-facing supervisor. It plans, coordinates, verifies, and dispatches work to the other agents. Dev handles code-truth work: deep repo inspection, TypeScript/Next.js verification, builds, tests, refactors, migrations. Forger owns ForgingApps as a business: brand, packages, pricing, blog, lead pipeline. Alfa is the complex autonomous remote worker that runs long multi-step tasks without babysitting. Personal is scoped to health, nutrition, and accountability work outside the business. On top of that, two Docker bots (Ember and FB) run isolated customer-facing tasks — the Ember widget you can see on the ForgingApps homepage is one of them. The shape is deliberate: one generalist, several specialists, each with a clear brief."
+    },
+    { 
+      heading: "The Runtime Underneath",
+      content: "All Legion agents run on a single Ubuntu host called Hydra. They are supervised by systemd user services so they survive reboots and log cleanly to the same place as any other service on the box. There are two runtimes in play. Hermes is the messaging gateway — it routes work into the fleet, translates between chat surfaces, and is where Dev lives. OpenClaw is the agent framework that actually runs alfa, forger, personal, and the Docker bots; it handles sessions, tools, memory, and model routing. Both are Python, both are open CLI-first tools, and both are wired into Tailscale so I can talk to them from a laptop in Sofia or from a coworking space in Berlin with the same command."
+    },
+    { 
+      heading: "Durable Memory Is the Thing That Changes Everything",
+      content: "Agents that forget are interns in a loop. The piece that makes our fleet actually useful over time is a shared wiki the agents write to and read from. It lives on Hydra, it is version-controlled, and it has a strict schema: every page has a title, updated timestamp, updated-by agent, tags, and a lifecycle flag. When an agent makes a non-trivial change — fixes a bug, adds a service, resolves an incident, decides on a pattern — it writes that decision to the wiki via a file-locked append script so concurrent agents never corrupt the log. That last detail sounds pedantic until the day four agents race to log at once and you discover why the lock matters. Shared durable memory is the difference between a fleet that compounds and a fleet that keeps relearning the same lessons."
+    },
+    { 
+      heading: "Delegation by Lane, Not by Vibe",
+      content: "The biggest unlock is a hard rule about who does what. Code-truth tasks — anything that requires deep repo inspection, TypeScript verification, build or test runs, or architectural refactors — go to Dev. Business and content work — package copy, blog posts, pricing changes, lead pipeline — go to Forger. Prime coordinates, plans, and verifies but does not itself produce client-facing code by default. Without that rule, generalist agents would cheerfully do everything and get 80 percent of it right. With the rule, specialists stay inside their context window sweet spot and produce work that does not need to be re-verified by a human on every pass. Difficulty is the tiebreaker, not the primary axis: Forger can write a one-line copy fix inside a component; Dev picks up anything that touches build config or type-safety."
+    },
+    { 
+      heading: "Models Are Plural, Not Singular",
+      content: "We run multiple models behind the same CLI. The primary model for most work is OpenAI Codex GPT-5.4, called via the ChatGPT backend API because that is where its best price-to-capability currently sits. Fallbacks include MiniMax-M2.7 for long-context batch work and Claude Sonnet 4.6 for tasks where we want its specific reasoning style. Vision is enabled across these model definitions so the agents can read screenshots, diffs, and UI states without extra tooling. This matters because the single-model answer — whichever vendor is loudest this quarter — ages badly. Running the fleet on a thin abstraction over multiple providers is how we avoid being whipsawed by a single API change, and how we advise clients to think about model choice in their own stacks."
+    },
+    { 
+      heading: "What Actually Goes Wrong in Production",
+      content: "The failure modes that matter are boring and specific. Session context exhaustion is the most common: an agent fills its conversation history, silently degrades in quality, and keeps answering. We handle it by watching session sizes and rotating (renaming the JSONL, dropping it from the sessions registry, restarting the gateway) before quality drops visibly. Concurrent writes to shared files used to corrupt the wiki log; the flock-protected append shim was written the day four agents raced and produced interleaved garbage that had to be untangled by hand. Docker bots occasionally fall behind when their mount paths drift between base image updates — we treat every isolated bot as having its own local wiki and keep a registry so Legion agents can read those wikis without reaching into containers blindly. Nothing glamorous. All of it operational."
+    },
+    { 
+      heading: "Why This Shapes How We Advise Clients",
+      content: "The reason this post exists on a consulting site is simple: the advice we give clients is downstream of what we actually run. Our recommendation when a business asks \"should we deploy AI agents?\" is always the same shape. Start narrow. Give the agent one job. Give it persistent, structured memory. Give it clear boundaries on what it can write to and where. Build the operational surface — logging, rotation, verification — before you widen the scope. Anything else looks like progress in a demo and accrues cost in production. We know it because we lived it: the fleet you see here did not show up fully formed; it is the result of enough iteration to make the mistakes cheaply enough to keep them in the family. That is the experience we bring into Oracle consulting engagements and AI Chat Assistant builds. If you want to talk about how any of this applies to your business, the contact form is on the menu."
+    }
+  ]
+  },
   "ai-security-is-now-a-buying-issue": {
     title: "AI Security Is Now a Buying Issue",
     metaDescription: "Anthropic's Mythos preview and a fresh OpenAI tooling incident point to the same conclusion: businesses buying AI need to vet permissions, connectors, and blast radius, not just model quality.",
