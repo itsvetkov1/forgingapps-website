@@ -80,14 +80,32 @@ export default function BlogPostContent({ slug }: { slug: string }) {
       <div className="container-custom max-w-3xl">
         <div className="mb-12">
           <Link href={localePath('/blog')} className="text-forge-gold hover:text-forge-ember transition mb-4 inline-block">← Back to Blog</Link>
-          <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center gap-4 mb-4 flex-wrap">
             <span className="text-xs font-semibold text-forge-ember bg-forge-ember/10 px-2 py-1 rounded">{post.category}</span>
             <span className="text-sm text-gray-400">{post.date}</span>
             <span className="text-sm text-gray-400">•</span>
             <span className="text-sm text-gray-400">{post.readTime}</span>
           </div>
           <h1 className="font-cinzel text-5xl font-bold text-forge-gold mb-4">{post.title}</h1>
-          <p className="text-xl text-gray-400">{post.intro}</p>
+          <p className="text-xl text-gray-400 mb-3">{post.intro}</p>
+          {post.author ? (
+            <p data-test="post-byline" className="text-sm text-gray-400">
+              {(() => {
+                const isRadoslav = typeof post.author === 'string' && post.author.toLowerCase().includes('radoslav')
+                const authorLinkedin = isRadoslav
+                  ? 'https://www.linkedin.com/in/radoslav-lambrev/'
+                  : 'https://www.linkedin.com/in/ivaylo-tsvetkov-28b039106/'
+                return (
+                  <>
+                    {language === 'bg' ? 'От ' : 'By '}
+                    <a href={authorLinkedin} target="_blank" rel="noopener noreferrer" className="text-forge-gold hover:text-forge-ember underline underline-offset-4">
+                      {post.author}
+                    </a>
+                  </>
+                )
+              })()}
+            </p>
+          ) : null}
         </div>
 
         <div className="prose prose-invert max-w-none mb-12">

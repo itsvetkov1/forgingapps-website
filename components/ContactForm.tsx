@@ -44,7 +44,7 @@ const genericCopy = {
     subjectLabel: 'Subject',
     subjectPlaceholder: 'What would you like to discuss?',
     sourcePlaceholder: 'Select source...',
-    sourceOptions: ['Google Search', 'Social Media', 'Referral', 'Other'],
+    sourceOptions: ['Google Search', 'Social Media', 'Referral', 'AI tool (ChatGPT / Claude / other)', 'Other'],
     selectPlaceholder: 'Select...',
     error: 'Something went wrong. Please try again or email us directly at',
     directEmailLabel: 'email us directly',
@@ -52,6 +52,9 @@ const genericCopy = {
     validationRequired: 'Please complete this field.',
     validationEmail: 'Please enter a valid email address.',
     honeypotLabel: 'Leave this field empty',
+    privacyDisclaimerPrefix: 'By submitting you agree to our ',
+    privacyDisclaimerLink: 'privacy policy',
+    privacyDisclaimerSuffix: '.',
   },
   bg: {
     submittedTitle: 'Получихме съобщението Ви!',
@@ -65,7 +68,7 @@ const genericCopy = {
     subjectLabel: 'Тема',
     subjectPlaceholder: 'Какво искате да обсъдим?',
     sourcePlaceholder: 'Изберете източник...',
-    sourceOptions: ['Google търсене', 'Социални мрежи', 'Препоръка', 'Друго'],
+    sourceOptions: ['Google търсене', 'Социални мрежи', 'Препоръка', 'AI инструмент (ChatGPT / Claude / друг)', 'Друго'],
     selectPlaceholder: 'Изберете...',
     error: 'Нещо се обърка. Моля, опитайте отново или ни пишете директно на',
     directEmailLabel: 'пишете ни директно по имейл',
@@ -73,6 +76,9 @@ const genericCopy = {
     validationRequired: 'Моля, попълнете това поле.',
     validationEmail: 'Моля, въведете валиден имейл адрес.',
     honeypotLabel: 'Оставете това поле празно',
+    privacyDisclaimerPrefix: 'С изпращането приемате нашата ',
+    privacyDisclaimerLink: 'политика за поверителност',
+    privacyDisclaimerSuffix: '.',
   },
 } as const
 
@@ -627,6 +633,13 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
       <button data-test="contact-form-submit" type="submit" disabled={loading} className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50">
         {loading ? copy.sending : t('formSubmit')}
       </button>
+            <p className="mt-3 text-xs text-gray-400 text-center">
+              {copy.privacyDisclaimerPrefix}
+              <Link href={localePath('/privacy')} className="text-forge-gold hover:text-forge-ember underline underline-offset-2">
+                {copy.privacyDisclaimerLink}
+              </Link>
+              {copy.privacyDisclaimerSuffix}
+            </p>
     </form>
   )
 }

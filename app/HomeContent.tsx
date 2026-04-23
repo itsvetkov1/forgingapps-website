@@ -75,7 +75,13 @@ export default function HomeContent() {
         <div className="container-custom">
           <div className="bg-forge-dark border border-forge-ember/30 rounded-xl p-8 md:p-10 text-center">
             <h2 className="font-cinzel text-3xl md:text-4xl font-bold text-forge-gold mb-4">{data.demoTeaser.heading}</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">{data.demoTeaser.description}</p>
+            <p className="text-gray-300 max-w-2xl mx-auto mb-4 text-lg">{data.demoTeaser.description}</p>
+            {(data.demoTeaser as any).emberPrompt ? (
+              <p className="max-w-2xl mx-auto mb-8 text-sm text-forge-gold/90">
+                <span aria-hidden="true" className="mr-1">→</span>
+                {(data.demoTeaser as any).emberPrompt}
+              </p>
+            ) : null}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
               <Link href={localePath('/demo')} className="btn-primary">{data.demoTeaser.tryDemo}</Link>
               <Link href={localePath('/ai-consulting')} className="btn-secondary">{data.demoTeaser.learnAboutAi}</Link>

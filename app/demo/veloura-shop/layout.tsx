@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { VelouraCartProvider } from "@/contexts/VelouraCartContext"
 import Navbar from "@/components/veloura-shop/Navbar"
+import VelouraDemoBanner from "@/components/VelouraDemoBanner"
 import Footer from "@/components/veloura-shop/Footer"
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function VelouraShopLayout({
   return (
     <VelouraCartProvider>
       <div className="veloura-shop min-h-screen flex flex-col bg-white">
+        <VelouraDemoBanner />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

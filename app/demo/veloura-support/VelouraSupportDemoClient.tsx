@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import VelouraDemoBanner from '@/components/VelouraDemoBanner'
 import Hero from '@/components/Hero'
 import VelouraChatEmbed from '@/components/VelouraChatEmbed'
 import { Brain, MessageCircle, Zap, Share2 } from 'lucide-react'
@@ -65,6 +66,7 @@ const HOW_IT_WORKS_STEPS = [
 export default function VelouraSupportDemoClient() {
   return (
     <>
+      <VelouraDemoBanner />
       <Hero
         headline="Veloura Support Demo"
         subheadline="A branded embedded AI support experience for fashion and e-commerce brands. Ask about shipping, returns, exchanges, sizing, and product browsing without leaving the page."

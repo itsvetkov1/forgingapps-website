@@ -113,7 +113,7 @@ export default function EmberChatWindow() {
           <EmberFlameIcon small />
           <div>
             <p className="font-cinzel text-lg font-bold text-white">Ember</p>
-            <p className="text-xs text-zinc-400">ForgingApps Assistant</p>
+            <p className="text-xs text-zinc-400">Live AI assistant — built by us</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
