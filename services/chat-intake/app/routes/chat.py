@@ -25,7 +25,7 @@ STARTER_PROMPTS = [
     'Walk me through what happens next',
     'How do you scope a project?',
     'What does payment look like?',
-    'Can I see more of your work?',
+    'Show me an AI demo',
 ]
 READY_MARKER_RE = re.compile(r'\s*\[CINDER_READY\]\s*\Z')
 EMAIL_RECIPIENT = 'hello@forgingapps.com'
@@ -84,11 +84,43 @@ def build_chat_turn_timestamps() -> tuple[str, str]:
     )
 
 
+# Closure-posture heuristics: when the persona closes semantically without emitting
+# the [CINDER_READY] marker (gpt-5.4 instruction-following on trailing tokens is
+# unreliable), we promote to 'ready' by detecting explicit hand-off language.
+# EN + BG patterns. Case-insensitive.
+CLOSURE_PHRASES_RE = re.compile(
+    r"""(?ix)
+    \b(
+        hand\s+(?:this|it|that)\s+off       # "hand this off"
+        | handing\s+(?:this|it|that)\s+off    # "handing this off"
+        | hand\s+(?:this|it|that)\s+over     # "hand this over"
+        | leave\s+(?:it|this|things)\s+(?:here|there)  # "leave it here"
+        | enough\s+(?:context\s+)?to\s+hand  # "enough to hand"
+        | enough\s+to\s+hand\s+(?:this|it)   # "enough to hand this"
+        | (?:i'?ve|i\s+have)\s+got\s+enough\s+to\s+hand
+        | ready\s+to\s+hand\s+(?:this|it)   # "ready to hand this"
+        | send(?:ing)?\s+(?:this\s+)?(?:summary|to\s+ivaylo)  # "sending this summary"
+        | summary\s+(?:is\s+)?on\s+its?\s+way
+        | pick\s+this\s+up\s+with\s+the\s+right\s+context
+        | достатъчно\s+контекст                # BG: "enough context"
+        | ще\s+приключа                         # BG: "I'll wrap up"
+        | приключвам\s+тук                      # BG: "I'm closing here"
+        | изпращам\s+резюмето                   # BG: "sending the summary"
+        | подготвен\s+за\s+разговора            # BG: "prepared for the call"
+        | предавам\s+(?:това|го)\s+нататък      # BG: "handing this off"
+    )\b
+    """
+)
+
+
 def resolve_completion(reply: str) -> tuple[str, Literal['none', 'partial', 'ready']]:
     cleaned = str(reply or '').strip()
     if READY_MARKER_RE.search(cleaned):
         stripped = READY_MARKER_RE.sub('', cleaned).strip()
         return stripped, 'ready'
+    # Fallback — persona decided to close but forgot the marker
+    if CLOSURE_PHRASES_RE.search(cleaned):
+        return cleaned, 'ready'
     if len(cleaned) > 40:
         return cleaned, 'partial'
     return cleaned, 'none'
