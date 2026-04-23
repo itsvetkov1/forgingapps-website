@@ -44,7 +44,7 @@ def test_intake_message_assembles_cinder_request(monkeypatch) -> None:
         captured['instructions'] = instructions
         captured['input_items'] = input_items
         return {
-            'reply': '<MINIMUM_REACHED/> Payment depends on the package.',
+            'reply': '<MINIMUM_REACHED/> Payment depends on the package, the integrations, and whether we need founder-led scoping first.',
             'usage': {'input_tokens': 10, 'output_tokens': 5, 'total_tokens': 15},
         }
 
@@ -69,7 +69,8 @@ def test_intake_message_assembles_cinder_request(monkeypatch) -> None:
     )
 
     assert response.status_code == 200
-    assert response.json()['reply'] == 'Payment depends on the package.'
+    assert response.json()['reply'] == 'Payment depends on the package, the integrations, and whether we need founder-led scoping first.'
+    assert response.json()['completion'] == 'partial'
     assert captured['model'] == 'gpt-5.4'
     assert 'Cinder' in captured['instructions']
     assert captured['input_items'][0]['role'] == 'user'
@@ -79,3 +80,62 @@ def test_intake_message_assembles_cinder_request(monkeypatch) -> None:
         'role': 'user',
         'content': 'Walk me through what happens next',
     }
+
+
+def test_intake_message_marks_ready_and_strips_marker(monkeypatch) -> None:
+    def fake_call_codex_responses(*, model, instructions, input_items):
+        return {
+            'reply': 'That gives Ivaylo enough to prep the call. We can wrap here. [CINDER_READY]   ',
+            'usage': {'input_tokens': 12, 'output_tokens': 9, 'total_tokens': 21},
+        }
+
+    monkeypatch.setattr('app.services.call_codex_responses', fake_call_codex_responses)
+
+    response = client.post(
+        '/intake/message',
+        json={
+            'session': {
+                'brief_id': 'FA-2604-TEST',
+                'firstName': 'Mara',
+                'topic': 'AI chatbot for customer support',
+                'locale': 'en',
+                'variant': 'generic',
+            },
+            'history': [],
+            'message': 'Ok, let us do it. Budget is approved and I am the decision maker.',
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()['completion'] == 'ready'
+    assert response.json()['reply'] == 'That gives Ivaylo enough to prep the call. We can wrap here.'
+    assert '[CINDER_READY]' not in response.json()['reply']
+
+
+def test_intake_message_marks_none_for_greeting_only_reply(monkeypatch) -> None:
+    def fake_call_codex_responses(*, model, instructions, input_items):
+        return {
+            'reply': 'Hi Mara — happy to help.',
+            'usage': {'input_tokens': 8, 'output_tokens': 4, 'total_tokens': 12},
+        }
+
+    monkeypatch.setattr('app.services.call_codex_responses', fake_call_codex_responses)
+
+    response = client.post(
+        '/intake/message',
+        json={
+            'session': {
+                'brief_id': 'FA-2604-TEST',
+                'firstName': 'Mara',
+                'topic': 'AI chatbot for customer support',
+                'locale': 'en',
+                'variant': 'generic',
+            },
+            'history': [],
+            'message': 'Hello',
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()['completion'] == 'none'
+    assert response.json()['reply'] == 'Hi Mara — happy to help.'

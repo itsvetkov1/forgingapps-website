@@ -1,19 +1,20 @@
 import ChatSurface from '@/components/chat/ChatSurface'
-import type { BriefRecord, ChatMessageRecord, IntakeSessionState } from '@/lib/chat-intake'
+import type { BriefRecord, ChatMessageRecord, CompletionStatus } from '@/lib/chat-intake'
 
 interface CinderChatProps {
-  announcement: string
   brief: BriefRecord | null
   chatError: string | null
+  completion: CompletionStatus
   copy: any
+  finalizePending: boolean
+  finalizeSent: boolean
   messages: ChatMessageRecord[]
+  onFinalize: () => void | Promise<void>
   onSelectStarterPrompt: (prompt: string) => void | Promise<void>
   onSendMessage: (message: string) => void | Promise<void>
-  onSubmitBrief: () => void | Promise<void>
   phase: 'idle' | 'loading' | 'ready' | 'missing' | 'error'
-  sessionState: IntakeSessionState
   starterPrompts: string[]
-  submitting: boolean
+  toast: { tone: 'success' | 'error'; message: string } | null
   typing: boolean
 }
 

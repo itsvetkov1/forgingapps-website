@@ -11,7 +11,7 @@ export default function StarterPrompts({ onSelect, prompts }: StarterPromptsProp
           key={prompt}
           type="button"
           onClick={() => void onSelect(prompt)}
-          className="rounded-full border border-[#d7cdb8] bg-white px-4 py-2 text-sm text-[#3a3f45] transition hover:border-[#d8660b]/50 hover:text-[#b04f00]"
+          className="rounded-full border border-[#e8d7ba]/18 bg-[#1a232d] px-4 py-2 text-sm text-[#f3ede3] transition hover:border-[#d8660b]/50 hover:bg-[#221911] hover:text-[#ffd8bc]"
         >
           {prompt}
         </button>

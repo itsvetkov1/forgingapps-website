@@ -29,7 +29,7 @@ export default async function BriefReceivedPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#f4ede3]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#111821]" />}>
       <BriefReceivedClient locale={locale} />
     </Suspense>
   )

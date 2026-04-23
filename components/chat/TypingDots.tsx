@@ -4,7 +4,7 @@ interface TypingDotsProps {
 
 export default function TypingDots({ label }: TypingDotsProps) {
   return (
-    <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-[#eadfca] bg-white px-4 py-3 shadow-[0_12px_28px_rgba(15,20,25,0.06)]">
+    <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-[#e8d7ba]/14 bg-[#1a232d] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.2)]">
       <span className="sr-only">{label}</span>
       {[0, 1, 2].map((dot) => (
         <span

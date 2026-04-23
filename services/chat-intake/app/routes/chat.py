@@ -1,16 +1,25 @@
 from __future__ import annotations
 
 import json
-from typing import Literal
+import logging
+import re
+from datetime import datetime, timezone
+from pathlib import Path
+from string import Template
+from typing import Any, Literal
 
-from fastapi import APIRouter
+import httpx
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
-from app.prompt_stack import DEFAULT_MODEL, DEFAULT_VARIANT, normalize_locale, normalize_variant
+from app.db import get_brief, upsert_brief_enrichment
+from app.llm.codex import call_codex_responses
+from app.prompt_stack import DEFAULT_MODEL, DEFAULT_VARIANT, normalize_locale, normalize_variant, read_prompt
 from app.services import generate_cinder_reply
 
 router = APIRouter(prefix='/intake', tags=['intake'])
+logger = logging.getLogger(__name__)
 ALLOWED_MODELS = {DEFAULT_MODEL}
 STARTER_PROMPTS = [
     'Walk me through what happens next',
@@ -18,6 +27,10 @@ STARTER_PROMPTS = [
     'What does payment look like?',
     'Can I see more of your work?',
 ]
+READY_MARKER_RE = re.compile(r'\s*\[CINDER_READY\]\s*\Z')
+EMAIL_RECIPIENT = 'hello@forgingapps.com'
+RESEND_ENDPOINT = 'https://api.resend.com/emails'
+RESEND_SENDER = 'ForgingApps <hello@forgingapps.com>'
 
 
 class SessionPayload(BaseModel):
@@ -38,6 +51,166 @@ class MessageRequest(BaseModel):
     history: list[ChatTurn] = Field(default_factory=list, max_length=40)
     message: str = Field(max_length=4000)
     model: str = Field(default=DEFAULT_MODEL, max_length=64)
+
+
+class FinalizeRequest(BaseModel):
+    session: SessionPayload
+    history: list[ChatTurn] = Field(default_factory=list, max_length=80)
+    brief_id: str = Field(max_length=64)
+    locale: Literal['en', 'bg'] | None = None
+
+
+class FinalizeResponse(BaseModel):
+    summary: dict[str, Any]
+    emailed: bool
+    error: str | None = None
+
+
+class SummaryParseFailed(Exception):
+    def __init__(self, raw: str):
+        super().__init__('summary_parse_failed')
+        self.raw = raw
+
+
+def utc_now_iso() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+
+
+def resolve_completion(reply: str) -> tuple[str, Literal['none', 'partial', 'ready']]:
+    cleaned = str(reply or '').strip()
+    if READY_MARKER_RE.search(cleaned):
+        stripped = READY_MARKER_RE.sub('', cleaned).strip()
+        return stripped, 'ready'
+    if len(cleaned) > 40:
+        return cleaned, 'partial'
+    return cleaned, 'none'
+
+
+def infer_finalize_locale(request: FinalizeRequest) -> Literal['en', 'bg']:
+    if request.locale in {'en', 'bg'}:
+        return request.locale
+    session_locale = normalize_locale(request.session.locale)
+    if session_locale in {'en', 'bg'}:
+        return session_locale
+    for turn in request.history:
+        if '[bg]' in turn.content.lower():
+            return 'bg'
+    return 'en'
+
+
+def build_finalize_input(request: FinalizeRequest, locale: str) -> list[dict[str, str]]:
+    transcript = []
+    for turn in request.history:
+        transcript.append(f"{turn.role.upper()}: {turn.content}")
+    payload = {
+        'brief_id': request.brief_id,
+        'locale': locale,
+        'session': request.session.model_dump(),
+        'history': transcript,
+    }
+    return [
+        {
+            'role': 'user',
+            'content': (
+                'Create the final business handoff summary as strict JSON. '\
+                'Use the session context and transcript below.\n\n' + json.dumps(payload, ensure_ascii=False, indent=2)
+            ),
+        }
+    ]
+
+
+def parse_summary_json(raw_text: str) -> dict[str, Any]:
+    parsed = json.loads(raw_text)
+    if not isinstance(parsed, dict):
+        raise ValueError('Summary payload must be a JSON object')
+    return parsed
+
+
+def call_finalize_model(*, request: FinalizeRequest, locale: str) -> dict[str, Any]:
+    instructions = read_prompt('cinder_finalize.md')
+    input_items = build_finalize_input(request, locale)
+    first = call_codex_responses(model=DEFAULT_MODEL, instructions=instructions, input_items=input_items)
+    try:
+        return parse_summary_json(str(first.get('reply', '')))
+    except (json.JSONDecodeError, ValueError):
+        retry_items = [
+            *input_items,
+            {
+                'role': 'user',
+                'content': 'Your previous reply was not valid JSON. Respond with ONLY the JSON object, no prose, no fences.',
+            },
+        ]
+        retry = call_codex_responses(model=DEFAULT_MODEL, instructions=instructions, input_items=retry_items)
+        try:
+            return parse_summary_json(str(retry.get('reply', '')))
+        except (json.JSONDecodeError, ValueError) as exc:
+            raise SummaryParseFailed(str(retry.get('reply', ''))) from exc
+
+
+def _read_resend_api_key_from_file(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    for line in path.read_text(encoding='utf-8', errors='ignore').splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith('#') or not stripped.startswith('RESEND_API_KEY='):
+            continue
+        return stripped.partition('=')[2].strip().strip('"').strip("'") or None
+    return None
+
+
+def resolve_resend_api_key() -> str | None:
+    import os
+
+    env_value = str((os.environ.get('RESEND_API_KEY') or '')).strip()
+    if env_value:
+        return env_value
+    candidates = [
+        Path('/opt/forgingapps/chat-intake/.env'),
+        Path('/home/alpharius/projects/forgingapps-website/.env'),
+        Path('/home/alpharius/projects/forgingapps-website/.env.local'),
+    ]
+    for path in candidates:
+        value = _read_resend_api_key_from_file(path)
+        if value:
+            return value
+    return None
+
+
+def render_email_template(summary: dict[str, Any]) -> tuple[str, str]:
+    template = read_prompt('email_to_team.md')
+    fields = {key: '' if value is None else str(value) for key, value in summary.items()}
+    rendered = re.sub(r'\{\{\s*([a-zA-Z0-9_]+)\s*\}\}', lambda match: fields.get(match.group(1), ''), template)
+    lines = rendered.splitlines()
+    subject_line = next((line for line in lines if line.lower().startswith('subject:')), '')
+    subject = subject_line.partition(':')[2].strip() or f"Brief summary {summary.get('brief_id', '').strip()}".strip()
+    body_lines = lines[1:] if subject_line else lines
+    body = '\n'.join(body_lines).strip()
+    if not body:
+        body = json.dumps(summary, ensure_ascii=False, indent=2)
+    html = '<pre style="font-family:Inter,Arial,sans-serif;white-space:pre-wrap;">' + body.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;') + '</pre>'
+    return subject, html
+
+
+def send_summary_email(*, api_key: str, recipient: str, subject: str, html: str) -> dict[str, Any]:
+    response = httpx.post(
+        RESEND_ENDPOINT,
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+        },
+        json={
+            'from': RESEND_SENDER,
+            'to': [recipient],
+            'subject': subject,
+            'html': html,
+        },
+        timeout=20,
+    )
+    if response.is_success:
+        return {'emailed': True, 'error': None}
+    error = f'resend_{response.status_code}'
+    logger.error('Finalize email send failed: %s %s', error, response.text)
+    return {'emailed': False, 'error': error}
 
 
 TEST_PAGE = """<!doctype html>
@@ -750,8 +923,12 @@ def intake_message(request: MessageRequest) -> JSONResponse:
             message=request.message,
             model=model,
         )
+        reply, completion = resolve_completion(str(result.get('reply', '')))
+        result['reply'] = reply
+        result['completion'] = completion
         return JSONResponse(result)
     except Exception:
+        logger.exception('intake message failed')
         return JSONResponse(
             {
                 'reply': 'Something went wrong on our end, try again in a moment.',
@@ -759,3 +936,43 @@ def intake_message(request: MessageRequest) -> JSONResponse:
             },
             status_code=502,
         )
+
+
+@router.post('/finalize', response_model=FinalizeResponse)
+def intake_finalize(request: FinalizeRequest) -> FinalizeResponse | JSONResponse:
+    brief_id = request.brief_id.strip()
+    brief = get_brief(brief_id)
+    if brief is None:
+        raise HTTPException(status_code=404, detail='Brief not found.')
+
+    locale = infer_finalize_locale(request)
+    try:
+        summary = call_finalize_model(request=request, locale=locale)
+    except SummaryParseFailed as exc:
+        return JSONResponse({'error': 'summary_parse_failed', 'raw': exc.raw}, status_code=502)
+    summary.setdefault('brief_id', brief_id)
+    summary.setdefault('contact_name', request.session.firstName)
+    summary.setdefault('project_summary', request.session.topic)
+
+    subject, html = render_email_template(summary)
+    api_key = resolve_resend_api_key()
+    if api_key:
+        email_result = send_summary_email(api_key=api_key, recipient=EMAIL_RECIPIENT, subject=subject, html=html)
+    else:
+        logger.error('EMAIL WOULD BE SENT TO %s', EMAIL_RECIPIENT)
+        email_result = {'emailed': False, 'error': 'resend_api_key_missing'}
+
+    now = utc_now_iso()
+    upsert_brief_enrichment(
+        brief_id=brief_id,
+        summary=summary,
+        locale=locale,
+        created_at=now,
+        finalized_at=now,
+        email_sent_at=now if email_result['emailed'] else None,
+        email_recipient=EMAIL_RECIPIENT,
+        email_error=email_result['error'],
+    )
+    if email_result['error']:
+        logger.error('Finalize flow completed without email delivery for %s: %s', brief_id, email_result['error'])
+    return FinalizeResponse(summary=summary, emailed=bool(email_result['emailed']), error=email_result['error'])

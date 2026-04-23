@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 import sqlite3
@@ -37,6 +38,19 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     role TEXT NOT NULL,
     content TEXT NOT NULL,
     created_at TEXT NOT NULL,
+    FOREIGN KEY (brief_id) REFERENCES briefs(id)
+);
+
+CREATE TABLE IF NOT EXISTS brief_enrichments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    brief_id TEXT NOT NULL UNIQUE,
+    summary_json TEXT NOT NULL,
+    locale TEXT,
+    created_at TEXT NOT NULL,
+    finalized_at TEXT,
+    email_sent_at TEXT,
+    email_recipient TEXT,
+    email_error TEXT,
     FOREIGN KEY (brief_id) REFERENCES briefs(id)
 );
 """
@@ -124,5 +138,53 @@ def upsert_brief(record: dict[str, Any]) -> None:
                 created_at=excluded.created_at
             ''',
             record,
+        )
+        connection.commit()
+
+
+def upsert_brief_enrichment(
+    *,
+    brief_id: str,
+    summary: dict[str, Any],
+    locale: str,
+    created_at: str,
+    finalized_at: str,
+    email_sent_at: str | None,
+    email_recipient: str | None,
+    email_error: str | None,
+) -> None:
+    with connect() as connection:
+        connection.execute(
+            '''
+            INSERT INTO brief_enrichments (
+                brief_id,
+                summary_json,
+                locale,
+                created_at,
+                finalized_at,
+                email_sent_at,
+                email_recipient,
+                email_error
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(brief_id) DO UPDATE SET
+                summary_json=excluded.summary_json,
+                locale=excluded.locale,
+                created_at=brief_enrichments.created_at,
+                finalized_at=excluded.finalized_at,
+                email_sent_at=excluded.email_sent_at,
+                email_recipient=excluded.email_recipient,
+                email_error=excluded.email_error
+            ''',
+            (
+                brief_id,
+                json.dumps(summary, ensure_ascii=False, sort_keys=True),
+                locale,
+                created_at,
+                finalized_at,
+                email_sent_at,
+                email_recipient,
+                email_error,
+            ),
         )
         connection.commit()

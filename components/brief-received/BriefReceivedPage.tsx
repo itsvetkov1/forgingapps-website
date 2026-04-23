@@ -1,59 +1,62 @@
 import LeftPanel from '@/components/brief-received/LeftPanel'
 import RightPanel from '@/components/brief-received/RightPanel'
-import type { BriefRecord, ChatMessageRecord, IntakeSessionState } from '@/lib/chat-intake'
+import type { BriefRecord, ChatMessageRecord, CompletionStatus } from '@/lib/chat-intake'
 
 interface BriefReceivedPageProps {
-  announcement: string
   brief: BriefRecord | null
   chatError: string | null
+  completion: CompletionStatus
   copy: any
+  finalizePending: boolean
+  finalizeSent: boolean
   locale: 'en' | 'bg'
   messages: ChatMessageRecord[]
+  onFinalize: () => void | Promise<void>
   onSelectStarterPrompt: (prompt: string) => void | Promise<void>
   onSendMessage: (message: string) => void | Promise<void>
-  onSubmitBrief: () => void | Promise<void>
   phase: 'idle' | 'loading' | 'ready' | 'missing' | 'error'
-  sessionState: IntakeSessionState
   starterPrompts: string[]
-  submitting: boolean
+  toast: { tone: 'success' | 'error'; message: string } | null
   typing: boolean
 }
 
 export default function BriefReceivedPage(props: BriefReceivedPageProps) {
   const {
-    announcement,
     brief,
     chatError,
+    completion,
     copy,
+    finalizePending,
+    finalizeSent,
     locale,
     messages,
+    onFinalize,
     onSelectStarterPrompt,
     onSendMessage,
-    onSubmitBrief,
     phase,
-    sessionState,
     starterPrompts,
-    submitting,
+    toast,
     typing,
   } = props
 
   return (
-    <div className="min-h-screen bg-[#f4ede3] text-slate-900">
+    <div className="min-h-screen bg-[#111821] text-[#f3ede3]">
       <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col min-[840px]:grid min-[840px]:grid-cols-[520px_minmax(0,1fr)] min-[840px]:items-start">
         <LeftPanel brief={brief} copy={copy} locale={locale} phase={phase} />
         <RightPanel
-          announcement={announcement}
           brief={brief}
           chatError={chatError}
+          completion={completion}
           copy={copy}
+          finalizePending={finalizePending}
+          finalizeSent={finalizeSent}
           messages={messages}
+          onFinalize={onFinalize}
           onSelectStarterPrompt={onSelectStarterPrompt}
           onSendMessage={onSendMessage}
-          onSubmitBrief={onSubmitBrief}
           phase={phase}
-          sessionState={sessionState}
           starterPrompts={starterPrompts}
-          submitting={submitting}
+          toast={toast}
           typing={typing}
         />
       </div>

@@ -1034,22 +1034,23 @@ export const en: Record<string, any> = {
       missingBrief: "This page needs a valid brief ID before the conversation can continue.",
       invalidBrief: "We could not load that brief. Please use the link from your contact-form confirmation or ask us to resend it.",
       typingLabel: "Cinder is typing",
-      submitReadyAnnouncement: "Brief ready to submit",
-      submittedAnnouncement: "Brief submitted",
-      submittedConfirmation: "Thanks — Ivaylo has your full brief, and he’ll be in touch within 24 hours on business days.",
       composer: {
         hint: "Enter sends. Shift+Enter adds a new line.",
         placeholder: "Tell Cinder what you need — scope, timing, or what happens next",
         send: "Send message",
-        submitted: "This brief has already been submitted to the founder.",
+        summary: {
+          idle: "Send summary to the team",
+          ready: "Send summary to the team",
+          sending: "Sending…",
+          sent: "Sent ✓",
+        },
       },
-      submit: {
-        label: "Submit — send this brief to the founder",
-        loading: "Submitting your brief...",
+      summary: {
+        successToast: "We’ve sent the summary — Ivaylo will be in touch within 24 hours on business days.",
+        errorToast: "Something went wrong. Reply to hello@forgingapps.com if you don’t hear from us soon.",
       },
       errors: {
         turnFailed: "The message did not go through. Please try again in a moment.",
-        submitFailed: "We could not submit the brief just yet. Please try again shortly.",
       },
     },
   },

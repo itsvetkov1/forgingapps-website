@@ -92,7 +92,9 @@ export default function Message({ message }: MessageProps) {
   const isAssistant = message.role === 'assistant'
 
   return (
-    <article className={`max-w-[90%] rounded-[24px] px-4 py-3 shadow-[0_12px_28px_rgba(15,20,25,0.06)] ${isAssistant ? 'self-start border border-[#eadfca] bg-white' : 'self-end bg-[#141a22] text-[#f8f0e3]'}`}>
+    <article
+      className={`max-w-[90%] rounded-[24px] px-4 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.18)] ${isAssistant ? 'self-start border border-[#eadfca] bg-[#f8f0e3]' : 'self-end border border-[#e8d7ba]/45 bg-[#1e2633] text-[#f8f0e3]'}`}
+    >
       <p className={`mb-2 font-mono text-[11px] uppercase tracking-[0.22em] ${isAssistant ? 'text-[#8a8177]' : 'text-white/60'}`}>
         {isAssistant ? 'Cinder' : 'You'}
       </p>

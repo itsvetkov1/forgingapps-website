@@ -1,5 +1,5 @@
-export type IntakeSessionState = 'open' | 'minimum_met' | 'ready_to_submit' | 'submitted'
 export type ChatRole = 'assistant' | 'user'
+export type CompletionStatus = 'none' | 'partial' | 'ready'
 
 export interface BriefRecord {
   id: string
@@ -21,7 +21,13 @@ export interface ChatMessageRecord {
 
 export interface TurnResponse {
   reply: string
-  state: IntakeSessionState
+  completion: CompletionStatus
+}
+
+export interface FinalizeResult {
+  summary: Record<string, unknown>
+  emailed: boolean
+  error: string | null
 }
 
 const CHAT_INTAKE_BASE_URL = 'https://chat.forgingapps.com/intake'
@@ -33,12 +39,8 @@ function buildJsonHeaders() {
   }
 }
 
-function normalizeState(value: unknown): IntakeSessionState {
-  if (value === 'minimum_met' || value === 'ready_to_submit' || value === 'submitted') {
-    return value
-  }
-
-  return 'open'
+function normalizeCompletion(value: unknown): CompletionStatus {
+  return value === 'ready' || value === 'partial' ? value : 'none'
 }
 
 async function parseJsonResponse(response: Response) {
@@ -83,75 +85,69 @@ export async function sendTurn(params: {
   message: string
 }): Promise<TurnResponse> {
   const { brief, locale, history, message } = params
-  const turnUrl = `${CHAT_INTAKE_BASE_URL}/session/${encodeURIComponent(brief.sid)}/turn`
   const nextHistory = history.map(({ role, content }) => ({ role, content }))
 
-  const primary = await fetch(turnUrl, {
-    method: 'POST',
-    credentials: 'include',
-    headers: buildJsonHeaders(),
-    body: JSON.stringify({ locale, message, history: nextHistory }),
-  })
-
-  if (primary.ok) {
-    const data = await parseJsonResponse(primary)
-    return {
-      reply: String(data.reply ?? data.message ?? ''),
-      state: normalizeState(data.state),
-    }
-  }
-
-  if (primary.status !== 404) {
-    const body = await primary.text()
-    throw new Error(body || `turn-failed-${primary.status}`)
-  }
-
-  const legacy = await fetch(`${CHAT_INTAKE_BASE_URL}/message`, {
+  const response = await fetch(`${CHAT_INTAKE_BASE_URL}/message`, {
     method: 'POST',
     credentials: 'include',
     headers: buildJsonHeaders(),
     body: JSON.stringify({
       session: {
-        sid: brief.sid,
+        brief_id: brief.id,
+        firstName: brief.firstName,
+        topic: brief.project,
         locale,
-        name: brief.firstName,
-        email: brief.email,
-        project: brief.project,
-        interest: brief.interest,
-        launch: brief.launch,
+        variant: 'generic',
       },
       history: nextHistory,
       message,
     }),
   })
 
-  if (!legacy.ok) {
-    const body = await legacy.text()
-    throw new Error(body || `legacy-turn-failed-${legacy.status}`)
-  }
-
-  const data = await parseJsonResponse(legacy)
-  return {
-    reply: String(data.reply ?? data.message ?? ''),
-    state: normalizeState(data.state),
-  }
-}
-
-export async function submitBrief(sid: string) {
-  const response = await fetch(`${CHAT_INTAKE_BASE_URL}/session/${encodeURIComponent(sid)}/submit`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: buildJsonHeaders(),
-  })
-
   if (!response.ok) {
     const body = await response.text()
-    throw new Error(body || `submit-failed-${response.status}`)
+    throw new Error(body || `turn-failed-${response.status}`)
   }
 
   const data = await parseJsonResponse(response)
   return {
-    state: normalizeState(data.state || 'submitted'),
-    confirmation: String(data.confirmation ?? data.message ?? ''),
+    reply: String(data.reply ?? data.message ?? ''),
+    completion: normalizeCompletion(data.completion),
+  }
+}
+
+export async function finalizeBrief(params: {
+  brief: BriefRecord
+  locale: 'en' | 'bg'
+  history: ChatMessageRecord[]
+}): Promise<FinalizeResult> {
+  const { brief, locale, history } = params
+  const response = await fetch(`${CHAT_INTAKE_BASE_URL}/finalize`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: buildJsonHeaders(),
+    body: JSON.stringify({
+      session: {
+        brief_id: brief.id,
+        firstName: brief.firstName,
+        topic: brief.project,
+        locale,
+        variant: 'generic',
+      },
+      history: history.map(({ role, content }) => ({ role, content })),
+      brief_id: brief.id,
+      locale,
+    }),
+  })
+
+  const data = await parseJsonResponse(response)
+  if (!response.ok) {
+    throw new Error(String(data.error ?? data.detail ?? `finalize-failed-${response.status}`))
+  }
+
+  return {
+    summary: typeof data.summary === 'object' && data.summary ? data.summary : {},
+    emailed: Boolean(data.emailed),
+    error: data.error ? String(data.error) : null,
   }
 }

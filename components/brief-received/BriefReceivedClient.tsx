@@ -4,10 +4,18 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import BriefReceivedPage from '@/components/brief-received/BriefReceivedPage'
 import { translations } from '@/lib/i18n/translations'
-import { fetchBrief, sendTurn, submitBrief, type BriefRecord, type ChatMessageRecord, type IntakeSessionState } from '@/lib/chat-intake'
+import {
+  fetchBrief,
+  finalizeBrief,
+  sendTurn,
+  type BriefRecord,
+  type ChatMessageRecord,
+  type CompletionStatus,
+} from '@/lib/chat-intake'
 import { getBriefReceivedOpeningMessage, getBriefReceivedStarterPrompts } from '@/lib/brief-received-content.mjs'
 
 type ClientPhase = 'idle' | 'loading' | 'ready' | 'missing' | 'error'
+type ToastTone = 'success' | 'error'
 
 interface BriefReceivedClientProps {
   locale: 'en' | 'bg'
@@ -23,10 +31,11 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
   const [brief, setBrief] = useState<BriefRecord | null>(null)
   const [messages, setMessages] = useState<ChatMessageRecord[]>([])
   const [typing, setTyping] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
   const [chatError, setChatError] = useState<string | null>(null)
-  const [announcement, setAnnouncement] = useState('')
-  const [sessionState, setSessionState] = useState<IntakeSessionState>('open')
+  const [completion, setCompletion] = useState<CompletionStatus>('none')
+  const [finalizePending, setFinalizePending] = useState(false)
+  const [finalizeSent, setFinalizeSent] = useState(false)
+  const [toast, setToast] = useState<{ tone: ToastTone; message: string } | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -35,6 +44,9 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
       setPhase('missing')
       setBrief(null)
       setMessages([])
+      setCompletion('none')
+      setFinalizeSent(false)
+      setToast(null)
       return
     }
 
@@ -42,7 +54,9 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     setBrief(null)
     setMessages([])
     setChatError(null)
-    setSessionState('open')
+    setCompletion('none')
+    setFinalizeSent(false)
+    setToast(null)
 
     void fetchBrief(briefId)
       .then((result) => {
@@ -67,16 +81,8 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     }
   }, [briefId, locale])
 
-  useEffect(() => {
-    if (sessionState === 'minimum_met') {
-      setAnnouncement(copy.chat.submitReadyAnnouncement)
-    } else if (sessionState === 'submitted') {
-      setAnnouncement(copy.chat.submittedAnnouncement)
-    }
-  }, [copy.chat.submitReadyAnnouncement, copy.chat.submittedAnnouncement, sessionState])
-
   const handleSend = async (value: string) => {
-    if (!brief || !value.trim() || typing || submitting || sessionState === 'submitted') return
+    if (!brief || !value.trim() || typing || finalizePending) return
 
     const userMessage: ChatMessageRecord = {
       id: `user-${Date.now()}`,
@@ -88,6 +94,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     setMessages(nextHistory)
     setTyping(true)
     setChatError(null)
+    setToast(null)
 
     try {
       const response = await sendTurn({
@@ -105,7 +112,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
           content: response.reply,
         },
       ])
-      setSessionState(response.state)
+      setCompletion(response.completion)
     } catch {
       setChatError(copy.chat.errors.turnFailed)
     } finally {
@@ -113,46 +120,45 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     }
   }
 
-  const handleSubmitBrief = async () => {
-    if (!brief || submitting || sessionState === 'submitted') return
+  const handleFinalize = async () => {
+    if (!brief || finalizePending || finalizeSent || completion !== 'ready') return
 
-    setSubmitting(true)
+    setFinalizePending(true)
     setChatError(null)
+    setToast(null)
 
     try {
-      const result = await submitBrief(brief.sid)
-      const confirmation = result.confirmation || copy.chat.submittedConfirmation
-      setMessages((current) => [
-        ...current,
-        {
-          id: `assistant-submit-${Date.now()}`,
-          role: 'assistant',
-          content: confirmation,
-        },
-      ])
-      setSessionState(result.state)
+      const result = await finalizeBrief({ brief, locale, history: messages })
+      if (result.emailed) {
+        setFinalizeSent(true)
+        setToast({ tone: 'success', message: copy.chat.summary.successToast })
+        return
+      }
+
+      setToast({ tone: 'error', message: copy.chat.summary.errorToast })
     } catch {
-      setChatError(copy.chat.errors.submitFailed)
+      setToast({ tone: 'error', message: copy.chat.summary.errorToast })
     } finally {
-      setSubmitting(false)
+      setFinalizePending(false)
     }
   }
 
   return (
     <BriefReceivedPage
-      announcement={announcement}
       brief={brief}
       chatError={chatError}
+      completion={completion}
       copy={copy}
+      finalizePending={finalizePending}
+      finalizeSent={finalizeSent}
       locale={locale}
       messages={messages}
+      onFinalize={handleFinalize}
       onSelectStarterPrompt={handleSend}
       onSendMessage={handleSend}
-      onSubmitBrief={handleSubmitBrief}
       phase={phase}
-      sessionState={sessionState}
       starterPrompts={starterPrompts}
-      submitting={submitting}
+      toast={toast}
       typing={typing}
     />
   )
