@@ -7,6 +7,7 @@ interface BriefReceivedPageProps {
   chatError: string | null
   completion: CompletionStatus
   copy: any
+  finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
   locale: 'en' | 'bg'
@@ -26,6 +27,7 @@ export default function BriefReceivedPage(props: BriefReceivedPageProps) {
     chatError,
     completion,
     copy,
+    finalizedBanner,
     finalizePending,
     finalizeSent,
     locale,
@@ -48,6 +50,7 @@ export default function BriefReceivedPage(props: BriefReceivedPageProps) {
           chatError={chatError}
           completion={completion}
           copy={copy}
+          finalizedBanner={finalizedBanner}
           finalizePending={finalizePending}
           finalizeSent={finalizeSent}
           messages={messages}

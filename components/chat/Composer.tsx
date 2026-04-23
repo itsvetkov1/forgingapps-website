@@ -9,6 +9,7 @@ interface ComposerProps {
   copy: {
     hint: string
     placeholder: string
+    finalizedPlaceholder: string
     send: string
     summary: {
       idle: string
@@ -63,6 +64,9 @@ export default function Composer({
       : completion === 'ready'
         ? copy.summary.ready
         : copy.summary.idle
+  const placeholder = finalizeSent
+    ? copy.finalizedPlaceholder
+    : copy.placeholder
 
   return (
     <div className="border-t border-[#e8d7ba]/12 px-4 py-4 min-[840px]:px-6">
@@ -80,7 +84,7 @@ export default function Composer({
           rows={2}
           data-test="brief-received-chat-input"
           disabled={disabled}
-          placeholder={copy.placeholder}
+          placeholder={placeholder}
           className="min-h-[56px] w-full resize-none bg-transparent px-2 py-2 text-sm leading-6 text-[#f8f0e3] outline-none placeholder:text-[#b8a992] disabled:cursor-not-allowed disabled:text-[#8a8177]"
           onInput={resize}
           onKeyDown={(event) => {

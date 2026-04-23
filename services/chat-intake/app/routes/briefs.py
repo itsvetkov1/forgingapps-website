@@ -1,15 +1,17 @@
 from __future__ import annotations
 
 import hmac
+import json
 import os
 import re
 import sqlite3
+from typing import Any
 
 from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, ValidationError
 
 from app.brief_bootstrap import default_created_at, generate_sid, persist_brief_bootstrap, validate_sid
-from app.db import get_brief
+from app.db import get_brief, get_brief_enrichment, list_chat_messages
 
 router = APIRouter(prefix='/intake', tags=['intake'])
 BRIEF_ID_PATTERN = re.compile(r'^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$')
@@ -28,6 +30,20 @@ class BriefResponse(BaseModel):
     createdAt: str
 
 
+class BriefMessageResponse(BaseModel):
+    role: str
+    content: str
+    created_at: str
+
+
+class BriefMessagesResponse(BaseModel):
+    brief_id: str
+    messages: list[BriefMessageResponse]
+    finalized: bool
+    finalized_at: str | None = None
+    summary_preview: dict[str, str] | None = None
+
+
 class BriefIngestPayload(BaseModel):
     brief_id: str
     firstName: str
@@ -44,6 +60,57 @@ class BriefIngestResponse(BaseModel):
     ok: bool
     brief_id: str
     sid: str
+
+
+def _build_summary_preview(summary: dict[str, Any]) -> dict[str, str] | None:
+    project = str(summary.get('project') or summary.get('project_summary') or '').strip()
+    timing = str(summary.get('timing') or '').strip()
+    next_step = str(summary.get('next_step') or '').strip()
+    if not any([project, timing, next_step]):
+        return None
+    return {
+        'project': project,
+        'timing': timing,
+        'next_step': next_step,
+    }
+
+
+@router.get('/brief/{brief_id}/messages', response_model=BriefMessagesResponse)
+def get_brief_messages_route(brief_id: str) -> BriefMessagesResponse:
+    normalized_brief_id = brief_id.strip()
+    if not normalized_brief_id or not BRIEF_ID_PATTERN.match(normalized_brief_id):
+        raise HTTPException(status_code=404, detail='Brief not found.')
+
+    row = get_brief(normalized_brief_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail='Brief not found.')
+
+    messages = [
+        BriefMessageResponse(
+            role=str(message['role']),
+            content=str(message['content']),
+            created_at=str(message['created_at']),
+        )
+        for message in list_chat_messages(normalized_brief_id)
+    ]
+
+    enrichment = get_brief_enrichment(normalized_brief_id)
+    summary_preview = None
+    finalized_at = None
+    if enrichment is not None:
+        finalized_at = str(enrichment['finalized_at']) if enrichment['finalized_at'] else None
+        try:
+            summary_preview = _build_summary_preview(json.loads(str(enrichment['summary_json'] or '{}')))
+        except json.JSONDecodeError:
+            summary_preview = None
+
+    return BriefMessagesResponse(
+        brief_id=normalized_brief_id,
+        messages=messages,
+        finalized=enrichment is not None,
+        finalized_at=finalized_at,
+        summary_preview=summary_preview,
+    )
 
 
 @router.get('/brief/{brief_id}', response_model=BriefResponse)

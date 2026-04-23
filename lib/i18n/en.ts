@@ -1039,6 +1039,7 @@ export const en: Record<string, any> = {
       composer: {
         hint: "Enter sends. Shift+Enter adds a new line.",
         placeholder: "Tell Cinder what you need — scope, timing, or what happens next",
+        finalizedPlaceholder: "This summary has been sent. Reply to hello@forgingapps.com if you need to add more.",
         send: "Send message",
         summary: {
           idle: "Send summary to the team",
@@ -1050,6 +1051,11 @@ export const en: Record<string, any> = {
       summary: {
         successToast: "We’ve sent the summary — Ivaylo will be in touch within 24 hours on business days.",
         errorToast: "Something went wrong. Reply to hello@forgingapps.com if you don’t hear from us soon.",
+      },
+      finalizedBanner: {
+        banner: "Summary sent to Ivaylo on {date}. He'll be in touch within 24 hours on business days.",
+        topicLabel: "Topic",
+        nextStepLabel: "Next step",
       },
       errors: {
         turnFailed: "The message did not go through. Please try again in a moment.",

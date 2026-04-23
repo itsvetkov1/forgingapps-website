@@ -314,7 +314,7 @@ def test_finalize_uses_noop_sender_when_resend_key_missing(
     history: list[dict[str, str]],
 ) -> None:
     _seed_brief(seeded_brief)
-    monkeypatch.delenv('RESEND_API_KEY', raising=False)
+    monkeypatch.setattr('app.routes.chat.resolve_resend_api_key', lambda: None)
 
     monkeypatch.setattr(
         'app.routes.chat.call_codex_responses',

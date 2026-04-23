@@ -13,6 +13,7 @@ interface ChatSurfaceProps {
   chatError: string | null
   completion: CompletionStatus
   copy: any
+  finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
   messages: ChatMessageRecord[]
@@ -30,6 +31,7 @@ export default function ChatSurface({
   chatError,
   completion,
   copy,
+  finalizedBanner,
   finalizePending,
   finalizeSent,
   messages,
@@ -57,12 +59,12 @@ export default function ChatSurface({
     return messages
   }, [copy.chat.invalidBrief, copy.chat.loading, copy.chat.missingBrief, messages, phase])
 
-  const showStarters = phase === 'ready' && messages.length <= 1
-  const disableComposer = phase !== 'ready' || finalizePending
+  const showStarters = phase === 'ready' && messages.length <= 1 && !finalizeSent
+  const disableComposer = phase !== 'ready' || finalizePending || finalizeSent
 
   return (
     <section data-test="brief-received-chat-panel" className="flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-[32px] border border-[#e8d7ba]/14 bg-[#141a22] shadow-[0_30px_80px_rgba(0,0,0,0.32)]">
-      <ChatHeader copy={copy.chat.header} />
+      <ChatHeader copy={copy.chat.header} finalizedBanner={finalizedBanner} />
       <div className="flex flex-1 min-h-0 flex-col overflow-hidden px-4 py-4 min-[840px]:px-6">
         <MessageList messages={placeholderMessage} />
         {typing ? <TypingDots label={copy.chat.typingLabel} /> : null}

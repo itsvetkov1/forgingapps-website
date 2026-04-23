@@ -119,6 +119,51 @@ def get_brief(brief_id: str):
         ).fetchone()
 
 
+def list_chat_messages(brief_id: str):
+    with connect() as connection:
+        return connection.execute(
+            '''
+            SELECT role, content, created_at
+            FROM chat_messages
+            WHERE brief_id = ?
+            ORDER BY created_at ASC, id ASC
+            ''',
+            (brief_id,),
+        ).fetchall()
+
+
+def insert_chat_messages(*, brief_id: str, messages: list[dict[str, str]]) -> None:
+    if not messages:
+        return
+    with connect() as connection:
+        connection.executemany(
+            'INSERT INTO chat_messages (brief_id, role, content, created_at) VALUES (?, ?, ?, ?)',
+            [
+                (
+                    brief_id,
+                    message['role'],
+                    message['content'],
+                    message['created_at'],
+                )
+                for message in messages
+            ],
+        )
+        connection.commit()
+
+
+def get_brief_enrichment(brief_id: str):
+    with connect() as connection:
+        return connection.execute(
+            '''
+            SELECT summary_json, finalized_at
+            FROM brief_enrichments
+            WHERE brief_id = ?
+            LIMIT 1
+            ''',
+            (brief_id,),
+        ).fetchone()
+
+
 def upsert_brief(record: dict[str, Any]) -> None:
     with connect() as connection:
         connection.execute(

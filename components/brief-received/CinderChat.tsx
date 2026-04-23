@@ -6,6 +6,7 @@ interface CinderChatProps {
   chatError: string | null
   completion: CompletionStatus
   copy: any
+  finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
   messages: ChatMessageRecord[]

@@ -17,6 +17,25 @@ export interface ChatMessageRecord {
   id: string
   role: ChatRole
   content: string
+  createdAt?: string | null
+}
+
+export interface PersistedChatMessageRecord {
+  role: ChatRole
+  content: string
+  created_at: string
+}
+
+export interface BriefMessagesResult {
+  briefId: string
+  messages: PersistedChatMessageRecord[]
+  finalized: boolean
+  finalizedAt: string | null
+  summaryPreview: {
+    project: string
+    timing: string
+    next_step: string
+  } | null
 }
 
 export interface TurnResponse {
@@ -75,6 +94,40 @@ export async function fetchBrief(briefId: string): Promise<BriefRecord> {
     createdAt: String(data.createdAt ?? data.created_at ?? new Date().toISOString()),
     locale: data.locale === 'bg' ? 'bg' : 'en',
     sid: String(data.sid),
+  }
+}
+
+export async function fetchBriefMessages(briefId: string): Promise<BriefMessagesResult> {
+  const response = await fetch(`${CHAT_INTAKE_BASE_URL}/brief/${encodeURIComponent(briefId)}/messages`, {
+    credentials: 'include',
+    headers: { Accept: 'application/json' },
+  })
+
+  if (!response.ok) {
+    throw new Error(response.status === 404 ? 'brief-not-found' : `brief-messages-fetch-${response.status}`)
+  }
+
+  const data = await parseJsonResponse(response)
+  const summaryPreview = typeof data.summary_preview === 'object' && data.summary_preview
+    ? {
+        project: String(data.summary_preview.project ?? ''),
+        timing: String(data.summary_preview.timing ?? ''),
+        next_step: String(data.summary_preview.next_step ?? ''),
+      }
+    : null
+
+  return {
+    briefId: String(data.brief_id ?? briefId),
+    messages: Array.isArray(data.messages)
+      ? data.messages.map((message: Record<string, unknown>) => ({
+          role: message.role === 'user' ? 'user' : 'assistant',
+          content: String(message.content ?? ''),
+          created_at: String(message.created_at ?? ''),
+        }))
+      : [],
+    finalized: Boolean(data.finalized),
+    finalizedAt: data.finalized_at ? String(data.finalized_at) : null,
+    summaryPreview,
   }
 }
 

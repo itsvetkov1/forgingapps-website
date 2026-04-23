@@ -6,6 +6,7 @@ import BriefReceivedPage from '@/components/brief-received/BriefReceivedPage'
 import { translations } from '@/lib/i18n/translations'
 import {
   fetchBrief,
+  fetchBriefMessages,
   finalizeBrief,
   sendTurn,
   type BriefRecord,
@@ -13,9 +14,12 @@ import {
   type CompletionStatus,
 } from '@/lib/chat-intake'
 import { getBriefReceivedOpeningMessage, getBriefReceivedStarterPrompts } from '@/lib/brief-received-content.mjs'
+import { buildFinalizedBannerModel, deriveBriefReceivedChatState } from '@/lib/brief-received-state.mjs'
 
 type ClientPhase = 'idle' | 'loading' | 'ready' | 'missing' | 'error'
 type ToastTone = 'success' | 'error'
+type SummaryPreview = { project: string; timing: string; next_step: string } | null
+type FinalizedBanner = { dateLabel: string; bannerText: string; recapLine: string | null } | null
 
 interface BriefReceivedClientProps {
   locale: 'en' | 'bg'
@@ -35,6 +39,8 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
   const [completion, setCompletion] = useState<CompletionStatus>('none')
   const [finalizePending, setFinalizePending] = useState(false)
   const [finalizeSent, setFinalizeSent] = useState(false)
+  const [finalizedAt, setFinalizedAt] = useState<string | null>(null)
+  const [summaryPreview, setSummaryPreview] = useState<SummaryPreview>(null)
   const [toast, setToast] = useState<{ tone: ToastTone; message: string } | null>(null)
 
   useEffect(() => {
@@ -46,6 +52,8 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
       setMessages([])
       setCompletion('none')
       setFinalizeSent(false)
+      setFinalizedAt(null)
+      setSummaryPreview(null)
       setToast(null)
       return
     }
@@ -56,19 +64,33 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     setChatError(null)
     setCompletion('none')
     setFinalizeSent(false)
+    setFinalizedAt(null)
+    setSummaryPreview(null)
     setToast(null)
 
-    void fetchBrief(briefId)
-      .then((result) => {
+    void Promise.all([fetchBrief(briefId), fetchBriefMessages(briefId)])
+      .then(([briefResult, messageResult]) => {
         if (cancelled) return
-        setBrief(result)
-        setMessages([
-          {
-            id: `opening-${result.id}`,
-            role: 'assistant',
-            content: getBriefReceivedOpeningMessage(locale, result),
-          },
-        ])
+        const openingMessage = getBriefReceivedOpeningMessage(locale, briefResult)
+        const hydrated = deriveBriefReceivedChatState({
+          briefId: briefResult.id,
+          openingMessage,
+          persistedMessages: messageResult.messages as any,
+          finalized: messageResult.finalized,
+          finalizedAt: messageResult.finalizedAt as any,
+          summaryPreview: messageResult.summaryPreview as any,
+        }) as {
+          messages: ChatMessageRecord[]
+          finalizeSent: boolean
+          finalizedAt: string | null
+          summaryPreview: SummaryPreview
+        }
+
+        setBrief(briefResult)
+        setMessages(hydrated.messages)
+        setFinalizeSent(hydrated.finalizeSent)
+        setFinalizedAt(hydrated.finalizedAt)
+        setSummaryPreview(hydrated.summaryPreview)
         setPhase('ready')
       })
       .catch(() => {
@@ -82,7 +104,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
   }, [briefId, locale])
 
   const handleSend = async (value: string) => {
-    if (!brief || !value.trim() || typing || finalizePending) return
+    if (!brief || !value.trim() || typing || finalizePending || finalizeSent) return
 
     const userMessage: ChatMessageRecord = {
       id: `user-${Date.now()}`,
@@ -130,7 +152,24 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     try {
       const result = await finalizeBrief({ brief, locale, history: messages })
       if (result.emailed) {
-        setFinalizeSent(true)
+        const refreshed = await fetchBriefMessages(brief.id)
+        const hydrated = deriveBriefReceivedChatState({
+          briefId: brief.id,
+          openingMessage: getBriefReceivedOpeningMessage(locale, brief),
+          persistedMessages: refreshed.messages as any,
+          finalized: refreshed.finalized,
+          finalizedAt: refreshed.finalizedAt as any,
+          summaryPreview: refreshed.summaryPreview as any,
+        }) as {
+          messages: ChatMessageRecord[]
+          finalizeSent: boolean
+          finalizedAt: string | null
+          summaryPreview: SummaryPreview
+        }
+        setMessages(hydrated.messages)
+        setFinalizeSent(hydrated.finalizeSent)
+        setFinalizedAt(hydrated.finalizedAt)
+        setSummaryPreview(hydrated.summaryPreview)
         setToast({ tone: 'success', message: copy.chat.summary.successToast })
         return
       }
@@ -143,12 +182,23 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     }
   }
 
+  const finalizedBanner = useMemo<FinalizedBanner>(() => {
+    if (!finalizeSent || !finalizedAt) return null
+    return buildFinalizedBannerModel({
+      locale,
+      finalizedAt,
+      summaryPreview,
+      copy: copy.chat.finalizedBanner,
+    } as any) as FinalizedBanner
+  }, [copy.chat.finalizedBanner, finalizeSent, finalizedAt, locale, summaryPreview])
+
   return (
     <BriefReceivedPage
       brief={brief}
       chatError={chatError}
       completion={completion}
       copy={copy}
+      finalizedBanner={finalizedBanner}
       finalizePending={finalizePending}
       finalizeSent={finalizeSent}
       locale={locale}

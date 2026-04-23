@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from string import Template
 from typing import Any, Literal
@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
-from app.db import get_brief, upsert_brief_enrichment
+from app.db import get_brief, insert_chat_messages, upsert_brief_enrichment
 from app.llm.codex import call_codex_responses
 from app.prompt_stack import DEFAULT_MODEL, DEFAULT_VARIANT, normalize_locale, normalize_variant, read_prompt
 from app.services import generate_cinder_reply
@@ -74,6 +74,14 @@ class SummaryParseFailed(Exception):
 
 def utc_now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+
+
+def build_chat_turn_timestamps() -> tuple[str, str]:
+    base = datetime.now(timezone.utc)
+    return (
+        base.isoformat(timespec='microseconds').replace('+00:00', 'Z'),
+        (base + timedelta(microseconds=1)).isoformat(timespec='microseconds').replace('+00:00', 'Z'),
+    )
 
 
 def resolve_completion(reply: str) -> tuple[str, Literal['none', 'partial', 'ready']]:
@@ -177,19 +185,71 @@ def resolve_resend_api_key() -> str | None:
 
 
 def render_email_template(summary: dict[str, Any]) -> tuple[str, str]:
+    from datetime import datetime, timezone
+
     template = read_prompt('email_to_team.md')
-    fields = {key: '' if value is None else str(value) for key, value in summary.items()}
-    rendered = re.sub(r'\{\{\s*([a-zA-Z0-9_]+)\s*\}\}', lambda match: fields.get(match.group(1), ''), template)
+
+    def _html_list(items: Any, empty: str) -> str:
+        if not items:
+            return f'<p style="font-size:14px;color:#a8a39b;margin:6px 0 0 0;">{empty}</p>'
+        if not isinstance(items, list):
+            items = [items]
+        lis = ''.join(
+            f'<li style="font-size:14px;line-height:1.65;color:#ece7de;margin:4px 0;">{str(item).replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")}</li>'
+            for item in items
+        )
+        return f'<ul style="margin:8px 0 0 0;padding-left:20px;">{lis}</ul>'
+
+    def _fmt_finalized(ts: Any) -> str:
+        s = str(ts or '').strip()
+        if not s:
+            return 'just now'
+        try:
+            dt = datetime.fromisoformat(s.replace('Z', '+00:00'))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.strftime('%Y-%m-%d %H:%M UTC')
+        except Exception:
+            return s
+
+    fields: dict[str, str] = {}
+    for key, value in summary.items():
+        if value is None:
+            fields[key] = ''
+        elif isinstance(value, (list, dict)):
+            fields[key] = json.dumps(value, ensure_ascii=False)
+        else:
+            fields[key] = str(value)
+
+    fields['concerns_list_html'] = _html_list(summary.get('concerns'), 'None flagged.')
+    fields['highlights_list_html'] = _html_list(summary.get('chat_highlights'), 'No highlights captured.')
+    fields['finalized_at_human'] = _fmt_finalized(summary.get('finalized_at') or summary.get('created_at'))
+    fields.setdefault('preferred_language', 'en')
+    fields.setdefault('contact_name', summary.get('contact_name') or '-')
+    fields.setdefault('brief_id', summary.get('brief_id', ''))
+
+    template_stripped = re.sub(r'<!--.*?-->', '', template, flags=re.DOTALL).strip()
+
+    rendered = re.sub(
+        r'\{\{\s*([a-zA-Z0-9_]+)\s*\}\}',
+        lambda m: fields.get(m.group(1), ''),
+        template_stripped,
+    )
+
     lines = rendered.splitlines()
     subject_line = next((line for line in lines if line.lower().startswith('subject:')), '')
-    subject = subject_line.partition(':')[2].strip() or f"Brief summary {summary.get('brief_id', '').strip()}".strip()
-    body_lines = lines[1:] if subject_line else lines
-    body = '\n'.join(body_lines).strip()
+    subject = (
+        subject_line.partition(':')[2].strip()
+        or f"Brief summary {summary.get('brief_id', '').strip()}".strip()
+    )
+    if subject_line:
+        idx = lines.index(subject_line)
+        body = '\n'.join(lines[idx + 1 :]).strip()
+    else:
+        body = rendered.strip()
     if not body:
         body = json.dumps(summary, ensure_ascii=False, indent=2)
-    html = '<pre style="font-family:Inter,Arial,sans-serif;white-space:pre-wrap;">' + body.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;') + '</pre>'
-    return subject, html
-
+    return subject, body
 
 def send_summary_email(*, api_key: str, recipient: str, subject: str, html: str) -> dict[str, Any]:
     response = httpx.post(
@@ -926,6 +986,25 @@ def intake_message(request: MessageRequest) -> JSONResponse:
         reply, completion = resolve_completion(str(result.get('reply', '')))
         result['reply'] = reply
         result['completion'] = completion
+
+        brief_id = str(session.get('brief_id') or '').strip()
+        if brief_id and get_brief(brief_id) is not None:
+            user_created_at, assistant_created_at = build_chat_turn_timestamps()
+            insert_chat_messages(
+                brief_id=brief_id,
+                messages=[
+                    {
+                        'role': 'user',
+                        'content': request.message,
+                        'created_at': user_created_at,
+                    },
+                    {
+                        'role': 'assistant',
+                        'content': reply,
+                        'created_at': assistant_created_at,
+                    },
+                ],
+            )
         return JSONResponse(result)
     except Exception:
         logger.exception('intake message failed')

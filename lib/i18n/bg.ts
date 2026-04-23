@@ -1041,6 +1041,7 @@ export const bg: Record<string, any> = {
       composer: {
         hint: "Enter изпраща. Shift+Enter добавя нов ред.",
         placeholder: "Кажете ни какво Ви трябва — обхват, срокове или какво следва",
+        finalizedPlaceholder: "Това резюме е изпратено. Отговорете на hello@forgingapps.com, ако искате да добавите още нещо.",
         send: "Изпратете съобщение",
         summary: {
           idle: "Изпратете резюмето към екипа",
@@ -1052,6 +1053,11 @@ export const bg: Record<string, any> = {
       summary: {
         successToast: "Изпратихме резюмето — Ивайло ще се свърже с Вас до 24 часа в работни дни.",
         errorToast: "Нещо се обърка. Отговорете на hello@forgingapps.com, ако скоро не получите вест от нас.",
+      },
+      finalizedBanner: {
+        banner: "Резюмето е изпратено до Ивайло на {date}. Той ще се свърже с Вас до 24 часа в работни дни.",
+        topicLabel: "Тема",
+        nextStepLabel: "Следваща стъпка",
       },
       errors: {
         turnFailed: "Съобщението не беше изпратено. Моля, опитайте отново след малко.",
