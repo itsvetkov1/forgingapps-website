@@ -26,6 +26,7 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     monkeypatch.setenv('CHAT_INTAKE_DB_PATH', str(tmp_path / 'briefs.db'))
     monkeypatch.setenv('CHAT_INTAKE_INTAKES_DIR', str(tmp_path / 'intakes'))
     monkeypatch.setenv('CHAT_INTAKE_PROMPTS_DIR', str(prompts_dir))
+    monkeypatch.setenv('ENABLE_AUTO_FINALIZE', 'false')  # Disable auto-finalize in tests
 
     import app.main
 
@@ -135,7 +136,7 @@ def test_intake_message_assembles_cinder_request(client: TestClient, monkeypatch
     assert response.status_code == 200
     assert response.json()['reply'] == 'Payment depends on the package, the integrations, and whether we need founder-led scoping first.'
     assert response.json()['completion'] == 'partial'
-    assert captured['model'] == 'gpt-5.4'
+    assert captured['model'] == 'gpt-5.5'
     assert 'Cinder' in captured['instructions']
     assert captured['input_items'][0]['role'] == 'user'
     assert captured['input_items'][0]['content'].startswith('--- SESSION CONTEXT')

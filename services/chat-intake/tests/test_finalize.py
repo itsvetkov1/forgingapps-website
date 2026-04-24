@@ -28,6 +28,7 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     monkeypatch.setenv('CHAT_INTAKE_INTAKES_DIR', str(tmp_path / 'intakes'))
     monkeypatch.setenv('CHAT_INTAKE_PROMPTS_DIR', str(prompts_dir))
     monkeypatch.setenv('RESEND_API_KEY', 'test-resend-key')
+    monkeypatch.setenv('ENABLE_AUTO_FINALIZE', 'false')
 
     import app.main
 
@@ -86,7 +87,7 @@ def test_finalize_persists_summary_and_emails_team(
     sent = {}
 
     def fake_call_codex_responses(*, model, instructions, input_items):
-        assert model == 'gpt-5.4'
+        assert model == 'gpt-5.5'
         assert 'Return strict JSON only.' in instructions
         assert input_items[-1]['role'] == 'user'
         return {
