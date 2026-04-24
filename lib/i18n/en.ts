@@ -1057,6 +1057,7 @@ export const en: Record<string, any> = {
       composer: {
         hint: "Enter sends. Shift+Enter adds a new line.",
         placeholder: "Tell Cinder what you need — scope, timing, or what happens next",
+        conversationPlaceholder: "Write a reply…",
         finalizedPlaceholder: "This summary has been sent. Reply to hello@forgingapps.com if you need to add more.",
         send: "Send message",
         summary: {

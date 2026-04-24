@@ -61,6 +61,7 @@ export default function ChatSurface({
 
   const showStarters = phase === 'ready' && messages.length <= 1 && !finalizeSent
   const disableComposer = phase !== 'ready' || finalizePending || finalizeSent
+  const inConversation = messages.some((m) => m.role === 'user')
 
   return (
     <section data-test="brief-received-chat-panel" className="flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-[32px] border border-[#e8d7ba]/14 bg-[#141a22] shadow-[0_30px_80px_rgba(0,0,0,0.32)]">
@@ -78,6 +79,7 @@ export default function ChatSurface({
           disabled={disableComposer}
           finalizePending={finalizePending}
           finalizeSent={finalizeSent}
+          inConversation={inConversation}
           onFinalize={onFinalize}
           onSend={onSendMessage}
           toast={toast}

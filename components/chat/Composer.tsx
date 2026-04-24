@@ -9,6 +9,7 @@ interface ComposerProps {
   copy: {
     hint: string
     placeholder: string
+    conversationPlaceholder: string
     finalizedPlaceholder: string
     send: string
     summary: {
@@ -21,6 +22,7 @@ interface ComposerProps {
   disabled?: boolean
   finalizePending?: boolean
   finalizeSent?: boolean
+  inConversation?: boolean
   onFinalize: () => void | Promise<void>
   onSend: (message: string) => void | Promise<void>
   toast: { tone: 'success' | 'error'; message: string } | null
@@ -32,6 +34,7 @@ export default function Composer({
   disabled,
   finalizePending,
   finalizeSent,
+  inConversation,
   onFinalize,
   onSend,
   toast,
@@ -66,7 +69,9 @@ export default function Composer({
         : copy.summary.idle
   const placeholder = finalizeSent
     ? copy.finalizedPlaceholder
-    : copy.placeholder
+    : inConversation
+      ? copy.conversationPlaceholder
+      : copy.placeholder
 
   return (
     <div className="border-t border-[#e8d7ba]/12 px-4 py-4 min-[840px]:px-6">

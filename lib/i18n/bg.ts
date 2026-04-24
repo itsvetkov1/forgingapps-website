@@ -1059,6 +1059,7 @@ export const bg: Record<string, any> = {
       composer: {
         hint: "Enter изпраща. Shift+Enter добавя нов ред.",
         placeholder: "Кажете ни какво Ви трябва — обхват, срокове или какво следва",
+        conversationPlaceholder: "Напишете отговор…",
         finalizedPlaceholder: "Това резюме е изпратено. Отговорете на hello@forgingapps.com, ако искате да добавите още нещо.",
         send: "Изпратете съобщение",
         summary: {
