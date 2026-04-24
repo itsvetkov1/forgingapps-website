@@ -6,7 +6,7 @@ from typing import Literal
 
 DEFAULT_PROMPTS_DIR = Path('/opt/forgingapps/chat-intake/prompts')
 REPO_PROMPTS_DIR = Path(__file__).resolve().parents[1] / 'prompts'
-DEFAULT_MODEL = 'gpt-5.4'
+DEFAULT_MODEL = 'gpt-5.5'
 DEFAULT_VARIANT = 'generic'
 DEFAULT_LOCALE = 'en'
 

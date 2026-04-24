@@ -1,0 +1,13 @@
+[Unit]
+Description=ForgingApps chat-intake inactivity sweeper — runs every 15 minutes
+PartOf=chat-intake-sweep.service
+RefuseManualStop=yes
+
+[Timer]
+Persistent=true
+OnBootSec=5min
+OnUnitActiveSec=15min
+Unit=chat-intake-sweep.service
+
+[Install]
+WantedBy=timers.target

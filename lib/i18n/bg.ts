@@ -1072,6 +1072,9 @@ export const bg: Record<string, any> = {
       summary: {
         successToast: "Изпратихме резюмето — Ивайло ще се свърже с Вас до 24 часа в работни дни.",
         errorToast: "Нещо се обърка. Отговорете на hello@forgingapps.com, ако скоро не получите вест от нас.",
+        autoSavedToast: "Записано за екипа. Продължете — ще получат всички актуализации.",
+        sendFirstButtonLabel: "Изпрати резюме до екипа",
+        sendUpdatedButtonLabel: "Изпрати актуализирано резюме",
       },
       finalizedBanner: {
         banner: "Резюмето е изпратено до Ивайло на {date}. Той ще се свърже с Вас до 24 часа в работни дни.",

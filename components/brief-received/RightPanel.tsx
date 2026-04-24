@@ -10,6 +10,7 @@ interface RightPanelProps {
   finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
+  finalizeButtonLabel: string
   messages: ChatMessageRecord[]
   onFinalize: () => void | Promise<void>
   onSelectStarterPrompt: (prompt: string) => void | Promise<void>
@@ -21,7 +22,7 @@ interface RightPanelProps {
 }
 
 export default function RightPanel(props: RightPanelProps) {
-  const { brief, copy } = props
+  const { brief, copy, finalizeButtonLabel } = props
 
   return (
     <section className="order-1 flex min-h-[100svh] flex-col gap-4 bg-[#111821] px-4 py-4 min-[840px]:order-2 min-[840px]:sticky min-[840px]:top-0 min-[840px]:h-screen min-[840px]:border-l min-[840px]:border-[#e8d7ba]/10 min-[840px]:px-6 min-[840px]:py-6">
