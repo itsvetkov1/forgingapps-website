@@ -1,0 +1,19 @@
+[Unit]
+Description=ForgingApps chat-intake inactivity sweeper (one-shot)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/forgingapps/chat-intake/.venv/bin/python /opt/forgingapps/chat-intake/tools/sweep_inactive.py
+WorkingDirectory=/opt/forgingapps/chat-intake
+Restart=no
+StandardOutput=journal
+StandardError=journal
+User=alpharius
+Environment=RESEND_API_KEY_FILE=/opt/forgingapps/chat-intake/.env.resend
+# Load RESEND_API_KEY from env file if present
+EnvironmentFile=/opt/forgingapps/chat-intake/.env.resend
+
+[Install]
+WantedBy=timers.target
