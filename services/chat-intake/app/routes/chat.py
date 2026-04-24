@@ -1,4 +1,5 @@
 from __future__ import annotations
+import os
 
 import json
 import logging
@@ -13,7 +14,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
-from app.db import get_brief, insert_chat_messages, upsert_brief_enrichment
+from app.db import get_brief, insert_chat_messages, upsert_brief_enrichment, get_brief_enrichment, get_latest_chat_message
 from app.llm.codex import call_codex_responses
 from app.prompt_stack import DEFAULT_MODEL, DEFAULT_VARIANT, normalize_locale, normalize_variant, read_prompt
 from app.services import generate_cinder_reply
@@ -338,6 +339,102 @@ def send_summary_email(*, api_key: str, recipient: str, subject: str, html: str)
         return {'emailed': True, 'error': None}
     error = f'resend_{response.status_code}'
     logger.error('Finalize email send failed: %s %s', error, response.text)
+    return {'emailed': False, 'error': error}
+
+
+
+def render_markdown_summary(summary: dict[str, Any], locale: str) -> str:
+    """"Build a readable markdown document from the summary dict for email attachment."""
+    brief_id = summary.get('brief_id', '')
+    contact = summary.get('contact_name', 'Unknown')
+    project = summary.get('project', summary.get('project_summary', 'N/A'))
+    timing = summary.get('timing', 'N/A')
+    scope = summary.get('scope_summary', summary.get('scope', 'N/A'))
+    next_step = summary.get('next_step', 'N/A')
+    track = summary.get('track', 'N/A')
+    confidence = summary.get('confidence', 'N/A')
+    locale_label = 'English' if locale == 'en' else 'Bulgarian'
+    chat_url = f'https://forgingapps.com/{locale}/brief-received?id={brief_id}'
+
+    lines = [
+        f'# Project Brief — {brief_id}',
+        f'',
+        f'**Contact:** {contact}',
+        f'**Language:** {locale_label}',
+        f'**Track:** {track}',
+        f'**Confidence:** {confidence}',
+        f'',
+        f'## Project',
+        f'{project}',
+        f'',
+        f'## Timing',
+        f'{timing}',
+        f'',
+        f'## Scope',
+        f'{scope}',
+        f'',
+        f'## Recommended Next Step',
+        f'{next_step}',
+        f'',
+    ]
+
+    concerns = summary.get('concerns', [])
+    if concerns:
+        lines.append('## Open Concerns')
+        for c in concerns:
+            lines.append(f'- {c}')
+        lines.append('')
+
+    highlights = summary.get('chat_highlights', [])
+    if highlights:
+        lines.append('## Chat Highlights')
+        for h in highlights:
+            lines.append(f'- {h}')
+        lines.append('')
+
+    lines.append(f'—')
+    lines.append(f'View full conversation: {chat_url}')
+    lines.append(f'Cinder intake · ForgingApps · {utc_now_iso()}')
+
+    return '\n'.join(lines)
+
+
+def send_summary_email_with_attachment(
+    *,
+    api_key: str,
+    recipient: str,
+    subject: str,
+    html: str,
+    markdown_content: str,
+    attachment_filename: str,
+) -> dict[str, Any]:
+    import base64
+    encoded = base64.b64encode(markdown_content.encode('utf-8')).decode('ascii')
+    response = httpx.post(
+        RESEND_ENDPOINT,
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+        },
+        json={
+            'from': RESEND_SENDER,
+            'to': [recipient],
+            'subject': subject,
+            'html': html,
+            'attachments': [
+                {
+                    'content': encoded,
+                    'filename': attachment_filename,
+                    'type': 'text/markdown',
+                }
+            ],
+        },
+        timeout=20,
+    )
+    if response.is_success:
+        return {'emailed': True, 'error': None}
+    error = f'resend_{response.status_code}'
+    logger.error('Finalize email with attachment send failed: %s %s', error, response.text)
     return {'emailed': False, 'error': error}
 
 
@@ -875,7 +972,7 @@ TEST_PAGE = """<!doctype html>
         <input id=\"brief_id\" value=\"FA-2604-TEST\" />
         <input id=\"firstName\" value=\"Mara\" />
         <input id=\"topic\" value=\"AI chatbot for customer support\" />
-        <input id=\"model\" value=\"gpt-5.4\" />
+        <input id=\"model\" value=\"gpt-5.5\" />
         <select id=\"locale\"><option value=\"en\" selected>en</option><option value=\"bg\">bg</option></select>
         <input id=\"variant\" value=\"generic\" />
       </section>
@@ -1055,7 +1152,10 @@ def intake_message(request: MessageRequest) -> JSONResponse:
         result['reply'] = reply
         result['completion'] = completion
 
+        auto_finalized = False
+        summary_preview = None
         brief_id = str(session.get('brief_id') or '').strip()
+
         if brief_id and get_brief(brief_id) is not None:
             user_created_at, assistant_created_at = build_chat_turn_timestamps()
             insert_chat_messages(
@@ -1073,6 +1173,91 @@ def intake_message(request: MessageRequest) -> JSONResponse:
                     },
                 ],
             )
+
+            # Auto-finalize: fire the first time completion=ready and no enrichment exists,
+            # OR when a new user message arrives after a prior finalize and completion is ready again.
+            auto_finalize_enabled = os.environ.get('ENABLE_AUTO_FINALIZE', 'true').lower() != 'false'
+            if completion == 'ready' and auto_finalize_enabled:
+                existing = get_brief_enrichment(brief_id)
+                should_finalize = False
+                if existing is None:
+                    should_finalize = True
+                elif existing['finalized_at']:
+                    last_msg = get_latest_chat_message(brief_id)
+                    if last_msg and last_msg['created_at'] > existing['finalized_at']:
+                        should_finalize = True
+
+                if should_finalize:
+                    finalize_req = FinalizeRequest(
+                        session=request.session,
+                        history=request.history,
+                        brief_id=brief_id,
+                        locale=None,
+                    )
+                    locale = infer_finalize_locale(finalize_req)
+                    try:
+                        summary = call_finalize_model(request=finalize_req, locale=locale)
+                    except SummaryParseFailed:
+                        summary = {
+                            'brief_id': brief_id,
+                            'project': str(session.get('topic', '')),
+                            'contact_name': str(session.get('firstName', '')),
+                            'timing': 'N/A',
+                            'scope_summary': 'N/A',
+                            'next_step': 'N/A',
+                            'track': 'N/A',
+                            'confidence': 'low',
+                        }
+                    summary.setdefault('brief_id', brief_id)
+                    summary.setdefault('contact_name', request.session.firstName)
+                    summary.setdefault('project', session.get('topic', ''))
+
+
+                    subject, html = render_email_template(summary)
+                    revision = 1
+                    if existing and existing['enrichment_revision']:
+                        revision = existing['enrichment_revision'] + 1
+
+                    markdown_body = render_markdown_summary(summary, locale)
+                    attachment_filename = f'summary-{brief_id}.md'
+
+                    api_key = resolve_resend_api_key()
+                    if api_key:
+                        email_result = send_summary_email_with_attachment(
+                            api_key=api_key,
+                            recipient=EMAIL_RECIPIENT,
+                            subject=subject,
+                            html=html,
+                            markdown_content=markdown_body,
+                            attachment_filename=attachment_filename,
+                        )
+                    else:
+                        logger.error('EMAIL WOULD BE SENT TO %s', EMAIL_RECIPIENT)
+                        email_result = {'emailed': False, 'error': 'resend_api_key_missing'}
+
+                    now = utc_now_iso()
+                    upsert_brief_enrichment(
+                        brief_id=brief_id,
+                        summary=summary,
+                        locale=locale,
+                        created_at=now,
+                        finalized_at=now,
+                        email_sent_at=now if email_result['emailed'] else None,
+                        email_recipient=EMAIL_RECIPIENT,
+                        email_error=email_result['error'],
+                        enrichment_revision=revision,
+                    )
+
+                    auto_finalized = True
+                    summary_preview = {
+                        'project': str(summary.get('project', '') or summary.get('project_summary', '')),
+                        'timing': str(summary.get('timing', '')),
+                        'next_step': str(summary.get('next_step', '')),
+                    }
+                    logger.info('auto-finalized brief %s revision %d', brief_id, revision)
+
+        result['auto_finalized'] = auto_finalized
+        result['summary_preview'] = summary_preview
         return JSONResponse(result)
     except Exception:
         logger.exception('intake message failed')
@@ -1119,6 +1304,7 @@ def intake_finalize(request: FinalizeRequest) -> FinalizeResponse | JSONResponse
         email_sent_at=now if email_result['emailed'] else None,
         email_recipient=EMAIL_RECIPIENT,
         email_error=email_result['error'],
+        enrichment_revision=0,
     )
     if email_result['error']:
         logger.error('Finalize flow completed without email delivery for %s: %s', brief_id, email_result['error'])

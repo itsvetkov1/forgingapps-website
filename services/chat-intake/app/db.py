@@ -51,6 +51,8 @@ CREATE TABLE IF NOT EXISTS brief_enrichments (
     email_sent_at TEXT,
     email_recipient TEXT,
     email_error TEXT,
+    enrichment_revision INTEGER DEFAULT 0,
+    sweep_sent_at TEXT,
     FOREIGN KEY (brief_id) REFERENCES briefs(id)
 );
 """
@@ -107,6 +109,11 @@ def init_schema() -> Path:
         columns = {row[1] for row in connection.execute('PRAGMA table_info(briefs)').fetchall()}
         if 'status' not in columns:
             connection.execute('ALTER TABLE briefs ADD COLUMN status TEXT')
+        enrich_cols = {row[1] for row in connection.execute('PRAGMA table_info(brief_enrichments)').fetchall()}
+        if 'enrichment_revision' not in enrich_cols:
+            connection.execute('ALTER TABLE brief_enrichments ADD COLUMN enrichment_revision INTEGER DEFAULT 0')
+        if 'sweep_sent_at' not in enrich_cols:
+            connection.execute('ALTER TABLE brief_enrichments ADD COLUMN sweep_sent_at TEXT')
         connection.commit()
     return path
 
@@ -155,9 +162,24 @@ def get_brief_enrichment(brief_id: str):
     with connect() as connection:
         return connection.execute(
             '''
-            SELECT summary_json, finalized_at
+            SELECT summary_json, finalized_at, enrichment_revision
             FROM brief_enrichments
             WHERE brief_id = ?
+            LIMIT 1
+            ''',
+            (brief_id,),
+        ).fetchone()
+
+
+
+def get_latest_chat_message(brief_id: str):
+    with connect() as connection:
+        return connection.execute(
+            '''
+            SELECT role, content, created_at
+            FROM chat_messages
+            WHERE brief_id = ?
+            ORDER BY created_at DESC, id DESC
             LIMIT 1
             ''',
             (brief_id,),
@@ -197,6 +219,7 @@ def upsert_brief_enrichment(
     email_sent_at: str | None,
     email_recipient: str | None,
     email_error: str | None,
+    enrichment_revision: int = 0,
 ) -> None:
     with connect() as connection:
         connection.execute(
@@ -209,9 +232,10 @@ def upsert_brief_enrichment(
                 finalized_at,
                 email_sent_at,
                 email_recipient,
-                email_error
+                email_error,
+                enrichment_revision
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(brief_id) DO UPDATE SET
                 summary_json=excluded.summary_json,
                 locale=excluded.locale,
@@ -219,7 +243,8 @@ def upsert_brief_enrichment(
                 finalized_at=excluded.finalized_at,
                 email_sent_at=excluded.email_sent_at,
                 email_recipient=excluded.email_recipient,
-                email_error=excluded.email_error
+                email_error=excluded.email_error,
+                enrichment_revision=excluded.enrichment_revision
             ''',
             (
                 brief_id,
@@ -230,6 +255,29 @@ def upsert_brief_enrichment(
                 email_sent_at,
                 email_recipient,
                 email_error,
+                enrichment_revision,
             ),
         )
         connection.commit()
+
+
+def get_inactive_briefs(*, threshold_seconds: int):
+    """Return brief_ids whose latest message is older than threshold AND
+    no enrichment has been sent since (or sweep_sent_at is older than latest message)."""
+    with connect() as connection:
+        rows = connection.execute(
+            '''
+            SELECT DISTINCT cm.brief_id, MAX(cm.created_at) AS last_msg_at
+            FROM chat_messages cm
+            WHERE NOT EXISTS (
+                SELECT 1 FROM brief_enrichments be
+                WHERE be.brief_id = cm.brief_id
+                AND be.sweep_sent_at IS NOT NULL
+                AND be.sweep_sent_at >= cm.created_at
+            )
+            GROUP BY cm.brief_id
+            HAVING MAX(cm.created_at) < datetime('now', ?)
+            ''',
+            (f'-{threshold_seconds} seconds',),
+        ).fetchall()
+        return [(row['brief_id'], row['last_msg_at']) for row in rows]
