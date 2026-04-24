@@ -99,12 +99,15 @@ CLOSURE_PHRASES_RE = re.compile(
         | hand\s+this\s+off                                # "hand this off"
         | leave\s+(?:it|this|things)\s+(?:here|there)         # "leave it there"
         | pick\s+this\s+up\s+with\s+the\s+right\s+context
+        | move\s+to\s+(?:the\s+)?founders?                  # "move to the founders"
         # "Enough" families
         | enough\s+(?:context\s+)?to\s+hand
         | enough\s+(?:for|to)\s+(?:ivaylo|the\s+founders)
+        | enough\s+(?:context\s+)?for\s+(?:a\s+|an\s+)?(?:useful\s+)?(?:founder|ivaylo|team)\s+call
         | (?:i'?ve|i\s+have)\s+got\s+enough
         # "Ready" families
         | ready\s+(?:to\s+hand|for\s+(?:ivaylo|the\s+founders|them|him|review|the\s+team))
+        | ready\s+(?:for|to)\s+the\s+founders?                # "ready for the founders"
         | this\s+is\s+ready\s+(?:for|to)                     # "this is ready for..."
         | ready\s+(?:to|for)\s+review
         # Summary / send language
@@ -119,6 +122,7 @@ CLOSURE_PHRASES_RE = re.compile(
         | подготвен\s+за\s+разговора
         | предавам\s+(?:това|го)\s+нататък
         | готово\s+за\s+преглед\s+от\s+основателите
+        | (?:около|за)\s+(?:полезен\s+)?(?:първи\s+)?(?:разговор|среща)\s+(?:с\s+(?:основателите|ивайло))?
     )
     """
 )
