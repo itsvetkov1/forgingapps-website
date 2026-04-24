@@ -41,6 +41,12 @@ export interface BriefMessagesResult {
 export interface TurnResponse {
   reply: string
   completion: CompletionStatus
+  auto_finalized?: boolean
+  summary_preview?: {
+    project: string
+    timing: string
+    next_step: string
+  } | null
 }
 
 export interface FinalizeResult {
@@ -166,6 +172,12 @@ export async function sendTurn(params: {
   return {
     reply: String(data.reply ?? data.message ?? ''),
     completion: normalizeCompletion(data.completion),
+    auto_finalized: Boolean(data.auto_finalized ?? false),
+    summary_preview: data.summary_preview ? {
+      project: String(data.summary_preview.project ?? ''),
+      timing: String(data.summary_preview.timing ?? ''),
+      next_step: String(data.summary_preview.next_step ?? ''),
+    } : null,
   }
 }
 

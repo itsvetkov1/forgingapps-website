@@ -9,6 +9,7 @@ interface CinderChatProps {
   finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
+  finalizeButtonLabel: string
   messages: ChatMessageRecord[]
   onFinalize: () => void | Promise<void>
   onSelectStarterPrompt: (prompt: string) => void | Promise<void>

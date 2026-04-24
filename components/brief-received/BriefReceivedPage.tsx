@@ -10,6 +10,7 @@ interface BriefReceivedPageProps {
   finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
+  finalizeButtonLabel: string
   locale: 'en' | 'bg'
   messages: ChatMessageRecord[]
   onFinalize: () => void | Promise<void>
@@ -30,6 +31,7 @@ export default function BriefReceivedPage(props: BriefReceivedPageProps) {
     finalizedBanner,
     finalizePending,
     finalizeSent,
+    finalizeButtonLabel,
     locale,
     messages,
     onFinalize,
@@ -53,6 +55,7 @@ export default function BriefReceivedPage(props: BriefReceivedPageProps) {
           finalizedBanner={finalizedBanner}
           finalizePending={finalizePending}
           finalizeSent={finalizeSent}
+          finalizeButtonLabel={finalizeButtonLabel}
           messages={messages}
           onFinalize={onFinalize}
           onSelectStarterPrompt={onSelectStarterPrompt}

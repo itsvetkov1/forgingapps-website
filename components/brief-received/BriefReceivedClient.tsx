@@ -42,6 +42,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
   const [finalizedAt, setFinalizedAt] = useState<string | null>(null)
   const [summaryPreview, setSummaryPreview] = useState<SummaryPreview>(null)
   const [toast, setToast] = useState<{ tone: ToastTone; message: string } | null>(null)
+  const [hasAutoSentOnce, setHasAutoSentOnce] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -91,6 +92,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
         setFinalizeSent(hydrated.finalizeSent)
         setFinalizedAt(hydrated.finalizedAt)
         setSummaryPreview(hydrated.summaryPreview)
+        setHasAutoSentOnce(hydrated.finalizeSent)
         setPhase('ready')
       })
       .catch(() => {
@@ -104,7 +106,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
   }, [briefId, locale])
 
   const handleSend = async (value: string) => {
-    if (!brief || !value.trim() || typing || finalizePending || finalizeSent) return
+    if (!brief || !value.trim() || typing || finalizePending) return
 
     const userMessage: ChatMessageRecord = {
       id: `user-${Date.now()}`,
@@ -135,6 +137,13 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
         },
       ])
       setCompletion(response.completion)
+      if (response.auto_finalized) {
+        setHasAutoSentOnce(true)
+        setFinalizeSent(true)
+        setFinalizedAt(new Date().toISOString())
+        if (response.summary_preview) setSummaryPreview(response.summary_preview)
+        setToast({ tone: 'success', message: copy.chat.summary.autoSavedToast })
+      }
     } catch {
       setChatError(copy.chat.errors.turnFailed)
     } finally {
@@ -171,6 +180,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
         setFinalizedAt(hydrated.finalizedAt)
         setSummaryPreview(hydrated.summaryPreview)
         setToast({ tone: 'success', message: copy.chat.summary.successToast })
+        setHasAutoSentOnce(true)
         return
       }
 
@@ -192,6 +202,10 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
     } as any) as FinalizedBanner
   }, [copy.chat.finalizedBanner, finalizeSent, finalizedAt, locale, summaryPreview])
 
+  const finalizeButtonLabel = hasAutoSentOnce && completion === 'ready'
+    ? copy.chat.summary.sendUpdatedButtonLabel
+    : copy.chat.summary.sendFirstButtonLabel
+
   return (
     <BriefReceivedPage
       brief={brief}
@@ -201,6 +215,7 @@ export default function BriefReceivedClient({ locale }: BriefReceivedClientProps
       finalizedBanner={finalizedBanner}
       finalizePending={finalizePending}
       finalizeSent={finalizeSent}
+      finalizeButtonLabel={finalizeButtonLabel}
       locale={locale}
       messages={messages}
       onFinalize={handleFinalize}
