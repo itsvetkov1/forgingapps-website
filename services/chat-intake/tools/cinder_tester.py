@@ -40,7 +40,7 @@ Usage
 
 Variants
 --------
-Any file under prompts/system/ without `.md` — e.g. generic, spark, ember, anvil,
+Any file under prompts/system/ without `.md` — e.g. generic, spark, blaze, anvil,
 forge, oracle, ai-readiness, ai-chat-assistant, discovery-workshop, hearthstone.
 
 Exit codes

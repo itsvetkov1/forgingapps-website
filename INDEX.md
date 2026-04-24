@@ -47,7 +47,7 @@ All pages below live at \pp/[locale]/<path>/page.tsx\ (served as \/en/<path>\ a
 | Package | Price | Delivery | Notes |
 |---|---|---|---|
 | The Spark | Fixed price (per quote) | ~2 wks | Landing pages. 40/30/30 payment split. |
-| The Ember | From EUR 3,000 | 2-3 weeks | New. Simple web product: brochure sites with CMS, portals, directories, calculators, booking flows, lightweight internal tools. 100% upfront. |
+| The Blaze | From EUR 3,000 | 2-3 weeks | New. Simple web product: brochure sites with CMS, portals, directories, calculators, booking flows, lightweight internal tools. 100% upfront. |
 | The Anvil | From EUR 5,000 | 4-8 weeks | Custom app or mobile product. 50/50 split. |
 | The Forge | From EUR 10,000 | Variable | Complex platform or full MVP. 40/30/30 split. |
 | The Oracle | EUR 60/hr | Ongoing | AI consulting & integration. Billed weekly. |

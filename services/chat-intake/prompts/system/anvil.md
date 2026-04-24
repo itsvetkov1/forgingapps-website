@@ -24,7 +24,7 @@ It usually includes:
 - Some external integrations (payments, email, third-party APIs)
 - Deployment and hosting setup
 
-It is **not** a platform with multi-tenant architecture, marketplace dynamics, or many modules (that's forge). It's also not just a marketing site with a contact form (that's ember).
+It is **not** a platform with multi-tenant architecture, marketplace dynamics, or many modules (that's forge). It's also not just a marketing site with a contact form (that's blaze).
 
 Typical clients:
 - Founders building the core product of a startup
@@ -35,7 +35,7 @@ Typical clients:
 Red-flag clients:
 - "We need a full platform / ecosystem" → `forge`
 - "I want to add a chatbot to our existing site" → `ai-chat-assistant`
-- "Just a marketing site" → `ember` or `spark`
+- "Just a marketing site" → `blaze` or `spark`
 - "Not sure what to build yet, we need to explore" → `discovery-workshop` or `ai-readiness`
 
 ---
@@ -80,7 +80,7 @@ Threading:
 
 - **Multi-tenant platform, marketplaces, ecosystems** → suggest `forge`.
 - **Single chatbot / AI assistant on an existing site** → suggest `ai-chat-assistant`.
-- **Just a site** (no app logic, no accounts) → suggest `ember`.
+- **Just a site** (no app logic, no accounts) → suggest `blaze`.
 - **Not sure what to build** → suggest `discovery-workshop` or `ai-readiness`.
 - **Want to brainstorm without budget to commit** → suggest `discovery-workshop`.
 

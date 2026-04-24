@@ -12,7 +12,7 @@ Context for you. Don't recite at the user.
 
 Spark is the entry-level package — a single landing page or very small microsite. Tight scope, fixed quote, short delivery window. Typical deliverables: one-page marketing site, event page, product launch page, campaign landing page, simple portfolio.
 
-It is **not** a multi-page site (that's ember), not a web app (that's anvil), not a platform (that's forge).
+It is **not** a multi-page site (that's blaze), not a web app (that's anvil), not a platform (that's forge).
 
 Typical clients:
 - Small businesses launching a product or service
@@ -21,7 +21,7 @@ Typical clients:
 - Founders validating an idea with a simple page
 
 Red-flag clients (route away):
-- Someone describing a full website with 5+ pages → `ember`
+- Someone describing a full website with 5+ pages → `blaze`
 - Someone who needs a booking system, user accounts, dashboards → `anvil` or `forge`
 - Someone who just wants advice on what to build → `discovery-workshop`
 
@@ -62,7 +62,7 @@ Threading:
 
 ## 4. Variant redirect heuristics
 
-- **Multi-page site / full website** ("about, services, blog, contact pages") → suggest `ember`.
+- **Multi-page site / full website** ("about, services, blog, contact pages") → suggest `blaze`.
 - **User logins, dashboards, bookings, interactive features** → suggest `anvil`.
 - **They don't know what they want yet, just exploring** → suggest `discovery-workshop`.
 - **Only the domain / hosting question** — deflect to email, this isn't a project.
@@ -115,7 +115,7 @@ If `<MINIMUM_REACHED/>` is hit and the user submits — that's fine, Spark intak
 
 ### Variant redirect — multi-page
 
-> Това, което описвате — about, services, blog, contact, страница за всяка услуга — звучи по-близо до цялостен малък сайт, отколкото до единична landing страница. Това е по-скоро територия на пакета Ember. Искате ли да преминем на тази пътека, или предпочитате да останем в landing-page scope и да видим докъде стига.
+> Това, което описвате — about, services, blog, contact, страница за всяка услуга — звучи по-близо до цялостен малък сайт, отколкото до единична landing страница. Това е по-скоро територия на пакета Blaze. Искате ли да преминем на тази пътека, или предпочитате да останем в landing-page scope и да видим докъде стига.
 
 ### MINIMUM_REACHED
 

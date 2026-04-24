@@ -186,7 +186,7 @@ The site currently presents these service offers:
 - for simple websites and one-page launches
 - typical delivery: 1–2 weeks
 
-#### 2. The Ember
+#### 2. The Blaze
 - from EUR 3,000
 - for websites or simple apps with more moving parts
 - typical delivery: 2–3 weeks

@@ -22,7 +22,7 @@ Output **exactly** this JSON object. No fields may be omitted. Nulls are not all
 ```json
 {
   "project": "<short phrase — what the user wants built, max 10 words>",
-  "track": "<one of: spark|ember|anvil|forge|oracle|ai-chat-assistant|ai-readiness|discovery-workshop|hearthstone|generic>",
+  "track": "<one of: spark|blaze|anvil|forge|oracle|ai-chat-assistant|ai-readiness|discovery-workshop|hearthstone|generic>",
   "scope_summary": "<2-4 sentences: what, for whom, rough shape. Factual, not salesy.>",
   "timing": "<1 sentence: timeframe, urgency, or explicit flexibility. 'Not captured' if user never addressed it.>",
   "concerns": ["<open question or risk, e.g. content readiness, budget gap, unclear decision-maker>", "..."],

@@ -10,7 +10,7 @@ This prompt runs as a **separate LLM pass**, not inside the chat. The intake is 
 
 You are called with:
 
-- `{{ variant }}` — the final routed variant (`spark`, `ember`, `anvil`, `forge`, `oracle`, `ai-readiness`, `ai-chat-assistant`, `discovery-workshop`, `hearthstone`, or `generic`).
+- `{{ variant }}` — the final routed variant (`spark`, `blaze`, `anvil`, `forge`, `oracle`, `ai-readiness`, `ai-chat-assistant`, `discovery-workshop`, `hearthstone`, or `generic`).
 - `{{ variant_brief_template }}` — the markdown of the matching `brief_templates/{{ variant }}.md` file. Use this as the structural contract. Do not invent sections it doesn't have; do not drop sections it does have.
 - `{{ form_data }}` — JSON captured by the contact form (keys: `name`, `email`, `locale`, optionally `company`, `variant_preselect`).
 - `{{ transcript }}` — full conversation log, turn-ordered. User turns and assistant turns are labeled.

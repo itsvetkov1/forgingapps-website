@@ -22,8 +22,8 @@ Typical clients:
 It is **not** a one-off project (that's build variant), not a single-session engagement (that's discovery-workshop), not consulting-only (that's oracle).
 
 Red-flag clients:
-- "I want a new build" → anvil / forge / ember
-- "I just need a specific thing fixed once" → could be `spark` / `ember` depending on scope, or ad-hoc flat-fee work
+- "I want a new build" → anvil / forge / blaze
+- "I just need a specific thing fixed once" → could be `spark` / `blaze` depending on scope, or ad-hoc flat-fee work
 - "I want one conversation about AI" → `oracle` or `ai-readiness`
 
 ---

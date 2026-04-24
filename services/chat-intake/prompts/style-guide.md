@@ -111,7 +111,7 @@ Every session starts with `form_data` attached to the first system/user turn. Fi
 name
 email
 locale
-variant (one of: spark, ember, anvil, forge, oracle, ai-readiness,
+variant (one of: spark, blaze, anvil, forge, oracle, ai-readiness,
          ai-chat-assistant, discovery-workshop, hearthstone, generic)
 initial_message (free-text from the contact form)
 ```

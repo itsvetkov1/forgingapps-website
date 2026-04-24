@@ -11,15 +11,15 @@ export default function ServicesContent() {
 
   const projectPackages = [
     { id: 'spark', data: data.spark, href: contactWithProduct('spark') },
-    { id: 'ember', data: data.ember, href: contactWithProduct('ember') },
+    { id: 'blaze', data: data.blaze, href: contactWithProduct('blaze') },
     { id: 'anvil', data: data.anvil, href: contactWithProduct('anvil') },
     { id: 'forge', data: data.forge, href: contactWithProduct('forge') },
     { id: 'oracle', data: data.oracle, href: localePath('/ai-consulting') },
   ]
 
   const comparisonRows = [
-    ['priceRange', data.spark.launchPrice, data.ember.launchPrice, data.anvil.launchPrice, data.forge.launchPrice],
-    ['delivery', data.spark.delivery, data.ember.delivery, data.anvil.delivery, data.forge.delivery],
+    ['priceRange', data.spark.launchPrice, data.blaze.launchPrice, data.anvil.launchPrice, data.forge.launchPrice],
+    ['delivery', data.spark.delivery, data.blaze.delivery, data.anvil.delivery, data.forge.delivery],
     ['platform', data.comparison.webOnly, data.comparison.webOnly, data.comparison.mobileOrWeb, data.comparison.mobilePlusWeb],
     ['pagesScreens', data.comparison.oneToFive, data.comparison.upTo10, data.comparison.tenPlus, data.comparison.tenPlus],
     ['userAuth', '—', 'Optional', '✓', '✓'],
@@ -84,17 +84,17 @@ export default function ServicesContent() {
               <tr className="bg-forge-stone">
                 <th className="p-4 text-left text-forge-gold">{data.comparison.featureLabel}</th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.spark.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.spark.name}</div></th>
-                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.ember.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.ember.name}</div></th>
+                <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.blaze.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.blaze.name}</div></th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.anvil.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.anvil.name}</div></th>
                 <th className="p-4 text-left text-forge-gold"><div className="font-semibold text-white">{data.forge.subtitle}</div><div className="text-xs uppercase tracking-[0.18em] text-forge-ember mt-1">{data.forge.name}</div></th>
               </tr>
             </thead>
             <tbody>
-              {comparisonRows.map(([label, spark, ember, anvil, forge]) => (
+              {comparisonRows.map(([label, spark, blaze, anvil, forge]) => (
                 <tr key={String(label)} className="border-t border-forge-ember/10">
                   <td className="p-4 text-gray-300">{data.comparison[label as string]}</td>
                   <td className="p-4 text-gray-400">{spark}</td>
-                  <td className="p-4 text-gray-400">{ember}</td>
+                  <td className="p-4 text-gray-400">{blaze}</td>
                   <td className="p-4 text-gray-400">{anvil}</td>
                   <td className="p-4 text-gray-400">{forge}</td>
                 </tr>

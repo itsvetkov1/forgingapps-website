@@ -55,7 +55,7 @@ export default function HomeContent() {
           <h2 className="font-cinzel text-4xl font-bold text-center mb-10">{data.whatWeForge}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <ServiceCard icon={<Zap size={40} />} title={data.spark.title} tier={data.spark.tier} outcome={data.spark.outcome} description={data.spark.description} launchPrice={data.spark.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#spark')} />
-            <ServiceCard icon={<Globe size={40} />} title={data.ember.title} tier={data.ember.tier} outcome={data.ember.outcome} description={data.ember.description} launchPrice={data.ember.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#ember')} />
+            <ServiceCard icon={<Globe size={40} />} title={data.blaze.title} tier={data.blaze.tier} outcome={data.blaze.outcome} description={data.blaze.description} launchPrice={data.blaze.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#blaze')} />
             <ServiceCard icon={<Hammer size={40} />} title={data.anvil.title} tier={data.anvil.tier} outcome={data.anvil.outcome} description={data.anvil.description} launchPrice={data.anvil.launchPrice} badge={data.anvil.badge} ctaLabel={common.learnMore + ' →'} href={localePath('/services#anvil')} />
             <ServiceCard icon={<Flame size={40} />} title={data.forge.title} tier={data.forge.tier} outcome={data.forge.outcome} description={data.forge.description} launchPrice={data.forge.launchPrice} ctaLabel={common.learnMore + ' →'} href={localePath('/services#forge')} />
           </div>

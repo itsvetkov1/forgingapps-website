@@ -35,7 +35,7 @@ Typical clients:
 
 Red-flag clients:
 - Bootstrapped founder with no budget trying to size a forge → very likely `anvil` or `discovery-workshop` to start
-- "We just need a website" → `ember`
+- "We just need a website" → `blaze`
 - "We want to add AI" → `ai-readiness` or `ai-chat-assistant`
 - "We have a chain of clinics and need a booking app" → typically `anvil` unless multi-tenant / marketplace logic is central
 

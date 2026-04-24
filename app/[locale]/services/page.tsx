@@ -21,7 +21,7 @@ export default async function LocaleServicesPage({ params }: { params: Promise<{
   const data = translations[locale].services
   const servicesSchema = [
     { slug: 'spark', pkg: data.spark },
-    { slug: 'ember', pkg: data.ember },
+    { slug: 'blaze', pkg: data.blaze },
     { slug: 'anvil', pkg: data.anvil },
     { slug: 'forge', pkg: data.forge },
     { slug: 'oracle', pkg: data.oracle },

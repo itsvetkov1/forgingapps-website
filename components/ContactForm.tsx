@@ -609,7 +609,7 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
               <select id={createFieldId('packageInterest')} name="packageInterest" value={genericFormData.packageInterest} onChange={handleGenericChange} aria-invalid={fieldErrors.packageInterest ? 'true' : undefined} aria-describedby={joinDescriptorIds(fieldErrors.packageInterest ? createErrorId('packageInterest') : undefined)} className="w-full rounded-lg border border-forge-stone bg-forge-dark px-4 py-2 text-white transition focus:border-forge-gold focus:outline-none">
                 <option>{t('packageOptions.notSure')}</option>
                 <option>{t('packageOptions.spark')}</option>
-                <option>{t('packageOptions.ember')}</option>
+                <option>{t('packageOptions.blaze')}</option>
                 <option>{t('packageOptions.anvil')}</option>
                 <option>{t('packageOptions.forge')}</option>
                 <option>{t('packageOptions.oracle')}</option>

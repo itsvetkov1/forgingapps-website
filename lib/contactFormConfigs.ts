@@ -1,6 +1,6 @@
 export const contactFormVariants = [
   'spark',
-  'ember',
+  'blaze',
   'anvil',
   'forge',
   'ai-readiness',
@@ -57,10 +57,10 @@ export const contactFormConfigs: Record<ContactFormVariant, FormVariantConfig> =
       { name: 'notes', type: 'textarea', rows: 3 },
     ],
   },
-  ember: {
-    i18nKey: 'ember',
+  blaze: {
+    i18nKey: 'blaze',
     showPhoneField: true,
-    hiddenValues: { product_tag: 'ember' },
+    hiddenValues: { product_tag: 'blaze' },
     fields: [
       { name: 'name', type: 'text', required: true },
       { name: 'email', type: 'email', required: true },

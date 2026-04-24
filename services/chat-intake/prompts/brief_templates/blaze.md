@@ -1,4 +1,4 @@
-# Brief Template — Variant: `ember`
+# Brief Template — Variant: `blaze`
 
 Output artifact produced after `<READY_TO_SUBMIT/>`. Saved to `/opt/forgingapps/intakes/{sid}/brief.md`.
 
@@ -8,7 +8,7 @@ Output artifact produced after `<READY_TO_SUBMIT/>`. Saved to `/opt/forgingapps/
 
 ```yaml
 ---
-variant: ember
+variant: blaze
 session_id: "{sid}"
 locale: "{bg|en}"
 created_at: "{ISO-8601 UTC}"
@@ -130,7 +130,7 @@ Applied flags with one-line rationale each.
 ## Generator rules
 
 - English body. User quotes verbatim in original language.
-- Length: 500–900 words. Ember briefs are meatier than Spark because scope varies widely.
+- Length: 500–900 words. Blaze briefs are meatier than Spark because scope varies widely.
 - Be specific about what was captured versus what's still unclear. Section-by-section uncertainty is useful.
 - PII/credential redaction per style-guide §11.
 - Hard-close edge cases → minimal brief, see style-guide §16.

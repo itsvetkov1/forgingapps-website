@@ -61,9 +61,9 @@ export const en: Record<string, any> = {
       description: "Landing pages and simple sites for businesses that need to get online fast. Mobile-responsive, SEO-optimized, ready to ship.",
       launchPrice: "From \u20ac1,500",
     },
-    ember: {
+    blaze: {
       title: "Simple Web Products & CMS Sites",
-      tier: "The Ember",
+      tier: "The Blaze",
       outcome: "Ship in 2\u20133 weeks",
       description: "The step between a landing page and a full custom app. Great for multi-page websites with CMS, client portals, booking flows, directories, and calculators.",
       launchPrice: "From \u20ac3,000",
@@ -208,7 +208,7 @@ export const en: Record<string, any> = {
       bullet1: "Permission to publish the project as a public case study after launch",
       bullet2: "A short written testimonial when the product ships",
       bullet3: "Photos or screenshots of the delivered product we can feature",
-      note: "Retainers, Spark, and Ember packages are not eligible. First three clients to confirm by end of Q2 2026.",
+      note: "Retainers, Spark, and Blaze packages are not eligible. First three clients to confirm by end of Q2 2026.",
       cta: "Claim a founding slot",
     },
     agencyPositioning: {
@@ -260,8 +260,8 @@ export const en: Record<string, any> = {
       discoveryOption: "Not ready to commit? Start with a paid scoping workshop (€400) — we'll define the full scope, tech stack, and timeline. The fee is credited toward your project.",
       hearthstoneUpsell: "Every project we deliver transitions naturally into a Hearthstone retainer. Reserved capacity starts at €300/month.",
     },
-    ember: {
-      name: "The Ember",
+    blaze: {
+      name: "The Blaze",
       subtitle: "Web Application",
       regularPrice: "",
       launchPrice: "From €3,000",
@@ -273,7 +273,7 @@ export const en: Record<string, any> = {
       included3: "Booking, directory, calculator, or gated-content flows",
       included4: "Launch-ready deployment and handover",
       priceNote: "Best for projects that are too complex for Spark but do not need full custom platform scoping yet.",
-      cta: "Start with Ember",
+      cta: "Start with Blaze",
       paymentTerms: "100% upfront.",
       hearthstoneUpsell: "Every project we deliver transitions naturally into a Hearthstone retainer. Reserved capacity starts at €300/month.",
     },
@@ -376,7 +376,7 @@ export const en: Record<string, any> = {
     },
     payment: {
       heading: "Pricing Terms",
-      fixedPrice: { title: "Smaller builds", detail: "Spark and Ember are usually quoted as straightforward fixed-price projects." },
+      fixedPrice: { title: "Smaller builds", detail: "Spark and Blaze are usually quoted as straightforward fixed-price projects." },
       hourly: { title: "Larger custom work", detail: "Anvil and Forge are scoped individually and quoted after a free scoping call or Discovery Workshop." },
       retainers: { title: "Ongoing partnerships", detail: "Hearthstone retainers are billed monthly, with annual discount options for long-term work." },
       methods: { title: "Payment methods", detail: "Bank transfer preferred. Other methods by agreement." },
@@ -393,7 +393,7 @@ export const en: Record<string, any> = {
     },
     faq: {
       heading: "Frequently Asked Questions",
-      q1: { q: "How much will my project actually cost?", a: "Spark and Ember usually have straightforward fixed prices. Anvil and Forge start from clear baseline prices, but the final quote depends on scope, integrations, and complexity. We confirm that after a free scoping call or a paid Discovery Workshop." },
+      q1: { q: "How much will my project actually cost?", a: "Spark and Blaze usually have straightforward fixed prices. Anvil and Forge start from clear baseline prices, but the final quote depends on scope, integrations, and complexity. We confirm that after a free scoping call or a paid Discovery Workshop." },
       q2: { q: "What if I'm not sure which package fits?", a: "That is normal. We can usually tell quickly after a short conversation. If the project is still fuzzy, the Discovery Workshop is the best next step." },
       q3: { q: "Do you work only with clients in Bulgaria?", a: "No. We are based in Sofia, but we work with clients across Europe." },
       q4: { q: "Can you take over an existing project?", a: "Yes, depending on code quality and project state. We usually need a short audit first." },
@@ -674,7 +674,7 @@ export const en: Record<string, any> = {
     packageOptions: {
       notSure: "Not Sure Yet",
       spark: "The Spark (Landing Page)",
-      ember: "The Ember (Website / App)",
+      blaze: "The Blaze (Website / App)",
       anvil: "The Anvil (Standard App)",
       forge: "The Forge (Full MVP)",
       oracle: "The Oracle (AI Consulting)",
@@ -735,8 +735,8 @@ export const en: Record<string, any> = {
         ],
       },
     },
-    ember: {
-      heading: "The Ember, Website / Web App Intake",
+    blaze: {
+      heading: "The Blaze, Website / Web App Intake",
       description: "More than a page, a real web product. Tell us what you need and we'll scope it out.",
       fields: {
         name: { label: "Name", placeholder: "Your name" },
@@ -753,7 +753,7 @@ export const en: Record<string, any> = {
       },
       success: {
         title: "We'll review your needs and get back within 24 hours",
-        description: "We'll look at what you're building, what already exists, and what the right Ember scope looks like.",
+        description: "We'll look at what you're building, what already exists, and what the right Blaze scope looks like.",
         steps: [
           "We review your product type, features, and current web presence.",
           "We outline the likely scope, timeline, and next conversation.",
@@ -1101,9 +1101,9 @@ export const en: Record<string, any> = {
     intro: "These Terms of Service (\"Terms\") govern your use of the ForgingApps website (forgingapps.com) and our development and consulting services. By using our website or engaging our services, you agree to these Terms.",
     section1: { title: "Services", content: "ForgingApps provides custom software development, AI consulting, and ongoing support services as described on our website. All projects are governed by individual project agreements that specify scope, timeline, deliverables, and payment terms." },
     section2: { title: "Project Agreements", content: "Each project requires a separate written agreement. Project agreements take precedence over these general Terms where they conflict. Changes to project scope require written agreement from both parties and may affect pricing and timeline." },
-    section3: { title: "Payment Terms", content: "Spark & Ember: 100% upfront. Anvil: 50% upfront / 50% on delivery. Forge: 40% upfront / 30% at midpoint / 30% on delivery. Oracle (hourly): billed weekly. Hearthstone: monthly prepaid, auto-renew. Annual plan: pay 10 months, get 12. Late payments may incur interest at 1.5% per month." },
+    section3: { title: "Payment Terms", content: "Spark & Blaze: 100% upfront. Anvil: 50% upfront / 50% on delivery. Forge: 40% upfront / 30% at midpoint / 30% on delivery. Oracle (hourly): billed weekly. Hearthstone: monthly prepaid, auto-renew. Annual plan: pay 10 months, get 12. Late payments may incur interest at 1.5% per month." },
     section4: { title: "Intellectual Property", content: "Upon full payment, you own all custom code, designs, and assets created specifically for your project. We retain the right to use general techniques, tools, and frameworks developed during the project. We may reference the project in our portfolio unless you request otherwise in writing." },
-    section5: { title: "Post-Launch Support", content: "All projects include post-launch support (30 days for Spark, Ember & Anvil; 60 days for Forge). This covers defects in functionality as defined in the project agreement. It does not cover issues caused by third-party services, hosting environments, or modifications made by others." },
+    section5: { title: "Post-Launch Support", content: "All projects include post-launch support (30 days for Spark, Blaze & Anvil; 60 days for Forge). This covers defects in functionality as defined in the project agreement. It does not cover issues caused by third-party services, hosting environments, or modifications made by others." },
     section6: { title: "Limitation of Liability", content: "Our total liability is limited to the amount paid for the specific project or service in question. We are not liable for indirect, incidental, or consequential damages." },
     section7: { title: "Confidentiality", content: "Both parties agree to keep confidential any proprietary or sensitive information shared during the project. This obligation survives the termination of any agreement." },
     section8: { title: "Termination", content: "Either party may terminate a project agreement with 14 days written notice. Upon termination, you pay for all work completed to date. We deliver all work completed up to the termination date." },
