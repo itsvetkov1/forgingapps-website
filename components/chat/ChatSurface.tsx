@@ -16,6 +16,7 @@ interface ChatSurfaceProps {
   finalizedBanner: { dateLabel: string; bannerText: string; recapLine: string | null } | null
   finalizePending: boolean
   finalizeSent: boolean
+  finalizeButtonLabel: string
   messages: ChatMessageRecord[]
   onFinalize: () => void | Promise<void>
   onSelectStarterPrompt: (prompt: string) => void | Promise<void>
@@ -34,6 +35,7 @@ export default function ChatSurface({
   finalizedBanner,
   finalizePending,
   finalizeSent,
+  finalizeButtonLabel,
   messages,
   onFinalize,
   onSelectStarterPrompt,
@@ -79,6 +81,7 @@ export default function ChatSurface({
           disabled={disableComposer}
           finalizePending={finalizePending}
           finalizeSent={finalizeSent}
+          finalizeButtonLabel={finalizeButtonLabel}
           inConversation={inConversation}
           onFinalize={onFinalize}
           onSend={onSendMessage}

@@ -258,57 +258,46 @@ def send_transcript_email(*, api_key: str, brief_id: str, messages: list[dict], 
             }
         ],
     }
-    req = urllib.request.Request(
-        RESEND_ENDPOINT,
-        data=json.dumps(payload).encode(),
-        headers={
-            'Authorization': f'Bearer {api_key}',
-            'Content-Type': 'application/json',
-        },
-        method='POST',
-    )
+    import httpx
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            return {'emailed': True, 'error': None, 'status_code': resp.status}
+        resp = httpx.post(
+            RESEND_ENDPOINT,
+            headers={
+                'Authorization': f'Bearer {api_key}',
+                'Content-Type': 'application/json',
+            },
+            json=payload,
+            timeout=20,
+        )
+        if resp.is_success:
+            return {'emailed': True, 'error': None, 'status_code': resp.status_code}
+        return {'emailed': False, 'error': f'resend_{resp.status_code}: {resp.text[:200]}', 'status_code': resp.status_code}
     except Exception as exc:
         return {'emailed': False, 'error': str(exc), 'status_code': None}
 
 
 def call_finalize_model_for_brief(brief_id: str, session_data: dict, messages: list[dict], locale: str) -> dict:
-    """Build a FinalizeRequest and call the existing LLM finalize path."""
-    sys.path.insert(0, str(Path(__file__).parent.parent / 'app'))
-    from app.services import call_finalize_model
-    from app.routes.chat import FinalizeRequest, build_finalize_input
+    """Build a FinalizeRequest (Pydantic) and call the existing LLM finalize path."""
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from app.routes.chat import call_finalize_model, FinalizeRequest, SessionPayload, ChatTurn
 
-    # Reconstruct a minimal session object
-    class _Session:
-        firstName: str
-        locale: str
-        brief_id: str
-        def model_dump(self):
-            return {
-                'firstName': self.firstName,
-                'locale': self.locale,
-                'brief_id': self.brief_id,
-            }
-
-    sess = _Session()
-    sess.firstName = session_data.get('first_name', 'Unknown')
-    sess.locale = locale
-    sess.brief_id = brief_id
-
-    class _Turn:
-        role: str
-        content: str
-        def __init__(self, role, content):
-            self.role = role
-            self.content = content
-        def model_dump(self):
-            return {'role': self.role, 'content': self.content}
-
-    history = [_Turn(m['role'], m['content']) for m in messages]
-
-    req = FinalizeRequest(session=sess, history=history, brief_id=brief_id, locale=locale)
+    # Truncate any oversize message bodies to stay under ChatTurn validation cap (4000 chars)
+    history = [
+        ChatTurn(role=m['role'], content=str(m['content'] or '')[:4000])
+        for m in messages
+    ]
+    session = SessionPayload(
+        brief_id=brief_id,
+        firstName=session_data.get('first_name') or 'there',
+        topic=str(session_data.get('project') or 'project')[:280],
+        locale='bg' if locale == 'bg' else 'en',
+    )
+    req = FinalizeRequest(
+        session=session,
+        history=history,
+        brief_id=brief_id,
+        locale='bg' if locale == 'bg' else 'en',
+    )
     return call_finalize_model(request=req, locale=locale)
 
 
