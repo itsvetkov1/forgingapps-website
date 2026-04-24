@@ -60,7 +60,7 @@ export default function ChatSurface({
   }, [copy.chat.invalidBrief, copy.chat.loading, copy.chat.missingBrief, messages, phase])
 
   const showStarters = phase === 'ready' && messages.length <= 1 && !finalizeSent
-  const disableComposer = phase !== 'ready' || finalizePending || finalizeSent
+  const disableComposer = phase !== 'ready' || finalizePending
   const inConversation = messages.some((m) => m.role === 'user')
 
   return (

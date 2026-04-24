@@ -67,11 +67,9 @@ export default function Composer({
       : completion === 'ready'
         ? copy.summary.ready
         : copy.summary.idle
-  const placeholder = finalizeSent
-    ? copy.finalizedPlaceholder
-    : inConversation
-      ? copy.conversationPlaceholder
-      : copy.placeholder
+  const placeholder = inConversation
+    ? copy.conversationPlaceholder
+    : copy.placeholder
 
   return (
     <div className="border-t border-[#e8d7ba]/12 px-4 py-4 min-[840px]:px-6">
