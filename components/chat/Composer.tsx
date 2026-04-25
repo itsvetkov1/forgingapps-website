@@ -22,6 +22,7 @@ interface ComposerProps {
   disabled?: boolean
   finalizePending?: boolean
   finalizeSent?: boolean
+  finalizeButtonLabel?: string
   inConversation?: boolean
   onFinalize: () => void | Promise<void>
   onSend: (message: string) => void | Promise<void>
@@ -34,6 +35,7 @@ export default function Composer({
   disabled,
   finalizePending,
   finalizeSent,
+  finalizeButtonLabel,
   inConversation,
   onFinalize,
   onSend,
