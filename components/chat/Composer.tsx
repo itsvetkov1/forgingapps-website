@@ -65,7 +65,7 @@ export default function Composer({
     : finalizeSent
       ? copy.summary.sent
       : completion === 'ready'
-        ? copy.summary.ready
+        ? (finalizeButtonLabel ?? copy.summary.ready)
         : copy.summary.idle
   const placeholder = inConversation
     ? copy.conversationPlaceholder

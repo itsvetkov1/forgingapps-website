@@ -1,3 +1,18 @@
+> ## Deploy reminder (READ THIS FIRST)
+>
+> The chat-intake runtime lives at `/opt/forgingapps/chat-intake/`, which is a
+> SEPARATE copy of the repo (rsynced into place). After editing anything under
+> `services/chat-intake/`, always run:
+>
+> ```
+> ./scripts/deploy-chat-intake.sh
+> ```
+>
+> Do NOT `systemctl restart chat-intake.service` directly  the bare restart
+> will reload the same stale code. The deploy script rsyncs, restarts the
+> service, restarts the sweeper timer, and runs a drift check that fails
+> loudly if anything didn't sync.
+
 # Dev Handoff — Chat Intake Platform
 
 **Owner:** dev (code-truth tasks per CLAUDE.md delegation rules)

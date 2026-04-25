@@ -1,3 +1,8 @@
+# DO NOT `systemctl restart chat-intake.service` directly after editing code.
+# The runtime at /opt/forgingapps/chat-intake/ is a separate copy of the repo.
+# Always run `./scripts/deploy-chat-intake.sh` from the repo root, which rsyncs
+# the source, restarts both this service and the sweeper timer, and runs a
+# drift check.
 [Unit]
 Description=ForgingApps chat-intake FastAPI service
 After=network-online.target
