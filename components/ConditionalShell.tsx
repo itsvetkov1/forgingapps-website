@@ -58,7 +58,7 @@ export default function ConditionalShell({ children }: { children: React.ReactNo
   return (
     <>
       {isVelouraDemo && <VelouraDemoBanner />}
-      {!isVelouraShop && !hideSiteChrome && <Navbar />}
+      {!isVelouraShop && !hideSiteChrome && <Navbar pinned={!isVelouraDemo} />}
       <main>{children}</main>
       {!isVelouraShop && !hideSiteChrome && <Footer />}
     </>

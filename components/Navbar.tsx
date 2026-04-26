@@ -6,13 +6,19 @@ import LanguageToggle from '@/components/LanguageToggle'
 import { useTranslation } from '@/lib/i18n/useTranslation'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-export default function Navbar() {
+interface NavbarProps {
+  pinned?: boolean
+}
+
+export default function Navbar({ pinned = true }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { t } = useTranslation('common')
   const { localePath } = useLanguage()
 
+  const positionClasses = pinned ? 'sticky top-0 z-50' : 'relative'
+
   return (
-    <nav className="sticky top-0 z-50 bg-forge-dark/95 backdrop-blur-sm border-b border-forge-stone">
+    <nav className={`${positionClasses} bg-forge-dark/95 backdrop-blur-sm border-b border-forge-stone`}>
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           <Link href={localePath('/')} className="flex items-center gap-2 font-cinzel text-xl font-bold text-forge-gold hover:text-forge-ember transition">
