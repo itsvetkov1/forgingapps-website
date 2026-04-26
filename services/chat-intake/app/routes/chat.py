@@ -10,7 +10,7 @@ from string import Template
 from typing import Any, Literal
 
 import httpx
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Header
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
@@ -1128,8 +1128,12 @@ def intake_test() -> HTMLResponse:
 
 
 @router.post('/message')
-def intake_message(request: MessageRequest) -> JSONResponse:
+def intake_message(
+    request: MessageRequest,
+    x_synthetic_warmup: str | None = Header(default=None, alias='X-Synthetic-Warmup'),
+) -> JSONResponse:
     try:
+        synthetic_warmup = str(x_synthetic_warmup or '').strip().lower() in {'1', 'true', 'yes'}
         session = request.session.model_dump()
         session['variant'] = normalize_variant(session.get('variant'))
         session['locale'] = normalize_locale(session.get('locale'))
@@ -1156,7 +1160,7 @@ def intake_message(request: MessageRequest) -> JSONResponse:
         summary_preview = None
         brief_id = str(session.get('brief_id') or '').strip()
 
-        if brief_id and get_brief(brief_id) is not None:
+        if brief_id and not synthetic_warmup and get_brief(brief_id) is not None:
             user_created_at, assistant_created_at = build_chat_turn_timestamps()
             insert_chat_messages(
                 brief_id=brief_id,
@@ -1258,6 +1262,7 @@ def intake_message(request: MessageRequest) -> JSONResponse:
 
         result['auto_finalized'] = auto_finalized
         result['summary_preview'] = summary_preview
+        result['synthetic_warmup'] = synthetic_warmup
         return JSONResponse(result)
     except Exception:
         logger.exception('intake message failed')

@@ -19,7 +19,7 @@ app.add_middleware(
     allow_origin_regex=r'https://[A-Za-z0-9-]+\.forgingapps\.pages\.dev',
     allow_credentials=True,
     allow_methods=['GET', 'POST', 'OPTIONS'],
-    allow_headers=['Accept', 'Content-Type'],
+    allow_headers=['Accept', 'Content-Type', 'X-Synthetic-Warmup'],
 )
 app.include_router(health_router)
 app.include_router(briefs_router)

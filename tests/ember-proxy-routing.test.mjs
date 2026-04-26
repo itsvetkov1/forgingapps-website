@@ -63,3 +63,13 @@ test('buildProxyHeaders forwards shared-secret ingest headers to chat-intake', (
     'X-Intake-Secret': 'test-shared-secret',
   })
 })
+
+test('buildProxyHeaders forwards synthetic warmup marker to downstream bots', () => {
+  assert.deepEqual(buildProxyHeaders({
+    'content-type': 'application/json',
+    'x-synthetic-warmup': '1',
+  }), {
+    'Content-Type': 'application/json',
+    'X-Synthetic-Warmup': '1',
+  })
+})

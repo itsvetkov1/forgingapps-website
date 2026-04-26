@@ -191,7 +191,7 @@ function sendJson(res, statusCode, payload, origin = '*') {
   const headers = {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Synthetic-Warmup',
     'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
     'Cache-Control': 'no-store',
   }
@@ -485,7 +485,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') {
     const headers = {
       'Access-Control-Allow-Origin': allowedOrigin,
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type, X-Synthetic-Warmup',
       'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
       'Cache-Control': 'no-store',
     }
@@ -509,6 +509,7 @@ const server = http.createServer(async (req, res) => {
       const body = await parseBody(req)
       const message = String(body?.message || '').trim()
       const visitorId = sanitizeVisitorId(body?.visitorId)
+      const syntheticWarmup = String(req.headers['x-synthetic-warmup'] || '').trim().toLowerCase() === '1'
 
       if (!message || !visitorId) {
         sendJson(res, 400, { error: 'message and visitorId are required' }, allowedOrigin)
@@ -524,8 +525,9 @@ const server = http.createServer(async (req, res) => {
         return
       }
 
-      // [SECURITY] Check rate limit (messages per minute/hour)
-      const rateLimitCheck = checkRateLimit(visitorId)
+      // [SECURITY] Check rate limit (messages per minute/hour). Synthetic warmups are isolated
+      // and should keep the model path hot without consuming visitor-facing quota.
+      const rateLimitCheck = syntheticWarmup ? { exceeded: false } : checkRateLimit(visitorId)
       if (rateLimitCheck.exceeded) {
         console.log(`[ember-chat-proxy] [SECURITY] Rate limit exceeded for ${visitorId}: ${rateLimitCheck.window} limit (${rateLimitCheck.limit})`)
         sendJson(res, 429, {
@@ -539,17 +541,20 @@ const server = http.createServer(async (req, res) => {
       const injectionCheck = checkForInjectionPatterns(message)
       if (injectionCheck.blocked) {
         console.log(`[ember-chat-proxy] [SECURITY] Blocked injection attempt for ${visitorId}; matched pattern: ${injectionCheck.pattern}`)
-        addHistory(visitorId, 'user', message)
-        addHistory(visitorId, 'assistant', BLOCKED_INJECTION_RESPONSE)
+        if (!syntheticWarmup) {
+          addHistory(visitorId, 'user', message)
+          addHistory(visitorId, 'assistant', BLOCKED_INJECTION_RESPONSE)
+        }
         sendJson(res, 200, {
           reply: BLOCKED_INJECTION_RESPONSE,
           actions: [],
+          synthetic_warmup: syntheticWarmup,
           _securityNote: 'blocked_injection_attempt',
         }, allowedOrigin)
         return
       }
 
-      addHistory(visitorId, 'user', message)
+      if (!syntheticWarmup) addHistory(visitorId, 'user', message)
       const rawReply = await askBot(visitorId, message)
 
       // [SECURITY] Check for sensitive information leakage in bot reply
@@ -561,11 +566,11 @@ const server = http.createServer(async (req, res) => {
       }
 
       const { cleanReply, tags } = parseActionTags(finalReply)
-      const effectiveTags = inferFallbackTags(visitorId, cleanReply, tags)
-      const actions = await executeActionTags(visitorId, effectiveTags)
+      const effectiveTags = syntheticWarmup ? [] : inferFallbackTags(visitorId, cleanReply, tags)
+      const actions = syntheticWarmup ? [] : await executeActionTags(visitorId, effectiveTags)
       const reply = cleanReply || 'I can help with that. Tell me a bit more.'
-      addHistory(visitorId, 'assistant', reply)
-      sendJson(res, 200, { reply, actions }, allowedOrigin)
+      if (!syntheticWarmup) addHistory(visitorId, 'assistant', reply)
+      sendJson(res, 200, { reply, actions, synthetic_warmup: syntheticWarmup }, allowedOrigin)
       return
     }
 
@@ -594,7 +599,7 @@ const server = http.createServer(async (req, res) => {
             const headers = {
               'Content-Type': proxyRes.headers['content-type'] || proxyTarget.contentType,
               'Access-Control-Allow-Origin': allowedOrigin,
-              'Access-Control-Allow-Headers': 'Content-Type',
+              'Access-Control-Allow-Headers': 'Content-Type, X-Synthetic-Warmup',
               'Access-Control-Allow-Methods': 'POST,OPTIONS,GET',
               'Cache-Control': 'no-store',
             }

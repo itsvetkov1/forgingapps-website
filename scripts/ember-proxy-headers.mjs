@@ -11,5 +11,9 @@ export function buildProxyHeaders(requestHeaders = {}) {
     headers['X-Intake-Secret'] = requestHeaders['x-intake-secret']
   }
 
+  if (typeof requestHeaders['x-synthetic-warmup'] === 'string' && requestHeaders['x-synthetic-warmup'].trim()) {
+    headers['X-Synthetic-Warmup'] = requestHeaders['x-synthetic-warmup']
+  }
+
   return headers
 }

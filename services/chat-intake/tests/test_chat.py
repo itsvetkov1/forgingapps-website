@@ -196,6 +196,54 @@ def test_intake_message_persists_user_and_assistant_turns(client: TestClient, mo
     assert rows[-1]['created_at'].endswith('Z')
 
 
+def test_synthetic_warmup_triggers_model_but_skips_chat_persistence_and_finalize(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    seed_brief(brief_id='FA-2604-WARMUP')
+    captured = {}
+
+    def fake_call_codex_responses(*, model, instructions, input_items):
+        captured['called'] = True
+        return {
+            'reply': 'Ready to hand this off. [CINDER_READY]',
+            'usage': {'input_tokens': 3, 'output_tokens': 3, 'total_tokens': 6},
+        }
+
+    monkeypatch.setattr('app.services.call_codex_responses', fake_call_codex_responses)
+
+    response = client.post(
+        '/intake/message',
+        headers={'X-Synthetic-Warmup': '1'},
+        json={
+            'session': {
+                'brief_id': 'FA-2604-WARMUP',
+                'firstName': 'Warmup',
+                'topic': 'Synthetic warmup',
+                'locale': 'en',
+                'variant': 'generic',
+            },
+            'history': [],
+            'message': 'ping',
+        },
+    )
+
+    assert response.status_code == 200
+    assert captured['called'] is True
+    assert response.json()['synthetic_warmup'] is True
+    assert response.json()['auto_finalized'] is False
+
+    with connect() as connection:
+        chat_count = connection.execute(
+            'SELECT COUNT(*) AS count FROM chat_messages WHERE brief_id = ?',
+            ('FA-2604-WARMUP',),
+        ).fetchone()['count']
+        enrichment_count = connection.execute(
+            'SELECT COUNT(*) AS count FROM brief_enrichments WHERE brief_id = ?',
+            ('FA-2604-WARMUP',),
+        ).fetchone()['count']
+
+    assert chat_count == 0
+    assert enrichment_count == 0
+
+
 def test_intake_message_marks_ready_and_strips_marker(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
     seed_brief()
 
