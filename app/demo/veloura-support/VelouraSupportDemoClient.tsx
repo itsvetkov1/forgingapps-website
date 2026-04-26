@@ -83,7 +83,7 @@ export default function VelouraSupportDemoClient() {
             />
           </div>
 
-          <div className="mb-8 min-h-[60vh] flex flex-col">
+          <div className="mb-8 sm:min-h-[60vh] flex flex-col">
             <VelouraChatEmbed />
           </div>
 

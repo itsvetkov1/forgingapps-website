@@ -203,7 +203,7 @@ export default function VelouraChatEmbed() {
 
   return (
     <div className="bg-forge-stone border border-forge-ember/30 rounded-lg overflow-hidden">
-      <div className="border-b border-forge-ember/20 px-6 py-4 flex items-center justify-between gap-4">
+      <div className="border-b border-forge-ember/20 px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between gap-4">
         <div>
           <h2 className="font-cinzel text-2xl font-bold text-forge-gold">Live Veloura Support Demo</h2>
           <p className="text-sm text-gray-400">{CHAT_SUBTITLE}</p>
@@ -214,8 +214,8 @@ export default function VelouraChatEmbed() {
       </div>
 
       {!hasUserSentMessage && (
-        <div className="px-6 pt-4">
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div className="px-4 pt-3 sm:px-6 sm:pt-4">
+          <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
             {STARTER_PROMPTS.map((prompt) => (
               <button
                 key={prompt}
@@ -231,7 +231,7 @@ export default function VelouraChatEmbed() {
         </div>
       )}
 
-      <div ref={listRef} className="h-[480px] overflow-y-auto px-6 pb-4 space-y-4">
+      <div ref={listRef} className="h-[280px] sm:h-[400px] md:h-[480px] overflow-y-auto px-4 pb-3 sm:px-6 sm:pb-4 space-y-4">
         {messages.map((message) => {
           const blocks = splitChatBlocks(message.text)
 
@@ -341,8 +341,8 @@ export default function VelouraChatEmbed() {
         )}
       </div>
 
-      <div className="border-t border-forge-ember/20 p-6">
-        <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="border-t border-forge-ember/20 p-4 sm:p-6">
+        <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <p className="text-xs text-gray-500">Want a guided sample flow? Run the built-in support walkthrough.</p>
           <button
             type="button"
@@ -374,7 +374,7 @@ export default function VelouraChatEmbed() {
             disabled={loading}
             className="w-full bg-forge-dark border border-forge-stone rounded-lg px-4 py-3 text-white focus:outline-none focus:border-forge-gold transition resize-none"
           />
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
             <p className="text-xs text-gray-500">
               Product guidance and policy help are live here. Order status, refunds, and account actions stay outside the demo scope.
             </p>
