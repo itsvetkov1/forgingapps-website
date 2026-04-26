@@ -42,8 +42,8 @@ const demoCopy = {
         highlights: ['Policy-grounded responses', 'Context-aware conversation', 'Branded embedded widget', 'Instant deployment'],
         icon: MessageCircle,
         preview: 'support',
-        packageTitle: 'AI Chat Assistant — €2,500 flat',
-        packageRationale: 'A custom AI assistant trained on your content, embedded in your website. Fixed scope, fixed price, deployed in 2 weeks.',
+        packageTitle: 'AI Chat Assistant — from €1,500',
+        packageRationale: 'A managed AI assistant trained on your content, embedded in your website. Three tiers from €1,500 with the first 4 months of managed Care included.',
         packageHref: '/en/ai-consulting#ai-chat-assistant',
       },
       {
@@ -94,8 +94,8 @@ const demoCopy = {
         highlights: ['Отговори върху реални правила', 'Контекст в разговора', 'Брандиран embedded widget', 'Бърза интеграция'],
         icon: MessageCircle,
         preview: 'support',
-        packageTitle: 'AI Chat Assistant — €2,500 фиксирано',
-        packageRationale: 'Персонализиран AI асистент, обучен на вашата информация, вграден във вашия уебсайт. Фиксирана обхват, фиксирана цена, внедрен за 2 седмици.',
+        packageTitle: 'AI Chat Assistant — от €1,500',
+        packageRationale: 'Управляван AI асистент, обучен на вашата информация, вграден във вашия уебсайт. Три нива от €1,500, включващи първите 4 месеца управляван Care.',
         packageHref: '/bg/ai-consulting#ai-chat-assistant',
       },
       {

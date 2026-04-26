@@ -847,8 +847,8 @@ export const bg: Record<string, any> = {
     },
     [AI_CHAT_ASSISTANT_KEY]: {
       heading: "Форма за AI чат асистент",
-      description: "Персонализиран AI асистент, обучен върху Вашето съдържание. Фиксиран обхват, фиксирана цена, внедрен за 2 седмици. Кажете ни какво трябва да прави.",
-      priceNote: "AI Chat Assistant е с фиксирана цена €2,500.",
+      description: "Управляван AI чат асистент, обучен върху Вашето съдържание. Три нива (Starter / Complete / Advanced), включващи първите 4 месеца управляван Care. Кажете ни какво трябва да прави и кое ниво пасва.",
+      priceNote: "AI Chat Assistant има три нива: Starter €1,500, Complete €2,650, Advanced €3,750. Custom проектите се оферират на разговор.",
       fields: {
         name: { label: "Име", placeholder: "Вашето име" },
         email: { label: "Имейл", placeholder: "име@фирма.бг" },

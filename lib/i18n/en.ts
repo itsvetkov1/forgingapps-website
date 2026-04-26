@@ -845,8 +845,8 @@ export const en: Record<string, any> = {
     },
     "ai-chat-assistant": {
       heading: "AI Chat Assistant Intake",
-      description: "A custom AI assistant trained on your content. Fixed scope, fixed price, deployed in 2 weeks. Tell us what it should do.",
-      priceNote: "The AI Chat Assistant is fixed at €2,500.",
+      description: "A managed AI chat assistant trained on your content. Three tiers (Starter / Complete / Advanced), with the first 4 months of managed Care included. Tell us what it should do and which tier fits.",
+      priceNote: "The AI Chat Assistant has three tiers: Starter €1,500, Complete €2,650, Advanced €3,750. Custom builds are quoted on the call.",
       fields: {
         name: { label: "Name", placeholder: "Your name" },
         email: { label: "Email", placeholder: "your.name@company.com" },

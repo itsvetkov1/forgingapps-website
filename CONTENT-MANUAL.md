@@ -263,10 +263,10 @@ It is designed to convert visitors who are AI-curious but may not yet know wheth
 - positioned as the first recommended step for many AI buyers
 
 #### 2. AI Chat Assistant
-- EUR 2,500 flat
-- deployed in 2 weeks
-- custom AI assistant trained on client content
-- fixed-scope, simpler entry offer
+- EUR 1,500–3,750 across three tiers (Starter €1,500 / Complete €2,650 / Advanced €3,750), Custom on call
+- delivered in 1–3 weeks depending on tier
+- managed AI assistant trained on client content with the first 4 months of Care included
+- ten optional add-on modules (€300–€700 each) and mandatory monthly Care plan after the bundle (Essential €149 / Plus €299 / Pro €599)
 
 #### 3. The Oracle
 - EUR 100–150/hour
@@ -504,7 +504,7 @@ For this reason, pricing and positioning changes should always be checked in bot
 
 ### AI offers
 - AI Readiness Sprint — EUR 1,500–2,500 fixed
-- AI Chat Assistant — EUR 2,500 flat
+- AI Chat Assistant — EUR 1,500–3,750 (3-tier ladder, Custom on call)
 - Oracle hourly consulting — EUR 100–150/hour
 - AI feasibility assessment — from EUR 1,500
 - custom chatbot / assistant — from EUR 2,500

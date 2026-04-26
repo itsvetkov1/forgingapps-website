@@ -137,7 +137,7 @@ export const contactFormConfigs: Record<ContactFormVariant, FormVariantConfig> =
     i18nKey: 'ai-chat-assistant',
     showPriceNote: true,
     showPhoneField: false,
-    hiddenValues: { product_tag: 'ai-chat-assistant', budget_range: '2500-fixed' },
+    hiddenValues: { product_tag: 'ai-chat-assistant', budget_range: '1500-3750-tiered' },
     fields: [
       { name: 'name', type: 'text', required: true },
       { name: 'email', type: 'email', required: true },
