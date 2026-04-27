@@ -52,7 +52,7 @@ export const en: Record<string, any> = {
     subheadline: "Two senior builders in Sofia. Direct access, fixed-price scope, no agencies, no juniors on your project.",
     primaryCTA: "See live demos",
     secondaryCTA: "Book a consultation",
-    trustBadge: "umlaut Verified Partner - Certified by umlaut, a Deutsche Telekom company",
+    trustBadge: "Founder-built software with security and quality engineered in",
     whatWeForge: "What We Forge",
     spark: {
       title: "Landing Pages & Simple Sites",
@@ -111,8 +111,8 @@ export const en: Record<string, any> = {
         description: "Senior builders, direct communication, and lower overhead than a traditional agency.",
       },
       secure: {
-        title: "umlaut Secure App Award",
-        description: "Two years running. Your data and your users' data are safe \u2014 privacy and security built in by design.",
+        title: "Security-First Delivery",
+        description: "Your data and your users' data are protected \u2014 privacy and security built in by design.",
       },
     },
     process: {
@@ -125,7 +125,7 @@ export const en: Record<string, any> = {
     credentials: {
       heading: "Proven & Verified",
       credentialsTitle: "Credentials",
-      cred1: "umlaut Secure App Award (2024, 2025)",
+      cred1: "Security-reviewed app delivery",
       cred2: "10+ years combined development experience",
       cred3: "Cross-platform expertise: Flutter, Kotlin, React, Node.js",
       cred4: "AI integration specialists: LLMs, automation, chatbots, agents",

@@ -7,12 +7,9 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 import { Zap, Hammer, Flame, Globe, Brain, Users, Bot, Shield, DollarSign } from 'lucide-react'
 
-const UMLAUT_AWARD_PHRASE = 'umlaut Secure App Award'
-
 export default function HomeContent() {
   const { language, localePath } = useLanguage()
   const data = translations[language].home
-  const umlautAwardHref = localePath('/blog/umlaut-secure-app-award')
   const common = translations[language].common
   const blog = translations[language].blog
 
@@ -25,20 +22,6 @@ export default function HomeContent() {
   const steps = [data.process.step1, data.process.step2, data.process.step3, data.process.step4]
   const credentials = [data.credentials.cred1, data.credentials.cred2, data.credentials.cred3, data.credentials.cred4]
   const techStack = ['Flutter', 'Kotlin', 'React', 'Node.js', 'Python', 'Firebase', 'AWS', 'OpenAI', 'Anthropic', 'Stripe']
-
-  const renderAwardText = (text: string) => {
-    if (!text.includes(UMLAUT_AWARD_PHRASE)) return text
-    const parts = text.split(UMLAUT_AWARD_PHRASE)
-    return parts.flatMap((part, index) => {
-      if (index === parts.length - 1) return [part]
-      return [
-        part,
-        <Link key={`award-${index}`} href={umlautAwardHref} className="text-forge-gold hover:text-forge-ember transition underline underline-offset-4">
-          {UMLAUT_AWARD_PHRASE}
-        </Link>,
-      ]
-    })
-  }
 
   return (
     <>
@@ -133,7 +116,7 @@ export default function HomeContent() {
               <h3 className="font-cinzel text-2xl font-bold text-forge-gold mb-4">{data.credentials.credentialsTitle}</h3>
               <ul className="space-y-3 text-gray-400">
                 {credentials.map((item: string) => (
-                  <li key={item} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{renderAwardText(item)}</span></li>
+                  <li key={item} className="flex items-start gap-3"><span className="text-forge-gold mt-1">✓</span><span>{item}</span></li>
                 ))}
               </ul>
             </div>
