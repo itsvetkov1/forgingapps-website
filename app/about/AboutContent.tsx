@@ -104,14 +104,6 @@ export default function AboutContent() {
                         <Linkedin size={16} />
                         <span>{person.linkedin}</span>
                       </a>
-                      {person.bookCallCta && (
-                        <Link
-                          href={`${localePath('/contact')}?product=oracle`}
-                          className="inline-flex items-center gap-2 text-forge-gold hover:text-forge-ember transition-colors text-sm font-semibold"
-                        >
-                          → {person.bookCallCta}
-                        </Link>
-                      )}
                     </div>
                   )}
                 </div>
