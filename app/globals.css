@@ -70,6 +70,60 @@ h1, h2, h3, h4, h5, h6 {
   @apply transition-all duration-300 hover:shadow-2xl hover:shadow-forge-ember/30 hover:-translate-y-1;
 }
 
+/* Blog cards: subtle forge/rainbow honeycomb edge overlay for less generic cards. */
+.blog-card-ambient {
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgba(196, 160, 98, 0.04),
+    0 18px 48px rgba(0, 0, 0, 0.24),
+    18px -18px 46px rgba(216, 102, 11, 0.08),
+    -18px 18px 44px rgba(72, 211, 255, 0.04);
+}
+
+.blog-card-ambient::before,
+.blog-card-ambient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blog-card-ambient::before {
+  z-index: 20;
+  opacity: 0.72;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 102, 0, 0.36), transparent 28%),
+    radial-gradient(circle at 92% 4%, rgba(196, 160, 98, 0.24), transparent 24%),
+    radial-gradient(circle at 101% 82%, rgba(120, 54, 255, 0.18), transparent 26%),
+    radial-gradient(circle at -6% 78%, rgba(62, 210, 255, 0.13), transparent 24%);
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 0%, transparent 48%, black 73%, black 100%);
+  mask-image: radial-gradient(ellipse at center, transparent 0%, transparent 48%, black 73%, black 100%);
+  mix-blend-mode: screen;
+}
+
+.blog-card-ambient::after {
+  z-index: 19;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(30deg, rgba(196, 160, 98, 0.36) 12%, transparent 12.5%, transparent 87%, rgba(196, 160, 98, 0.36) 87.5%, rgba(196, 160, 98, 0.36)),
+    linear-gradient(150deg, rgba(196, 160, 98, 0.32) 12%, transparent 12.5%, transparent 87%, rgba(196, 160, 98, 0.32) 87.5%, rgba(196, 160, 98, 0.32)),
+    linear-gradient(30deg, rgba(216, 102, 11, 0.24) 12%, transparent 12.5%, transparent 87%, rgba(216, 102, 11, 0.24) 87.5%, rgba(216, 102, 11, 0.24)),
+    linear-gradient(150deg, rgba(62, 210, 255, 0.18) 12%, transparent 12.5%, transparent 87%, rgba(62, 210, 255, 0.18) 87.5%, rgba(62, 210, 255, 0.18));
+  background-position: 0 0, 0 0, 16px 28px, 16px 28px;
+  background-size: 32px 56px;
+  -webkit-mask-image: linear-gradient(120deg, black 0%, rgba(0, 0, 0, 0.55) 18%, transparent 42%, transparent 62%, rgba(0, 0, 0, 0.52) 84%, black 100%);
+  mask-image: linear-gradient(120deg, black 0%, rgba(0, 0, 0, 0.55) 18%, transparent 42%, transparent 62%, rgba(0, 0, 0, 0.52) 84%, black 100%);
+}
+
+.blog-card-ambient:hover {
+  box-shadow:
+    0 0 0 1px rgba(196, 160, 98, 0.08),
+    0 22px 58px rgba(0, 0, 0, 0.3),
+    24px -22px 58px rgba(216, 102, 11, 0.14),
+    -22px 20px 52px rgba(72, 211, 255, 0.06);
+}
+
 /* Section spacing */
 .section-py {
   @apply py-16 md:py-24;

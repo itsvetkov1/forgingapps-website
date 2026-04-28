@@ -70,9 +70,9 @@ export default function BlogContent() {
               const postData = blogPosts[post.slug]
               const postMeta = blogPostMeta[(postKeyMap as Record<string,string>)[post.slug] ?? '']
               return (
-                <Link key={post.slug} href={localePath(`/blog/${post.slug}`)} className="group bg-forge-stone border border-forge-ember/20 rounded-xl overflow-hidden hover:border-forge-gold/40 transition block">
-                  <div className="h-40 bg-forge-dark text-forge-gold flex items-center justify-center">{renderIcon(post.image)}</div>
-                  <div className="p-6">
+                <Link key={post.slug} href={localePath(`/blog/${post.slug}`)} className="group blog-card-ambient bg-forge-stone border border-forge-ember/20 rounded-xl overflow-hidden hover:border-forge-gold/40 transition block">
+                  <div className="relative z-10 h-40 bg-forge-dark text-forge-gold flex items-center justify-center">{renderIcon(post.image)}</div>
+                  <div className="relative z-10 p-6">
                     <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
                       <span className="px-2 py-1 rounded bg-forge-ember/10 text-forge-ember">{blog.categories[post.category]}</span>
                       <span>{postData.date}</span>
