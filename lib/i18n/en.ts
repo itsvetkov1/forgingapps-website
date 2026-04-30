@@ -578,7 +578,7 @@ export const en: Record<string, any> = {
         { name: "Extra language pair", price: "+€400", description: "One more language beyond the base (German, Spanish, Greek, etc.)" },
         { name: "Human handoff (live chat)", price: "+€500", description: "Escalate to a real teammate when the bot reaches its limits" },
         { name: "E-commerce lookup", price: "+€700", description: "Shopify / WooCommerce product info + order-status lookup" },
-        { name: "WhatsApp or Messenger channel", price: "+€500", description: "Deploy the same assistant on WhatsApp Business or Meta Messenger" },
+        { name: "Telegram or Discord channel", price: "+€500", description: "Deploy the same OpenClaw assistant on Telegram or Discord" },
         { name: "Voice mode", price: "+€600", description: "Customers speak instead of type" },
         { name: "Custom analytics dashboard", price: "+€400", description: "Beyond the standard metrics - custom events, funnel tracking" },
         { name: "Knowledge base expansion", price: "+€300", description: "Each additional 100 pages or documents" },

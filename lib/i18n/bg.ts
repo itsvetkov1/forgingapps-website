@@ -580,7 +580,7 @@ export const bg: Record<string, any> = {
         { name: "Допълнителен езиков чифт", price: "+€400", description: "Още един език отвъд основните (немски, испански, гръцки и др.)" },
         { name: "Прехвърляне към човек (live chat)", price: "+€500", description: "Ескалация към реален колега когато ботът достигне границите си" },
         { name: "E-commerce справки", price: "+€700", description: "Shopify / WooCommerce продуктова информация + справка за поръчки" },
-        { name: "WhatsApp или Messenger канал", price: "+€500", description: "Разгърнете същия асистент в WhatsApp Business или Meta Messenger" },
+        { name: "Telegram или Discord канал", price: "+€500", description: "Разгърнете същия OpenClaw асистент в Telegram или Discord" },
         { name: "Гласов режим", price: "+€600", description: "Клиентите говорят вместо да пишат" },
         { name: "Персонализирано аналитично табло", price: "+€400", description: "Отвъд стандартните метрики — персонализирани събития, проследяване на фунии" },
         { name: "Разширяване на базата от знания", price: "+€300", description: "За всяка допълнителни 100 страници или документа" },
