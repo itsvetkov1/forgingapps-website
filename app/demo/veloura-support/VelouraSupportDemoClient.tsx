@@ -108,14 +108,14 @@ export default function VelouraSupportDemoClient() {
                 <div key={exchange.label} className="rounded-lg border border-forge-ember/20 bg-forge-dark/60 p-5">
                   <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-gray-500">{exchange.label}</p>
                   <div className="space-y-3">
-                    <div className="flex justify-start">
-                      <div className="max-w-[92%] rounded-2xl border border-forge-ember/20 bg-forge-dark px-4 py-3 text-sm leading-6 text-gray-200">
-                        {exchange.assistant}
-                      </div>
-                    </div>
                     <div className="flex justify-end">
                       <div className="max-w-[88%] rounded-2xl bg-forge-ember px-4 py-3 text-sm leading-6 text-white">
                         {exchange.user}
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="max-w-[92%] rounded-2xl border border-forge-ember/20 bg-forge-dark px-4 py-3 text-sm leading-6 text-gray-200">
+                        {exchange.assistant}
                       </div>
                     </div>
                   </div>
