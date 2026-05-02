@@ -187,7 +187,15 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
   const router = useRouter()
   const copy = genericCopy[language]
   const contactForms = translations[language].contactForms ?? {}
-  const defaultPackage = packagePreselect || t('packageOptions.notSure')
+  const productParamPackageMap: Record<string, string> = {
+    spark: t('packageOptions.spark'),
+    blaze: t('packageOptions.blaze'),
+    anvil: t('packageOptions.anvil'),
+    forge: t('packageOptions.forge'),
+    oracle: t('packageOptions.oracle'),
+    hearthstone: t('packageOptions.hearthstone'),
+  }
+  const defaultPackage = packagePreselect || (productParam ? productParamPackageMap[productParam] : undefined) || t('packageOptions.notSure')
 
   const resolvedVariant = useMemo(
     () => resolveContactFormVariant(variant ?? productParam, subjectParam),
@@ -209,6 +217,30 @@ function ContactFormRenderer({ packagePreselect, variant, productParam, subjectP
   useEffect(() => {
     setSourcePage(document.referrer || window.location.href)
   }, [])
+
+  // M-2: Auto-populate "How Did You Find Us?" from referrer / UTM params on mount
+  useEffect(() => {
+    if (variantConfig) return
+    const referrer = document.referrer.toLowerCase()
+    const urlParams = new URLSearchParams(window.location.search)
+    const utmSource = (urlParams.get('utm_source') ?? urlParams.get('source') ?? '').toLowerCase()
+    const googleOption = copy.sourceOptions[0] ?? ''
+    const socialOption = copy.sourceOptions[1] ?? ''
+    let detected = ''
+    if (utmSource === 'google' || referrer.includes('google.')) {
+      detected = googleOption
+    } else if (
+      utmSource === 'linkedin' || referrer.includes('linkedin.com') ||
+      utmSource === 'twitter' || utmSource === 'x' ||
+      referrer.includes('twitter.com') || referrer.includes('x.com') ||
+      referrer.includes('facebook.com') || utmSource === 'facebook'
+    ) {
+      detected = socialOption
+    }
+    if (detected) {
+      setGenericFormData((prev) => (prev.source === '' ? { ...prev, source: detected } : prev))
+    }
+  }, []) // intentionally runs once on mount
 
   useEffect(() => {
     setFieldErrors({})

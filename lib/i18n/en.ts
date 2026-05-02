@@ -49,7 +49,7 @@ export const en: Record<string, any> = {
   },
   home: {
     headline: "Custom software and AI systems, built by the founders.",
-    subheadline: "Two senior builders in Sofia. Direct access, fixed-price scope, no agencies, no juniors on your project.",
+    subheadline: "Two senior builders in Sofia. Custom web apps, mobile MVPs and AI consulting. Direct access, fixed-price scope, no agencies, no juniors on your project.",
     primaryCTA: "See live demos",
     secondaryCTA: "Book a consultation",
     trustBadge: "Founder-built software with security and quality engineered in",
@@ -57,7 +57,7 @@ export const en: Record<string, any> = {
     spark: {
       title: "Landing Pages & Simple Sites",
       tier: "The Spark",
-      outcome: "Launch in 2 weeks",
+      outcome: "Ship in 2 weeks",
       description: "Landing pages and simple sites for businesses that need to get online fast. Mobile-responsive, SEO-optimized, ready to ship.",
       launchPrice: "From \u20ac1,500",
     },
@@ -79,7 +79,7 @@ export const en: Record<string, any> = {
     forge: {
       title: "Complex Apps & Full MVPs",
       tier: "The Forge",
-      outcome: "Production-ready in 8-16 weeks",
+      outcome: "Ship in 8-16 weeks",
       description: "Full MVPs, complex web platforms, and multi-service systems. The same architecture patterns a VC-funded startup would get from a €50K build - delivered at a fraction of the cost because two people are doing the work of eight.",
       launchPrice: "From \u20ac10,000",
     },
@@ -415,7 +415,7 @@ export const en: Record<string, any> = {
       sectionHeading: "AI Consulting That Starts With Your Business, Not the Technology",
       p1: "Most businesses know that AI is relevant right now. The harder part is knowing what to actually do with it. Vendor pitches are everywhere, model announcements come weekly, and the gap between a compelling demo and something that actually helps your business is real. Most companies end up either paralyzed by too many options or burned by tools that created more work instead of removing it. If that sounds familiar, you\'re not behind \u2014 you\'ve just been unlucky with where to start.",
       approachHeading: "How We Work",
-      p2: "ForgingApps approaches AI integration the same way we approach software: start with the problem, not the technology. Before recommending any tool or model, we assess what your business actually does, where time or quality gets lost, and whether AI creates real leverage \u2014 or just complexity. We run a private AI agent fleet daily - not demo-only systems - and we bring that experience into every engagement. Production-ready AI looks different from demo-ready AI, and understanding the difference is most of the value a serious business AI consultant provides. We won\'t recommend something because it\'s trending. We\'ll recommend it if it makes your business work better.",
+      p2: "ForgingApps approaches AI integration the same way we approach software: start with the problem, not the technology. Before recommending any tool or model, we assess what your business actually does, where time or quality gets lost, and whether AI creates real leverage \u2014 or just complexity. We run a private AI agent fleet daily — not demo-only systems - and we bring that experience into every engagement. Production-ready AI looks different from demo-ready AI, and understanding the difference is most of the value a serious business AI consultant provides. We won\'t recommend something because it\'s trending. We\'ll recommend it if it makes your business work better.",
       outcomesHeading: "What You Can Expect",
       p3: "Businesses that work with us on AI automation typically come away with: repetitive manual processes replaced by automated workflows, customer interactions that run faster and more consistently, hours per week returned to team members who were stuck doing triage or data work by hand, and a clear picture of what\'s worth automating next \u2014 and what isn\'t. The outcome is rarely one big transformation. It\'s usually a series of targeted improvements that compound. Clients also come away knowing how to use AI in their business on an ongoing basis, not just for a one-time project.",
       whyUsHeading: "Why ForgingApps",
