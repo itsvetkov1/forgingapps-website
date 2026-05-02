@@ -57,10 +57,10 @@ export default function Navbar({ pinned = true }: NavbarProps) {
                   href={localePath(item.href)}
                   aria-current={active ? 'page' : undefined}
                   className={joinClasses(
-                    'transition border-b-2 pb-1',
+                    'rounded-md px-3 py-2 transition border border-transparent',
                     active
-                      ? 'text-forge-gold border-forge-ember'
-                      : 'border-transparent hover:text-forge-gold hover:border-forge-gold/60'
+                      ? 'bg-forge-ember/35 text-white border-forge-ember/70 shadow-sm shadow-forge-ember/20'
+                      : 'hover:text-forge-gold hover:border-forge-gold/40 hover:bg-forge-gold/5'
                   )}
                 >
                   {t(item.labelKey)}
@@ -100,10 +100,10 @@ export default function Navbar({ pinned = true }: NavbarProps) {
                     href={localePath(item.href)}
                     aria-current={active ? 'page' : undefined}
                     className={joinClasses(
-                      'hover:text-forge-gold transition py-2 border-l-2',
+                      'rounded-md px-3 py-2 transition border border-transparent',
                       active
-                        ? 'text-forge-gold border-forge-ember pl-3'
-                        : 'border-transparent'
+                        ? 'bg-forge-ember/35 text-white border-forge-ember/70 shadow-sm shadow-forge-ember/20'
+                        : 'hover:text-forge-gold hover:border-forge-gold/40 hover:bg-forge-gold/5'
                     )}
                     onClick={() => setMobileMenuOpen(false)}
                   >

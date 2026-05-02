@@ -13,9 +13,9 @@ test('navbar derives active links from the localized current pathname', () => {
 
 test('navbar marks the active desktop and mobile item accessibly and visibly', () => {
   assert.match(source, /aria-current=\{active \? 'page' : undefined\}/)
-  assert.match(source, /text-forge-gold border-forge-ember/)
-  assert.match(source, /border-transparent hover:text-forge-gold/)
-  assert.match(source, /text-forge-gold border-forge-ember pl-3/)
+  assert.match(source, /rounded-md px-3 py-2 transition border border-transparent/)
+  assert.match(source, /bg-forge-ember\/35 text-white border-forge-ember\/70 shadow-sm shadow-forge-ember\/20/)
+  assert.match(source, /hover:text-forge-gold hover:border-forge-gold\/40 hover:bg-forge-gold\/5/)
 })
 
 test('navbar active matching covers all top-level navigation destinations', () => {
