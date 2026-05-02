@@ -1,21 +1,42 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import LanguageToggle from '@/components/LanguageToggle'
 import { useTranslation } from '@/lib/i18n/useTranslation'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { stripLocaleFromPath } from '@/lib/i18n/routing'
 
 interface NavbarProps {
   pinned?: boolean
 }
 
+const navItems = [
+  { href: '/services', labelKey: 'nav.services' },
+  { href: '/ai-consulting', labelKey: 'nav.aiConsulting' },
+  { href: '/demo', labelKey: 'nav.demo' },
+  { href: '/about', labelKey: 'nav.about' },
+  { href: '/blog', labelKey: 'nav.blog' },
+] as const
+
+function isActivePath(currentPath: string, itemPath: string) {
+  if (itemPath === '/') return currentPath === '/'
+  return currentPath === itemPath || currentPath.startsWith(`${itemPath}/`)
+}
+
+function joinClasses(...classes: Array<string | false | undefined>) {
+  return classes.filter(Boolean).join(' ')
+}
+
 export default function Navbar({ pinned = true }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
   const { t } = useTranslation('common')
   const { localePath } = useLanguage()
 
   const positionClasses = pinned ? 'sticky top-0 z-50' : 'relative'
+  const currentPath = stripLocaleFromPath(pathname || '/')
 
   return (
     <nav className={`${positionClasses} bg-forge-dark/95 backdrop-blur-sm border-b border-forge-stone`}>
@@ -27,13 +48,38 @@ export default function Navbar({ pinned = true }: NavbarProps) {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href={localePath('/services')} className="hover:text-forge-gold transition">{t('nav.services')}</Link>
-            <Link href={localePath('/ai-consulting')} className="hover:text-forge-gold transition">{t('nav.aiConsulting')}</Link>
-            <Link href={localePath('/demo')} className="hover:text-forge-gold transition">{t('nav.demo')}</Link>
-            <Link href={localePath('/about')} className="hover:text-forge-gold transition">{t('nav.about')}</Link>
-            <Link href={localePath('/blog')} className="hover:text-forge-gold transition">{t('nav.blog')}</Link>
+            {navItems.map((item) => {
+              const active = isActivePath(currentPath, item.href)
+
+              return (
+                <Link
+                  key={item.href}
+                  href={localePath(item.href)}
+                  aria-current={active ? 'page' : undefined}
+                  className={joinClasses(
+                    'transition border-b-2 pb-1',
+                    active
+                      ? 'text-forge-gold border-forge-ember'
+                      : 'border-transparent hover:text-forge-gold hover:border-forge-gold/60'
+                  )}
+                >
+                  {t(item.labelKey)}
+                </Link>
+              )
+            })}
             <LanguageToggle />
-            <Link href={localePath('/contact')} className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark">{t('nav.contact')}</Link>
+            <Link
+              href={localePath('/contact')}
+              aria-current={isActivePath(currentPath, '/contact') ? 'page' : undefined}
+              className={joinClasses(
+                'btn-small hover:bg-forge-gold hover:text-forge-dark',
+                isActivePath(currentPath, '/contact')
+                  ? 'bg-forge-gold text-forge-dark ring-2 ring-forge-ember/70'
+                  : 'bg-forge-ember text-white'
+              )}
+            >
+              {t('nav.contact')}
+            </Link>
           </div>
 
           <button type="button" className="md:hidden text-forge-gold hover:text-forge-ember transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')} aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
@@ -45,12 +91,39 @@ export default function Navbar({ pinned = true }: NavbarProps) {
           <div id="mobile-menu" className="md:hidden pb-4 border-t border-forge-stone">
             <div className="flex flex-col gap-3 pt-3">
               <div className="py-2"><LanguageToggle /></div>
-              <Link href={localePath('/services')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</Link>
-              <Link href={localePath('/ai-consulting')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.aiConsulting')}</Link>
-              <Link href={localePath('/demo')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.demo')}</Link>
-              <Link href={localePath('/about')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</Link>
-              <Link href={localePath('/blog')} className="hover:text-forge-gold transition py-2" onClick={() => setMobileMenuOpen(false)}>{t('nav.blog')}</Link>
-              <Link href={localePath('/contact')} className="btn-small bg-forge-ember text-white hover:bg-forge-gold hover:text-forge-dark w-full text-center" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</Link>
+              {navItems.map((item) => {
+                const active = isActivePath(currentPath, item.href)
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={localePath(item.href)}
+                    aria-current={active ? 'page' : undefined}
+                    className={joinClasses(
+                      'hover:text-forge-gold transition py-2 border-l-2',
+                      active
+                        ? 'text-forge-gold border-forge-ember pl-3'
+                        : 'border-transparent'
+                    )}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t(item.labelKey)}
+                  </Link>
+                )
+              })}
+              <Link
+                href={localePath('/contact')}
+                aria-current={isActivePath(currentPath, '/contact') ? 'page' : undefined}
+                className={joinClasses(
+                  'btn-small hover:bg-forge-gold hover:text-forge-dark w-full text-center',
+                  isActivePath(currentPath, '/contact')
+                    ? 'bg-forge-gold text-forge-dark ring-2 ring-forge-ember/70'
+                    : 'bg-forge-ember text-white'
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t('nav.contact')}
+              </Link>
             </div>
           </div>
         )}
