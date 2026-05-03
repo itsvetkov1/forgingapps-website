@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-05-03T10:15:00Z",
+  "proof": {
+    "autonomousActionsLast30d": 9248,
+    "interventionRateLast30d": 0.024,
+    "daysSinceLastEditAcrossAllExhibits": "14d 06h",
+    "lastEditTimestamp": "2026-04-19T08:22:00Z"
+  },
+  "exhibits": {
+    "facebook-autopilot": {
+      "daysAutonomous": 112,
+      "postsThisMonth": 38,
+      "postsPlanned": 40,
+      "commentsAnswered": 347,
+      "avgResponseTimeMin": 4.2,
+      "lastHumanEditTs": null
+    },
+    "veloura": {
+      "escalationsRate": 0.038,
+      "conversationsHandled": 8759,
+      "daysAutonomous": 75,
+      "avgResolutionMin": 1.8,
+      "lastHumanEditTs": "2026-04-19T08:22:00Z"
+    }
+  },
+  "isStale": false,
+  "staleSinceMin": 0
+}

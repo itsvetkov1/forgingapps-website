@@ -5,6 +5,7 @@ export const bg: Record<string, any> = {
     nav: {
       services: "Услуги",
       aiConsulting: "AI Консултации",
+      workshop: "Workshop",
       demo: "Демо",
       about: "За нас",
       blog: "Блог",
@@ -1082,6 +1083,71 @@ export const bg: Record<string, any> = {
       errors: {
         turnFailed: "Съобщението не беше изпратено. Моля, опитайте отново след малко.",
       },
+    },
+  },
+  // TODO BG: Workshop strings are mirrored in English for forger translation pass.
+  workshop: {
+    hero: {
+      kicker: "/ workshop · public showroom",
+      badge: "operations online",
+      title: "The Workshop.",
+      subtitle: "Our agents, working in the open. Live, autonomous, public.",
+      context: 'Everyone says their AI is "in production." We let you watch ours run. Every exhibit below is a real agent we built, deployed, and left alone — with the receipts to prove it.',
+    },
+    proof: {
+      autonomousActions: { label: "Autonomous actions / month", sub: "across {count} exhibits" },
+      interventionRate: { label: "Human intervention rate", sub: "of agent actions, last 30d", caption: "↓ lower is better" },
+      daysSinceEdit: { label: "Days since last human edit", sub: "{date} · across all exhibits" },
+      staleBadge: "stale",
+    },
+    exhibits: {
+      sectionKicker: "/ exhibits · {count} active",
+      sectionTitle: "On the floor right now",
+      sectionDescription: "Each tile is a live operations dashboard. Numbers tick. Status is real. Click through to inspect.",
+      facebook: {
+        title: "Facebook Autopilot",
+        tagline: "Researches, drafts, schedules, and replies on a live Facebook page — without us touching it. Anvil-tier build, running unsupervised since January.",
+        stats: { daysAutonomous: "Days autonomous", postsThisMonth: "Posts this month", postsPlanned: "/{count} planned", commentsAnswered: "Comments answered", avgResponseTime: "Avg response time", lastHumanEdit: "Last human edit", neverEdited: "— never —" },
+        actions: { viewOnFacebook: "View on Facebook ↗", howItWorks: "How it works →" },
+      },
+      veloura: {
+        title: "Veloura Support",
+        tagline: "Handles every customer message for our boutique-fashion demo store. Order-aware, and stubborn about not pretending to be human.",
+        stats: { escalations: "Escalations to human", conversationsHandled: "Conversations handled", daysAutonomous: "Days autonomous", avgResolution: "Avg resolution" },
+        actions: { visitStore: "Visit the store ↗", transcripts: "Transcripts", tryDemo: "Try the demo →" },
+        mock: {
+          userMsg: '"Is the Solène silk slip still in stock in size S?"',
+          botMsg: "Yes — 2 left in size S. Pulling it up for you. 🤖",
+          productLine: "Champagne · Size S",
+          inStock: "{count} in stock",
+          resolutionLine: "resolved in {seconds}s · checkout link sent",
+        },
+      },
+    },
+    closing: {
+      kicker: "/ what this proves",
+      title: 'Most "AI in production" is a screenshot. Ours has a public URL.',
+      body: 'Every exhibit above runs on the same architecture we\'d build for you: pinned models, kill-switches, audit logs, EU AI Act–shaped guardrails. No ghost-in-the-machine, no "human-in-the-loop" euphemism for "we wrote this one ourselves."',
+      primaryCta: "See packages → Spark to Forge",
+      secondaryCta: "Talk to a builder",
+      aside: { uptime: "Avg uptime", modelsPinned: "Models pinned", auditLog: "Audit log retention", killSwitch: "Human kill-switch", armed: "armed ●" },
+    },
+    detail: {
+      breadcrumbHome: "workshop · home",
+      breadcrumbActive: "active",
+      sectionHowItWorks: "How it works",
+      sectionWhyItMatters: "Why this matters",
+      activityHeading: "Recent activity",
+    },
+    disclosure: {
+      title: "AI Operations Disclosure",
+      intro: "TODO — forger to author per Meta policy + EU AI Act Art. 50. This scaffold exists so the route, styling, and compliance slots are live before final prose sign-off.",
+      sections: [
+        { title: "Autonomous AI agents", body: "TODO — describe that this page interacts with autonomous AI agents and that AI-operated labels are visible on the Workshop and exhibit tiles." },
+        { title: "forger-social-01", body: "TODO — describe Facebook posting/reply behavior, page post/comment data access, pinned model/version, and audit-log retention." },
+        { title: "forger-support-veloura", body: "TODO — describe Veloura customer-message replies, transcript/order metadata access, pinned model/version, and audit-log retention." },
+        { title: "Opt-out and human review", body: "TODO — include Facebook opt-out, Veloura human handoff, hello@forgingapps.com, EU AI Act Art. 50, Meta AI disclosure policy, and kill-switch language." },
+      ],
     },
   },
   privacy: {
