@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Cinzel, Inter } from 'next/font/google'
+import { Cinzel, Inter, JetBrains_Mono } from 'next/font/google'
 import '../globals.css'
 import StructuredData from '@/components/StructuredData'
 import ConditionalShell from '@/components/ConditionalShell'
@@ -10,6 +10,7 @@ import { isLocale, locales } from '@/lib/i18n/routing'
 
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' })
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://forgingapps.com'),
@@ -27,7 +28,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   if (!isLocale(locale)) notFound()
 
   return (
-    <html lang={locale} className={`${cinzel.variable} ${inter.variable}`}>
+    <html lang={locale} className={`${cinzel.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <StructuredData />

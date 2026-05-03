@@ -15,6 +15,7 @@ interface NavbarProps {
 const navItems = [
   { href: '/services', labelKey: 'nav.services' },
   { href: '/ai-consulting', labelKey: 'nav.aiConsulting' },
+  { href: '/workshop', labelKey: 'nav.workshop' },
   { href: '/demo', labelKey: 'nav.demo' },
   { href: '/about', labelKey: 'nav.about' },
   { href: '/blog', labelKey: 'nav.blog' },

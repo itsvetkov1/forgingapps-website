@@ -215,3 +215,78 @@ h1, h2, h3, h4, h5, h6 {
 :lang(bg) h4, :lang(bg) h5, :lang(bg) h6 {
   font-family: var(--font-inter), sans-serif;
 }
+
+
+/* Workshop scoped design tokens and utilities */
+.workshop {
+  --panel: #141A22;
+  --panel-2: #1A2230;
+  --hairline: rgba(196, 160, 98, 0.14);
+  --hairline-strong: rgba(216, 102, 11, 0.32);
+  --ink-100: #E8E6E1;
+  --ink-200: #C9C5BD;
+  --ink-300: #A8A39B;
+  --ink-400: #7A746B;
+  --ink-500: #54504A;
+  --live: #4ADE80;
+  --live-glow: rgba(74, 222, 128, 0.5);
+  --mono: var(--font-jetbrains-mono), 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.workshop .mono { font-family: var(--mono); font-feature-settings: "tnum","zero","ss02"; }
+.workshop .tnum { font-variant-numeric: tabular-nums; }
+.workshop .scanlines, .workshop.scanlines { background-image: repeating-linear-gradient(to bottom, rgba(216, 102, 11, 0.025) 0px, rgba(216, 102, 11, 0.025) 1px, transparent 1px, transparent 4px); }
+.workshop .ember-grain::before, .workshop.ember-grain::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 12% 8%, rgba(216, 102, 11, 0.10), transparent 38%), radial-gradient(circle at 88% 92%, rgba(196, 160, 98, 0.06), transparent 36%); z-index: 0; }
+.workshop .live-dot { display: inline-block; width: 8px; height: 8px; background: var(--live); border-radius: 50%; box-shadow: 0 0 0 0 var(--live-glow); animation: workshop-live-pulse 1.8s ease-out infinite; }
+@keyframes workshop-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); } 70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); } 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); } }
+.workshop .live-badge, .workshop .idle-badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px 4px 8px; font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 999px; }
+.workshop .live-badge { color: var(--live); background: rgba(74, 222, 128, 0.08); border: 1px solid rgba(74, 222, 128, 0.32); }
+.workshop .idle-badge { color: var(--forge-gold); background: rgba(196, 160, 98, 0.08); border: 1px solid rgba(196, 160, 98, 0.32); }
+.workshop .workshop-stale-badge { display: inline-flex; margin-left: 8px; padding: 2px 6px; border-radius: 999px; color: var(--forge-ember); background: rgba(216, 102, 11, 0.12); border: 1px solid var(--hairline-strong); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; vertical-align: middle; }
+.workshop .panel { position: relative; background: var(--panel); border: 1px solid var(--hairline); border-radius: 12px; }
+.workshop .panel-stone { background: linear-gradient(180deg, rgba(216, 102, 11, 0.04), transparent 40%), var(--panel); }
+.workshop .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; font-weight: 600; font-size: 14px; border-radius: 8px; border: 1px solid transparent; cursor: pointer; transition: all .18s ease; white-space: nowrap; }
+.workshop .btn-primary { background: var(--forge-ember); color: white; box-shadow: 0 0 0 0 rgba(216, 102, 11, 0); }
+.workshop .btn-primary:hover { background: var(--forge-ember-soft); box-shadow: 0 8px 24px rgba(216, 102, 11, 0.35); }
+.workshop .btn-secondary { background: transparent; color: var(--forge-gold); border-color: rgba(196, 160, 98, 0.5); }
+.workshop .btn-secondary:hover { background: rgba(196, 160, 98, 0.08); border-color: var(--forge-gold); }
+.workshop .btn-ghost { background: transparent; color: var(--ink-200); border-color: var(--hairline); }
+.workshop .btn-ghost:hover { color: var(--ink-100); border-color: var(--hairline-strong); }
+.workshop .stat-row { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--hairline); gap: 16px; }
+.workshop .stat-row:last-child { border-bottom: none; }
+.workshop .stat-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-400); }
+.workshop .stat-value { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink-100); font-size: 15px; }
+.workshop .stat-value .unit { color: var(--ink-400); font-weight: 400; margin-left: 4px; font-size: 11px; }
+.workshop .counter-card { position: relative; background: var(--panel); border: 1px solid var(--hairline); border-radius: 10px; padding: 18px 18px 16px; overflow: hidden; }
+.workshop .counter-card::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--forge-ember), transparent 70%); }
+.workshop .counter-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-400); margin-bottom: 8px; }
+.workshop .counter-value { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; font-size: 38px; color: var(--forge-gold); line-height: 1; letter-spacing: -0.02em; }
+.workshop .counter-sub { margin-top: 6px; font-family: var(--mono); font-size: 11px; color: var(--ink-300); }
+.workshop .tick-corners::before, .workshop .tick-corners::after { content: ""; position: absolute; width: 12px; height: 12px; border-color: var(--hairline-strong); border-style: solid; pointer-events: none; }
+.workshop .tick-corners::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.workshop .tick-corners::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.workshop .kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--forge-ember); }
+.workshop .kicker::before { content: ""; width: 24px; height: 1px; background: var(--forge-ember); }
+.workshop .fb-mock { background: linear-gradient(180deg, #1c2433, #141A22); border: 1px solid var(--hairline); border-radius: 8px; padding: 14px; font-size: 12px; color: var(--ink-200); line-height: 1.5; }
+.workshop .fb-mock-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.workshop .fb-mock-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--forge-ember), var(--forge-gold)); display: flex; align-items: center; justify-content: center; font-family: var(--font-cinzel), serif; font-size: 12px; color: var(--forge-dark); font-weight: 700; }
+.workshop .fb-mock-handle { font-size: 11px; color: var(--ink-300); }
+.workshop .fb-mock-handle .dot { color: var(--ink-500); margin: 0 4px; }
+.workshop .gradient-text { background: linear-gradient(135deg, #C4A062, #D8660B); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.workshop .sparkbars { display: flex; align-items: flex-end; gap: 3px; height: 36px; }
+.workshop .sparkbars > span { flex: 1; background: linear-gradient(180deg, var(--forge-ember), rgba(216, 102, 11, 0.3)); border-radius: 1px; min-width: 4px; }
+.workshop .diagram-node { background: var(--panel); border: 1px solid var(--hairline); border-radius: 10px; padding: 14px 16px; position: relative; }
+.workshop .diagram-node .node-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--forge-ember); text-transform: uppercase; margin-bottom: 6px; }
+.workshop .diagram-node .node-name { font-family: var(--font-cinzel), serif; font-size: 16px; color: var(--forge-gold); margin-bottom: 4px; }
+.workshop .diagram-node .node-sub { font-family: var(--mono); font-size: 11px; color: var(--ink-400); }
+.workshop .diagram-arrow { display: flex; align-items: center; justify-content: center; color: var(--forge-ember); font-family: var(--mono); font-size: 18px; }
+.workshop .activity-item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px dashed var(--hairline); }
+.workshop .activity-item:last-child { border-bottom: none; }
+.workshop .activity-time { font-family: var(--mono); font-size: 11px; color: var(--ink-400); letter-spacing: 0.05em; }
+.workshop .activity-headline { color: var(--ink-100); font-weight: 500; margin-bottom: 6px; line-height: 1.4; }
+.workshop .activity-reasoning { font-family: var(--mono); font-size: 12px; color: var(--ink-300); background: rgba(216, 102, 11, 0.05); border-left: 2px solid var(--forge-ember); padding: 8px 12px; border-radius: 0 4px 4px 0; line-height: 1.55; }
+.workshop .activity-reasoning .tag { color: var(--forge-ember); font-weight: 600; }
+.workshop .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--hairline-strong) 20%, var(--hairline-strong) 80%, transparent); }
+@media (max-width: 767px) { .workshop .counter-value { font-size: 32px; } .workshop .activity-item { grid-template-columns: 1fr; gap: 6px; } }
