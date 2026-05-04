@@ -1,28 +1,33 @@
 {
-  "generatedAt": "2026-05-03T10:15:00Z",
+  "generatedAt": "2026-05-04T07:00:00Z",
   "proof": {
-    "autonomousActionsLast30d": 9248,
-    "interventionRateLast30d": 0.024,
-    "daysSinceLastEditAcrossAllExhibits": "14d 06h",
-    "lastEditTimestamp": "2026-04-19T08:22:00Z"
+    "autonomousActionsLast30d": 0,
+    "interventionRateLast30d": 0.0,
+    "daysSinceLastEditAcrossAllExhibits": "—",
+    "lastEditTimestamp": null
   },
   "exhibits": {
     "facebook-autopilot": {
-      "daysAutonomous": 112,
-      "postsThisMonth": 38,
-      "postsPlanned": 40,
-      "commentsAnswered": 347,
-      "avgResponseTimeMin": 4.2,
+      "daysAutonomous": 0,
+      "postsThisMonth": 0,
+      "postsPlanned": 30,
+      "commentsAnswered": 0,
+      "avgResponseTimeMin": 0,
       "lastHumanEditTs": null
     },
     "veloura": {
-      "escalationsRate": 0.038,
-      "conversationsHandled": 8759,
-      "daysAutonomous": 75,
-      "avgResolutionMin": 1.8,
-      "lastHumanEditTs": "2026-04-19T08:22:00Z"
+      "escalationsRate": 0.0,
+      "conversationsHandled": 0,
+      "daysAutonomous": 0,
+      "avgResolutionMin": 0,
+      "lastHumanEditTs": null
     }
   },
-  "isStale": false,
-  "staleSinceMin": 0
+  "isStale": true,
+  "staleSinceMin": 0,
+  "meta": {
+    "stubbedSources": [
+      "build-time fallback only; live values come from /api/workshop-stats.json refreshed every 15 minutes"
+    ]
+  }
 }
