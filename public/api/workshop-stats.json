@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-04T12:52:57Z",
+  "generatedAt": "2026-05-04T12:57:10Z",
   "proof": {
-    "autonomousActionsLast30d": 13,
+    "autonomousActionsLast30d": 22,
     "interventionRateLast30d": 0.0,
     "daysSinceLastEditAcrossAllExhibits": "—",
     "lastEditTimestamp": null,
@@ -10,7 +10,7 @@
     "auditLogRetentionDays": 90,
     "killSwitchState": "armed",
     "stale": {
-      "autonomousActionsLast30d": true,
+      "autonomousActionsLast30d": false,
       "interventionRateLast30d": false,
       "daysSinceLastEditAcrossAllExhibits": false
     }
@@ -25,10 +25,10 @@
       "lastHumanEditTs": null
     },
     "veloura": {
-      "escalationsRate": 0.0,
-      "conversationsHandled": 0,
+      "escalationsRate": 0.3333,
+      "conversationsHandled": 9,
       "daysAutonomous": 19,
-      "avgResolutionMin": 0,
+      "avgResolutionMin": 174.5,
       "lastHumanEditTs": null,
       "escalationsLast30d": 3
     }
@@ -37,9 +37,7 @@
   "staleSinceMin": 15,
   "meta": {
     "stubbedSources": [
-      "avgResponseTimeMin: no page replies in 30d window; preserving 0",
-      "Veloura conversationsHandled / escalationsRate not yet wired (specimen-1 message logger pending - Phase 2.3b). escalation_log shows 3 escalations in 30d, tracked separately at exhibits.veloura.escalationsLast30d",
-      "Veloura avgResolutionMin not yet wired; needs message timestamp deltas (Phase 2.3b)"
+      "avgResponseTimeMin: no page replies in 30d window; preserving 0"
     ]
   }
 }
