@@ -64,6 +64,8 @@ export default function Footer() {
           <p>{t('copyright')}</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link href={localePath('/privacy')} className="hover:text-forge-gold transition">{t('privacyPolicy')}</Link>
+            <Link href={localePath('/legal/privacy')} className="hover:text-forge-gold transition">{t('legalPrivacy')}</Link>
+            <Link href={localePath('/legal/data-deletion')} className="hover:text-forge-gold transition">{t('dataDeletion')}</Link>
             <Link href={localePath('/terms')} className="hover:text-forge-gold transition">{t('termsOfService')}</Link>
           </div>
         </div>

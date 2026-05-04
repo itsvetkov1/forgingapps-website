@@ -3,10 +3,10 @@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { translations } from '@/lib/i18n/translations'
 
-export default function PrivacyContent() {
+export default function DataDeletionContent() {
   const { language } = useLanguage()
-  const data = translations[language].privacy
-  const sections = [data.section1, data.section2, data.section3, data.section4, data.section5, data.section6, data.section7, data.section8, data.section9, data.section10]
+  const data = translations[language].dataDeletion
+  const sections = [data.section1, data.section2, data.section3, data.section4, data.section5, data.section6]
 
   return (
     <div className="bg-forge-dark min-h-screen section-py">
