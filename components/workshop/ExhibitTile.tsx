@@ -68,11 +68,15 @@ export default function ExhibitTile({ exhibitNumber, agentId, agentVersion, titl
               </div>
             ))}
             <div className="mt-5 flex flex-wrap gap-3">
-              {actions.map((action) => (
-                <Link key={action.href + action.label} href={action.href} className={`btn btn-${action.variant}`}>
-                  {action.label}
-                </Link>
-              ))}
+              {actions.map((action) => {
+                const isExternal = /^https?:\/\//.test(action.href)
+                const externalProps = isExternal ? { target: '_blank', rel: 'noopener noreferrer' as const } : {}
+                return (
+                  <Link key={action.href + action.label} href={action.href} className={`btn btn-${action.variant}`} {...externalProps}>
+                    {action.label}
+                  </Link>
+                )
+              })}
             </div>
           </div>
           <div>{preview}</div>
