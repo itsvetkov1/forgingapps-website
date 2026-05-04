@@ -85,7 +85,7 @@ export default function WorkshopContent() {
             ]}
             preview={<FbPostMock />}
             actions={[
-              { label: copy.exhibits.facebook.actions.viewOnFacebook, href: 'https://www.facebook.com/forgingapps', variant: 'secondary' },
+              { label: copy.exhibits.facebook.actions.viewOnFacebook, href: 'https://www.facebook.com/profile.php?id=61567546706088', variant: 'secondary' },
               { label: copy.exhibits.facebook.actions.howItWorks, href: localePath('/workshop/facebook-autopilot'), variant: 'primary' },
             ]}
           />
