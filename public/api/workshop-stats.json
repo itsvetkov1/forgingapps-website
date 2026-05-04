@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T12:57:10Z",
+  "generatedAt": "2026-05-04T18:15:01Z",
   "proof": {
     "autonomousActionsLast30d": 22,
     "interventionRateLast30d": 0.0,
@@ -21,7 +21,7 @@
       "postsThisMonth": 12,
       "postsPlanned": 30,
       "commentsAnswered": 1,
-      "avgResponseTimeMin": 0,
+      "avgResponseTimeMin": 0.6,
       "lastHumanEditTs": null
     },
     "veloura": {
@@ -33,11 +33,7 @@
       "escalationsLast30d": 3
     }
   },
-  "isStale": true,
-  "staleSinceMin": 15,
-  "meta": {
-    "stubbedSources": [
-      "avgResponseTimeMin: no page replies in 30d window; preserving 0"
-    ]
-  }
+  "isStale": false,
+  "staleSinceMin": 0,
+  "meta": {}
 }
