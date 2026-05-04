@@ -8,7 +8,12 @@
     "fleetUptimePct": 0,
     "agentsInProduction": 0,
     "auditLogRetentionDays": 90,
-    "killSwitchState": "unknown"
+    "killSwitchState": "unknown",
+    "stale": {
+      "autonomousActionsLast30d": true,
+      "interventionRateLast30d": true,
+      "daysSinceLastEditAcrossAllExhibits": true
+    }
   },
   "exhibits": {
     "facebook-autopilot": {

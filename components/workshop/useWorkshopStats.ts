@@ -14,6 +14,11 @@ export interface WorkshopStats {
     agentsInProduction: number
     auditLogRetentionDays: number
     killSwitchState: 'armed' | 'engaged' | 'partial' | 'unknown'
+    stale?: {
+      autonomousActionsLast30d?: boolean
+      interventionRateLast30d?: boolean
+      daysSinceLastEditAcrossAllExhibits?: boolean
+    }
   }
   exhibits: {
     'facebook-autopilot': {

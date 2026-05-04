@@ -50,10 +50,12 @@ export default function WorkshopContent() {
           <div className="mt-12">
             <ProofStrip
               actions={formatNumber(data.proof.autonomousActionsLast30d)}
+              actionsStale={isFallback || (data.proof.stale?.autonomousActionsLast30d ?? false)}
               interventionRate={formatPercent(data.proof.interventionRateLast30d)}
+              interventionRateStale={isFallback || (data.proof.stale?.interventionRateLast30d ?? false)}
               daysSinceEdit={data.proof.daysSinceLastEditAcrossAllExhibits}
+              daysSinceEditStale={isFallback || (data.proof.stale?.daysSinceLastEditAcrossAllExhibits ?? false)}
               lastEditLabel={formatDate(data.proof.lastEditTimestamp)}
-              isStale={isStale || isFallback}
               staleLabel={copy.proof.staleBadge}
             />
           </div>

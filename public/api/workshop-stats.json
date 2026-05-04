@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T12:41:31Z",
+  "generatedAt": "2026-05-04T12:52:57Z",
   "proof": {
     "autonomousActionsLast30d": 13,
     "interventionRateLast30d": 0.0,
@@ -8,7 +8,12 @@
     "fleetUptimePct": 100.0,
     "agentsInProduction": 2,
     "auditLogRetentionDays": 90,
-    "killSwitchState": "armed"
+    "killSwitchState": "armed",
+    "stale": {
+      "autonomousActionsLast30d": true,
+      "interventionRateLast30d": false,
+      "daysSinceLastEditAcrossAllExhibits": false
+    }
   },
   "exhibits": {
     "facebook-autopilot": {
