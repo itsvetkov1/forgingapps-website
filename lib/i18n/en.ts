@@ -1127,7 +1127,7 @@ export const en: Record<string, any> = {
       body: 'Every exhibit above runs on the same architecture we\'d build for you: pinned models, kill-switches, audit logs, EU AI Act–shaped guardrails. No ghost-in-the-machine, no "human-in-the-loop" euphemism for "we wrote this one ourselves."',
       primaryCta: "See packages → Spark to Forge",
       secondaryCta: "Talk to a builder",
-      aside: { uptime: "Avg uptime", modelsPinned: "Models pinned", auditLog: "Audit log retention", killSwitch: "Human kill-switch", armed: "armed ●" },
+      aside: { uptime: "Avg uptime", agentsInProduction: "Agents in production", auditLog: "Audit log retention", killSwitch: "Human kill-switch", armed: "armed ●", engaged: "engaged ○" },
     },
     detail: {
       breadcrumbHome: "workshop · home",

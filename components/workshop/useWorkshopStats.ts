@@ -10,6 +10,10 @@ export interface WorkshopStats {
     interventionRateLast30d: number
     daysSinceLastEditAcrossAllExhibits: string
     lastEditTimestamp: string | null
+    fleetUptimePct: number
+    agentsInProduction: number
+    auditLogRetentionDays: number
+    killSwitchState: 'armed' | 'engaged' | 'partial' | 'unknown'
   }
   exhibits: {
     'facebook-autopilot': {

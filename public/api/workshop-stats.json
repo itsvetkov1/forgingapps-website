@@ -1,10 +1,14 @@
 {
-  "generatedAt": "2026-05-04T07:33:50Z",
+  "generatedAt": "2026-05-04T11:52:24Z",
   "proof": {
     "autonomousActionsLast30d": 13,
     "interventionRateLast30d": 0.0,
     "daysSinceLastEditAcrossAllExhibits": "—",
-    "lastEditTimestamp": null
+    "lastEditTimestamp": null,
+    "fleetUptimePct": 100.0,
+    "agentsInProduction": 2,
+    "auditLogRetentionDays": 90,
+    "killSwitchState": "armed"
   },
   "exhibits": {
     "facebook-autopilot": {
@@ -27,9 +31,9 @@
   "staleSinceMin": 15,
   "meta": {
     "stubbedSources": [
+      "workshop.sqlite human_interventions table empty; preserving fallback lastEditTimestamp",
       "avgResponseTimeMin not yet wired (no per-comment reply latency log); preserving fallback",
-      "Veloura DB has no messages table yet; preserving fallback conversationsHandled",
-      "workshop.sqlite human_interventions table empty; preserving fallback lastEditTimestamp"
+      "Veloura DB has no messages table yet; preserving fallback conversationsHandled"
     ]
   }
 }

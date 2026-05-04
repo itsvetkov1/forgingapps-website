@@ -4,7 +4,11 @@
     "autonomousActionsLast30d": 0,
     "interventionRateLast30d": 0.0,
     "daysSinceLastEditAcrossAllExhibits": "—",
-    "lastEditTimestamp": null
+    "lastEditTimestamp": null,
+    "fleetUptimePct": 0,
+    "agentsInProduction": 0,
+    "auditLogRetentionDays": 90,
+    "killSwitchState": "unknown"
   },
   "exhibits": {
     "facebook-autopilot": {

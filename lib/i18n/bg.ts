@@ -1130,7 +1130,7 @@ export const bg: Record<string, any> = {
       body: "Всеки експонат по-горе работи на същата архитектура, която бихме построили за вас: фиксирани модели, kill-switch-ове, одитни логове, защитни рамки по формата на EU AI Act. Без дух в машината, без „човек в цикъла” като евфемизъм за „ние сами го написахме”.",
       primaryCta: "Виж пакетите → Spark to Forge",
       secondaryCta: "Поговори с builder",
-      aside: { uptime: "Средна наличност", modelsPinned: "Фиксирани модели", auditLog: "Одитни логове", killSwitch: "Човешки kill-switch", armed: "активиран ●" },
+      aside: { uptime: "Средна наличност", agentsInProduction: "Агенти в продакшън", auditLog: "Одитни логове", killSwitch: "Човешки kill-switch", armed: "в готовност ●", engaged: "задействан ○" },
     },
     detail: {
       breadcrumbHome: "работилница · начало",

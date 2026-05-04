@@ -115,7 +115,7 @@ export default function WorkshopContent() {
       </section>
 
       <section className="container-custom pb-20 md:pb-28">
-        <ClosingBand data={copy.closing} servicesHref={localePath('/services')} contactHref={localePath('/contact')} />
+        <ClosingBand data={copy.closing} stats={{ fleetUptimePct: data.proof.fleetUptimePct, agentsInProduction: data.proof.agentsInProduction, auditLogRetentionDays: data.proof.auditLogRetentionDays, killSwitchState: data.proof.killSwitchState }} servicesHref={localePath('/services')} contactHref={localePath('/contact')} />
       </section>
     </main>
   )
