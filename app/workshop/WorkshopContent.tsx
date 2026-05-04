@@ -70,7 +70,7 @@ export default function WorkshopContent() {
           <ExhibitTile
             exhibitNumber="01"
             agentId="forger-social-01"
-            agentVersion="v2.4.1"
+            agentVersion="v1.0"
             title={copy.exhibits.facebook.title}
             tagline={copy.exhibits.facebook.tagline}
             isLive
@@ -85,14 +85,14 @@ export default function WorkshopContent() {
             ]}
             preview={<FbPostMock />}
             actions={[
-              { label: copy.exhibits.facebook.actions.viewOnFacebook, href: 'https://www.facebook.com/profile.php?id=61567546706088', variant: 'secondary' },
+              { label: copy.exhibits.facebook.actions.viewOnFacebook, href: 'https://www.facebook.com/share/1GquCrojwm/', variant: 'secondary' },
               { label: copy.exhibits.facebook.actions.howItWorks, href: localePath('/workshop/facebook-autopilot'), variant: 'primary' },
             ]}
           />
           <ExhibitTile
             exhibitNumber="02"
             agentId="forger-support-veloura"
-            agentVersion="v1.8.0"
+            agentVersion="v1.0"
             title={copy.exhibits.veloura.title}
             tagline={copy.exhibits.veloura.tagline}
             isLive
