@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-05T17:00:01Z",
+  "generatedAt": "2026-05-05T21:00:01Z",
   "proof": {
     "autonomousActionsLast30d": 24,
     "interventionRateLast30d": 0.0,
@@ -17,7 +17,7 @@
   },
   "exhibits": {
     "facebook-autopilot": {
-      "daysAutonomous": 14,
+      "daysAutonomous": 15,
       "postsThisMonth": 14,
       "postsPlanned": 30,
       "commentsAnswered": 1,
@@ -27,7 +27,7 @@
     "veloura": {
       "escalationsRate": 0.3333,
       "conversationsHandled": 9,
-      "daysAutonomous": 20,
+      "daysAutonomous": 21,
       "avgResolutionMin": 174.5,
       "lastHumanEditTs": null,
       "escalationsLast30d": 3
