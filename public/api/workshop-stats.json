@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-04T21:00:01Z",
+  "generatedAt": "2026-05-05T04:15:01Z",
   "proof": {
-    "autonomousActionsLast30d": 22,
+    "autonomousActionsLast30d": 23,
     "interventionRateLast30d": 0.0,
     "daysSinceLastEditAcrossAllExhibits": "—",
     "lastEditTimestamp": null,
@@ -18,7 +18,7 @@
   "exhibits": {
     "facebook-autopilot": {
       "daysAutonomous": 14,
-      "postsThisMonth": 12,
+      "postsThisMonth": 13,
       "postsPlanned": 30,
       "commentsAnswered": 1,
       "avgResponseTimeMin": 0.6,
