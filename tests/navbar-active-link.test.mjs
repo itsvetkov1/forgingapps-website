@@ -18,6 +18,14 @@ test('navbar marks the active desktop and mobile item accessibly and visibly', (
   assert.match(source, /hover:text-forge-gold hover:border-forge-gold\/40 hover:bg-forge-gold\/5/)
 })
 
+test('navbar switches to the mobile menu before the desktop links can collide with the logo', () => {
+  assert.match(source, /className="hidden xl:flex items-center gap-8"/)
+  assert.match(source, /className="xl:hidden text-forge-gold/)
+  assert.match(source, /className="xl:hidden pb-4 border-t border-forge-stone"/)
+  assert.doesNotMatch(source, /hidden md:flex items-center gap-8/)
+  assert.doesNotMatch(source, /className="md:hidden text-forge-gold/)
+})
+
 test('navbar active matching covers all top-level navigation destinations', () => {
   for (const href of ['/services', '/ai-consulting', '/demo', '/about', '/blog']) {
     assert.match(source, new RegExp(`href: '${href}'`))

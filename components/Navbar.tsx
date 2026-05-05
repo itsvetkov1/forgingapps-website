@@ -48,7 +48,7 @@ export default function Navbar({ pinned = true }: NavbarProps) {
             <span>ForgingApps</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden xl:flex items-center gap-8">
             {navItems.map((item) => {
               const active = isActivePath(currentPath, item.href)
 
@@ -83,13 +83,13 @@ export default function Navbar({ pinned = true }: NavbarProps) {
             </Link>
           </div>
 
-          <button type="button" className="md:hidden text-forge-gold hover:text-forge-ember transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')} aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
+          <button type="button" className="xl:hidden text-forge-gold hover:text-forge-ember transition" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')} aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <div id="mobile-menu" className="md:hidden pb-4 border-t border-forge-stone">
+          <div id="mobile-menu" className="xl:hidden pb-4 border-t border-forge-stone">
             <div className="flex flex-col gap-3 pt-3">
               <div className="py-2"><LanguageToggle /></div>
               {navItems.map((item) => {
