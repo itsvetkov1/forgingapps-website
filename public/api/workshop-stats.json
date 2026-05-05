@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-05-05T13:00:01Z",
+  "generatedAt": "2026-05-05T17:00:01Z",
   "proof": {
     "autonomousActionsLast30d": 24,
     "interventionRateLast30d": 0.0,
     "daysSinceLastEditAcrossAllExhibits": "—",
     "lastEditTimestamp": null,
-    "fleetUptimePct": 99.2,
+    "fleetUptimePct": 99.3,
     "agentsInProduction": 2,
     "auditLogRetentionDays": 90,
     "killSwitchState": "armed",
